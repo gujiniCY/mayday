@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bukaopu.mapper.admin.UserMapper">
+  <resultMap id="BaseResultMap" type="com.bukaopu.model.admin.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_pass" jdbcType="VARCHAR" property="userPass" />
+    <result column="user_display_name" jdbcType="VARCHAR" property="userDisplayName" />
+    <result column="portrait" jdbcType="VARCHAR" property="portrait" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from buhaopu_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bukaopu.model.admin.User">
+    insert into buhaopu_user (id, user_name, user_pass, 
+      user_display_name, portrait)
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPass,jdbcType=VARCHAR}, 
+      #{userDisplayName,jdbcType=VARCHAR}, #{portrait,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bukaopu.model.admin.User">
+    update buhaopu_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_pass = #{userPass,jdbcType=VARCHAR},
+      user_display_name = #{userDisplayName,jdbcType=VARCHAR},
+      portrait = #{portrait,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, user_name, user_pass, user_display_name, portrait
+    from buhaopu_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, user_name, user_pass, user_display_name, portrait
+    from buhaopu_user
+  </select>
+</mapper>

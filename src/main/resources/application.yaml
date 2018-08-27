@@ -1,0 +1,23 @@
+server: 
+  port: 8090
+logging:
+  config: classpath:logback-spring.xml
+  file: server.log
+  path: /log/
+spring: 
+#    mvc: 
+ #    view: 
+  #    prefix: classpath:/templates/
+   #   suffix: .html
+    thymeleaf: 
+      mode: HTML
+      content-type: text/html
+    datasource: 
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://47.106.22.160:3306/bukaopu
+        username: bukaopu
+        password: 123456
+        driver-class-name: com.mysql.jdbc.Driver
+mybatis: 
+  typeAliasesPackage: com.bukaopu.model.admin
+  mapperLocations: classpath:mapper/*.xml
