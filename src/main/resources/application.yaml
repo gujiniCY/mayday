@@ -5,10 +5,6 @@ logging:
   file: server.log
   path: /log/
 spring: 
-#    mvc: 
- #    view: 
-  #    prefix: classpath:/templates/
-   #   suffix: .html
     thymeleaf: 
       mode: HTML
       content-type: text/html

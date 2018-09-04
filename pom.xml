@@ -4,12 +4,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.bukaopu</groupId>
-	<artifactId>bukaopu</artifactId>
+	<groupId>com.songhaozhi.mayday</groupId>
+	<artifactId>mayday</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>bukaopu</name>
+	<name>mayday</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>

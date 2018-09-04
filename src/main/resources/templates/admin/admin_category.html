@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="admin/module/header.html"></div>
+<body class="app sidebar-mini rtl">
+	<div th:replace="admin/module/sidebar.html"></div>
+	<main class="app-content">
+	<div class="app-title">
+		<div>
+			<h1>分类目录</h1>
+		</div>
+		<ul class="app-breadcrumb breadcrumb">
+			<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+			<li class="breadcrumb-item"><a href="#">分类目录</a></li>
+		</ul>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="tile">
+				<div class="row">
+					<div class="col-lg-5">
+						<h4 class="tile-title">添加分类</h4>
+						<form>
+							<div class="form-group">
+								<label class="col-form-label" for="inputDefault">名称</label> <input
+									class="form-control" id="inputDefault" type="text">
+							</div>
+							<div class="form-group">
+								<label class="col-form-label" for="inputDefault">路径名称</label> <input
+									class="form-control" id="inputDefault" type="text">
+							</div>
+							<div class="tile-footer">
+								<button class="btn btn-primary" type="submit">添加</button>
+							</div>
+						</form>
+					</div>
+					<div class="col-lg-7">
+            <h4 class="tile-title">所有分类</h4>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td><button>修改</button><button>删除</button></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	</main>
+	<script src="/plugins/vali/js/jquery-3.2.1.min.js"></script>
+	<script src="/plugins/vali/js/popper.min.js"></script>
+	<script src="/plugins/vali/js/bootstrap.min.js"></script>
+	<script src="/plugins/vali/js/main.js"></script>
+	<script src="/plugins/vali/js/plugins/pace.min.js"></script>
+	<script type="text/javascript" src="/plugins/vali/js/plugins/chart.js"></script>
+</body>
+</html>
