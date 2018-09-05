@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,18 +19,43 @@
         <h1>MayDay</h1>
       </div>
       <div class="login-box">
-        <form class="login-form" action="index.html">
+        <form class="login-form">
           <div class="form-group">
-            <input class="form-control" type="text"  autofocus>
+            <input class="form-control" id="userName" type="text" name="userName"  placeholder="用户名/邮箱" autofocus>
           </div>
           <div class="form-group">
-            <input class="form-control" type="password">
+            <input class="form-control" id="userPwd" type="password" name="userPwd" placeholder="密码">
           </div>
           <div class="form-group btn-container">
-            <button class="btn btn-primary btn-block">登录</button>
+            <button class="btn btn-primary btn-block" type="button" onclick="getLogin()">登录</button>
           </div>
         </form>
       </div>
     </section>
+  <div th:replace="admin/module/publi_js.html" ></div>
+  <script type="text/javascript">
+    $(function () {
+    });
+
+    function getLogin() {
+        var userName=$("#userName").val();
+        var userPwd=$("#userPwd").val();
+        console.log(userName+","+userPwd)
+        $.ajax({
+            type: "post",
+            url: "/admin/getLogin",
+            dataType :"json",
+            contentType:"application/json;charset=utf-8",
+            data: {"userName":userName,"userPwd": userPwd},
+            success:function (data) {
+                console.log(data);
+            },error:function (data) {
+                console.log(data);
+            }
+        });
+    }
+
+
+  </script>
   </body>
 </html>

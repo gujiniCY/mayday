@@ -5,30 +5,22 @@ package com.songhaozhi.mayday.model.dto;
  * @createDate 创建时间：2018年8月27日 下午1:38:27
  */
 public class JsonResult {
-	private static final int SUCCESS = 0;
 	private boolean flag;
-	private int code;
+	private String code;
 	private String msg;
 	private Object data;
 
-	public JsonResult() {
-		this.flag = true;
-		this.code = SUCCESS;
-		this.msg = "成功";
-	}
-	public JsonResult(Object data) {
-		this.flag = true;
-		this.code = SUCCESS;
-		this.msg = "成功";
-		this.data = data;
-	}
-
-	public int getCode() {
-		return code;
-	}
-
-	public void setCode(int code) {
+	public JsonResult(boolean flag, String code, String msg) {
+		this.flag = flag;
 		this.code = code;
+		this.msg = msg;
+	}
+
+	public JsonResult(boolean flag, String code, String msg, Object data) {
+		this.flag = flag;
+		this.code = code;
+		this.msg = msg;
+		this.data = data;
 	}
 
 	public boolean isFlag() {
@@ -37,6 +29,14 @@ public class JsonResult {
 
 	public void setFlag(boolean flag) {
 		this.flag = flag;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getMsg() {
@@ -54,5 +54,4 @@ public class JsonResult {
 	public void setData(Object data) {
 		this.data = data;
 	}
-
 }
