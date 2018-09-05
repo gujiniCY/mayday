@@ -13,7 +13,7 @@ public class UserController {
 	
 	@RequestMapping("/login")
 	public String login() {
-		return "admin/admin_menus";
+		return "admin/admin_login";
 	}
 	
 

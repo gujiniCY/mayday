@@ -13877,7 +13877,7 @@ be a descendant of the grid when it is being dragged.
 }
 
 .app-menu__item.active, .app-menu__item:hover, .app-menu__item:focus {
-  background: #fff;
+  background: #dbdbdb;
   border-left-color: #42a0ff;
   text-decoration: none;
   color: #0d1214;
@@ -13899,7 +13899,7 @@ be a descendant of the grid when it is being dragged.
 
 .treeview.is-expanded [data-toggle='treeview'] {
   border-left-color: #42a0ff;
-  background: #0d1214;
+  background: #dbdbdb;
 }
 
 .treeview.is-expanded .treeview-menu {
