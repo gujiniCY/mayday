@@ -51,7 +51,7 @@
     user_display_name, user_email, user_name, user_pwd
     from user
   </select>
-  <select id="getByNameAndPwd" parameterType="String" resultType="com.songhaozhi.mayday.model.domain.User">
+  <select id="getByNameAndPwd" parameterType="String" resultMap="BaseResultMap">
     select * from user where  user_name=#{name} and user_pwd=#{pwd}
   </select>
 </mapper>

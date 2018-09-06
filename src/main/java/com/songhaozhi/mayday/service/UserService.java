@@ -7,5 +7,5 @@ import com.songhaozhi.mayday.model.domain.User;
 * @createDate 创建时间：2018年8月27日 上午11:14:15
 */
 public interface UserService {
-        public User getByNameAndPwd(String name,String pwd);
+         User getByNameAndPwd(String name,String pwd);
 }
