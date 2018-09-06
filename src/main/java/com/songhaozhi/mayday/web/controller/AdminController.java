@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 */
 @RequestMapping("/admin")
 @Controller
-public class AdminController {
+public class AdminController extends BaseController{
 	@Autowired
     private UserService userService;
 	/**
@@ -54,10 +54,16 @@ public class AdminController {
     @ResponseBody
     public JsonResult getLogin(@RequestParam(value="userName")String userName,@RequestParam(value="userPwd") String userPwd, HttpSession session){
         User user=userService.getByNameAndPwd(userName,userPwd);
-        if(user!=null){
-            session.setAttribute("user",user);
-            return new JsonResult(true,"SUCCESS","登录成功");
-        }
+        try {
+			if(user!=null){
+				session.setAttribute("user",user);
+				return new JsonResult(true,"SUCCESS","登录成功");
+			}
+			log.info(userName+"登录成功");
+		}catch (Exception e){
+			e.printStackTrace();
+			log.info("系统错误！");
+		}
         return new JsonResult(false,"ERROR","登录失败");
     }
 	/**
