@@ -5,7 +5,7 @@ mayday博客系统是我想边学习springboot和thymeleaf编写的一个java博
 
 ## 简介 ##
 
-## 致谢：##
+## 致谢：
  1. [springboot](http://spring.io/projects/spring-boot) 版本2.2.4
  2. [maven](http://maven.apache.org/)  依赖管理
  3. [mysql](https://www.mysql.com/) 数据库，版本5.6
