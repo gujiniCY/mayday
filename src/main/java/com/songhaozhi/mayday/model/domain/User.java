@@ -1,9 +1,14 @@
 package com.songhaozhi.mayday.model.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
-    private Integer userId;
+public class User  implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer userId;
     /**
      * 是否禁用登录
      */

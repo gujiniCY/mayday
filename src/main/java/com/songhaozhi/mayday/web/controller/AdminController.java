@@ -1,17 +1,16 @@
 package com.songhaozhi.mayday.web.controller;
 
-import com.songhaozhi.mayday.model.domain.User;
-import com.songhaozhi.mayday.model.dto.JsonResult;
-import com.songhaozhi.mayday.service.UserService;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
+import com.songhaozhi.mayday.model.domain.User;
+import com.songhaozhi.mayday.model.dto.JsonResult;
+import com.songhaozhi.mayday.service.UserService;
 
 /**
 * @author 作者:宋浩志
@@ -57,12 +56,12 @@ public class AdminController extends BaseController{
         try {
 			if(user!=null){
 				session.setAttribute("user",user);
+				log.info(userName+"登录成功");
 				return new JsonResult(true,"SUCCESS","登录成功");
 			}
-			log.info(userName+"登录成功");
 		}catch (Exception e){
 			e.printStackTrace();
-			log.info("系统错误！");
+			log.info("登录失败，系统错误！");
 		}
         return new JsonResult(false,"ERROR","登录失败");
     }

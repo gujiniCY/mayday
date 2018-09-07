@@ -4,7 +4,13 @@ logging:
   config: classpath:logback-spring.xml
   file: server.log
   path: /log/
-spring: 
+spring:
+    mvc: 
+    #出现错误时, 直接抛出异常
+      throw-exception-if-no-handler-found: true
+    resources: 
+    #不要为我们工程中的资源文件建立映射
+      add-mappings: false  
     thymeleaf: 
       mode: HTML
       content-type: text/html

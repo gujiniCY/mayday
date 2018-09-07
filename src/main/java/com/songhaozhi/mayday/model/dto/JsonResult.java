@@ -10,6 +10,10 @@ public class JsonResult {
 	private String msg;
 	private Object data;
 
+	public JsonResult() {
+		super();
+	}
+
 	public JsonResult(boolean flag, String code, String msg) {
 		this.flag = flag;
 		this.code = code;
