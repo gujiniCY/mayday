@@ -3,7 +3,6 @@
 #### 项目介绍
 mayday博客系统是我想边学习springboot和thymeleaf编写的一个java博客系统，目前正在开发中
 
-## 简介 ##
 
 ## 致谢：
  1. [springboot](http://spring.io/projects/spring-boot) 版本2.2.4
