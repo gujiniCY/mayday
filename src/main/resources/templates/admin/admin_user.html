@@ -23,7 +23,7 @@
 					</ul>
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade active show col-lg-6" id="data">
-							<form class="form-horizontal">
+							<form class="form-horizontal" id="dataFrom">
 								<div class="form-group row">
 									<label class="control-label col-md-2">用户名： <span
 										data-toggle="tooltip" data-placement="top" title="用于登录"
@@ -32,7 +32,7 @@
 									</span>
 									</label>
 									<div class="col-md-8">
-										<input class="form-control" type="text" name="">
+										<input class="form-control" type="text" name="userName">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -41,9 +41,10 @@
 										style="cursor: pointer"> <i
 											class="fa fa-question-circle" aria-hidden="true"></i>
 									</span>
+						
 									</label>
 									<div class="col-md-8">
-										<input class="form-control" type="text" name="">
+										<input class="form-control" type="text" name="userDisplayName">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -54,20 +55,20 @@
 									</span>
 									</label>
 									<div class="col-md-8">
-										<input class="form-control" type="text" name="">
+										<input class="form-control" type="text" name="userTitle">
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="control-label col-md-2">邮箱：</label>
 									<div class="col-md-8">
-										<input class="form-control" type="text" name="">
+										<input class="form-control" type="text" name="userEmail">
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="control-label col-md-2">头像：</label>
 									<div class="col-md-8">
 										<div class="input-group">
-											<input type="text" class="form-control" id="" name=""
+											<input type="text" class="form-control" id="" name="userPortrait"
 												value=""> <span class="input-group-btn">
 												<button class="btn btn-default " type="button" onclick="">选择</button>
 											</span>
@@ -78,7 +79,7 @@
 									<label class="control-label col-md-2">个人说明：</label>
 									<div class="col-md-8">
 										<div class="input-group">
-											<textarea class="form-control" rows="3" id="" name=""
+											<textarea class="form-control" rows="3" id="" name="userExplain"
 												style="resize: none"></textarea>
 										</div>
 									</div>
@@ -86,7 +87,7 @@
 								<div class="tile-footer">
 									<div class="row">
 										<div class="col-md-8 col-md-offset-3">
-											<button class="btn btn-primary" type="button">
+											<button class="btn btn-primary" type="button" onclick="save()">
 												<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
 											</button>
 										</div>
@@ -130,9 +131,27 @@
 			</div>
 		</div>
 	</div>
-	</div>
-	</div>
 	</main>
 	<div th:replace="admin/module/publi_js.html" ></div>
+	<script src="/plugins/layer/layer.js"></script>
+	<script>
+	function save(){
+		var obj = $('#dataFrom').serialize();
+		$.ajax({
+			type:"POST",
+			url:"/admin/datum/updateDatum.do",
+			data:obj,
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+			},error:function(data){
+				
+			}
+		});
+		
+		
+	}
+	layer.msg('hello'); 
+	</script>
 </body>
 </html>

@@ -1,10 +1,8 @@
-package com.songhaozhi.mayday.mapper;
+package com.songhaozhi.mayday.mapper.generator;
 
 import com.songhaozhi.mayday.model.domain.User;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
+
 public interface UserMapper {
     int deleteByPrimaryKey(Integer userId);
 
@@ -15,6 +13,4 @@ public interface UserMapper {
     List<User> selectAll();
 
     int updateByPrimaryKey(User record);
-
-    User getByNameAndPwd(@Param(value = "name") String name,@Param(value = "pwd") String pwd);
 }

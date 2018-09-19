@@ -8,4 +8,6 @@ import com.songhaozhi.mayday.model.domain.User;
 */
 public interface UserService {
          User getByNameAndPwd(String name,String pwd);
+
+		void updateDatum(User user);
 }

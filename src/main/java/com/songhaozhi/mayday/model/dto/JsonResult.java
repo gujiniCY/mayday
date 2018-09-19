@@ -6,26 +6,31 @@ package com.songhaozhi.mayday.model.dto;
  */
 public class JsonResult {
 	private boolean flag;
-	private String code;
+	private Integer code;
 	private String msg;
 	private Object data;
 
 	public JsonResult() {
 		super();
 	}
+	
 
-	public JsonResult(boolean flag, String code, String msg) {
+	public JsonResult(boolean flag, Integer code, String msg) {
+		super();
 		this.flag = flag;
 		this.code = code;
 		this.msg = msg;
 	}
 
-	public JsonResult(boolean flag, String code, String msg, Object data) {
+
+	public JsonResult(boolean flag, Integer code, String msg, Object data) {
+		super();
 		this.flag = flag;
 		this.code = code;
 		this.msg = msg;
 		this.data = data;
 	}
+
 
 	public boolean isFlag() {
 		return flag;
@@ -35,11 +40,11 @@ public class JsonResult {
 		this.flag = flag;
 	}
 
-	public String getCode() {
+	public Integer getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(Integer code) {
 		this.code = code;
 	}
 
@@ -58,4 +63,6 @@ public class JsonResult {
 	public void setData(Object data) {
 		this.data = data;
 	}
+
+	
 }

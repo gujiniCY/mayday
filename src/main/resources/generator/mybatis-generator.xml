@@ -21,7 +21,7 @@
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
          <!--对应的mapper.xml文件  -->  
-        <sqlMapGenerator targetPackage="mapper" targetProject="mayday/src/main/resources">
+        <sqlMapGenerator targetPackage="mapper/generator" targetProject="mayday/src/main/resources">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
         <!--生成Dao类存放位置-->
@@ -30,11 +30,11 @@
                 type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
                 type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
         -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.songhaozhi.mayday.mapper" targetProject="mayday/src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.songhaozhi.mayday.mapper.generator" targetProject="mayday/src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!--生成对应表及类名-->
-        <table tableName="attachment" domainObjectName="Attachment" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="user" domainObjectName="User" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
     <!--<table tableName="t_goods" domainObjectName="Goods" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
            -->     <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"/>-->

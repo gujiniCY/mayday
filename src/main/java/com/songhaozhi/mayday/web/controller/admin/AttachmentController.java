@@ -1,4 +1,4 @@
-package com.songhaozhi.mayday.web.controller;
+package com.songhaozhi.mayday.web.controller.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

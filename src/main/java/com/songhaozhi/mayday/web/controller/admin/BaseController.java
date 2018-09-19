@@ -1,4 +1,4 @@
-package com.songhaozhi.mayday.web.controller;
+package com.songhaozhi.mayday.web.controller.admin;
 /**
 * @author 作者:宋浩志
 * @createDate 创建时间：2018年9月6日 下午3:09:57
