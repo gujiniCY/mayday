@@ -7,11 +7,20 @@ public enum MaydayEnums {
 	/**
 	 * 操作成功
 	 */
-	SUCCESS(200, "操作成功！"),
+	OPERATION_SUCCESS(200, "操作成功！"),
 	/**
 	 * 操作失败
 	 */
-	ERROR(500,"操作失败");
+	OPERATION_ERROR(500,"操作失败"),
+	
+	/**
+	 * 保存成功
+	 */
+	PRESERVE_SUCCESS(200,"保存成功"),
+	/**
+	 * 保存失败
+	 */
+	PRESERVE_ERROR(500,"保存失败");
 	private Integer code;
     private String message;
     

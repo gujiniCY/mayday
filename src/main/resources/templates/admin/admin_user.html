@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="admin/module/header.html"></div>
 <body class="app sidebar-mini rtl">
-<div th:replace="admin/module/sidebar.html"></div>
+	<div th:replace="admin/module/sidebar.html"></div>
 	<main class="app-content"> <!-- Navs-->
 	<div class="tile mb-4">
 		<div class="row">
@@ -24,70 +24,78 @@
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade active show col-lg-6" id="data">
 							<form class="form-horizontal" id="dataFrom">
+								<input class="form-control" type="hidden"
+									th:value="${user.userId}" name="userId">
 								<div class="form-group row">
-									<label class="control-label col-md-2">用户名： <span
+									<label class="control-label col-md-3">用户名： <span
 										data-toggle="tooltip" data-placement="top" title="用于登录"
 										style="cursor: pointer"> <i
 											class="fa fa-question-circle" aria-hidden="true"></i>
 									</span>
 									</label>
 									<div class="col-md-8">
-										<input class="form-control" type="text" name="userName">
+										<input class="form-control" type="text"
+											th:value="${user.userName}" name="userName">
 									</div>
 								</div>
 								<div class="form-group row">
-									<label class="control-label col-md-2">显示名称： <span
+									<label class="control-label col-md-3">显示名称： <span
 										data-toggle="tooltip" data-placement="top" title="页面显示的名称"
 										style="cursor: pointer"> <i
 											class="fa fa-question-circle" aria-hidden="true"></i>
 									</span>
-						
+
 									</label>
 									<div class="col-md-8">
-										<input class="form-control" type="text" name="userDisplayName">
+										<input class="form-control" type="text"
+											th:value="${user.userDisplayName}" name="userDisplayName">
 									</div>
 								</div>
 								<div class="form-group row">
-									<label class="control-label col-md-2">网站标题： <span
+									<label class="control-label col-md-3">网站标题： <span
 										data-toggle="tooltip" data-placement="top" title="网站标题"
 										style="cursor: pointer"> <i
 											class="fa fa-question-circle" aria-hidden="true"></i>
 									</span>
 									</label>
 									<div class="col-md-8">
-										<input class="form-control" type="text" name="userTitle">
+										<input class="form-control" type="text"
+											th:value="${user.userTitle}" name="userTitle">
 									</div>
 								</div>
 								<div class="form-group row">
-									<label class="control-label col-md-2">邮箱：</label>
+									<label class="control-label col-md-3">邮箱：</label>
 									<div class="col-md-8">
-										<input class="form-control" type="text" name="userEmail">
+										<input class="form-control" type="text"
+											th:value="${user.userEmail}" name="userEmail">
 									</div>
 								</div>
 								<div class="form-group row">
-									<label class="control-label col-md-2">头像：</label>
+									<label class="control-label col-md-3">头像：</label>
 									<div class="col-md-8">
 										<div class="input-group">
-											<input type="text" class="form-control" id="" name="userPortrait"
-												value=""> <span class="input-group-btn">
+											<input type="text" class="form-control" id=""
+												name="userPortrait" th:value="${user.userPortrait}">
+											<span class="input-group-btn">
 												<button class="btn btn-default " type="button" onclick="">选择</button>
 											</span>
 										</div>
 									</div>
 								</div>
 								<div class="form-group row">
-									<label class="control-label col-md-2">个人说明：</label>
+									<label class="control-label col-md-3">个人说明：</label>
 									<div class="col-md-8">
 										<div class="input-group">
-											<textarea class="form-control" rows="3" id="" name="userExplain"
-												style="resize: none"></textarea>
+											<textarea class="form-control" th:value="${user.userExplain}"
+												rows="3" id="" name="userExplain" style="resize: none"></textarea>
 										</div>
 									</div>
 								</div>
 								<div class="tile-footer">
 									<div class="row">
 										<div class="col-md-8 col-md-offset-3">
-											<button class="btn btn-primary" type="button" onclick="save()">
+											<button class="btn btn-primary" type="button"
+												onclick="save()">
 												<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
 											</button>
 										</div>
@@ -98,19 +106,19 @@
 						<div class="tab-pane fade col-lg-6" id="password">
 							<form class="form-horizontal" action="">
 								<div class="form-group row">
-									<label class="control-label col-md-2">原密码</label>
+									<label class="control-label col-md-3">原密码：</label>
 									<div class="col-md-8">
 										<input class="form-control" type="text" name="">
 									</div>
 								</div>
 								<div class="form-group row">
-									<label class="control-label col-md-2">新密码：</label>
+									<label class="control-label col-md-3">新密码：</label>
 									<div class="col-md-8">
 										<input class="form-control" type="text" name="">
 									</div>
 								</div>
 								<div class="form-group row">
-									<label class="control-label col-md-2">确认新密码：</label>
+									<label class="control-label col-md-3">确认新密码：</label>
 									<div class="col-md-8">
 										<input class="form-control" type="text" name="">
 									</div>
@@ -132,26 +140,40 @@
 		</div>
 	</div>
 	</main>
-	<div th:replace="admin/module/publi_js.html" ></div>
+	<div th:replace="admin/module/publi_js.html"></div>
 	<script src="/plugins/layer/layer.js"></script>
 	<script>
-	function save(){
-		var obj = $('#dataFrom').serialize();
-		$.ajax({
-			type:"POST",
-			url:"/admin/datum/updateDatum.do",
-			data:obj,
-			dataType:"json",
-			success:function(data){
-				console.log(data);
-			},error:function(data){
-				
-			}
-		});
-		
-		
-	}
-	layer.msg('hello'); 
+		function save() {
+			var obj = $('#dataFrom').serialize();
+			$.ajax({
+				type : "POST",
+				url : "/admin/profile/updateProfile",
+				data : obj,
+				dataType : "json",
+				success : function(data) {
+					if (data.flag == true) {
+						$.toast({
+							text : data.msg,
+							heading : '提示',
+							icon : 'success',
+							showHideTransition : 'fade',
+							allowToastClose : true,
+							hideAfter : 1000,
+							stack : 1,
+							position : 'top-center',
+							textAlign : 'left',
+							loader : true,
+							loaderBg : '#ffffff',
+							afterHidden : function() {
+								window.location.reload();
+							}
+						});
+					} else {
+						showMsg(data.msg, "error", 3000);
+					}
+				}
+			});
+		}
 	</script>
 </body>
 </html>

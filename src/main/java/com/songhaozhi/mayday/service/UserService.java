@@ -10,4 +10,6 @@ public interface UserService {
          User getByNameAndPwd(String name,String pwd);
 
 		void updateDatum(User user);
+
+		User findUser(Integer userId);
 }

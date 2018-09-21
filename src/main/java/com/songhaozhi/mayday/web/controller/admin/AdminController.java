@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.songhaozhi.mayday.model.domain.User;
 import com.songhaozhi.mayday.model.dto.JsonResult;
+import com.songhaozhi.mayday.model.dto.MaydayConst;
 import com.songhaozhi.mayday.model.enums.MaydayEnums;
 import com.songhaozhi.mayday.service.UserService;
 
@@ -41,7 +42,7 @@ public class AdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/login")
 	public String login(HttpSession session) {
-		User user = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute(MaydayConst.USER_SESSION_KEY);
 		if (user != null) {
 			return "redirect:/admin";
 		}
@@ -63,15 +64,16 @@ public class AdminController extends BaseController {
 		User user = userService.getByNameAndPwd(userName, userPwd);
 		try {
 			if (user != null) {
-				session.setAttribute("user", user);
+				session.setAttribute(MaydayConst.USER_SESSION_KEY, user);
 				log.info(userName + "登录成功");
-				return new JsonResult(true, MaydayEnums.SUCCESS.getCode(), "登录成功");
+				return new JsonResult(true, MaydayEnums.OPERATION_SUCCESS.getCode(), "登录成功");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.info("登录失败，系统错误！");
+			return new JsonResult(false,MaydayEnums.OPERATION_ERROR.getCode(), "未知错误！");
 		}
-		return new JsonResult(false,MaydayEnums.ERROR.getCode(), "登录失败");
+		return new JsonResult(false,MaydayEnums.OPERATION_ERROR.getCode(), "用户名或密码错误！");
 	}
 
 	/**

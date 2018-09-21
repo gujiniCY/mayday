@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -65,10 +65,10 @@
                          }
                      });
             	}else{
-            		PopupMsg("登录失败","error",3000);
+            		showMsg("登录失败","error",3000);
             	}
             },error:function (data) {
-            	PopupMsg("登录失败","error",3000);
+            	showMsg("登录失败","error",3000);
             }
         });
     }

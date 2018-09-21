@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.songhaozhi.mayday.mapper.generator.UserMapper">
+  <resultMap id="BaseResultMap" type="com.songhaozhi.mayday.model.domain.User">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="login_enable" jdbcType="VARCHAR" property="loginEnable" />
+    <result column="login_error" jdbcType="INTEGER" property="loginError" />
+    <result column="login_last_time" jdbcType="TIMESTAMP" property="loginLastTime" />
+    <result column="user_portrait" jdbcType="VARCHAR" property="userPortrait" />
+    <result column="user_explain" jdbcType="VARCHAR" property="userExplain" />
+    <result column="user_display_name" jdbcType="VARCHAR" property="userDisplayName" />
+    <result column="user_title" jdbcType="VARCHAR" property="userTitle" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_id, login_enable, login_error, login_last_time, user_portrait, user_explain, 
+    user_display_name, user_title, user_email, user_name, user_pwd
+  </sql>
+  <select id="selectByExample" parameterType="com.songhaozhi.mayday.model.domain.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.songhaozhi.mayday.model.domain.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.songhaozhi.mayday.model.domain.User">
+    insert into user (user_id, login_enable, login_error, 
+      login_last_time, user_portrait, user_explain, 
+      user_display_name, user_title, user_email, 
+      user_name, user_pwd)
+    values (#{userId,jdbcType=INTEGER}, #{loginEnable,jdbcType=VARCHAR}, #{loginError,jdbcType=INTEGER}, 
+      #{loginLastTime,jdbcType=TIMESTAMP}, #{userPortrait,jdbcType=VARCHAR}, #{userExplain,jdbcType=VARCHAR}, 
+      #{userDisplayName,jdbcType=VARCHAR}, #{userTitle,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.songhaozhi.mayday.model.domain.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="loginEnable != null">
+        login_enable,
+      </if>
+      <if test="loginError != null">
+        login_error,
+      </if>
+      <if test="loginLastTime != null">
+        login_last_time,
+      </if>
+      <if test="userPortrait != null">
+        user_portrait,
+      </if>
+      <if test="userExplain != null">
+        user_explain,
+      </if>
+      <if test="userDisplayName != null">
+        user_display_name,
+      </if>
+      <if test="userTitle != null">
+        user_title,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userPwd != null">
+        user_pwd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="loginEnable != null">
+        #{loginEnable,jdbcType=VARCHAR},
+      </if>
+      <if test="loginError != null">
+        #{loginError,jdbcType=INTEGER},
+      </if>
+      <if test="loginLastTime != null">
+        #{loginLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userPortrait != null">
+        #{userPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="userExplain != null">
+        #{userExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="userDisplayName != null">
+        #{userDisplayName,jdbcType=VARCHAR},
+      </if>
+      <if test="userTitle != null">
+        #{userTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.songhaozhi.mayday.model.domain.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginEnable != null">
+        login_enable = #{record.loginEnable,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginError != null">
+        login_error = #{record.loginError,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginLastTime != null">
+        login_last_time = #{record.loginLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userPortrait != null">
+        user_portrait = #{record.userPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userExplain != null">
+        user_explain = #{record.userExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userDisplayName != null">
+        user_display_name = #{record.userDisplayName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userTitle != null">
+        user_title = #{record.userTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEmail != null">
+        user_email = #{record.userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPwd != null">
+        user_pwd = #{record.userPwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      login_enable = #{record.loginEnable,jdbcType=VARCHAR},
+      login_error = #{record.loginError,jdbcType=INTEGER},
+      login_last_time = #{record.loginLastTime,jdbcType=TIMESTAMP},
+      user_portrait = #{record.userPortrait,jdbcType=VARCHAR},
+      user_explain = #{record.userExplain,jdbcType=VARCHAR},
+      user_display_name = #{record.userDisplayName,jdbcType=VARCHAR},
+      user_title = #{record.userTitle,jdbcType=VARCHAR},
+      user_email = #{record.userEmail,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_pwd = #{record.userPwd,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.songhaozhi.mayday.model.domain.User">
+    update user
+    <set>
+      <if test="loginEnable != null">
+        login_enable = #{loginEnable,jdbcType=VARCHAR},
+      </if>
+      <if test="loginError != null">
+        login_error = #{loginError,jdbcType=INTEGER},
+      </if>
+      <if test="loginLastTime != null">
+        login_last_time = #{loginLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userPortrait != null">
+        user_portrait = #{userPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="userExplain != null">
+        user_explain = #{userExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="userDisplayName != null">
+        user_display_name = #{userDisplayName,jdbcType=VARCHAR},
+      </if>
+      <if test="userTitle != null">
+        user_title = #{userTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        user_pwd = #{userPwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.songhaozhi.mayday.model.domain.User">
+    update user
+    set login_enable = #{loginEnable,jdbcType=VARCHAR},
+      login_error = #{loginError,jdbcType=INTEGER},
+      login_last_time = #{loginLastTime,jdbcType=TIMESTAMP},
+      user_portrait = #{userPortrait,jdbcType=VARCHAR},
+      user_explain = #{userExplain,jdbcType=VARCHAR},
+      user_display_name = #{userDisplayName,jdbcType=VARCHAR},
+      user_title = #{userTitle,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_pwd = #{userPwd,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -5,7 +5,7 @@
  * info
  * error
  * */
-function PopupMsg(text,icon,hideAfter){
+function showMsg(text,icon,hideAfter){
 	$.toast({
 	    text: text, 
 	    heading: '提示', 

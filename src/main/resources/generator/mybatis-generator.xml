@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
 
-    <context id="DB2Tables"  targetRuntime="MyBatis3Simple">
+    <context id="DB2Tables"  targetRuntime="MyBatis3">
         <commentGenerator>
             <property name="suppressDate" value="true"/>
             <property name="suppressAllComments" value="true"/>
@@ -21,7 +21,7 @@
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
          <!--对应的mapper.xml文件  -->  
-        <sqlMapGenerator targetPackage="mapper/generator" targetProject="mayday/src/main/resources">
+        <sqlMapGenerator targetPackage="mapper.generator" targetProject="mayday/src/main/resources">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
         <!--生成Dao类存放位置-->
