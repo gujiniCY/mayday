@@ -13,16 +13,16 @@ import com.songhaozhi.mayday.model.domain.User;
 import com.songhaozhi.mayday.service.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
-    @Autowired
-    private UserMapperCustom userMapperCustom;
-    @Autowired 
-    private UserMapper userMapper;
+public class UserServiceImpl implements UserService {
+	@Autowired
+	private UserMapperCustom userMapperCustom;
+	@Autowired
+	private UserMapper userMapper;
 
-    @Override
-    public User getByNameAndPwd(String name, String pwd) {
-        return userMapperCustom.getByNameAndPwd(name,pwd);
-    }
+	@Override
+	public User getByNameAndPwd(String name, String pwd) {
+		return userMapperCustom.getByNameAndPwd(name, pwd);
+	}
 
 	@Override
 	public void updateDatum(User user) {
@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User findUser(Integer userId) {
-		return userMapper.selectByPrimaryKey(userId);
+	public User findUser() {
+		return userMapperCustom.findUser();
 	}
 
 }

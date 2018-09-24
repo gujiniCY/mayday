@@ -14,6 +14,8 @@ import com.songhaozhi.mayday.model.dto.MaydayConst;
 import com.songhaozhi.mayday.model.enums.MaydayEnums;
 import com.songhaozhi.mayday.service.UserService;
 
+import cn.hutool.crypto.SecureUtil;
+
 /**
  * @author 作者:宋浩志
  * @createDate 创建时间：2018年8月27日 上午11:15:50
@@ -61,7 +63,8 @@ public class AdminController extends BaseController {
 	@ResponseBody
 	public JsonResult getLogin(@RequestParam(value = "userName") String userName,
 			@RequestParam(value = "userPwd") String userPwd, HttpSession session) {
-		User user = userService.getByNameAndPwd(userName, userPwd);
+		System.out.println(SecureUtil.md5(userName)+","+SecureUtil.md5(userPwd));
+		User user = userService.getByNameAndPwd(userName, SecureUtil.md5(userPwd));
 		try {
 			if (user != null) {
 				session.setAttribute(MaydayConst.USER_SESSION_KEY, user);
@@ -71,9 +74,9 @@ public class AdminController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.info("登录失败，系统错误！");
-			return new JsonResult(false,MaydayEnums.OPERATION_ERROR.getCode(), "未知错误！");
+			return new JsonResult(false, MaydayEnums.OPERATION_ERROR.getCode(), "未知错误！");
 		}
-		return new JsonResult(false,MaydayEnums.OPERATION_ERROR.getCode(), "用户名或密码错误！");
+		return new JsonResult(false, MaydayEnums.OPERATION_ERROR.getCode(), "用户名或密码错误！");
 	}
 
 	/**

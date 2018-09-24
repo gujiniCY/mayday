@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class BaseController {
-    /**日志**/
-    protected final  Logger log = LoggerFactory.getLogger(getClass());
+	/** 日志 **/
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 
 }

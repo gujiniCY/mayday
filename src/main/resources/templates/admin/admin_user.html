@@ -104,29 +104,29 @@
 							</form>
 						</div>
 						<div class="tab-pane fade col-lg-6" id="password">
-							<form class="form-horizontal" action="">
+							<form class="form-horizontal" id="pwdFrom">
 								<div class="form-group row">
 									<label class="control-label col-md-3">原密码：</label>
 									<div class="col-md-8">
-										<input class="form-control" type="text" name="">
+										<input class="form-control" type="text" id="formerlyPwd">
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="control-label col-md-3">新密码：</label>
 									<div class="col-md-8">
-										<input class="form-control" type="text" name="">
+										<input class="form-control" type="text" id="nowPwd">
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="control-label col-md-3">确认新密码：</label>
 									<div class="col-md-8">
-										<input class="form-control" type="text" name="">
+										<input class="form-control" type="text" id="confirmPwd">
 									</div>
 								</div>
 								<div class="tile-footer">
 									<div class="row">
 										<div class="col-md-8 col-md-offset-3">
-											<button class="btn btn-primary" type="button">
+											<button class="btn btn-primary" type="button" onclick="updatePwd()">
 												<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
 											</button>
 										</div>
@@ -143,6 +143,7 @@
 	<div th:replace="admin/module/publi_js.html"></div>
 	<script src="/plugins/layer/layer.js"></script>
 	<script>
+		//保存资料
 		function save() {
 			var obj = $('#dataFrom').serialize();
 			$.ajax({
@@ -173,6 +174,22 @@
 					}
 				}
 			});
+		}
+		//修改密码
+		function updatePwd(){
+			var formerlyPwd=$("#formerlyPwd").val();
+			var nowPwd=$("#nowPwd").val();
+			var confirmPwd=$("#confirmPwd").val();
+			$.ajax({
+				type:"POST",
+				url:"/",
+				dataType:"json",
+				success:function(data){
+					
+				}
+			});
+			
+			
 		}
 	</script>
 </body>

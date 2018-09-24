@@ -24,28 +24,50 @@ import com.songhaozhi.mayday.service.UserService;
 @RequestMapping("/admin/profile")
 @Controller
 public class UserController extends BaseController {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
+	/**
+	 * 
+	 * @param model
+	 * @param session
+	 * @return 返回个人资料页面
+	 */
 	@GetMapping
-	public String profile(Model model,HttpSession session) {
-		User user=(User) session.getAttribute(MaydayConst.USER_SESSION_KEY);
-		User users= userService.findUser(user.getUserId());
-		model.addAttribute("user",users);
+	public String profile(Model model, HttpSession session) {
+		User user = (User) session.getAttribute(MaydayConst.USER_SESSION_KEY);
+		User users = userService.findUser();
+		model.addAttribute("user", users);
 		return "/admin/admin_user";
 	}
-	
-	@PostMapping(value="updateProfile")
+
+	/**
+	 * 
+	 * @param user
+	 * @return 修改个人资料结果
+	 */
+	@PostMapping(value = "updateProfile")
 	@ResponseBody
 	public JsonResult updateProfile(User user) {
 		try {
 			userService.updateDatum(user);
 		} catch (Exception e) {
-			  log.error("修改资料：未知错误", e);
-			return new JsonResult(false,MaydayEnums.PRESERVE_ERROR.getCode(),MaydayEnums.PRESERVE_ERROR.getMessage());
+			log.error("修改资料：未知错误", e);
+			return new JsonResult(false, MaydayEnums.PRESERVE_ERROR.getCode(), MaydayEnums.PRESERVE_ERROR.getMessage());
 		}
-		return new JsonResult(true,MaydayEnums.PRESERVE_SUCCESS.getCode(),MaydayEnums.PRESERVE_SUCCESS.getMessage());
+		return new JsonResult(true, MaydayEnums.PRESERVE_SUCCESS.getCode(), MaydayEnums.PRESERVE_SUCCESS.getMessage());
 	}
-	
+
+	/**
+	 * 修改密码
+	 * 
+	 * @return
+	 */
+	@PostMapping(value = "updatePwd")
+	@ResponseBody
+	public JsonResult updatePwd() {
+		return null;
+	}
+
 }
