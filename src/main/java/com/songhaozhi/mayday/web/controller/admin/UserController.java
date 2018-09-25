@@ -94,6 +94,7 @@ public class UserController extends BaseController {
 				return new JsonResult(false, MaydayEnums.OPERATION_ERROR.getCode(), "原密码错误");
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			log.error("修改密码失败，系统错误");
 			return new JsonResult(false, MaydayEnums.ERROR.getCode(), "修改密码失败");
 		}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="admin/module/header.html"></div>
+<body class="app sidebar-mini rtl">
+	<div th:replace="admin/module/sidebar.html"></div>
+	<main class="app-content">
+	<div class="app-title">
+		<div>
+			<h1>友情链接</h1>
+		</div>
+		<ul class="app-breadcrumb breadcrumb">
+			<li class="breadcrumb-item"><a href="/admin"><i
+					class="fa fa-home fa-lg"></i></a></li>
+			<li class="breadcrumb-item"><a href="/admin/links">友情链接</a></li>
+		</ul>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="tile">
+				<div class="row">
+					<div class="col-lg-5">
+						<h4 class="tile-title">添加友情链接</h4>
+						<form autocomplete="off">
+							<div class="form-group">
+								<label class="col-form-label">网站名称</label> <input
+									class="form-control" id="" type="text">
+							</div>
+							<div class="form-group">
+								<label class="col-form-label">网址</label> <input
+									class="form-control" id="" type="text">
+							</div>
+							<div class="form-group">
+								<label class="col-form-label">logo</label> <input
+									class="form-control" id="" type="text">
+							</div>
+							<div class="form-group">
+								<label class="col-form-label">描述</label>
+								<textarea class="form-control" rows="3" id="" name="userExplain"
+									style="resize: none"></textarea>
+							</div>
+							<div class="tile-footer">
+								<button class="btn btn-primary" type="submit">添加</button>
+							</div>
+						</form>
+					</div>
+					<div class="col-lg-7">
+						<h4 class="tile-title">所有友情链接</h4>
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<td>网站名称</td>
+										<td>网址</td>
+										<td>描述</td>
+										<td>操作</td>
+									</tr>
+								</thead>
+								<tbody>
+									<th:block th:each="link : ${links}">
+										<tr th:attr="linkId=${link.linkId}">
+											<td th:text="${link.linkName}"></td>
+											<td th:text="${link.linkUrl}"></td>
+											<td th:text="${link.linkDescribe}"></td>
+											<td><a class="btn btn-primary">修改</a><a
+												class="btn btn-danger">删除</a></td>
+										</tr>
+									</th:block>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	</main>
+	<div th:replace="admin/module/publi_js.html"></div>
+</body>
+</html>

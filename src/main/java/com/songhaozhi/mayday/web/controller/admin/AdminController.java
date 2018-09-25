@@ -70,6 +70,12 @@ public class AdminController extends BaseController {
 	@ResponseBody
 	public JsonResult getLogin(@RequestParam(value = "userName") String userName,
 			@RequestParam(value = "userPwd") String userPwd, HttpSession session) {
+		//禁止时间10分子
+		int inhibitTime = 10;
+		//为true禁止登录
+		String flag = "true";
+		//错误总次数5次
+		Integer errorCount = 5;
 		// 已注册用户
 		User users = userService.findUser();
 		// 判断账户是否被禁用十分钟
@@ -79,7 +85,7 @@ public class AdminController extends BaseController {
 		}
 		// 计算两个日期之间的时间差
 		long between = DateUtil.between(date, DateUtil.date(), DateUnit.MINUTE);
-		if (StringUtils.equals(users.getLoginEnable(), "true") && (between < 10)) {
+		if (StringUtils.equals(users.getLoginEnable(), flag) && (between < inhibitTime)) {
 			return new JsonResult(false, MaydayEnums.OPERATION_ERROR.getCode(), "账户被禁止登录10分钟，请稍后重试");
 		}
 		// 验证用户名密码
@@ -89,16 +95,17 @@ public class AdminController extends BaseController {
 			userService.updateLoginLastTime(DateUtil.date(), users.getUserId());
 			if (user != null) {
 				session.setAttribute(MaydayConst.USER_SESSION_KEY, user);
-				//登录成功重置用户状态为正常
+				// 登录成功重置用户状态为正常
 				userService.updateUserNormal(user.getUserId());
 				log.info(userName + "登录成功");
 				return new JsonResult(true, MaydayEnums.OPERATION_SUCCESS.getCode(), "登录成功");
 			} else {
-				Integer error=userService.updateError();
-				if(error>=5) {
+				Integer error = userService.updateError();
+				if (error >= errorCount) {
 					userService.updateLoginEnable("true");
 				}
-				return new JsonResult(false, MaydayEnums.OPERATION_ERROR.getCode(), "用户名或密码错误！你还有"+(5-error)+"次机会");
+				return new JsonResult(false, MaydayEnums.OPERATION_ERROR.getCode(),
+						"用户名或密码错误！你还有" + (5 - error) + "次机会");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

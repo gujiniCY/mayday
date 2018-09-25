@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.songhaozhi.mayday.mapper.generator.LinkMapper">
+  <resultMap id="BaseResultMap" type="com.songhaozhi.mayday.model.domain.Link">
+    <id column="link_id" jdbcType="INTEGER" property="linkId" />
+    <result column="link_name" jdbcType="VARCHAR" property="linkName" />
+    <result column="link_url" jdbcType="VARCHAR" property="linkUrl" />
+    <result column="link_logo" jdbcType="VARCHAR" property="linkLogo" />
+    <result column="link_describe" jdbcType="VARCHAR" property="linkDescribe" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    link_id, link_name, link_url, link_logo, link_describe
+  </sql>
+  <select id="selectByExample" parameterType="com.songhaozhi.mayday.model.domain.LinkExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from link
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from link
+    where link_id = #{linkId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from link
+    where link_id = #{linkId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.songhaozhi.mayday.model.domain.LinkExample">
+    delete from link
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.songhaozhi.mayday.model.domain.Link">
+    insert into link (link_id, link_name, link_url, 
+      link_logo, link_describe)
+    values (#{linkId,jdbcType=INTEGER}, #{linkName,jdbcType=VARCHAR}, #{linkUrl,jdbcType=VARCHAR}, 
+      #{linkLogo,jdbcType=VARCHAR}, #{linkDescribe,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.songhaozhi.mayday.model.domain.Link">
+    insert into link
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="linkId != null">
+        link_id,
+      </if>
+      <if test="linkName != null">
+        link_name,
+      </if>
+      <if test="linkUrl != null">
+        link_url,
+      </if>
+      <if test="linkLogo != null">
+        link_logo,
+      </if>
+      <if test="linkDescribe != null">
+        link_describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="linkId != null">
+        #{linkId,jdbcType=INTEGER},
+      </if>
+      <if test="linkName != null">
+        #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkUrl != null">
+        #{linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="linkLogo != null">
+        #{linkLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="linkDescribe != null">
+        #{linkDescribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.songhaozhi.mayday.model.domain.LinkExample" resultType="java.lang.Long">
+    select count(*) from link
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update link
+    <set>
+      <if test="record.linkId != null">
+        link_id = #{record.linkId,jdbcType=INTEGER},
+      </if>
+      <if test="record.linkName != null">
+        link_name = #{record.linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkUrl != null">
+        link_url = #{record.linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkLogo != null">
+        link_logo = #{record.linkLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkDescribe != null">
+        link_describe = #{record.linkDescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update link
+    set link_id = #{record.linkId,jdbcType=INTEGER},
+      link_name = #{record.linkName,jdbcType=VARCHAR},
+      link_url = #{record.linkUrl,jdbcType=VARCHAR},
+      link_logo = #{record.linkLogo,jdbcType=VARCHAR},
+      link_describe = #{record.linkDescribe,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.songhaozhi.mayday.model.domain.Link">
+    update link
+    <set>
+      <if test="linkName != null">
+        link_name = #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkUrl != null">
+        link_url = #{linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="linkLogo != null">
+        link_logo = #{linkLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="linkDescribe != null">
+        link_describe = #{linkDescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where link_id = #{linkId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.songhaozhi.mayday.model.domain.Link">
+    update link
+    set link_name = #{linkName,jdbcType=VARCHAR},
+      link_url = #{linkUrl,jdbcType=VARCHAR},
+      link_logo = #{linkLogo,jdbcType=VARCHAR},
+      link_describe = #{linkDescribe,jdbcType=VARCHAR}
+    where link_id = #{linkId,jdbcType=INTEGER}
+  </update>
+</mapper>
