@@ -35,9 +35,6 @@
     </section>
   <div th:replace="admin/module/publi_js.html" ></div>
   <script type="text/javascript">
-    $(function () {
-    });
-
     function getLogin() {
         var userName=$("#userName").val();
         var userPwd=$("#userPwd").val();
@@ -65,15 +62,13 @@
                          }
                      });
             	}else{
-            		showMsg("登录失败","error",3000);
+            		showMsg(data.msg,"error",3000);
             	}
             },error:function (data) {
             	showMsg("登录失败","error",3000);
             }
         });
     }
-
-
   </script>
   </body>
 </html>

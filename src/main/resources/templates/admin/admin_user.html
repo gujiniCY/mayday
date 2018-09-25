@@ -23,7 +23,7 @@
 					</ul>
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade active show col-lg-6" id="data">
-							<form class="form-horizontal" id="dataFrom">
+							<form class="form-horizontal" id="dataFrom" autocomplete="off">
 								<input class="form-control" type="hidden"
 									th:value="${user.userId}" name="userId">
 								<div class="form-group row">
@@ -104,29 +104,31 @@
 							</form>
 						</div>
 						<div class="tab-pane fade col-lg-6" id="password">
-							<form class="form-horizontal" id="pwdFrom">
+							<form class="form-horizontal" id="pwdFrom" autocomplete="off">
+							<input class="form-control" type="hidden"
+									th:value="${user.userId}" id="userId" name="userId">
 								<div class="form-group row">
 									<label class="control-label col-md-3">原密码：</label>
 									<div class="col-md-8">
-										<input class="form-control" type="text" id="formerlyPwd">
+										<input class="form-control" type="password" id="formerlyPwd">
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="control-label col-md-3">新密码：</label>
 									<div class="col-md-8">
-										<input class="form-control" type="text" id="nowPwd">
+										<input class="form-control" type="password" id="nowPwd">
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="control-label col-md-3">确认新密码：</label>
 									<div class="col-md-8">
-										<input class="form-control" type="text" id="confirmPwd">
+										<input class="form-control" type="password" id="confirmPwd">
 									</div>
 								</div>
 								<div class="tile-footer">
 									<div class="row">
 										<div class="col-md-8 col-md-offset-3">
-											<button class="btn btn-primary" type="button" onclick="updatePwd()">
+											<button class="btn btn-primary" type="button" onclick="update()">
 												<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
 											</button>
 										</div>
@@ -142,7 +144,7 @@
 	</main>
 	<div th:replace="admin/module/publi_js.html"></div>
 	<script src="/plugins/layer/layer.js"></script>
-	<script>
+	<script type="text/javascript">
 		//保存资料
 		function save() {
 			var obj = $('#dataFrom').serialize();
@@ -175,22 +177,41 @@
 				}
 			});
 		}
-		//修改密码
-		function updatePwd(){
-			var formerlyPwd=$("#formerlyPwd").val();
-			var nowPwd=$("#nowPwd").val();
-			var confirmPwd=$("#confirmPwd").val();
-			$.ajax({
-				type:"POST",
-				url:"/",
-				dataType:"json",
-				success:function(data){
-					
+	//修改密码
+	function update(){
+		var formerlyPwd=$("#formerlyPwd").val();
+		var nowPwd=$("#nowPwd").val();
+		var confirmPwd=$("#confirmPwd").val();
+		var userId=$("#userId").val();
+		$.ajax({
+			type : "POST",
+			url : "/admin/profile/updatePwd",
+			data : {"formerlyPwd":formerlyPwd,"nowPwd":nowPwd,"confirmPwd":confirmPwd,"userId":userId},
+			dataType : "json",
+			success : function(data) {
+				if (data.flag == true) {
+					$.toast({
+						text : data.msg,
+						heading : '提示',
+						icon : 'success',
+						showHideTransition : 'fade',
+						allowToastClose : true,
+						hideAfter : 1000,
+						stack : 1,
+						position : 'top-center',
+						textAlign : 'left',
+						loader : true,
+						loaderBg : '#ffffff',
+						afterHidden : function() {
+							window.location.reload();
+						}
+					});
+				} else {
+					showMsg(data.msg, "error", 3000);
 				}
-			});
-			
-			
-		}
+			}
+		});
+	}
 	</script>
 </body>
 </html>

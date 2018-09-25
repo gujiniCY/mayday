@@ -4,12 +4,12 @@ logging:
   config: classpath:logback-spring.xml
   file: server.log
   path: /log/
-spring:
-    mvc: 
-    thymeleaf: 
-      mode: HTML
+spring: 
+  thymeleaf:
+    servlet:
       content-type: text/html
-    datasource: 
+    mode: HTML
+  datasource: 
         type: com.alibaba.druid.pool.DruidDataSource
         url: jdbc:mysql://47.106.22.160:3306/mayday
         username: mayday
@@ -18,3 +18,5 @@ spring:
 mybatis: 
   typeAliasesPackage: com.songhaozhi.mayday.model.domain
   mapperLocations: classpath:mapper/*/*.xml
+  configuration:
+    map-underscore-to-camel-case: true

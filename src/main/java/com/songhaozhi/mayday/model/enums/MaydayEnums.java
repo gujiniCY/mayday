@@ -6,14 +6,17 @@ package com.songhaozhi.mayday.model.enums;
  */
 public enum MaydayEnums {
 	/**
+	 * 运行错误
+	 */
+	ERROR(500,"系统错误"),
+	/**
 	 * 操作成功
 	 */
 	OPERATION_SUCCESS(200, "操作成功！"),
 	/**
-	 * 操作失败
+	 * 逻辑错误
 	 */
-	OPERATION_ERROR(500, "操作失败"),
-
+	OPERATION_ERROR(506, "操作失败"),
 	/**
 	 * 保存成功
 	 */

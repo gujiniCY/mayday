@@ -1,5 +1,7 @@
 package com.songhaozhi.mayday.service;
 
+import java.util.Date;
+
 import com.songhaozhi.mayday.model.domain.User;
 
 /**
@@ -31,4 +33,38 @@ public interface UserService {
 	 * @return
 	 */
 	User findUser();
+
+	/**
+	 * 查询原密码是否存在
+	 * 
+	 * @param userId
+	 *            用户id
+	 * @param formerlyPwd
+	 *            原密码
+	 * @return
+	 */
+	User findByUserIdAndUserPwd(Integer userId, String formerlyPwd);
+
+	/**
+	 * 修改最后登录时间
+	 * 
+	 * @param date
+	 * @param userId 
+	 */
+	void updateLoginLastTime(Date date, Integer userId);
+	/**
+	 * 修改用户状态为正常
+	 * @param userId
+	 */
+	void updateUserNormal(Integer userId);
+	/**
+	 * 更新登录失败次数
+	 * @return 
+	 */
+	Integer updateError();
+	/**
+	 * 禁止登录
+	 * @param enable
+	 */
+	void updateLoginEnable(String enable);
 }

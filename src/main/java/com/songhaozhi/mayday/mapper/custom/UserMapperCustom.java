@@ -1,5 +1,8 @@
 package com.songhaozhi.mayday.mapper.custom;
 
+import java.util.Date;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.songhaozhi.mayday.model.domain.User;
@@ -26,9 +29,24 @@ public interface UserMapperCustom {
 	 * @param user
 	 */
 	void updateDatum(User user);
+
 	/**
 	 * 用户资料查询
+	 * 
 	 * @return
 	 */
-	User findUser();
+	List<User> findUser();
+
+	/**
+	 * 查询原密码是否存在
+	 * 
+	 * @param userId
+	 *            用户id
+	 * @param formerlyPwd
+	 *            原密码
+	 * @return
+	 */
+	User findByUserIdAndUserPwd(@Param(value = "userId") Integer userId,
+			@Param(value = "formerlyPwd") String formerlyPwd);
+
 }
