@@ -19,51 +19,58 @@
 			<div class="tile">
 				<div class="row">
 					<div class="col-lg-5">
-					<th:block th:if="${link} == null ">
-						<h4 class="tile-title">添加友情链接</h4>
-					</th:block>
-					<th:block th:if="${link} != null">
-						<h4 class="tile-title">修改友情链接</h4>
-					</th:block>
-						<form id="linkFrom" action="/admin/links/save" method="post" autocomplete="off">
-						<input type="hidden" name="linkId" th:value="${link!=null ? link.linkId :''}">
+						<th:block th:if="${link} == null ">
+							<h4 class="tile-title">添加友情链接</h4>
+						</th:block>
+						<th:block th:if="${link} != null">
+							<h4 class="tile-title">修改友情链接</h4>
+						</th:block>
+						<form id="linkFrom" action="/admin/links/save" method="post"
+							autocomplete="off">
+							<input type="hidden" name="linkId"
+								th:value="${link!=null ? link.linkId :''}">
 							<div class="form-group">
-								<label class="col-form-label">网站名称<span
-										data-toggle="tooltip" data-placement="top" title="好友的网站名称"
-										style="cursor: pointer"> <i
-											class="fa fa-question-circle" aria-hidden="true"></i>
-									</span></label> <input
-									class="form-control" id="linkName" th:value="${link!=null ? link.linkName :''}" name="linkName" type="text">
+								<label class="col-form-label">*网站名称<span
+									data-toggle="tooltip" data-placement="top" title="好友的网站名称"
+									style="cursor: pointer"> <i
+										class="fa fa-question-circle" aria-hidden="true"></i>
+								</span></label> <input class="form-control" id="linkName"
+									th:value="${link!=null ? link.linkName :''}" name="linkName"
+									type="text">
 							</div>
 							<div class="form-group">
-								<label class="col-form-label">网址<span
-										data-toggle="tooltip" data-placement="top" title="*需要加上http://或https://"
-										style="cursor: pointer"> <i
-											class="fa fa-question-circle" aria-hidden="true"></i>
-									</span></label> <input
-									class="form-control" id="linkUrl" th:value="${link!=null ? link.linkUrl : ''}" name="linkUrl" type="text">
+								<label class="col-form-label">*网址<span
+									data-toggle="tooltip" data-placement="top"
+									title="*需要加上http://或https://" style="cursor: pointer"> <i
+										class="fa fa-question-circle" aria-hidden="true"></i>
+								</span></label> <input class="form-control" id="linkUrl"
+									th:value="${link!=null ? link.linkUrl : ''}" name="linkUrl"
+									type="text">
 							</div>
 							<div class="form-group">
-								<label class="col-form-label">logo<span
-										data-toggle="tooltip" data-placement="top" title="*LOGO链接地址，需要加上http://或https://"
-										style="cursor: pointer"> <i
-											class="fa fa-question-circle" aria-hidden="true"></i>
-									</span></label> <input
-									class="form-control" id="linkLogo" th:value="${link!=null ? link.linkLogo : ''}" name="linkLogo" type="text">
+								<label class="col-form-label">LOGO<span
+									data-toggle="tooltip" data-placement="top"
+									title="LOGO链接地址，需要加上http://或https://" style="cursor: pointer">
+										<i class="fa fa-question-circle" aria-hidden="true"></i>
+								</span></label> <input class="form-control" id="linkLogo"
+									th:value="${link!=null ? link.linkLogo : ''}" name="linkLogo"
+									type="text">
 							</div>
 							<div class="form-group">
 								<label class="col-form-label">描述<span
-										data-toggle="tooltip" data-placement="top" title="*网站的描述"
-										style="cursor: pointer"> <i
-											class="fa fa-question-circle" aria-hidden="true"></i>
-									</span></label>
-								<textarea class="form-control" rows="3" id="linkDescribe" th:text="${link != null ? link.linkDescribe : ''}" th:value="${link != null ? link.linkDescribe : ''}" name="linkDescribe"
-									style="resize: none"></textarea>
+									data-toggle="tooltip" data-placement="top" title="网站的描述"
+									style="cursor: pointer"> <i
+										class="fa fa-question-circle" aria-hidden="true"></i>
+								</span></label>
+								<textarea class="form-control" rows="3" id="linkDescribe"
+									th:text="${link != null ? link.linkDescribe : ''}"
+									th:value="${link != null ? link.linkDescribe : ''}"
+									name="linkDescribe" style="resize: none"></textarea>
 							</div>
 							<div class="tile-footer">
 								<button class="btn btn-primary" type="submit">保存链接</button>
 								<th:block th:if="${link} != null">
-								<a class="btn btn-info" href="/admin/links">返回添加</a>
+									<a class="btn btn-info" href="/admin/links">返回添加</a>
 								</th:block>
 							</div>
 						</form>
@@ -82,14 +89,15 @@
 								</thead>
 								<tbody>
 									<tr th:each="link : ${links}">
-											<td th:text="${link.linkName}"></td>
-											<td th:text="${link.linkUrl}"></td>
-											<td th:text="${link.linkDescribe}"></td>
-											<td>
-											<a class="btn btn-primary" th:href="@{/admin/links/edit(linkId=${link.linkId})}">修改</a>
-											<button class="btn btn-danger" th:onclick="'javascript:showModel('+${link.linkId}+')'">删除</button>
-											</td>
-										</tr>
+										<td th:text="${link.linkName}"></td>
+										<td th:text="${link.linkUrl}"></td>
+										<td th:text="${link.linkDescribe}"></td>
+										<td><a class="btn btn-primary"
+											th:href="@{/admin/links/edit(linkId=${link.linkId})}">修改</a>
+											<button class="btn btn-danger"
+												th:onclick="'javascript:showModel('+${link.linkId}+')'">删除</button>
+										</td>
+									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -99,36 +107,67 @@
 		</div>
 	</div>
 	</main>
-	   <!-- 删除确认弹出层 -->
-<div class="modal fade" id="removeModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">提示信息</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        	您确定要删除吗？
-      </div>
-      <!-- 模态框底部 -->
-      <div class="modal-footer">
-      	<input type="hidden" id="linkid"/>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary" onclick="remove()">确定</button>
-      </div>
- 
-    </div>
-  </div>
-</div>
-	<div th:replace="admin/module/publi_js.html"></div>
+	<!-- 删除确认弹出层 -->
+	<div class="modal fade" id="removeModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">提示信息</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">您确定要删除吗？</div>
+				<!-- 模态框底部 -->
+				<div class="modal-footer">
+					<input type="hidden" id="linkid" />
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="remove()">确定</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div th:replace="admin/module/macros :: comm"></div>
+	<div th:replace="admin/module/macros :: bootstrapValidator"></div>
 	<script type="text/javascript">
-	function showModel(linkId){
-		$("#linkid").val(linkId);
-		$("#removeModal").modal();
-	}
-	function remove(){
-		 window.location.href="/admin/links/remove?linkId="+$("#linkid").val();
-	}
+	$(function(){
+		$("form").bootstrapValidator({
+			message: 'This value is not valid',
+           　		feedbackIcons: {
+               　　　　　　　　valid: 'glyphicon glyphicon-ok',
+               　　　　　　　　invalid: 'glyphicon glyphicon-remove',
+               　　　　　　　　validating: 'glyphicon glyphicon-refresh'
+           　　　　　　　　   },
+            fields: {
+        	   linkName: {
+                   message: '网站名称验证失败',
+                   validators: {
+                       notEmpty: {
+                           message: '网站名称不能为空'
+                       }
+                   }
+               },
+               linkUrl: {
+            	   message: '网址验证失败',
+                   validators: {
+                       notEmpty: {
+                           message: '网址不能为空'
+                       }
+                   }
+               }
+           }
+		});
+	});
+		function showModel(linkId) {
+			$("#linkid").val(linkId);
+			$("#removeModal").modal();
+		}
+		function remove() {
+			window.location.href = "/admin/links/remove?linkId="
+					+ $("#linkid").val();
+		}
+		
+		
 	</script>
 </body>
 </html>

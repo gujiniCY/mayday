@@ -83,7 +83,7 @@
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from user
+    from mayday_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -94,21 +94,21 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user
+    from mayday_user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
+    delete from mayday_user
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.songhaozhi.mayday.model.domain.UserExample">
-    delete from user
+    delete from mayday_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.songhaozhi.mayday.model.domain.User">
-    insert into user (user_id, login_enable, login_error, 
+    insert into mayday_user (user_id, login_enable, login_error, 
       login_last_time, user_portrait, user_explain, 
       user_display_name, user_title, user_email, 
       user_name, user_pwd)
@@ -118,7 +118,7 @@
       #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.songhaozhi.mayday.model.domain.User">
-    insert into user
+    insert into mayday_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
         user_id,
@@ -191,13 +191,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.songhaozhi.mayday.model.domain.UserExample" resultType="java.lang.Long">
-    select count(*) from user
+    select count(*) from mayday_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update user
+    update mayday_user
     <set>
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=INTEGER},
@@ -238,7 +238,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update user
+    update mayday_user
     set user_id = #{record.userId,jdbcType=INTEGER},
       login_enable = #{record.loginEnable,jdbcType=VARCHAR},
       login_error = #{record.loginError,jdbcType=INTEGER},
@@ -255,7 +255,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.songhaozhi.mayday.model.domain.User">
-    update user
+    update mayday_user
     <set>
       <if test="loginEnable != null">
         login_enable = #{loginEnable,jdbcType=VARCHAR},
@@ -291,7 +291,7 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.songhaozhi.mayday.model.domain.User">
-    update user
+    update mayday_user
     set login_enable = #{loginEnable,jdbcType=VARCHAR},
       login_error = #{loginError,jdbcType=INTEGER},
       login_last_time = #{loginLastTime,jdbcType=TIMESTAMP},

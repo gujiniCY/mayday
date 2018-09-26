@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.songhaozhi.mayday.mapper.custom.UserMapperCustom">
   <select id="getByNameAndPwd" parameterType="String" resultType="com.songhaozhi.mayday.model.domain.User">
-    select * from user where  user_name=#{name} and user_pwd=#{pwd}
+    select * from mayday_user where  user_name=#{name} and user_pwd=#{pwd}
   </select>
   <select id="findUser" resultType="com.songhaozhi.mayday.model.domain.User">
-  select * from user
+  select * from mayday_user
   </select>
   <select id="findByUserIdAndUserPwd" resultType="com.songhaozhi.mayday.model.domain.User">
-  select * from user where user_id = #{userId} and user_pwd = #{formerlyPwd}
+  select * from mayday_user where user_id = #{userId} and user_pwd = #{formerlyPwd}
   </select>
   
 </mapper>

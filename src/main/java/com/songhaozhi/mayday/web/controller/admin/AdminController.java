@@ -25,7 +25,7 @@ import cn.hutool.crypto.SecureUtil;
  * @author 作者:宋浩志
  * @createDate 创建时间：2018年8月27日 上午11:15:50
  */
-@RequestMapping("/admin")
+@RequestMapping(value="/admin")
 @Controller
 public class AdminController extends BaseController {
 	@Autowired

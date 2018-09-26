@@ -19,7 +19,7 @@ import com.songhaozhi.mayday.service.LinksService;
  * 
  */
 @Controller
-@RequestMapping("/admin/links")
+@RequestMapping(value="/admin/links")
 public class LinksController extends BaseController {
 	@Autowired
 	private LinksService linksService;

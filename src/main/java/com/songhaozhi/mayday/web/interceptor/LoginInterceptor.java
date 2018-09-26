@@ -19,7 +19,6 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		Object obj = request.getSession().getAttribute(MaydayConst.USER_SESSION_KEY);
-		System.out.println("进入拦截器");
 		// 如果user不为空则放行
 		if (null != obj) {
 			return true;

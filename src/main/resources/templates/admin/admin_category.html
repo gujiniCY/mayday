@@ -18,15 +18,33 @@
 			<div class="tile">
 				<div class="row">
 					<div class="col-lg-5">
-						<h4 class="tile-title">添加分类</h4>
+						<th:block th:if="${category} == null ">
+							<h4 class="tile-title">添加分类</h4>
+						</th:block>
+						<th:block th:if="${category} != null">
+							<h4 class="tile-title">修改分类</h4>
+						</th:block>
 						<form>
 							<div class="form-group">
 								<label class="col-form-label" for="inputDefault">名称</label> <input
-									class="form-control" id="inputDefault" type="text">
+									class="form-control" id="inputDefault" th:text="${category != null ? category.categoryName : ''}"
+									th:value="${category != null ? category.categoryName : ''}" name="categoryName" type="text">
 							</div>
 							<div class="form-group">
 								<label class="col-form-label" for="inputDefault">路径名称</label> <input
-									class="form-control" id="inputDefault" type="text">
+									class="form-control" id="inputDefault" th:text="${category != null ? category.categoryUrl : ''}"
+									th:value="${category != null ? category.categoryUrl : ''}" type="text" name="categoryUrl">
+							</div>
+							<div class="form-group">
+								<label class="col-form-label">描述<span
+									data-toggle="tooltip" data-placement="top" title="分类描述"
+									style="cursor: pointer"> <i
+										class="fa fa-question-circle" aria-hidden="true"></i>
+								</span></label>
+								<textarea class="form-control" rows="3" id=""
+									th:text="${category != null ? category.categoryDescribe : ''}"
+									th:value="${category != null ? category.categoryDescribe : ''}"
+									name="categoryDescribe" style="resize: none"></textarea>
 							</div>
 							<div class="tile-footer">
 								<button class="btn btn-primary" type="submit">添加</button>
@@ -39,37 +57,22 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
+                    <th>分类名称</th>
+                    <th>分类路径</th>
+                    <th>分类描述</th>
+                     <th>操作</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td><button>修改</button><button>删除</button></td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
+                  <tr th:each="category : ${Categorys}">
+                    <td th:text="${category.categoryName}"></td>
+                   <td th:text="${category.categoryUrl}"></td>
+                    <td th:text="${category.categoryDescribe}"></td>
+                    <td><a class="btn btn-primary"
+											th:href="@{/admin/category/edit(categoryId=${category.categoryId})}">修改</a>
+											<button class="btn btn-danger"
+												th:onclick="'javascript:showModel('+${category.categoryId}+')'">删除</button>
+										</td>
                   </tr>
                 </tbody>
               </table>
@@ -81,6 +84,6 @@
 		</div>
 	</div>
 	</main>
-	<div th:replace="admin/module/publi_js.html" ></div>
+	<div th:replace="admin/module/macros :: comm" ></div>
 </body>
 </html>
