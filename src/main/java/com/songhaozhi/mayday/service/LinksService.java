@@ -15,5 +15,26 @@ public interface LinksService {
 	 * @return
 	 */
 	List<Link> findLinks();
-
+	/**
+	 * 根据linkId查询
+	 * @param linkId 友链id
+	 * @return
+	 */
+	Link findByLindId(int linkId);
+	/**
+	 * 保存
+	 * @param link
+	 */
+	void save(Link link);
+	/**
+	 * 修改
+	 * @param link
+	 */
+	void update(Link link);
+	/**
+	 * 删除
+	 * @param linkId
+	 */
+	void remove(int linkId);
+	
 }

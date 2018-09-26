@@ -9,13 +9,21 @@ public class Link implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Integer linkId;
-
+	/**
+	 * 网站名称
+	 */
     private String linkName;
-
+    /**
+     * 路径
+     */
     private String linkUrl;
-
+    /**
+     * logo
+     */
     private String linkLogo;
-
+    /**
+     * 描述
+     */
     private String linkDescribe;
 
     public Integer getLinkId() {
