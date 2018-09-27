@@ -6,11 +6,11 @@
 	<main class="app-content">
 	<div class="app-title">
 		<div>
-			<h1>分类目录</h1>
+			<h1>标签</h1>
 		</div>
 		<ul class="app-breadcrumb breadcrumb">
 			<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-			<li class="breadcrumb-item"><a href="/admin/category">分类目录</a></li>
+			<li class="breadcrumb-item"><a href="/admin/tag">标签</a></li>
 		</ul>
 	</div>
 	<div class="row">
@@ -18,68 +18,60 @@
 			<div class="tile">
 				<div class="row">
 					<div class="col-lg-5">
-						<th:block th:if="${category} == null ">
-							<h4 class="tile-title">添加分类</h4>
+						<th:block th:if="${tag} == null ">
+							<h4 class="tile-title">添加标签</h4>
 						</th:block>
-						<th:block th:if="${category} != null">
-							<h4 class="tile-title">修改分类</h4>
+						<th:block th:if="${tag} != null">
+							<h4 class="tile-title">修改标签</h4>
 						</th:block>
-						<form action="/admin/category/save" method="post"
-							autocomplete="off">
-							<input type="hidden" name="categoryId"
-								th:value="${category!=null ? category.categoryId :''}">
+						<form action="/admin/tag/save" method="post" autocomplete="off">
+							<input type="hidden" name="tagId"
+								th:value="${tag!=null ? tag.tagId :''}">
 							<div class="form-group">
-								<label class="col-form-label" for="inputDefault">名称</label> <input
-									class="form-control" id="inputDefault"
-									th:value="${category != null ? category.categoryName : ''}"
-									name="categoryName" type="text">
-							</div>
-							<div class="form-group">
-								<label class="col-form-label" for="inputDefault">路径名称</label> <input
-									class="form-control" id="inputDefault"
-									th:value="${category != null ? category.categoryUrl : ''}"
-									type="text" name="categoryUrl">
-							</div>
-							<div class="form-group">
-								<label class="col-form-label">描述<span
-									data-toggle="tooltip" data-placement="top" title="分类描述"
+								<label class="col-form-label" for="inputDefault">*名称<span
+									data-toggle="tooltip" data-placement="top" title="*页面上所显示的名称"
 									style="cursor: pointer"> <i
-										class="fa fa-question-circle" aria-hidden="true"></i>
-								</span></label>
-								<textarea class="form-control" rows="3" id=""
-									th:text="${category != null ? category.categoryDescribe : ''}"
-									th:value="${category != null ? category.categoryDescribe : ''}"
-									name="categoryDescribe" style="resize: none"></textarea>
+										class="fa fa-question-circle" aria-hidden="true"></i></label> <input
+									class="form-control" id="inputDefault"
+									th:value="${tag != null ? tag.tagName : ''}" name="tagName"
+									type="text">
+							</div>
+							<div class="form-group">
+								<label class="col-form-label" for="inputDefault">*路径名称<span
+									data-toggle="tooltip" data-placement="top" title="*这是文章路径上显示的名称，最好为英文 "
+									style="cursor: pointer"> <i
+										class="fa fa-question-circle" aria-hidden="true"></i></label> <input
+									class="form-control" id="inputDefault"
+									th:value="${tag != null ? tag.tagUrl : ''}" type="text"
+									name="tagUrl">
 							</div>
 							<div class="tile-footer">
-								<button class="btn btn-primary" type="submit">保存分类</button>
-								<th:block th:if="${category} != null">
-									<a class="btn btn-info" href="/admin/category">返回添加</a>
+								<button class="btn btn-primary" type="submit">保存标签</button>
+								<th:block th:if="${tag} != null">
+									<a class="btn btn-info" href="/admin/tag">返回添加</a>
 								</th:block>
 							</div>
 						</form>
 					</div>
 					<div class="col-lg-7">
-						<h4 class="tile-title">所有分类</h4>
+						<h4 class="tile-title">所有标签</h4>
 						<div class="table-responsive">
 							<table class="table">
 								<thead>
 									<tr>
-										<th>分类名称</th>
-										<th>分类路径</th>
-										<th>分类描述</th>
+										<th>名称</th>
+										<th>路径名称</th>
 										<th>操作</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="category : ${Categorys}">
-										<td th:text="${category.categoryName}"></td>
-										<td th:text="${category.categoryUrl}"></td>
-										<td th:text="${category.categoryDescribe}"></td>
+									<tr th:each="tag : ${tags}">
+										<td th:text="${tag.tagName}"></td>
+										<td th:text="${tag.tagUrl}"></td>
 										<td><a class="btn btn-primary"
-											th:href="@{/admin/category/edit(categoryId=${category.categoryId})}">修改</a>
+											th:href="@{/admin/tag/edit(tagId=${tag.tagId})}">修改</a>
 											<button class="btn btn-danger"
-												th:onclick="'javascript:showModel('+${category.categoryId}+')'">删除</button>
+												th:onclick="'javascript:showModel('+${tag.tagId}+')'">删除</button>
 										</td>
 									</tr>
 								</tbody>
@@ -103,7 +95,7 @@
 				<div class="modal-body">您确定要删除吗？</div>
 				<!-- 模态框底部 -->
 				<div class="modal-footer">
-					<input type="hidden" id="categoryid" />
+					<input type="hidden" id="tagid" />
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">关闭</button>
 					<button type="button" class="btn btn-primary" onclick="remove()">确定</button>
@@ -124,7 +116,7 @@
                　　　　　　　　validating: 'glyphicon glyphicon-refresh'
            　　　　　　　　   },
             fields: {
-            	categoryName: {
+            	tagName: {
                    message: '名称验证失败',
                    validators: {
                        notEmpty: {
@@ -132,7 +124,7 @@
                        }
                    }
                },
-               categoryUrl: {
+               tagUrl: {
             	   message: '路径名称验证失败',
                    validators: {
                        notEmpty: {
@@ -143,13 +135,13 @@
            }
 		});
 	});
-		function showModel(categoryId) {
-			$("#categoryid").val(categoryId);
+		function showModel(tagId) {
+			$("#tagid").val(tagId);
 			$("#removeModal").modal();
 		}
 		function remove() {
-			window.location.href = "/admin/category/remove?categoryId="
-					+ $("#categoryid").val();
+			window.location.href = "/admin/tag/remove?tagId="
+					+ $("#tagid").val();
 		}
 	</script>
 </body>

@@ -1,7 +1,14 @@
 package com.songhaozhi.mayday.model.domain;
 
-public class Link {
-    private Integer linkId;
+import java.io.Serializable;
+
+public class Link implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7276479736857958686L;
+
+	private Integer linkId;
 
     private String linkName;
 

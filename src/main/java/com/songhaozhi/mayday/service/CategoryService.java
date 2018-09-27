@@ -15,5 +15,26 @@ public interface CategoryService {
 	 * @return
 	 */
 	List<Category> findCategory();
+	/**
+	 * 根据id查询
+	 * @param categoryId
+	 * @return
+	 */
+	Category findByCategoryId(int categoryId);
+	/**
+	 * 添加
+	 * @param category
+	 */
+	void save(Category category);
+	/**
+	 * 修改
+	 * @param category
+	 */
+	void update(Category category);
+	/**
+	 * 删除
+	 * @param categoryId
+	 */
+	void delete(int categoryId);
 
 }
