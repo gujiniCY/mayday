@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.songhaozhi.mayday.mapper.generator.AttachmentMapper">
+  <resultMap id="BaseResultMap" type="com.songhaozhi.mayday.model.domain.Attachment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="picture_name" jdbcType="VARCHAR" property="pictureName" />
+    <result column="picture_path" jdbcType="VARCHAR" property="picturePath" />
+    <result column="picture_small_path" jdbcType="VARCHAR" property="pictureSmallPath" />
+    <result column="picture_type" jdbcType="VARCHAR" property="pictureType" />
+    <result column="picture_create_date" jdbcType="VARCHAR" property="pictureCreateDate" />
+    <result column="picture_size" jdbcType="VARCHAR" property="pictureSize" />
+    <result column="picture_suffix" jdbcType="VARCHAR" property="pictureSuffix" />
+    <result column="picture_wh" jdbcType="VARCHAR" property="pictureWh" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, picture_name, picture_path, picture_small_path, picture_type, picture_create_date, 
+    picture_size, picture_suffix, picture_wh
+  </sql>
+  <select id="selectByExample" parameterType="com.songhaozhi.mayday.model.domain.AttachmentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from mayday_attachment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mayday_attachment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mayday_attachment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.songhaozhi.mayday.model.domain.AttachmentExample">
+    delete from mayday_attachment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.songhaozhi.mayday.model.domain.Attachment">
+    insert into mayday_attachment (id, picture_name, picture_path, 
+      picture_small_path, picture_type, picture_create_date, 
+      picture_size, picture_suffix, picture_wh
+      )
+    values (#{id,jdbcType=INTEGER}, #{pictureName,jdbcType=VARCHAR}, #{picturePath,jdbcType=VARCHAR}, 
+      #{pictureSmallPath,jdbcType=VARCHAR}, #{pictureType,jdbcType=VARCHAR}, #{pictureCreateDate,jdbcType=VARCHAR}, 
+      #{pictureSize,jdbcType=VARCHAR}, #{pictureSuffix,jdbcType=VARCHAR}, #{pictureWh,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.songhaozhi.mayday.model.domain.Attachment">
+    insert into mayday_attachment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pictureName != null">
+        picture_name,
+      </if>
+      <if test="picturePath != null">
+        picture_path,
+      </if>
+      <if test="pictureSmallPath != null">
+        picture_small_path,
+      </if>
+      <if test="pictureType != null">
+        picture_type,
+      </if>
+      <if test="pictureCreateDate != null">
+        picture_create_date,
+      </if>
+      <if test="pictureSize != null">
+        picture_size,
+      </if>
+      <if test="pictureSuffix != null">
+        picture_suffix,
+      </if>
+      <if test="pictureWh != null">
+        picture_wh,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pictureName != null">
+        #{pictureName,jdbcType=VARCHAR},
+      </if>
+      <if test="picturePath != null">
+        #{picturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureSmallPath != null">
+        #{pictureSmallPath,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureType != null">
+        #{pictureType,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureCreateDate != null">
+        #{pictureCreateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureSize != null">
+        #{pictureSize,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureSuffix != null">
+        #{pictureSuffix,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureWh != null">
+        #{pictureWh,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.songhaozhi.mayday.model.domain.AttachmentExample" resultType="java.lang.Long">
+    select count(*) from mayday_attachment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mayday_attachment
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.pictureName != null">
+        picture_name = #{record.pictureName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picturePath != null">
+        picture_path = #{record.picturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pictureSmallPath != null">
+        picture_small_path = #{record.pictureSmallPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pictureType != null">
+        picture_type = #{record.pictureType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pictureCreateDate != null">
+        picture_create_date = #{record.pictureCreateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pictureSize != null">
+        picture_size = #{record.pictureSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pictureSuffix != null">
+        picture_suffix = #{record.pictureSuffix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pictureWh != null">
+        picture_wh = #{record.pictureWh,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mayday_attachment
+    set id = #{record.id,jdbcType=INTEGER},
+      picture_name = #{record.pictureName,jdbcType=VARCHAR},
+      picture_path = #{record.picturePath,jdbcType=VARCHAR},
+      picture_small_path = #{record.pictureSmallPath,jdbcType=VARCHAR},
+      picture_type = #{record.pictureType,jdbcType=VARCHAR},
+      picture_create_date = #{record.pictureCreateDate,jdbcType=VARCHAR},
+      picture_size = #{record.pictureSize,jdbcType=VARCHAR},
+      picture_suffix = #{record.pictureSuffix,jdbcType=VARCHAR},
+      picture_wh = #{record.pictureWh,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.songhaozhi.mayday.model.domain.Attachment">
+    update mayday_attachment
+    <set>
+      <if test="pictureName != null">
+        picture_name = #{pictureName,jdbcType=VARCHAR},
+      </if>
+      <if test="picturePath != null">
+        picture_path = #{picturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureSmallPath != null">
+        picture_small_path = #{pictureSmallPath,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureType != null">
+        picture_type = #{pictureType,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureCreateDate != null">
+        picture_create_date = #{pictureCreateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureSize != null">
+        picture_size = #{pictureSize,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureSuffix != null">
+        picture_suffix = #{pictureSuffix,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureWh != null">
+        picture_wh = #{pictureWh,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.songhaozhi.mayday.model.domain.Attachment">
+    update mayday_attachment
+    set picture_name = #{pictureName,jdbcType=VARCHAR},
+      picture_path = #{picturePath,jdbcType=VARCHAR},
+      picture_small_path = #{pictureSmallPath,jdbcType=VARCHAR},
+      picture_type = #{pictureType,jdbcType=VARCHAR},
+      picture_create_date = #{pictureCreateDate,jdbcType=VARCHAR},
+      picture_size = #{pictureSize,jdbcType=VARCHAR},
+      picture_suffix = #{pictureSuffix,jdbcType=VARCHAR},
+      picture_wh = #{pictureWh,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

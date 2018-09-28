@@ -6,7 +6,7 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-dashboard"></i> 附件管理</h1>
+          <h1><i class="fa fa-dashboard"></i> 附件管理<a href="#" id="upload" class="btn">上传附件</a></h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -16,16 +16,12 @@
       <div class="row">
         <div class="col-md-12">
           <div class="tile">
-            <h3 class="tile-title">最新文章</h3>
-            <table class="table">
-            <tr>
-            <td>23213</td>
-            </tr>
-            </table>
+            <input type="file" class="file">
             </div>
         </div>
       </div>
     </main>
     <div th:replace="admin/module/macros :: comm" ></div>
+    <div th:replace="admin/module/macros :: fileinput" ></div>
   </body>
 </html>

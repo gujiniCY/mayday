@@ -99,7 +99,12 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.8.1</version>
+			</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<!-- 此包一般在Servlet容器中都有提供 -->
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>
