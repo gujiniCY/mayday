@@ -1,22 +1,40 @@
 package com.songhaozhi.mayday.model.domain;
 
+import java.util.Date;
+
 public class Attachment {
     private Integer id;
-
+    /**
+     * 图片名称
+     */
     private String pictureName;
-
+    /**
+     * 图片路径
+     */
     private String picturePath;
-
+    /**
+     * 略缩图
+     */
     private String pictureSmallPath;
-
+    /**
+     * 图片类型
+     */
     private String pictureType;
-
-    private String pictureCreateDate;
-
+    /**
+     * 上传时间
+     */
+    private Date pictureCreateDate;
+    /**
+     * 文件大小
+     */
     private String pictureSize;
-
+    /**
+     * 后缀
+     */
     private String pictureSuffix;
-
+    /**
+     * 尺寸
+     */
     private String pictureWh;
 
     public Integer getId() {
@@ -59,15 +77,17 @@ public class Attachment {
         this.pictureType = pictureType == null ? null : pictureType.trim();
     }
 
-    public String getPictureCreateDate() {
-        return pictureCreateDate;
-    }
+    
 
-    public void setPictureCreateDate(String pictureCreateDate) {
-        this.pictureCreateDate = pictureCreateDate == null ? null : pictureCreateDate.trim();
-    }
+    public Date getPictureCreateDate() {
+		return pictureCreateDate;
+	}
 
-    public String getPictureSize() {
+	public void setPictureCreateDate(Date pictureCreateDate) {
+		this.pictureCreateDate = pictureCreateDate;
+	}
+
+	public String getPictureSize() {
         return pictureSize;
     }
 

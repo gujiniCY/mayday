@@ -7,7 +7,7 @@
     <result column="picture_path" jdbcType="VARCHAR" property="picturePath" />
     <result column="picture_small_path" jdbcType="VARCHAR" property="pictureSmallPath" />
     <result column="picture_type" jdbcType="VARCHAR" property="pictureType" />
-    <result column="picture_create_date" jdbcType="VARCHAR" property="pictureCreateDate" />
+    <result column="picture_create_date" jdbcType="TIMESTAMP" property="pictureCreateDate" />
     <result column="picture_size" jdbcType="VARCHAR" property="pictureSize" />
     <result column="picture_suffix" jdbcType="VARCHAR" property="pictureSuffix" />
     <result column="picture_wh" jdbcType="VARCHAR" property="pictureWh" />
@@ -111,7 +111,7 @@
       picture_size, picture_suffix, picture_wh
       )
     values (#{id,jdbcType=INTEGER}, #{pictureName,jdbcType=VARCHAR}, #{picturePath,jdbcType=VARCHAR}, 
-      #{pictureSmallPath,jdbcType=VARCHAR}, #{pictureType,jdbcType=VARCHAR}, #{pictureCreateDate,jdbcType=VARCHAR}, 
+      #{pictureSmallPath,jdbcType=VARCHAR}, #{pictureType,jdbcType=VARCHAR}, #{pictureCreateDate,jdbcType=TIMESTAMP}, 
       #{pictureSize,jdbcType=VARCHAR}, #{pictureSuffix,jdbcType=VARCHAR}, #{pictureWh,jdbcType=VARCHAR}
       )
   </insert>
@@ -163,7 +163,7 @@
         #{pictureType,jdbcType=VARCHAR},
       </if>
       <if test="pictureCreateDate != null">
-        #{pictureCreateDate,jdbcType=VARCHAR},
+        #{pictureCreateDate,jdbcType=TIMESTAMP},
       </if>
       <if test="pictureSize != null">
         #{pictureSize,jdbcType=VARCHAR},
@@ -201,7 +201,7 @@
         picture_type = #{record.pictureType,jdbcType=VARCHAR},
       </if>
       <if test="record.pictureCreateDate != null">
-        picture_create_date = #{record.pictureCreateDate,jdbcType=VARCHAR},
+        picture_create_date = #{record.pictureCreateDate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.pictureSize != null">
         picture_size = #{record.pictureSize,jdbcType=VARCHAR},
@@ -224,7 +224,7 @@
       picture_path = #{record.picturePath,jdbcType=VARCHAR},
       picture_small_path = #{record.pictureSmallPath,jdbcType=VARCHAR},
       picture_type = #{record.pictureType,jdbcType=VARCHAR},
-      picture_create_date = #{record.pictureCreateDate,jdbcType=VARCHAR},
+      picture_create_date = #{record.pictureCreateDate,jdbcType=TIMESTAMP},
       picture_size = #{record.pictureSize,jdbcType=VARCHAR},
       picture_suffix = #{record.pictureSuffix,jdbcType=VARCHAR},
       picture_wh = #{record.pictureWh,jdbcType=VARCHAR}
@@ -248,7 +248,7 @@
         picture_type = #{pictureType,jdbcType=VARCHAR},
       </if>
       <if test="pictureCreateDate != null">
-        picture_create_date = #{pictureCreateDate,jdbcType=VARCHAR},
+        picture_create_date = #{pictureCreateDate,jdbcType=TIMESTAMP},
       </if>
       <if test="pictureSize != null">
         picture_size = #{pictureSize,jdbcType=VARCHAR},
@@ -268,7 +268,7 @@
       picture_path = #{picturePath,jdbcType=VARCHAR},
       picture_small_path = #{pictureSmallPath,jdbcType=VARCHAR},
       picture_type = #{pictureType,jdbcType=VARCHAR},
-      picture_create_date = #{pictureCreateDate,jdbcType=VARCHAR},
+      picture_create_date = #{pictureCreateDate,jdbcType=TIMESTAMP},
       picture_size = #{pictureSize,jdbcType=VARCHAR},
       picture_suffix = #{pictureSuffix,jdbcType=VARCHAR},
       picture_wh = #{pictureWh,jdbcType=VARCHAR}

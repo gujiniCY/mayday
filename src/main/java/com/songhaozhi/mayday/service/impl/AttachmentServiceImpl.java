@@ -1,7 +1,10 @@
 package com.songhaozhi.mayday.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.songhaozhi.mayday.mapper.generator.AttachmentMapper;
+import com.songhaozhi.mayday.model.domain.Attachment;
 import com.songhaozhi.mayday.service.AttachmentService;
 
 /**
@@ -10,5 +13,12 @@ import com.songhaozhi.mayday.service.AttachmentService;
  */
 @Service
 public class AttachmentServiceImpl implements AttachmentService {
+	@Autowired
+	private AttachmentMapper attachmentMapper;
+
+	@Override
+	public void save(Attachment attachment) {
+		attachmentMapper.insert(attachment);
+	}
 
 }

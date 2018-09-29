@@ -2,13 +2,13 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 
 <div th:fragment="comm">
-	<script src="/plugins/vali/js/jquery-3.2.1.min.js"></script>
-	<script src="/plugins/vali/js/popper.min.js"></script>
-	<script src="/plugins/vali/js/bootstrap.min.js"></script>
-	<script src="/plugins/vali/js/main.js"></script>
-	<script src="/plugins/vali/js/plugins/pace.min.js"></script>
-	<script src="/js/public.js"></script>
-	<script src="/plugins/toast/jquery.toast.js"></script>
+	<script type="text/javascript" src="/plugins/vali/js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/plugins/vali/js/popper.min.js"></script>
+	<script type="text/javascript" src="/plugins/vali/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/plugins/vali/js/main.js"></script>
+	<script type="text/javascript" src="/plugins/vali/js/plugins/pace.min.js"></script>
+	<script type="text/javascript" src="/js/public.js"></script>
+	<script type="text/javascript" src="/plugins/toast/jquery.toast.js"></script>
 </div>
 
 <div th:fragment="bootstrapValidator">
@@ -16,7 +16,11 @@
 	<script src="/plugins/bootstrapvalidator/js/language/zh_CN.js"></script>
 </div>
 
-<div th:fragment="fileinput">
+<div th:fragment="bootstrapFileinput">
+<script type="text/javascript" src="/plugins/bootstrap-fileinput/js/fileinput.min.js"></script>
+<!-- <script type="text/javascript" src="/plugins/bootstrap-fileinput/js/locales/zh.js"></script> -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.9/js/locales/zh.js"></script>
+<script type="text/javascript" src="/plugins/bootstrap-fileinput/themes/fa/theme.js"></script>
 </div>
 </body>
 </html>

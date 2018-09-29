@@ -1,0 +1,3 @@
+2018-09-29 14:06:45.926 |-INFO  [Thread-16] org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext [993] -| Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@74133ea2: startup date [Sat Sep 29 14:02:12 CST 2018]; root of context hierarchy
+2018-09-29 14:06:45.928 |-INFO  [Thread-16] org.springframework.jmx.export.annotation.AnnotationMBeanExporter [451] -| Unregistering JMX-exposed beans on shutdown
+2018-09-29 14:06:45.928 |-INFO  [Thread-16] org.springframework.jmx.export.annotation.AnnotationMBeanExporter [185] -| Unregistering JMX-exposed beans

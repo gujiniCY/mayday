@@ -1,27 +1,45 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
- <div th:replace="admin/module/header.html" ></div>
-  <body class="app sidebar-mini rtl">
-   <div th:replace="admin/module/sidebar.html" ></div>
-    <main class="app-content">
-      <div class="app-title">
-        <div>
-          <h1><i class="fa fa-dashboard"></i> 附件管理<a href="#" id="upload" class="btn">上传附件</a></h1>
-        </div>
-        <ul class="app-breadcrumb breadcrumb">
-          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item"><a href="#">附件管理</a></li>
-        </ul>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="tile">
-            <input type="file" class="file">
-            </div>
-        </div>
-      </div>
-    </main>
-    <div th:replace="admin/module/macros :: comm" ></div>
-    <div th:replace="admin/module/macros :: fileinput" ></div>
-  </body>
+<div th:replace="admin/module/header.html"></div>
+<body class="app sidebar-mini rtl">
+	<div th:replace="admin/module/sidebar.html"></div>
+	<link rel="stylesheet"
+		href="/plugins/bootstrap-fileinput/css/fileinput.min.css">
+	<main class="app-content">
+	<div class="app-title">
+		<div>
+			<h1>
+				<i class="fa fa-dashboard"></i> 附件管理<a href="#" id="upload"
+					class="btn">上传附件</a>
+			</h1>
+		</div>
+		<ul class="app-breadcrumb breadcrumb">
+			<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+			<li class="breadcrumb-item"><a href="#">附件管理</a></li>
+		</ul>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="tile">
+				<div class="file-loading">
+					<input id="input-fas" name="file" type="file" class="file-loading"
+						multiple>
+				</div>
+			</div>
+		</div>
+	</div>
+	</main>
+	<div th:replace="admin/module/macros :: comm"></div>
+	<div th:replace="admin/module/macros :: bootstrapFileinput"></div>
+	<script>
+$("#input-fas").fileinput({
+    theme: "fa",
+    uploadUrl: "/admin/attachment/upload",
+    language : 'zh',
+    uploadAsync:true,
+    allowedFileExtensions: ['jpg','gif','png','jpeg','svg','psd'],
+    enctype : 'multipart/form-data'
+});
+</script>
+</body>
 </html>

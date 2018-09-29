@@ -12,9 +12,9 @@ public enum MaydayEnums {
 	/**
 	 * 操作成功
 	 */
-	OPERATION_SUCCESS(200, "操作成功！"),
+	OPERATION_SUCCESS(200, "操作成功"),
 	/**
-	 * 逻辑错误
+	 * 操作错误
 	 */
 	OPERATION_ERROR(506, "操作失败"),
 	/**
