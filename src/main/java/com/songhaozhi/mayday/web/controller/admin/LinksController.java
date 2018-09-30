@@ -16,7 +16,7 @@ import com.songhaozhi.mayday.service.LinksService;
 /**
  * @author 宋浩志
  * @createDate 创建时间：2018年9月25日 下午10:12:35
- * 
+ * 友情链接
  */
 @Controller
 @RequestMapping(value="/admin/links")

@@ -6,9 +6,14 @@ package com.songhaozhi.mayday.web.controller.admin;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.songhaozhi.mayday.service.LogService;
 
 public class BaseController {
 	/** 日志 **/
 	protected final Logger log = LoggerFactory.getLogger(getClass());
-
+	
+	@Autowired
+	protected LogService logService;
 }

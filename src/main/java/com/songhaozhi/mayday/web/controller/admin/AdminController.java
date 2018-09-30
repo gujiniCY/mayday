@@ -18,7 +18,6 @@ import com.songhaozhi.mayday.model.dto.JsonResult;
 import com.songhaozhi.mayday.model.dto.LogConstant;
 import com.songhaozhi.mayday.model.dto.MaydayConst;
 import com.songhaozhi.mayday.model.enums.MaydayEnums;
-import com.songhaozhi.mayday.service.LogService;
 import com.songhaozhi.mayday.service.UserService;
 
 import cn.hutool.core.date.DateUnit;
@@ -35,8 +34,6 @@ import cn.hutool.extra.servlet.ServletUtil;
 public class AdminController extends BaseController {
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private LogService logService;
 	@Autowired
 	private HttpServletRequest request;
 
