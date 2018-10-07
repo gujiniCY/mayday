@@ -3,14 +3,12 @@
 <div th:replace="admin/module/header.html"></div>
 <body class="app sidebar-mini rtl">
 	<div th:replace="admin/module/sidebar.html"></div>
-	<link rel="stylesheet"
-		href="/plugins/bootstrap-fileinput/css/fileinput.min.css">
 	<main class="app-content">
 	<div class="app-title">
 		<div>
 			<h1>
 				<i class="fa fa-dashboard"></i> 附件管理<a href="#" id="upload"
-					class="btn">上传附件</a>
+					class="btn" >上传附件</a>
 			</h1>
 		</div>
 		<ul class="app-breadcrumb breadcrumb">
@@ -20,26 +18,73 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<div class="tile">
+			<div class="tile" id="uploadInput" style="display: none;">
 				<div class="file-loading">
-					<input id="input-fas" name="file" type="file" class="file-loading"
+					<input id="input-fas" autocomplete="off" name="file" type="file" class="file-loading"
 						multiple>
 				</div>
 			</div>
+			<th:block th:each="attachment : ${info.list}">
+			 <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
+                        <a href="#">
+                            <img th:src="${attachment.pictureSmallPath}" class="img-responsive">
+                        </a>
+             </div>
+			</th:block>
 		</div>
 	</div>
 	</main>
 	<div th:replace="admin/module/macros :: comm"></div>
 	<div th:replace="admin/module/macros :: bootstrapFileinput"></div>
-	<script>
-$("#input-fas").fileinput({
-    theme: "fa",
-    uploadUrl: "/admin/attachment/upload",
-    language : 'zh',
-    uploadAsync:true,
-    allowedFileExtensions: ['jpg','gif','png','jpeg','svg','psd'],
-    enctype : 'multipart/form-data'
-});
-</script>
+	<script type="text/javascript">
+		$("#input-fas").fileinput(
+				{
+					theme : "fa",
+					uploadUrl : "/admin/attachment/upload",
+					language : 'zh',
+					uploadAsync : true,
+					allowedFileExtensions : [ 'jpg', 'gif', 'png', 'jpeg',
+							'svg', 'psd' ],
+					enctype : 'multipart/form-data',
+					showClose: false
+				}).on("fileuploaded", function(event, data, previewId, index) {
+			var response = data.response;
+			if (response.flag == true) {
+				$.toast({
+					text : response.msg,
+					heading : '提示',
+					icon : 'success',
+					showHideTransition : 'fade',
+					allowToastClose : true,
+					hideAfter : 1000,
+					stack : 1,
+					position : 'top-center',
+					textAlign : 'left',
+					loader : true,
+					loaderBg : '#ffffff',
+					afterHidden : function() {
+						window.location.reload();
+					}
+				});
+			}else{
+				$.toast({
+					text : response.msg,
+					heading : '提示',
+					icon : 'error',
+					showHideTransition : 'fade',
+					allowToastClose : true,
+					hideAfter : 1000,
+					stack : 1,
+					position : 'top-center',
+					textAlign : 'left',
+					loader : true,
+					loaderBg : '#ffffff',
+				});
+			}
+		});
+		$("#upload").click(function(){
+			$("#uploadInput").slideToggle(400);
+		});
+	</script>
 </body>
 </html>

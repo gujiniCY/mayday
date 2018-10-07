@@ -10756,7 +10756,7 @@ body.stop-scrolling {
       transform-origin: 50% 50%;
   -webkit-transition: all 0.1s;
   -o-transition: all 0.1s;
-  transition: all 0.1s;
+  transition: background-color 0.1s;<!--原为transition: all 0.1s;-->
 }
 
 .sweet-alert .sa-input-error::before, .sweet-alert .sa-input-error::after {
@@ -11648,7 +11648,7 @@ body.stop-scrolling {
   -webkit-user-select: none;
   -webkit-transition: all 0.15s ease-in-out;
   -o-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
+  transition: background-color 0.15s ease-in-out;
 }
 
 .select2-container .select2-selection--single .select2-selection__rendered {
@@ -14160,7 +14160,7 @@ be a descendant of the grid when it is being dragged.
   margin-bottom: 30px;
   -webkit-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
 }
 
 @media print {
@@ -14446,7 +14446,7 @@ be a descendant of the grid when it is being dragged.
   border-radius: 3px;
   -webkit-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  transition: background-color 0.5s ease;
 }
 
 .toggle-flip input[type="checkbox"] + .flip-indecator:before {
@@ -14895,7 +14895,7 @@ be a descendant of the grid when it is being dragged.
           perspective: 800px;
   -webkit-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
+  transition: background-color 0.5s ease-in-out;
 }
 
 .login-content .login-box .login-head {
@@ -14939,7 +14939,7 @@ be a descendant of the grid when it is being dragged.
   -webkit-backface-visibility: hidden;
   -webkit-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
+  transition: background-color 0.5s ease-in-out;
 }
 
 .login-content .login-box .forget-form {
@@ -15012,7 +15012,7 @@ be a descendant of the grid when it is being dragged.
           perspective: 800px;
   -webkit-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
+  transition: background-color 0.5s ease-in-out;
 }
 
 .lockscreen-content .lock-box .user-image {

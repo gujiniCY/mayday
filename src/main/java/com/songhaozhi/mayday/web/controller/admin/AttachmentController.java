@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.github.pagehelper.PageInfo;
 import com.songhaozhi.mayday.model.domain.Attachment;
 import com.songhaozhi.mayday.model.domain.Log;
 import com.songhaozhi.mayday.model.dto.JsonResult;
@@ -36,18 +38,36 @@ import net.coobird.thumbnailator.Thumbnails;
 public class AttachmentController extends BaseController {
 	@Autowired
 	private AttachmentService attachmentService;
-
+	/**
+	 * 跳转附件页面并显示所有图片
+	 * @return
+	 */
 	@GetMapping
-	public String attachment() {
+	public String attachment(Model model,@RequestParam(value="page",defaultValue="1") int page,@RequestParam(value="limit", defaultValue="18") int limit) {
+		PageInfo<Attachment> info= attachmentService.getAttachment(page, limit);
+		model.addAttribute("info", info);
 		return "/admin/admin_attachment";
 	}
-
+	
+	/**
+	 * 上传附件
+	 * @param file
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/upload")
 	@ResponseBody
 	public JsonResult upload(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request) {
 		return uploadAttachment(file, request);
 	}
-
+	
+	
+	/**
+	 * 上传功能
+	 * @param file
+	 * @param request
+	 * @return
+	 */
 	public JsonResult uploadAttachment(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request) {
 		if (!file.isEmpty()) {
 			try {
@@ -57,12 +77,14 @@ public class AttachmentController extends BaseController {
 				StringBuffer sb = new StringBuffer("upload/");
 				// 获取时间，以年月创建目录
 				Date date = DateUtil.date();
-				sb.append(DateUtil.year(date)).append("/").append(DateUtil.month(date)).append("/");
+				int kkk=DateUtil.thisYear();
+				sb.append(DateUtil.thisYear()).append("/").append(DateUtil.thisMonth()+1).append("/");
 				File mediaPath = new File(path.getAbsolutePath(), sb.toString());
 				// 如果没有该目录则创建
 				if (!mediaPath.exists()) {
 					mediaPath.mkdirs();
 				}
+				System.out.println("路径++++++"+mediaPath);
 				SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
 				// 生成文件名称
 				String nameSuffix = file.getOriginalFilename().substring(0, file.getOriginalFilename().lastIndexOf("."))

@@ -1,10 +1,15 @@
 package com.songhaozhi.mayday.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.songhaozhi.mayday.mapper.generator.AttachmentMapper;
 import com.songhaozhi.mayday.model.domain.Attachment;
+import com.songhaozhi.mayday.model.domain.AttachmentExample;
 import com.songhaozhi.mayday.service.AttachmentService;
 
 /**
@@ -19,6 +24,15 @@ public class AttachmentServiceImpl implements AttachmentService {
 	@Override
 	public void save(Attachment attachment) {
 		attachmentMapper.insert(attachment);
+	}
+
+	@Override
+	public PageInfo<Attachment> getAttachment(int page, int limit) {
+		PageHelper.startPage(page, limit);
+		AttachmentExample example=new AttachmentExample();
+		example.setOrderByClause("id desc");
+		List<Attachment> lists=attachmentMapper.selectByExample(example);
+		return new PageInfo<>(lists);
 	}
 
 }
