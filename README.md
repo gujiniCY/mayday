@@ -14,5 +14,5 @@ mayday博客系统是我想边学习springboot和thymeleaf编写的一个java博
  7. [jquery toast插件](http://www.jqueryfuns.com/resource/2412) 信息提示插件
  8. [fontawesome](http://www.fontawesome.com.cn/faicons/) 图标库
  9. [thumbnailator](https://github.com/coobird/thumbnailator) 压缩图片工具栏
- 10.[hutool](http://hutool.mydoc.io/) Hutool是一个Java工具包
- 11.[pagehelper](https://pagehelper.github.io/) mybatis分页插件
+ 10. [hutool](http://hutool.mydoc.io/) Hutool是一个Java工具包
+ 11. [pagehelper](https://pagehelper.github.io/) mybatis分页插件
