@@ -3,12 +3,26 @@
 <div th:replace="admin/module/header.html"></div>
 <body class="app sidebar-mini rtl">
 	<div th:replace="admin/module/sidebar.html"></div>
+	<style type="text/css" rel="stylesheet">
+.div-thumbnail {
+	transition: all .5s ease-in-out;
+	padding: 10px;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	display: table-cell;
+}
+
+.thumbnail {
+	margin-bottom: 0;
+}
+</style>
 	<main class="app-content">
 	<div class="app-title">
 		<div>
 			<h1>
 				<i class="fa fa-dashboard"></i> 附件管理<a href="#" id="upload"
-					class="btn" >上传附件</a>
+					class="btn">上传附件</a>
 			</h1>
 		</div>
 		<ul class="app-breadcrumb breadcrumb">
@@ -20,17 +34,19 @@
 		<div class="col-md-12">
 			<div class="tile" id="uploadInput" style="display: none;">
 				<div class="file-loading">
-					<input id="input-fas" autocomplete="off" name="file" type="file" class="file-loading"
-						multiple>
+					<input id="input-fas" autocomplete="off" name="file" type="file"
+						class="file-loading" multiple>
 				</div>
 			</div>
-			<th:block th:each="attachment : ${info.list}">
-			 <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
-                        <a href="#">
-                            <img th:src="${attachment.pictureSmallPath}" class="img-responsive">
-                        </a>
-             </div>
-			</th:block>
+			<div class="row">
+				<th:block th:each="attachment : ${info.list}">
+					<div class="col-lg-2 col-md-4 col-sm-6 col-xs-6 div-thumbnail"
+						style="border: solid;">
+						<a href="#" class="thumbnail"> <img
+							th:src="${attachment.pictureSmallPath}"></a>
+					</div>
+				</th:block>
+			</div>
 		</div>
 	</div>
 	</main>
@@ -46,7 +62,7 @@
 					allowedFileExtensions : [ 'jpg', 'gif', 'png', 'jpeg',
 							'svg', 'psd' ],
 					enctype : 'multipart/form-data',
-					showClose: false
+					showClose : false
 				}).on("fileuploaded", function(event, data, previewId, index) {
 			var response = data.response;
 			if (response.flag == true) {
@@ -66,7 +82,7 @@
 						window.location.reload();
 					}
 				});
-			}else{
+			} else {
 				$.toast({
 					text : response.msg,
 					heading : '提示',
@@ -82,7 +98,7 @@
 				});
 			}
 		});
-		$("#upload").click(function(){
+		$("#upload").click(function() {
 			$("#uploadInput").slideToggle(400);
 		});
 	</script>

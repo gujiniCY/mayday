@@ -5,7 +5,9 @@ logging:
   file: server.log
   path: /log/
 spring: 
-  thymeleaf:
+  mvc:
+    static-path-pattern: /**
+  thymeleaf: 
     servlet:
       content-type: text/html
     mode: HTML

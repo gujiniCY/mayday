@@ -77,7 +77,6 @@ public class AttachmentController extends BaseController {
 				StringBuffer sb = new StringBuffer("upload/");
 				// 获取时间，以年月创建目录
 				Date date = DateUtil.date();
-				int kkk=DateUtil.thisYear();
 				sb.append(DateUtil.thisYear()).append("/").append(DateUtil.thisMonth()+1).append("/");
 				File mediaPath = new File(path.getAbsolutePath(), sb.toString());
 				// 如果没有该目录则创建
@@ -98,16 +97,16 @@ public class AttachmentController extends BaseController {
 				file.transferTo(new File(mediaPath.toString(), fileName));
 				// 压缩图片
 				Thumbnails.of(new StringBuffer(mediaPath.getAbsolutePath()).append("/").append(fileName).toString())
-						.size(256, 256).toFile(new StringBuffer(mediaPath.getAbsolutePath()).append("/").append(nameSuffix)
+						.size(256, 256).keepAspectRatio(false).toFile(new StringBuffer(mediaPath.getAbsolutePath()).append("/").append(nameSuffix)
 								.append("_small.").append(fileSuffix).toString());
 				// 添加数据库
 				Attachment attachment = new Attachment();
 				attachment.setPictureName(fileName);
-				attachment.setPicturePath(new StringBuffer(sb.toString()).append(fileName).toString());
+				attachment.setPicturePath(new StringBuffer("/upload/").append(DateUtil.thisYear()).append("/").append(DateUtil.thisMonth()+1).append("/").append(fileName).toString());
 				attachment.setPictureType(file.getContentType());
 				attachment.setPictureCreateDate(date);
 				attachment.setPictureSuffix(new StringBuffer().append(".").append(fileSuffix).toString());
-				attachment.setPictureSmallPath(new StringBuffer(sb.toString()).append(nameSuffix).append("_small.")
+				attachment.setPictureSmallPath(new StringBuffer("/upload/").append(DateUtil.thisYear()).append("/").append(DateUtil.thisMonth()+1).append("/").append(nameSuffix).append("_small.")
 						.append(fileSuffix).toString());
 				attachmentService.save(attachment);
 				//添加日志
