@@ -16,3 +16,4 @@ mayday博客系统是我想边学习springboot和thymeleaf编写的一个java博
  9. [thumbnailator](https://github.com/coobird/thumbnailator) 压缩图片工具栏
  10. [hutool](http://hutool.mydoc.io/) Hutool是一个Java工具包
  11. [pagehelper](https://pagehelper.github.io/) mybatis分页插件
+ 12. [bootstrap-fileinput](https://github.com/kartik-v/bootstrap-fileinput) bootstrap上传控件
