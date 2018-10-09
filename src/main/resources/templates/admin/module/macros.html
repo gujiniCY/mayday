@@ -18,9 +18,31 @@
 
 <div th:fragment="bootstrapFileinput">
 <script type="text/javascript" src="/plugins/bootstrap-fileinput/js/fileinput.min.js"></script>
-<!-- <script type="text/javascript" src="/plugins/bootstrap-fileinput/js/locales/zh.js"></script> -->
 <script type="text/javascript" src="/plugins/bootstrap-fileinput/js/locales/zh.js"></script>
 <script type="text/javascript" src="/plugins/bootstrap-fileinput/themes/fa/theme.js"></script>
+</div>
+
+<div th:fragment="pageAdminNav(pageInfo)">
+	<div class="clearfix">
+		<ul class="pagination no-margin pull-right">
+			<li th:if="${pageInfo.hasPreviousPage}" class="page-item"><a
+				th:href="@{'?page='+${pageInfo.prePage}}" class="page-link"> <i
+					class="fa fa-angle-left"></i>&nbsp;上一页
+			</a></li>
+			<th:block th:each="nav : ${pageInfo.navigatepageNums}">
+				<li
+					th:class="${nav==pageInfo.pageNum} ? 'page-item active':'page-item'"><a
+					class="page-link" th:href="@{'?page='+${nav}}" th:text="${nav}"></a>
+				</li>
+			</th:block>
+			<th:block th:if="${pageInfo.hasNextPage}">
+				<li class="page-item"><a
+					th:href="@{'?page='+${pageInfo.nextPage}}" class="page-link">
+						下一页&nbsp;<i class="fa fa-angle-right"></i>
+				</a></li>
+			</th:block>
+		</ul>
+	</div>
 </div>
 </body>
 </html>

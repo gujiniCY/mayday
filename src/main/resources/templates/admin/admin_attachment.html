@@ -12,7 +12,6 @@
 	text-align: center;
 	display: table-cell;
 }
-
 .thumbnail {
 	margin-bottom: 0;
 }
@@ -40,21 +39,32 @@
 			</div>
 			<div class="row">
 				<th:block th:each="attachment : ${info.list}">
-					<div class="col-lg-2 col-md-4 col-sm-6 col-xs-6 div-thumbnail"
-						style="border: solid;">
-						<a href="#" class="thumbnail"> <img
+					<div class="col-lg-2 col-md-3 col-sm-6 col-xs-6 div-thumbnail" th:onclick="'javascript:viewDetails('+${attachment.id}+')'">
+						<a href="#"> <img class="img-thumbnail img-fluid"
 							th:src="${attachment.pictureSmallPath}"></a>
 					</div>
 				</th:block>
 			</div>
+			<div th:replace="admin/module/macros :: pageAdminNav(${info})"></div>
 		</div>
 	</div>
 	</main>
 	<div th:replace="admin/module/macros :: comm"></div>
 	<div th:replace="admin/module/macros :: bootstrapFileinput"></div>
+	<script type="text/javascript" src="/static/plugins/layer/layer.js"></script>
 	<script type="text/javascript">
-		$("#input-fas").fileinput(
-				{
+		function viewDetails(id){
+			layer.open({
+				  type: 1,
+				  
+				  content: $('#view') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+			});
+		}
+	
+	
+	
+	
+		$("#input-fas").fileinput({
 					theme : "fa",
 					uploadUrl : "/admin/attachment/upload",
 					language : 'zh',
@@ -102,5 +112,20 @@
 			$("#uploadInput").slideToggle(400);
 		});
 	</script>
+	<div id="view">
+	<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="col-lg-1" style="border: solid;">
+			1
+			</div>
+			<div class="col-lg-1" style="border: solid;">
+			2
+			</div>
+		</div>
+	</div>
+	</div>
+	
+	</div>
 </body>
 </html>
