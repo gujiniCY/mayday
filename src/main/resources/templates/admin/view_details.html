@@ -46,7 +46,7 @@
 								<h6 class="control-label col-md-2">上传时间：</h6>
 								<div class="col-md-9">
 									<input class="form-control" type="text" readonly="readonly"
-										th:value="${attachment!=null?attachment.pictureCreateDate:''}">
+										th:value="${#dates.format(attachment!=null?attachment.pictureCreateDate:'','yyyy-MM-dd HH:mm') }">
 								</div>
 							</div>
 							<div class="form-group row">
