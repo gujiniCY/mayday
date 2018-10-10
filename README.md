@@ -17,3 +17,4 @@ mayday博客系统是我想边学习springboot和thymeleaf编写的一个java博
  10. [hutool](http://hutool.mydoc.io/) Hutool是一个Java工具包
  11. [pagehelper](https://pagehelper.github.io/) mybatis分页插件
  12. [bootstrap-fileinput](https://github.com/kartik-v/bootstrap-fileinput) bootstrap上传控件
+ 13. [halo](https://github.com/ruibaby/halo)  halo博客系统
