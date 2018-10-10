@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="admin/module/header.html"></div>
 <body class="app sidebar-mini rtl">
 	<div th:replace="admin/module/sidebar.html"></div>
@@ -12,6 +12,11 @@
 	text-align: center;
 	display: table-cell;
 }
+
+.img-thumbnail:hover {
+	border: solid #009688;
+}
+
 .thumbnail {
 	margin-bottom: 0;
 }
@@ -39,8 +44,10 @@
 			</div>
 			<div class="row">
 				<th:block th:each="attachment : ${info.list}">
-					<div class="col-lg-2 col-md-3 col-sm-6 col-xs-6 div-thumbnail" th:onclick="'javascript:viewDetails('+${attachment.id}+')'">
-						<a href="#"> <img class="img-thumbnail img-fluid"
+					<div class="col-lg-2 col-md-3 col-sm-6 col-6 div-thumbnail"
+						th:onclick="'javascript:viewDetails('+${attachment.id}+')'">
+						<a href="#"><img
+							class="img-thumbnail img-fluid img-responsive"
 							th:src="${attachment.pictureSmallPath}"></a>
 					</div>
 				</th:block>
@@ -53,18 +60,19 @@
 	<div th:replace="admin/module/macros :: bootstrapFileinput"></div>
 	<script type="text/javascript" src="/static/plugins/layer/layer.js"></script>
 	<script type="text/javascript">
-		function viewDetails(id){
+		function viewDetails(id) {
 			layer.open({
-				  type: 1,
-				  
-				  content: $('#view') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+				type : 2,
+				title : '附件详情',
+				anim : 2,
+				area : [ '90%', '90%' ],
+				maxmin : true,
+				content : "/admin/attachment/viewDetails?id=" + id
 			});
 		}
-	
-	
-	
-	
-		$("#input-fas").fileinput({
+
+		$("#input-fas").fileinput(
+				{
 					theme : "fa",
 					uploadUrl : "/admin/attachment/upload",
 					language : 'zh',
@@ -112,20 +120,5 @@
 			$("#uploadInput").slideToggle(400);
 		});
 	</script>
-	<div id="view">
-	<div class="container-fluid">
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="col-lg-1" style="border: solid;">
-			1
-			</div>
-			<div class="col-lg-1" style="border: solid;">
-			2
-			</div>
-		</div>
-	</div>
-	</div>
-	
-	</div>
 </body>
 </html>

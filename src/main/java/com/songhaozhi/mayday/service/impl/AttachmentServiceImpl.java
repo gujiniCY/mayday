@@ -35,4 +35,14 @@ public class AttachmentServiceImpl implements AttachmentService {
 		return new PageInfo<>(lists);
 	}
 
+	@Override
+	public Attachment findById(int id) {
+		return attachmentMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public void deleteAttachment(int id) {
+		attachmentMapper.deleteByPrimaryKey(id);		
+	}
+
 }

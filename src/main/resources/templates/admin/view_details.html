@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>附件详情</title>
+<link rel="stylesheet" type="text/css"
+	href="/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/plugins/vali/css/main.css">
+<link rel="stylesheet" type="text/css"
+	href="/plugins/toast/jquery.toast.css">
+</head>
+<body>
+	<div class="col-md-12">
+		<div class="row">
+			<div class="col-lg-6">
+				<img alt="" class="img-thumbnail img-fluid"
+					th:src="${attachment.picturePath}">
+			</div>
+			<div class="col-lg-6">
+				<div class="tile">
+					<h3 class="tile-title">详细信息</h3>
+					<div class="tile-body">
+						<form class="form-horizontal">
+							<div class="form-group row">
+								<h6 class="control-label col-md-2">附件名：</h6>
+								<div class="col-md-9">
+									<input class="form-control" type="text"
+										th:value="${attachment!=null?attachment.pictureName:''}">
+								</div>
+							</div>
+							<div class="form-group row">
+								<h6 class="control-label col-md-2">附件类型：</h6>
+								<div class="col-md-9">
+									<input class="form-control" type="text" readonly="readonly"
+										th:value="${attachment!=null?attachment.pictureType:''}">
+								</div>
+							</div>
+							<div class="form-group row">
+								<h6 class="control-label col-md-2">附件路径：</h6>
+								<div class="col-md-9">
+									<input class="form-control" type="text" readonly="readonly"
+										th:value="${attachment!=null?attachment.picturePath:''}">
+								</div>
+							</div>
+							<div class="form-group row">
+								<h6 class="control-label col-md-2">上传时间：</h6>
+								<div class="col-md-9">
+									<input class="form-control" type="text" readonly="readonly"
+										th:value="${attachment!=null?attachment.pictureCreateDate:''}">
+								</div>
+							</div>
+							<div class="form-group row">
+								<h6 class="control-label col-md-2">附件大小：</h6>
+								<div class="col-md-9">
+									<input class="form-control" type="text" readonly="readonly"
+										th:value="${attachment!=null?attachment.pictureSize:''}">
+								</div>
+							</div>
+							<div class="form-group row">
+								<h6 class="control-label col-md-2">图片尺寸：</h6>
+								<div class="col-md-9">
+									<input class="form-control" type="text" readonly="readonly"
+										th:value="${attachment!=null?attachment.pictureWh:''}">
+								</div>
+							</div>
+							<div class="tile-footer">
+								<button class="btn btn-danger" type="button"
+									th:onclick="'javascript:deleteAttachment('+${attachment.id}+')'">永久删除</button>
+								<button class="btn btn-info" id="copyVal" type="button"
+									th:attr="data-clipboard-text=${attachment!=null?attachment.picturePath:''}">复制链接</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript"
+		src="/plugins/vali/js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/plugins/vali/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="/plugins/vali/js/plugins/pace.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.1/clipboard.min.js"></script>
+	<script type="text/javascript" src="/js/public.js"></script>
+	<script type="text/javascript" src="/plugins/toast/jquery.toast.js"></script>
+	<script type="text/javascript" src="/static/plugins/layer/layer.js"></script>
+	<script type="text/javascript">
+		function deleteAttachment(id) {
+			layer.confirm('您确定要删除该附件吗？', {
+				icon : 3,
+				title : '提示'
+			}, function(index) {
+				$.ajax({
+					url : '/admin/attachment/deleteAttachment',
+					type : 'post',
+					data : {
+						id : id
+					},
+					dataTpye : 'json',
+					success : function(data) {
+						if (data.flag == true) {
+							layer.close(index);
+							$.toast({
+								text : data.msg,
+								heading : '提示',
+								icon : 'success',
+								showHideTransition : 'fade',
+								allowToastClose : true,
+								hideAfter : 1000,
+								stack : 1,
+								position : 'top-center',
+								textAlign : 'left',
+								loader : true,
+								loaderBg : '#ffffff',
+								afterHidden : function() {
+									parent.location.reload();
+								}
+							});
+						} else {
+							showMsg("删除失败", "error", 3000);
+						}
+
+					},
+					error : function(data) {
+						showMsg("删除失败", "error", 3000);
+					}
+
+				});
+
+			});
+		}
+
+		$(document).ready(function() {
+			new ClipboardJS('#copyVal');
+		});
+
+		$("#copyVal").click(function() {
+			showMsg("复制成功", "success", 3000);
+		});
+	</script>
+</body>
+</html>

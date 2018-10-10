@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,19 +39,37 @@ import net.coobird.thumbnailator.Thumbnails;
 public class AttachmentController extends BaseController {
 	@Autowired
 	private AttachmentService attachmentService;
+
 	/**
 	 * 跳转附件页面并显示所有图片
+	 * 
 	 * @return
 	 */
 	@GetMapping
-	public String attachment(Model model,@RequestParam(value="page",defaultValue="1") int page,@RequestParam(value="limit", defaultValue="18") int limit) {
-		PageInfo<Attachment> info= attachmentService.getAttachment(page, limit);
+	public String attachment(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
+			@RequestParam(value = "limit", defaultValue = "18") int limit) {
+		PageInfo<Attachment> info = attachmentService.getAttachment(page, limit);
 		model.addAttribute("info", info);
 		return "/admin/admin_attachment";
 	}
-	
+
+	/**
+	 * 附件详情
+	 * 
+	 * @param model
+	 * @param id
+	 * @return
+	 */
+	@GetMapping(value = "viewDetails")
+	public String viewDetails(Model model, @RequestParam(value = "id") int id) {
+		Attachment attachment = attachmentService.findById(id);
+		model.addAttribute("attachment", attachment);
+		return "/admin/view_details";
+	}
+
 	/**
 	 * 上传附件
+	 * 
 	 * @param file
 	 * @param request
 	 * @return
@@ -60,10 +79,48 @@ public class AttachmentController extends BaseController {
 	public JsonResult upload(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request) {
 		return uploadAttachment(file, request);
 	}
-	
-	
+
+	/**
+	 * 删除附件
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@PostMapping(value = "deleteAttachment")
+	@ResponseBody
+	public JsonResult deleteAttachment(@RequestParam(value = "id") int id, HttpServletRequest request) {
+		Attachment attachment = attachmentService.findById(id);
+		try {
+			//获取文件路径
+			String picturePath = attachment.getPicturePath();
+			String pictureSmallPath = attachment.getPictureSmallPath();
+			File picturePathFile = new File(
+					new StringBuffer(ResourceUtils.getURL("classpath:").getPath()).append(picturePath).toString());
+			File pictureSmallPathFile = new File(
+					new StringBuffer(ResourceUtils.getURL("classpath:").getPath()).append(pictureSmallPath).toString());
+			if (picturePathFile.isFile() && picturePathFile.exists()) {
+				if (pictureSmallPathFile.delete() && picturePathFile.delete()) {
+					attachmentService.deleteAttachment(id);
+					log.info("删除文件" + attachment.getPictureName() + "成功");
+					// 添加日志
+					logService.save(new Log(LogConstant.DELETE_ATTACHMENT, LogConstant.DELETE_SUCCESS,
+							ServletUtil.getClientIP(request), DateUtil.date()));
+				} else {
+					log.error("删除文件" + attachment.getPictureName() + "失败");
+					return new JsonResult(true, MaydayEnums.OPERATION_ERROR.getCode(),MaydayEnums.OPERATION_ERROR.getMessage());
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("删除文件" + attachment.getPictureName() + "失败");
+			return new JsonResult(true, MaydayEnums.ERROR.getCode(),MaydayEnums.ERROR.getMessage());
+		}
+		return new JsonResult(true, MaydayEnums.OPERATION_SUCCESS.getCode(),MaydayEnums.OPERATION_SUCCESS.getMessage());
+	}
+
 	/**
 	 * 上传功能
+	 * 
 	 * @param file
 	 * @param request
 	 * @return
@@ -77,13 +134,13 @@ public class AttachmentController extends BaseController {
 				StringBuffer sb = new StringBuffer("upload/");
 				// 获取时间，以年月创建目录
 				Date date = DateUtil.date();
-				sb.append(DateUtil.thisYear()).append("/").append(DateUtil.thisMonth()+1).append("/");
+				sb.append(DateUtil.thisYear()).append("/").append(DateUtil.thisMonth() + 1).append("/");
 				File mediaPath = new File(path.getAbsolutePath(), sb.toString());
 				// 如果没有该目录则创建
 				if (!mediaPath.exists()) {
 					mediaPath.mkdirs();
 				}
-				System.out.println("路径++++++"+mediaPath);
+				System.out.println("路径++++++" + mediaPath);
 				SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
 				// 生成文件名称
 				String nameSuffix = file.getOriginalFilename().substring(0, file.getOriginalFilename().lastIndexOf("."))
@@ -97,19 +154,21 @@ public class AttachmentController extends BaseController {
 				file.transferTo(new File(mediaPath.toString(), fileName));
 				// 压缩图片
 				Thumbnails.of(new StringBuffer(mediaPath.getAbsolutePath()).append("/").append(fileName).toString())
-						.size(256, 256).keepAspectRatio(false).toFile(new StringBuffer(mediaPath.getAbsolutePath()).append("/").append(nameSuffix)
-								.append("_small.").append(fileSuffix).toString());
+						.size(256, 256).keepAspectRatio(false).toFile(new StringBuffer(mediaPath.getAbsolutePath())
+								.append("/").append(nameSuffix).append("_small.").append(fileSuffix).toString());
 				// 添加数据库
 				Attachment attachment = new Attachment();
 				attachment.setPictureName(fileName);
-				attachment.setPicturePath(new StringBuffer("/upload/").append(DateUtil.thisYear()).append("/").append(DateUtil.thisMonth()+1).append("/").append(fileName).toString());
+				attachment.setPicturePath(new StringBuffer("/upload/").append(DateUtil.thisYear()).append("/")
+						.append(DateUtil.thisMonth() + 1).append("/").append(fileName).toString());
 				attachment.setPictureType(file.getContentType());
 				attachment.setPictureCreateDate(date);
 				attachment.setPictureSuffix(new StringBuffer().append(".").append(fileSuffix).toString());
-				attachment.setPictureSmallPath(new StringBuffer("/upload/").append(DateUtil.thisYear()).append("/").append(DateUtil.thisMonth()+1).append("/").append(nameSuffix).append("_small.")
+				attachment.setPictureSmallPath(new StringBuffer("/upload/").append(DateUtil.thisYear()).append("/")
+						.append(DateUtil.thisMonth() + 1).append("/").append(nameSuffix).append("_small.")
 						.append(fileSuffix).toString());
 				attachmentService.save(attachment);
-				//添加日志
+				// 添加日志
 				logService.save(new Log(LogConstant.UPLOAD_ATTACHMENT, LogConstant.UPLOAD_SUCCESS,
 						ServletUtil.getClientIP(request), DateUtil.date()));
 			} catch (Exception e) {

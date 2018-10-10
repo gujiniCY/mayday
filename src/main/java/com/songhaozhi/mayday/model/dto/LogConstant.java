@@ -11,6 +11,10 @@ public interface LogConstant {
 	
 	String UPLOAD_SUCCESS="上传成功";
 	
+	String DELETE_ATTACHMENT="删除附件";
+	
+	String DELETE_SUCCESS="删除成功";
+	
 	String LOGIN_SUCCES="登录成功";
 	
 	String LOGIN_ERROR="登录失败";

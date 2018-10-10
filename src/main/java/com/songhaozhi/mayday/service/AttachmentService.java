@@ -20,5 +20,16 @@ public interface AttachmentService {
 	 * @return
 	 */
 	PageInfo<Attachment> getAttachment(int page, int limit);
+	/**
+	 * 根据id查询
+	 * @param id
+	 * @return
+	 */
+	Attachment findById(int id);
+	/**
+	 * 删除
+	 * @param id
+	 */
+	void deleteAttachment(int id);
 
 }
