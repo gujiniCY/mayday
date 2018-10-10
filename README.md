@@ -1,8 +1,12 @@
-# mayday
+<h1><a href="#">mayday</a></h1>
 
-#### 项目介绍
-mayday博客系统是我想边学习springboot和thymeleaf编写的一个java博客系统，目前正在开发中
+>mayday博客系统是我想边学习springboot和thymeleaf编写的一个java博客系统，目前正在开发中
 
+[![JDK](https://img.shields.io/badge/jdk-1.8-green.svg)](#)
+
+>个人博客[https://www.songhaozhi.com](https://www.songhaozhi.com)
+
+>mayday使用[GPL-v3.0协议开源](https://gitee.com/song_haozhi/mayday/blob/master/LICENSE)
 
 ## 致谢：
  1. [springboot](http://spring.io/projects/spring-boot) 版本2.2.4
