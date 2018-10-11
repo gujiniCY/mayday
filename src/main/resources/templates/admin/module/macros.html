@@ -25,7 +25,7 @@
 <div th:fragment="pageAdminNav(pageInfo)">
 	<div class="clearfix">
 		<ul class="pagination no-margin pull-right">
-			<li class="page-item"><a class="page-link" href="#" th:text="'共'+ ${pageInfo.pages}+'页'"></a></li>
+			<li th:if="${pageInfo.pages}!=0" class="page-item"><a class="page-link" href="#" th:text="'共'+ ${pageInfo.pages}+'页'"></a></li>
 			<li th:if="${pageInfo.hasPreviousPage}" class="page-item"><a
 				th:href="@{'?page='+${pageInfo.prePage}}" class="page-link"> <i
 					class="fa fa-angle-left"></i>&nbsp;上一页

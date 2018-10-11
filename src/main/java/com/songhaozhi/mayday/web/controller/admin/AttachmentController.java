@@ -128,14 +128,14 @@ public class AttachmentController extends BaseController {
 	public JsonResult uploadAttachment(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request) {
 		if (!file.isEmpty()) {
 			try {
-				// 获取项目真实路径src/main/resources
-				File path = new File(ResourceUtils.getURL("classpath:").getPath());
+				// 获取用户目录
+				String userPath = System.getProperties().getProperty("user.home")+"/mayday";
 				// 上传路径
 				StringBuffer sb = new StringBuffer("upload/");
 				// 获取时间，以年月创建目录
 				Date date = DateUtil.date();
 				sb.append(DateUtil.thisYear()).append("/").append(DateUtil.thisMonth() + 1).append("/");
-				File mediaPath = new File(path.getAbsolutePath(), sb.toString());
+				File mediaPath = new File(userPath, sb.toString());
 				// 如果没有该目录则创建
 				if (!mediaPath.exists()) {
 					mediaPath.mkdirs();
