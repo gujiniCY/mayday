@@ -8,6 +8,23 @@
 
 >mayday使用[GPL-v3.0协议开源](https://gitee.com/song_haozhi/mayday/blob/master/LICENSE)
 
+## 已完成部分
+## 图片演示
+### 登录
+![](http://img.songhaozhi.com/doc/login.png)
+### 个人资料
+![](http://img.songhaozhi.com/doc/%E4%B8%AA%E4%BA%BA%E8%B5%84%E6%96%99.png)
+### 分类
+![](http://img.songhaozhi.com/doc/%E5%88%86%E7%B1%BB.png)
+### 友情链接
+![](http://img.songhaozhi.com/doc/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5.png)
+### 标签
+![](http://img.songhaozhi.com/doc/%E6%A0%87%E7%AD%BE.png)
+### 附件
+![](http://img.songhaozhi.com/doc/%E9%99%84%E4%BB%B6.png)
+![](http://img.songhaozhi.com/doc/%E9%99%84%E4%BB%B62.png)
+![](http://img.songhaozhi.com/doc/%E9%99%84%E4%BB%B6%E8%AF%A6%E6%83%85.png)
+
 ## 致谢：
  1. [springboot](http://spring.io/projects/spring-boot) 版本2.2.4
  2. [maven](http://maven.apache.org/)  依赖管理
