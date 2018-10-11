@@ -1,5 +1,7 @@
 package com.songhaozhi.mayday.web.controller.admin;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
@@ -12,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageInfo;
+import com.songhaozhi.mayday.model.domain.Attachment;
 import com.songhaozhi.mayday.model.domain.User;
 import com.songhaozhi.mayday.model.dto.JsonResult;
 import com.songhaozhi.mayday.model.enums.MaydayEnums;
+import com.songhaozhi.mayday.service.AttachmentService;
 import com.songhaozhi.mayday.service.UserService;
 
 import cn.hutool.crypto.SecureUtil;
@@ -30,6 +35,8 @@ public class UserController extends BaseController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private AttachmentService attachmentService;
 
 	/**
 	 * 
@@ -100,5 +107,18 @@ public class UserController extends BaseController {
 			return new JsonResult(false, MaydayEnums.ERROR.getCode(), "修改密码失败");
 		}
 		return new JsonResult(true, MaydayEnums.OPERATION_SUCCESS.getCode(), "修改密码成功");
+	}
+	/**
+	 * 所有附件
+	 * @param model
+	 * @param page
+	 * @param limit
+	 * @return
+	 */
+	@GetMapping(value="/openChoice")
+	public String openChoice(Model model,@RequestParam(value="page",defaultValue="1") int page,@RequestParam(value="limit",defaultValue="18") int limit) {
+		PageInfo<Attachment> lists=attachmentService.getAttachment(page, limit);
+		model.addAttribute("info", lists);
+		return "/admin/open_choice";
 	}
 }

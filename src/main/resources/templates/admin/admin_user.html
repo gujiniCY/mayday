@@ -74,10 +74,10 @@
 									<label class="control-label col-md-3">头像：</label>
 									<div class="col-md-8">
 										<div class="input-group">
-											<input type="text" class="form-control" id=""
+											<input type="text" class="form-control" id="userPortrait"
 												name="userPortrait" th:value="${user.userPortrait}">
 											<span class="input-group-btn">
-												<button class="btn btn-default " type="button" onclick="">选择</button>
+												<button class="btn btn-default " type="button" th:onclick="'javascript:openChoice()'">选择</button>
 											</span>
 										</div>
 									</div>
@@ -87,7 +87,7 @@
 									<div class="col-md-8">
 										<div class="input-group">
 											<textarea class="form-control" th:value="${user.userExplain}"
-												rows="3" id="" name="userExplain" style="resize: none"></textarea>
+												th:text="${user.userExplain}" rows="3" id="" name="userExplain" style="resize: none"></textarea>
 										</div>
 									</div>
 								</div>
@@ -210,6 +210,17 @@
 					showMsg(data.msg, "error", 3000);
 				}
 			}
+		});
+	}
+	//选择头像
+	function openChoice(){
+		layer.open({
+			type : 2,
+			title : '所有附件',
+			anim : 2,
+			area : [ '90%', '90%' ],
+			maxmin : true,
+			content : "/admin/profile/openChoice"
 		});
 	}
 	</script>
