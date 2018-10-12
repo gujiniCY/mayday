@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.songhaozhi.mayday.mapper.generator.OptionsMapper">
+  <resultMap id="BaseResultMap" type="com.songhaozhi.mayday.model.domain.Options">
+    <id column="option_name" jdbcType="VARCHAR" property="optionName" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.songhaozhi.mayday.model.domain.Options">
+    <result column="option_value" jdbcType="LONGVARCHAR" property="optionValue" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    option_name
+  </sql>
+  <sql id="Blob_Column_List">
+    option_value
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.songhaozhi.mayday.model.domain.OptionsExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mayday_options
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.songhaozhi.mayday.model.domain.OptionsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from mayday_options
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mayday_options
+    where option_name = #{optionName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from mayday_options
+    where option_name = #{optionName,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.songhaozhi.mayday.model.domain.OptionsExample">
+    delete from mayday_options
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.songhaozhi.mayday.model.domain.Options">
+    insert into mayday_options (option_name, option_value)
+    values (#{optionName,jdbcType=VARCHAR}, #{optionValue,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.songhaozhi.mayday.model.domain.Options">
+    insert into mayday_options
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="optionName != null">
+        option_name,
+      </if>
+      <if test="optionValue != null">
+        option_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="optionName != null">
+        #{optionName,jdbcType=VARCHAR},
+      </if>
+      <if test="optionValue != null">
+        #{optionValue,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.songhaozhi.mayday.model.domain.OptionsExample" resultType="java.lang.Long">
+    select count(*) from mayday_options
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mayday_options
+    <set>
+      <if test="record.optionName != null">
+        option_name = #{record.optionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optionValue != null">
+        option_value = #{record.optionValue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update mayday_options
+    set option_name = #{record.optionName,jdbcType=VARCHAR},
+      option_value = #{record.optionValue,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mayday_options
+    set option_name = #{record.optionName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.songhaozhi.mayday.model.domain.Options">
+    update mayday_options
+    <set>
+      <if test="optionValue != null">
+        option_value = #{optionValue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where option_name = #{optionName,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.songhaozhi.mayday.model.domain.Options">
+    update mayday_options
+    set option_value = #{optionValue,jdbcType=LONGVARCHAR}
+    where option_name = #{optionName,jdbcType=VARCHAR}
+  </update>
+</mapper>
