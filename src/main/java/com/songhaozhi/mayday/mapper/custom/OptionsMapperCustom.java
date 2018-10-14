@@ -1,0 +1,24 @@
+package com.songhaozhi.mayday.mapper.custom;
+
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
+/**
+* @author 宋浩志
+* @createDate 创建时间：2018年10月14日 下午2:44:37
+* 
+*/
+public interface OptionsMapperCustom {
+	/**
+	 * 保存
+	 * @param map
+	 */
+	void saveMap(@Param("map") Map<String, Object> map);
+	/**
+	 * 所有设置选项
+	 * @return map
+	 */
+	Map<String, Object> selectMap();
+
+}

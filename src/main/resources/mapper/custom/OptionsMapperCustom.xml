@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.songhaozhi.mayday.mapper.custom.OptionsMapperCustom">
+	<resultMap type="HashMap" id="mapOption">
+	<result property="optionName" column="option_name" jdbcType="VARCHAR"/>
+	<result property="optionValue" column="option_value" jdbcType="LONGVARCHAR"/>
+	</resultMap> 
+	<insert id="saveMap" parameterType="java.util.Map">
+	  insert into mayday_options (option_name, option_value)
+    values 
+    <foreach collection="map" index="key" item="value" separator=",">
+    (#{key,jdbcType=VARCHAR}, #{value,jdbcType=LONGVARCHAR})
+    </foreach>
+	</insert>
+	
+	<select id="selectMap" resultMap="mapOption">
+	select option_name, option_value from mayday_options
+	</select>
+</mapper>
