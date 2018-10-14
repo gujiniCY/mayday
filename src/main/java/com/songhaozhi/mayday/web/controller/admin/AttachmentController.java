@@ -107,15 +107,15 @@ public class AttachmentController extends BaseController {
 							ServletUtil.getClientIP(request), DateUtil.date()));
 				} else {
 					log.error("删除文件" + attachment.getPictureName() + "失败");
-					return new JsonResult(true, MaydayEnums.OPERATION_ERROR.getCode(),MaydayEnums.OPERATION_ERROR.getMessage());
+					return new JsonResult(true,MaydayEnums.OPERATION_ERROR.getMessage());
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("删除文件" + attachment.getPictureName() + "失败");
-			return new JsonResult(true, MaydayEnums.ERROR.getCode(),MaydayEnums.ERROR.getMessage());
+			return new JsonResult(MaydayEnums.ERROR.isFlag(),MaydayEnums.ERROR.getMessage());
 		}
-		return new JsonResult(true, MaydayEnums.OPERATION_SUCCESS.getCode(),MaydayEnums.OPERATION_SUCCESS.getMessage());
+		return new JsonResult(MaydayEnums.OPERATION_SUCCESS.isFlag(),MaydayEnums.OPERATION_SUCCESS.getMessage());
 	}
 
 	/**
@@ -174,12 +174,12 @@ public class AttachmentController extends BaseController {
 			} catch (Exception e) {
 				e.printStackTrace();
 				log.error("上传附件错误" + e.getMessage());
-				return new JsonResult(false, MaydayEnums.ERROR.getCode(), "系统未知错误");
+				return new JsonResult(false, "系统未知错误");
 			}
 		} else {
-			return new JsonResult(false, MaydayEnums.OPERATION_ERROR.getCode(), "文件不能为空");
+			return new JsonResult(false, "文件不能为空");
 		}
-		return new JsonResult(true, MaydayEnums.OPERATION_SUCCESS.getCode(), "上传成功");
+		return new JsonResult(true, "上传成功");
 	}
 
 }

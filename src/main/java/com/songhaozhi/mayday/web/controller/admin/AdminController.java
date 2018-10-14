@@ -92,7 +92,7 @@ public class AdminController extends BaseController {
 		// 计算两个日期之间的时间差
 		long between = DateUtil.between(date, DateUtil.date(), DateUnit.MINUTE);
 		if (StringUtils.equals(users.getLoginEnable(), flag) && (between < inhibitTime)) {
-			return new JsonResult(false, MaydayEnums.OPERATION_ERROR.getCode(), "账户被禁止登录10分钟，请稍后重试");
+			return new JsonResult(false, "账户被禁止登录10分钟，请稍后重试");
 		}
 		// 验证用户名密码
 		User user = userService.getByNameAndPwd(userName, SecureUtil.md5(userPwd));
@@ -107,7 +107,7 @@ public class AdminController extends BaseController {
 				logService.save(new Log(LogConstant.LOGIN, LogConstant.LOGIN_SUCCES, ServletUtil.getClientIP(request),
 						DateUtil.date()));
 				log.info(userName + "登录成功");
-				return new JsonResult(true, MaydayEnums.OPERATION_SUCCESS.getCode(), "登录成功");
+				return new JsonResult(true, "登录成功");
 			} else {
 				Integer error = userService.updateError();
 				if (error >= errorCount) {
@@ -116,13 +116,13 @@ public class AdminController extends BaseController {
 				// 添加失败日志
 				logService.save(new Log(LogConstant.LOGIN, LogConstant.LOGIN_ERROR, ServletUtil.getClientIP(request),
 						DateUtil.date()));
-				return new JsonResult(false, MaydayEnums.OPERATION_ERROR.getCode(),
+				return new JsonResult(false,
 						"用户名或密码错误！你还有" + (5 - error) + "次机会");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("登录失败，系统错误！");
-			return new JsonResult(false, MaydayEnums.ERROR.getCode(), "未知错误！");
+			return new JsonResult(false, "未知错误！");
 		}
 	}
 

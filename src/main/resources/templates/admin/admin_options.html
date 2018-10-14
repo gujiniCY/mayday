@@ -40,38 +40,38 @@
 			<!-- Tab panes -->
 			<div class="tab-content">
 				<div id="routine" class="tab-pane active ">
-					<form class="form-horizontal">
+					<form class="form-horizontal" id="commonOptions">
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">博客标题：</label>
 							<div class="col-md-5">
-								<input class="form-control" type="text" placeholder="">
+								<input class="form-control" type="text" name="blog_name" th:value="${options.blog_name}">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">博客地址：</label>
 							<div class="col-md-5">
-								<input class="form-control" type="text">
+								<input class="form-control" type="text" name="blog_url" th:value="${options.blog_url}">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">LOGO：</label>
 							<div class="col-md-5">
-								<input class="form-control" type="text">
+								<input class="form-control" type="text" name="blog_logo" th:value="${options.blog_logo}">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="control-label col-md-2">页脚信息：</label>
 							<div class="col-md-5">
 								<div class="input-group">
-									<textarea class="form-control" title="支持HTML" rows="3" id=""
-										name="" style="resize: none"></textarea>
+									<textarea class="form-control" title="支持HTML" rows="3" th:text="${options.blog_footer}" th:value="${options.blog_footer}" id=""
+										name="blog_footer" style="resize: none"></textarea>
 								</div>
 							</div>
 						</div>
 						<div class="tile-footer">
 							<div class="row">
 								<div class="col-md-8 col-md-offset-3">
-									<button class="btn btn-primary" type="button" onclick="">
+									<button class="btn btn-primary" type="button" onclick="save('commonOptions')">
 										<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
 									</button>
 								</div>
@@ -182,5 +182,22 @@
 	</div>
 	</main>
 	<div th:replace="admin/module/macros :: comm"></div>
+	<script type="text/javascript">
+	function save(id){
+		var from =$("#"+id).serialize();
+		console.log(from);
+		$.ajax({
+			type:"post",
+			url:"/admin/option/save",
+			data:from,
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+			}
+		});
+		
+	}
+	
+	</script>
 </body>
 </html>

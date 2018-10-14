@@ -8,37 +8,39 @@ public enum MaydayEnums {
 	/**
 	 * 运行错误
 	 */
-	ERROR(500,"系统错误"),
+	ERROR(false,"系统错误"),
 	/**
 	 * 操作成功
 	 */
-	OPERATION_SUCCESS(200, "操作成功"),
+	OPERATION_SUCCESS(true, "操作成功"),
 	/**
 	 * 操作错误
 	 */
-	OPERATION_ERROR(506, "操作失败"),
+	OPERATION_ERROR(false, "操作失败"),
 	/**
 	 * 保存成功
 	 */
-	PRESERVE_SUCCESS(200, "保存成功"),
+	PRESERVE_SUCCESS(true, "保存成功"),
 	/**
 	 * 保存失败
 	 */
-	PRESERVE_ERROR(500, "保存失败");
-	private Integer code;
+	PRESERVE_ERROR(false, "保存失败");
+	private boolean flag;
 	private String message;
 
-	private MaydayEnums(Integer code, String message) {
-		this.code = code;
+	
+
+	private MaydayEnums(boolean flag, String message) {
+		this.flag = flag;
 		this.message = message;
 	}
 
-	public Integer getCode() {
-		return code;
+	public boolean isFlag() {
+		return flag;
 	}
 
-	public void setCode(Integer code) {
-		this.code = code;
+	public void setFlag(boolean flag) {
+		this.flag = flag;
 	}
 
 	public String getMessage() {
