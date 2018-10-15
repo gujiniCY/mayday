@@ -16,49 +16,44 @@
       <div class="row">
          <div class="col-md-12">
           <div class="tile">
-            <h3 class="tile-title">Responsive Table</h3>
             <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                </tbody>
-              </table>
+              <textarea id="aa"></textarea>
             </div>
           </div>
         </div>
       </div>
     </main>
    <div th:replace="admin/module/macros :: comm" ></div>
+	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
+   <script type="text/javascript">
+   var simplemde = new SimpleMDE({ 
+	   element: document.getElementById("aa"),
+	   //如果设置为true，则强制下载Font Awesome（用于图标）。如果设置为false，则阻止下载。默认为undefined，将智能检查是否已包含Font Awesome，然后相应下载。
+	   autoDownloadFontAwesome:true,
+	   //如果设置为true，则自动对焦编辑器。默认为false。
+	   autofocus:true,
+	   //自动保存
+	   autosave:{
+		    //如果设置为true，则自动保存文本。默认为false。
+			enabled:true,
+			//保存之间的延迟，以毫秒为单位。默认为10000（10s）。
+			delay:5000,
+			//您必须设置唯一的字符串标识符，以便SimpleMDE可以自动保存。将此与您网站上其他地方的SimpleMDE实例区分开来的东西。
+			uniqueId:1
+	   },
+	   //调整预览期间解析Markdown的设置
+	   renderingConfig:{
+		   ///如果设置为true，将使用highlight.js突出显示
+		   codeSyntaxHighlighting:true
+	   },
+	   //要显示的图标名称数组。可用于显示默认隐藏的特定图标，而无需完全自定义工具栏。
+	   showIcons: ["code", "table"],
+	   //如果设置，则自定义选项卡大小。默认为2。
+	   tabSize:4,
+   });
+   
+   
+   </script>
   </body>
 </html>

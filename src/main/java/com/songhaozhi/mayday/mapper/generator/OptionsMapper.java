@@ -16,19 +16,15 @@ public interface OptionsMapper {
 
     int insertSelective(Options record);
 
-    List<Options> selectByExampleWithBLOBs(OptionsExample example);
-
     List<Options> selectByExample(OptionsExample example);
 
     Options selectByPrimaryKey(String optionName);
 
     int updateByExampleSelective(@Param("record") Options record, @Param("example") OptionsExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") Options record, @Param("example") OptionsExample example);
-
     int updateByExample(@Param("record") Options record, @Param("example") OptionsExample example);
 
     int updateByPrimaryKeySelective(Options record);
 
-    int updateByPrimaryKeyWithBLOBs(Options record);
+    int updateByPrimaryKey(Options record);
 }

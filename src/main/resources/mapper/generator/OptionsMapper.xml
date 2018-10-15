@@ -3,9 +3,7 @@
 <mapper namespace="com.songhaozhi.mayday.mapper.generator.OptionsMapper">
   <resultMap id="BaseResultMap" type="com.songhaozhi.mayday.model.domain.Options">
     <id column="option_name" jdbcType="VARCHAR" property="optionName" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.songhaozhi.mayday.model.domain.Options">
-    <result column="option_value" jdbcType="LONGVARCHAR" property="optionValue" />
+    <result column="option_value" jdbcType="VARCHAR" property="optionValue" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,28 +64,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    option_name
+    option_name, option_value
   </sql>
-  <sql id="Blob_Column_List">
-    option_value
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.songhaozhi.mayday.model.domain.OptionsExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from mayday_options
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.songhaozhi.mayday.model.domain.OptionsExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -95,8 +73,6 @@
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from mayday_options
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -105,11 +81,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from mayday_options
     where option_name = #{optionName,jdbcType=VARCHAR}
   </select>
@@ -125,7 +99,7 @@
   </delete>
   <insert id="insert" parameterType="com.songhaozhi.mayday.model.domain.Options">
     insert into mayday_options (option_name, option_value)
-    values (#{optionName,jdbcType=VARCHAR}, #{optionValue,jdbcType=LONGVARCHAR})
+    values (#{optionName,jdbcType=VARCHAR}, #{optionValue,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.songhaozhi.mayday.model.domain.Options">
     insert into mayday_options
@@ -142,7 +116,7 @@
         #{optionName,jdbcType=VARCHAR},
       </if>
       <if test="optionValue != null">
-        #{optionValue,jdbcType=LONGVARCHAR},
+        #{optionValue,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -159,24 +133,17 @@
         option_name = #{record.optionName,jdbcType=VARCHAR},
       </if>
       <if test="record.optionValue != null">
-        option_value = #{record.optionValue,jdbcType=LONGVARCHAR},
+        option_value = #{record.optionValue,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update mayday_options
-    set option_name = #{record.optionName,jdbcType=VARCHAR},
-      option_value = #{record.optionValue,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByExample" parameterType="map">
     update mayday_options
-    set option_name = #{record.optionName,jdbcType=VARCHAR}
+    set option_name = #{record.optionName,jdbcType=VARCHAR},
+      option_value = #{record.optionValue,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -185,14 +152,14 @@
     update mayday_options
     <set>
       <if test="optionValue != null">
-        option_value = #{optionValue,jdbcType=LONGVARCHAR},
+        option_value = #{optionValue,jdbcType=VARCHAR},
       </if>
     </set>
     where option_name = #{optionName,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.songhaozhi.mayday.model.domain.Options">
+  <update id="updateByPrimaryKey" parameterType="com.songhaozhi.mayday.model.domain.Options">
     update mayday_options
-    set option_value = #{optionValue,jdbcType=LONGVARCHAR}
+    set option_value = #{optionValue,jdbcType=VARCHAR}
     where option_name = #{optionName,jdbcType=VARCHAR}
   </update>
 </mapper>

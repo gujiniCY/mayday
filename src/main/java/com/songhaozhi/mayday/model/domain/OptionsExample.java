@@ -173,6 +173,76 @@ public class OptionsExample {
             addCriterion("option_name not between", value1, value2, "optionName");
             return (Criteria) this;
         }
+
+        public Criteria andOptionValueIsNull() {
+            addCriterion("option_value is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptionValueIsNotNull() {
+            addCriterion("option_value is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptionValueEqualTo(String value) {
+            addCriterion("option_value =", value, "optionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptionValueNotEqualTo(String value) {
+            addCriterion("option_value <>", value, "optionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptionValueGreaterThan(String value) {
+            addCriterion("option_value >", value, "optionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptionValueGreaterThanOrEqualTo(String value) {
+            addCriterion("option_value >=", value, "optionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptionValueLessThan(String value) {
+            addCriterion("option_value <", value, "optionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptionValueLessThanOrEqualTo(String value) {
+            addCriterion("option_value <=", value, "optionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptionValueLike(String value) {
+            addCriterion("option_value like", value, "optionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptionValueNotLike(String value) {
+            addCriterion("option_value not like", value, "optionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptionValueIn(List<String> values) {
+            addCriterion("option_value in", values, "optionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptionValueNotIn(List<String> values) {
+            addCriterion("option_value not in", values, "optionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptionValueBetween(String value1, String value2) {
+            addCriterion("option_value between", value1, value2, "optionValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptionValueNotBetween(String value1, String value2) {
+            addCriterion("option_value not between", value1, value2, "optionValue");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
