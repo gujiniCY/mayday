@@ -1,8 +1,11 @@
 package com.songhaozhi.mayday.mapper.custom;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+
+import com.songhaozhi.mayday.model.domain.Options;
 
 /**
 * @author 宋浩志
@@ -19,6 +22,7 @@ public interface OptionsMapperCustom {
 	 * 所有设置选项
 	 * @return map
 	 */
-	Map<String, Object> selectMap();
+	List<Options> selectMap();
+
 
 }

@@ -81,7 +81,7 @@
 				</div>
 				<!-- SEO表单 -->
 				<div id="seo" class="tab-pane fade">
-					<form class="form-horizontal">
+					<form class="form-horizontal" id="seoOptions">
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">关键词： <span
 								data-toggle="tooltip" data-placement="top" title="多个关键词使用,隔开"
@@ -89,13 +89,13 @@
 									aria-hidden="true"></i>
 							</span></label>
 							<div class="col-md-5">
-								<input class="form-control" type="text">
+								<input class="form-control" type="text" name="seo_keyword">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">博客描述：</label>
 							<div class="col-md-5">
-								<input class="form-control" type="text">
+								<input class="form-control" type="text" name="seo_describe">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -106,9 +106,9 @@
 							</span></label>
 							<div class="col-md-5">
 								<div class="input-group">
-									<input type="text" class="form-control" id="" name="">
+									<input type="text" class="form-control" name="seo_baidu_token">
 									<span class="input-group-btn">
-										<button class="btn btn-default " id="" type="button">推送</button>
+										<button class="btn btn-default " type="button">推送</button>
 									</span>
 								</div>
 							</div>
@@ -116,7 +116,7 @@
 						<div class="tile-footer">
 							<div class="row">
 								<div class="col-md-8 col-md-offset-3">
-									<button class="btn btn-primary" type="button" onclick="">
+									<button class="btn btn-primary" type="button" onclick="save('seoOptions')">
 										<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
 									</button>
 								</div>
@@ -185,14 +185,13 @@
 	<script type="text/javascript">
 	function save(id){
 		var from =$("#"+id).serialize();
-		console.log(from);
 		$.ajax({
 			type:"post",
 			url:"/admin/option/save",
 			data:from,
 			dataType:"json",
 			success:function(data){
-				console.log(data);
+				showMsg(data.msg,"success",3000)
 			}
 		});
 		

@@ -1,6 +1,9 @@
 package com.songhaozhi.mayday.service;
 
+import java.util.List;
 import java.util.Map;
+
+import com.songhaozhi.mayday.model.domain.Options;
 
 /**
 * @author 作者:宋浩志
@@ -8,14 +11,20 @@ import java.util.Map;
 */
 public interface OptionsService {
 	/**
-	 * 保存
+	 * 保存多个
 	 * @param map
 	 */
-	void save(Map<String, Object> map);
+	void save(Map<String, String> map);
 	/**
 	 * 所有设置选项
 	 * @return
 	 */
-	Map<String, Object> findAll();
-
+	List<Options> selectMap();
+	/**
+	 * 保存单个
+	 */
+	void saveOption(String key, String value);
+	
+	void delete(Options options);
+	
 }

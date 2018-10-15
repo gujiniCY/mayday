@@ -95,6 +95,8 @@
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from mayday_options
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
