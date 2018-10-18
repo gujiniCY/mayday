@@ -46,9 +46,9 @@
 									name="tagUrl">
 							</div>
 							<div class="tile-footer">
-								<button class="btn btn-primary" type="submit">保存标签</button>
+								<button class="btn btn-outline-primary" type="submit">保存标签</button>
 								<th:block th:if="${tag} != null">
-									<a class="btn btn-info" href="/admin/tag">返回添加</a>
+									<a class="btn btn-outline-info" href="/admin/tag">返回添加</a>
 								</th:block>
 							</div>
 						</form>
@@ -68,9 +68,9 @@
 									<tr th:each="tag : ${tags}">
 										<td th:text="${tag.tagName}"></td>
 										<td th:text="${tag.tagUrl}"></td>
-										<td><a class="btn btn-primary"
+										<td><a class="btn btn-outline-primary"
 											th:href="@{/admin/tag/edit(tagId=${tag.tagId})}">修改</a>
-											<button class="btn btn-danger"
+											<button class="btn btn-outline-danger"
 												th:onclick="'javascript:showModel('+${tag.tagId}+')'">删除</button>
 										</td>
 									</tr>
@@ -96,9 +96,9 @@
 				<!-- 模态框底部 -->
 				<div class="modal-footer">
 					<input type="hidden" id="tagid" />
-					<button type="button" class="btn btn-secondary"
+					<button type="button" class="btn btn-outline-secondary"
 						data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" onclick="remove()">确定</button>
+					<button type="button" class="btn btn-outline-primary" onclick="remove()">确定</button>
 				</div>
 
 			</div>

@@ -1,30 +1,87 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
- <div th:replace="admin/module/header.html" ></div>
-  <body class="app sidebar-mini rtl">
-   <div th:replace="admin/module/sidebar.html" ></div>
-    <main class="app-content">
-      <div class="app-title">
-        <div>
-          <h1><i class="fa fa-book"></i>文章管理</h1>
-        </div>
-        <ul class="app-breadcrumb breadcrumb">
-          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item"><a href="/admin/article">文章管理</a></li>
-          <li class="breadcrumb-item">所有文章</li>
-        </ul>
-      </div>
-      <div class="row">
-         <div class="col-md-12">
-          <div class="tile">
-            <div class="table-responsive">
-              
-            </div>
-          </div> 
-        </div>
-      </div>
-    </main>
-   <div th:replace="admin/module/macros :: comm" ></div>
-	
-  </body>
+<div th:replace="admin/module/header.html"></div>
+<body class="app sidebar-mini rtl">
+	<div th:replace="admin/module/sidebar.html"></div>
+	<main class="app-content">
+	<div class="app-title">
+		<div>
+			<h1>
+				<i class="fa fa-book"></i>文章管理
+			</h1>
+		</div>
+		<ul class="app-breadcrumb breadcrumb">
+			<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+			<li class="breadcrumb-item"><a href="/admin/article">文章管理</a></li>
+			<li class="breadcrumb-item">所有文章</li>
+		</ul>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="tile">
+				<div class="table-responsive">
+					<div>
+						<form class="form-inline" role="form">
+							<div class="form-group col-md-2 col-*">
+								<label class="form-label ">标题：</label> <input type="text"
+									class="form-control">
+							</div>
+							<div class="form-group col-md-2 col-*">
+								<label class="form-label ">分类：</label> <select
+									class="form-control">
+									<option>请选择</option>
+									<option>是啊实打实asdsadsa大</option>
+									<option>否</option>
+								</select>
+							</div>
+							<div class="form-group col-md-3 col-*">
+								<label class="form-label ">状态：</label> <select
+									class="form-control">
+									<option>请选择</option>
+									<option>原创</option>
+									<option>转载</option>
+								</select>
+								<div class="col-md-1 col-*">
+									<button class="btn btn-outline-info" type="submit">查询</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="tile">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Username</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>Mark</td>
+								<td>Otto</td>
+								<td>@mdo</td>
+								<td><button class="btn btn-outline-primary">修改</button>
+									<button class="btn btn-outline-danger">删除</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	</main>
+	<div th:replace="admin/module/macros :: comm"></div>
+
+</body>
 </html>

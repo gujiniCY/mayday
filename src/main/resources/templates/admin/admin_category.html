@@ -52,9 +52,9 @@
 									name="categoryDescribe" style="resize: none"></textarea>
 							</div>
 							<div class="tile-footer">
-								<button class="btn btn-primary" type="submit">保存分类</button>
+								<button class="btn btn-outline-primary" type="submit">保存分类</button>
 								<th:block th:if="${category} != null">
-									<a class="btn btn-info" href="/admin/category">返回添加</a>
+									<a class="btn btn-outline-info" href="/admin/category">返回添加</a>
 								</th:block>
 							</div>
 						</form>
@@ -76,9 +76,9 @@
 										<td th:text="${category.categoryName}"></td>
 										<td th:text="${category.categoryUrl}"></td>
 										<td th:text="${category.categoryDescribe}"></td>
-										<td><a class="btn btn-primary"
+										<td><a class="btn btn-outline-primary"
 											th:href="@{/admin/category/edit(categoryId=${category.categoryId})}">修改</a>
-											<button class="btn btn-danger"
+											<button class="btn btn-outline-danger"
 												th:onclick="'javascript:showModel('+${category.categoryId}+')'">删除</button>
 										</td>
 									</tr>
@@ -104,9 +104,9 @@
 				<!-- 模态框底部 -->
 				<div class="modal-footer">
 					<input type="hidden" id="categoryid" />
-					<button type="button" class="btn btn-secondary"
+					<button type="button" class="btn btn-outline-secondary"
 						data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" onclick="remove()">确定</button>
+					<button type="button" class="btn btn-outline-primary" onclick="remove()">确定</button>
 				</div>
 
 			</div>

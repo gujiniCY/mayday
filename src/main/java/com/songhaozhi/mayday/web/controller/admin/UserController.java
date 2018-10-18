@@ -116,9 +116,10 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@GetMapping(value="/openChoice")
-	public String openChoice(Model model,@RequestParam(value="page",defaultValue="1") int page,@RequestParam(value="limit",defaultValue="18") int limit) {
+	public String openChoice(Model model,@RequestParam(value="id", defaultValue="none") String id,@RequestParam(value="page",defaultValue="1") int page,@RequestParam(value="limit",defaultValue="18") int limit) {
 		PageInfo<Attachment> lists=attachmentService.getAttachment(page, limit);
 		model.addAttribute("info", lists);
+		model.addAttribute("id", id);
 		return "/admin/open_choice";
 	}
 }

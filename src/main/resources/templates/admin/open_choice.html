@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>所有附件</title>
-<link rel="stylesheet" type="text/css" href="/plugins/bootstrap/css/bootstrap.min.css">  
+<link rel="stylesheet" type="text/css"
+	href="/plugins/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/plugins/vali/css/main.css">
-<link rel="stylesheet" type="text/css" href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="/plugins/bootstrap-fileinput/css/fileinput.min.css">
-<link rel="stylesheet" type="text/css" href="/plugins/toast/jquery.toast.css">
+<link rel="stylesheet" type="text/css"
+	href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="/plugins/bootstrap-fileinput/css/fileinput.min.css">
+<link rel="stylesheet" type="text/css"
+	href="/plugins/toast/jquery.toast.css">
 </head>
 <body>
-<style type="text/css" rel="stylesheet">
+	<style type="text/css" rel="stylesheet">
 .div-thumbnail {
 	transition: all .5s ease-in-out;
 	padding: 10px;
@@ -30,93 +34,92 @@
 </style>
 	<div class="col-md-12">
 		<div class="row">
-<ul class="nav nav-tabs" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" href="#allAttachment" role="tab" data-toggle="tab">所有附件</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#uploadAttachment" role="tab" data-toggle="tab">上传附件</a>
-  </li>
-</ul>
-</div>
-<div class="tab-content">
-  <div role="tabpanel" class="tab-pane active" id="allAttachment">
-  <div class="row">
-				<th:block th:each="attachment : ${info.list}">
-					<div class="col-lg-2 col-md-3 col-sm-6 col-6 div-thumbnail"
-						th:onclick="'javascript:choice(\''+${attachment.picturePath}+'\')'">
-						<a href="#"><img
-							class="img-thumbnail img-fluid img-responsive"
-							th:src="${attachment.pictureSmallPath}"></a>
+			<ul class="nav nav-tabs" role="tablist">
+				<li class="nav-item"><a class="nav-link active"
+					href="#allAttachment" role="tab" data-toggle="tab">所有附件</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="#uploadAttachment" role="tab" data-toggle="tab">上传附件</a></li>
+			</ul>
+		</div>
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="allAttachment">
+				<div class="row">
+					<input type="hidden" id="showId" th:value="${id}">
+					<th:block th:each="attachment : ${info.list}">
+						<div class="col-lg-2 col-md-3 col-sm-6 col-6 div-thumbnail"
+							th:onclick="'javascript:choice(\''+${attachment.picturePath}+'\')'">
+							<a href="#"><img
+								class="img-thumbnail img-fluid img-responsive"
+								th:src="${attachment.pictureSmallPath}"></a>
+						</div>
+					</th:block>
+				</div>
+				<div th:replace="admin/module/macros :: pageAdminNav(${info})"></div>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="uploadAttachment">
+				<div class="tile">
+					<div class="file-loading">
+						<input id="input-fas" autocomplete="off" name="file" type="file"
+							class="file-loading" multiple>
 					</div>
-				</th:block>
+				</div>
 			</div>
-			<div th:replace="admin/module/macros :: pageAdminNav(${info})"></div>
-  </div>
-  <div role="tabpanel" class="tab-pane" id="uploadAttachment">
-  <div class="tile">
-				<div class="file-loading">
-					<input id="input-fas" autocomplete="off" name="file" type="file"
-						class="file-loading" multiple>
-			</div>
+		</div>
 	</div>
-  </div>
-</div>
-</div>
 	<div th:replace="admin/module/macros :: comm"></div>
 	<div th:replace="admin/module/macros :: bootstrapFileinput"></div>
 	<script type="text/javascript">
-	$("#input-fas").fileinput(
-			{
-				theme : "fa",
-				uploadUrl : "/admin/attachment/upload",
-				language : 'zh',
-				uploadAsync : true,
-				allowedFileExtensions : [ 'jpg', 'gif', 'png', 'jpeg',
-						'svg', 'psd' ],
-				enctype : 'multipart/form-data',
-				showClose : false
-			}).on("fileuploaded", function(event, data, previewId, index) {
-		var response = data.response;
-		if (response.flag == true) {
-			$.toast({
-				text : response.msg,
-				heading : '提示',
-				icon : 'success',
-				showHideTransition : 'fade',
-				allowToastClose : true,
-				hideAfter : 1000,
-				stack : 1,
-				position : 'top-center',
-				textAlign : 'left',
-				loader : true,
-				loaderBg : '#ffffff',
-				afterHidden : function() {
-					window.location.reload();
-				}
-			});
-		} else {
-			$.toast({
-				text : response.msg,
-				heading : '提示',
-				icon : 'error',
-				showHideTransition : 'fade',
-				allowToastClose : true,
-				hideAfter : 1000,
-				stack : 1,
-				position : 'top-center',
-				textAlign : 'left',
-				loader : true,
-				loaderBg : '#ffffff',
-			});
+		$("#input-fas").fileinput(
+				{
+					theme : "fa",
+					uploadUrl : "/admin/attachment/upload",
+					language : 'zh',
+					uploadAsync : true,
+					allowedFileExtensions : [ 'jpg', 'gif', 'png', 'jpeg',
+							'svg', 'psd' ],
+					enctype : 'multipart/form-data',
+					showClose : false
+				}).on("fileuploaded", function(event, data, previewId, index) {
+			var response = data.response;
+			if (response.flag == true) {
+				$.toast({
+					text : response.msg,
+					heading : '提示',
+					icon : 'success',
+					showHideTransition : 'fade',
+					allowToastClose : true,
+					hideAfter : 1000,
+					stack : 1,
+					position : 'top-center',
+					textAlign : 'left',
+					loader : true,
+					loaderBg : '#ffffff',
+					afterHidden : function() {
+						window.location.reload();
+					}
+				});
+			} else {
+				$.toast({
+					text : response.msg,
+					heading : '提示',
+					icon : 'error',
+					showHideTransition : 'fade',
+					allowToastClose : true,
+					hideAfter : 1000,
+					stack : 1,
+					position : 'top-center',
+					textAlign : 'left',
+					loader : true,
+					loaderBg : '#ffffff',
+				});
+			}
+		});
+
+		function choice(path) {
+			var id = $("#showId").val();
+			$("#" + id + "", window.parent.document).attr("value", path);
+			parent.layer.closeAll();
 		}
-	});
-	
-	function choice(path){
-		$("#userPortrait",window.parent.document).attr("value",path);
-		parent.layer.closeAll();
-	}
-	
 	</script>
 </body>
 </html>
