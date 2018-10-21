@@ -11,7 +11,9 @@
     <result column="article_summary" jdbcType="VARCHAR" property="articleSummary" />
     <result column="article_thumbnail" jdbcType="VARCHAR" property="articleThumbnail" />
     <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
-    <result column="article_type" jdbcType="VARCHAR" property="articleType" />
+    <result column="article_type" jdbcType="INTEGER" property="articleType" />
+    <result column="article_post" jdbcType="VARCHAR" property="articlePost" />
+    <result column="article_comment" jdbcType="INTEGER" property="articleComment" />
     <result column="article_updatetime" jdbcType="TIMESTAMP" property="articleUpdatetime" />
     <result column="article_url" jdbcType="VARCHAR" property="articleUrl" />
     <result column="article_views" jdbcType="BIGINT" property="articleViews" />
@@ -76,8 +78,8 @@
   </sql>
   <sql id="Base_Column_List">
     id, user_id, article_content, article_content_md, article_newstime, article_status, 
-    article_summary, article_thumbnail, article_title, article_type, article_updatetime, 
-    article_url, article_views
+    article_summary, article_thumbnail, article_title, article_type, article_post, article_comment, 
+    article_updatetime, article_url, article_views
   </sql>
   <select id="selectByExample" parameterType="com.songhaozhi.mayday.model.domain.ArticleExample" resultMap="BaseResultMap">
     select
@@ -114,13 +116,15 @@
     insert into mayday_article (id, user_id, article_content, 
       article_content_md, article_newstime, article_status, 
       article_summary, article_thumbnail, article_title, 
-      article_type, article_updatetime, article_url, 
-      article_views)
+      article_type, article_post, article_comment, 
+      article_updatetime, article_url, article_views
+      )
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{articleContent,jdbcType=VARCHAR}, 
       #{articleContentMd,jdbcType=VARCHAR}, #{articleNewstime,jdbcType=TIMESTAMP}, #{articleStatus,jdbcType=INTEGER}, 
       #{articleSummary,jdbcType=VARCHAR}, #{articleThumbnail,jdbcType=VARCHAR}, #{articleTitle,jdbcType=VARCHAR}, 
-      #{articleType,jdbcType=VARCHAR}, #{articleUpdatetime,jdbcType=TIMESTAMP}, #{articleUrl,jdbcType=VARCHAR}, 
-      #{articleViews,jdbcType=BIGINT})
+      #{articleType,jdbcType=INTEGER}, #{articlePost,jdbcType=VARCHAR}, #{articleComment,jdbcType=INTEGER}, 
+      #{articleUpdatetime,jdbcType=TIMESTAMP}, #{articleUrl,jdbcType=VARCHAR}, #{articleViews,jdbcType=BIGINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.songhaozhi.mayday.model.domain.Article">
     insert into mayday_article
@@ -154,6 +158,12 @@
       </if>
       <if test="articleType != null">
         article_type,
+      </if>
+      <if test="articlePost != null">
+        article_post,
+      </if>
+      <if test="articleComment != null">
+        article_comment,
       </if>
       <if test="articleUpdatetime != null">
         article_updatetime,
@@ -194,7 +204,13 @@
         #{articleTitle,jdbcType=VARCHAR},
       </if>
       <if test="articleType != null">
-        #{articleType,jdbcType=VARCHAR},
+        #{articleType,jdbcType=INTEGER},
+      </if>
+      <if test="articlePost != null">
+        #{articlePost,jdbcType=VARCHAR},
+      </if>
+      <if test="articleComment != null">
+        #{articleComment,jdbcType=INTEGER},
       </if>
       <if test="articleUpdatetime != null">
         #{articleUpdatetime,jdbcType=TIMESTAMP},
@@ -244,7 +260,13 @@
         article_title = #{record.articleTitle,jdbcType=VARCHAR},
       </if>
       <if test="record.articleType != null">
-        article_type = #{record.articleType,jdbcType=VARCHAR},
+        article_type = #{record.articleType,jdbcType=INTEGER},
+      </if>
+      <if test="record.articlePost != null">
+        article_post = #{record.articlePost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleComment != null">
+        article_comment = #{record.articleComment,jdbcType=INTEGER},
       </if>
       <if test="record.articleUpdatetime != null">
         article_updatetime = #{record.articleUpdatetime,jdbcType=TIMESTAMP},
@@ -271,7 +293,9 @@
       article_summary = #{record.articleSummary,jdbcType=VARCHAR},
       article_thumbnail = #{record.articleThumbnail,jdbcType=VARCHAR},
       article_title = #{record.articleTitle,jdbcType=VARCHAR},
-      article_type = #{record.articleType,jdbcType=VARCHAR},
+      article_type = #{record.articleType,jdbcType=INTEGER},
+      article_post = #{record.articlePost,jdbcType=VARCHAR},
+      article_comment = #{record.articleComment,jdbcType=INTEGER},
       article_updatetime = #{record.articleUpdatetime,jdbcType=TIMESTAMP},
       article_url = #{record.articleUrl,jdbcType=VARCHAR},
       article_views = #{record.articleViews,jdbcType=BIGINT}
@@ -307,7 +331,13 @@
         article_title = #{articleTitle,jdbcType=VARCHAR},
       </if>
       <if test="articleType != null">
-        article_type = #{articleType,jdbcType=VARCHAR},
+        article_type = #{articleType,jdbcType=INTEGER},
+      </if>
+      <if test="articlePost != null">
+        article_post = #{articlePost,jdbcType=VARCHAR},
+      </if>
+      <if test="articleComment != null">
+        article_comment = #{articleComment,jdbcType=INTEGER},
       </if>
       <if test="articleUpdatetime != null">
         article_updatetime = #{articleUpdatetime,jdbcType=TIMESTAMP},
@@ -331,7 +361,9 @@
       article_summary = #{articleSummary,jdbcType=VARCHAR},
       article_thumbnail = #{articleThumbnail,jdbcType=VARCHAR},
       article_title = #{articleTitle,jdbcType=VARCHAR},
-      article_type = #{articleType,jdbcType=VARCHAR},
+      article_type = #{articleType,jdbcType=INTEGER},
+      article_post = #{articlePost,jdbcType=VARCHAR},
+      article_comment = #{articleComment,jdbcType=INTEGER},
       article_updatetime = #{articleUpdatetime,jdbcType=TIMESTAMP},
       article_url = #{articleUrl,jdbcType=VARCHAR},
       article_views = #{articleViews,jdbcType=BIGINT}

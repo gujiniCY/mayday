@@ -21,7 +21,11 @@ public class Article {
 
     private String articleTitle;
 
-    private String articleType;
+    private Integer articleType;
+
+    private String articlePost;
+
+    private Integer articleComment;
 
     private Date articleUpdatetime;
 
@@ -101,12 +105,28 @@ public class Article {
         this.articleTitle = articleTitle == null ? null : articleTitle.trim();
     }
 
-    public String getArticleType() {
+    public Integer getArticleType() {
         return articleType;
     }
 
-    public void setArticleType(String articleType) {
-        this.articleType = articleType == null ? null : articleType.trim();
+    public void setArticleType(Integer articleType) {
+        this.articleType = articleType;
+    }
+
+    public String getArticlePost() {
+        return articlePost;
+    }
+
+    public void setArticlePost(String articlePost) {
+        this.articlePost = articlePost == null ? null : articlePost.trim();
+    }
+
+    public Integer getArticleComment() {
+        return articleComment;
+    }
+
+    public void setArticleComment(Integer articleComment) {
+        this.articleComment = articleComment;
     }
 
     public Date getArticleUpdatetime() {

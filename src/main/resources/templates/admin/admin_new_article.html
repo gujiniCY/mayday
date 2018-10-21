@@ -17,12 +17,14 @@
 		</ul>
 	</div>
 	<form id="articleFrom" class="form-horizontal">
+		<input type="hidden" id="articleContent" name="articleContent">
+		<input type="hidden" id="articleContentMd" name="articleContentMd">
 		<div class="row">
 			<div class="col-md-8">
 				<div class="tile">
 					<div class="table-responsive">
 						<div class="form-group">
-							<input class="form-control" id="" type="text"
+							<input class="form-control" name="articleTitle" id="" type="text"
 								placeholder="输入文章标题">
 						</div>
 						<div class="form-group">
@@ -36,10 +38,10 @@
 					<div class="form-group row">
 						<label class="control-label col-md-3">文章类型:</label>
 						<div class="col-md-9">
-							<select class="form-control">
+							<select name="articleType" class="form-control">
 								<optgroup label="请选择">
-									<option>原创</option>
-									<option>转载</option>
+									<option value="0">原创</option>
+									<option value="1">转载</option>
 								</optgroup>
 							</select>
 						</div>
@@ -47,10 +49,10 @@
 					<div class="form-group row">
 						<label class="control-label col-md-3">开启评论:</label>
 						<div class="col-md-9">
-							<select class="form-control">
+							<select name="articleComment" class="form-control">
 								<optgroup label="请选择">
-									<option>是</option>
-									<option>否</option>
+									<option value="0">是</option>
+									<option value="1">否</option>
 								</optgroup>
 							</select>
 						</div>
@@ -58,10 +60,12 @@
 					<div class="form-group row">
 						<label class="control-label col-md-3">文章分类:</label>
 						<div class="col-md-9">
-							<select class="form-control" id="categorySelect" multiple="">
+							<select name="category" class="form-control" id="categorySelect"
+								multiple="">
 								<optgroup label="点击选择，可多选">
-									<option>Ahmedabad</option>
-									<option>Surat</option>
+									<option th:each="category:${categorys}"
+										th:value="${category.categoryId}"
+										th:text="${category.categoryName}"></option>
 								</optgroup>
 							</select>
 						</div>
@@ -69,10 +73,11 @@
 					<div class="form-group row">
 						<label class="control-label col-md-3">文章标签:</label>
 						<div class="col-md-9">
-							<select class="form-control" id="tagSelect" multiple="">
+							<select name="tag" class="form-control" id="tagSelect"
+								multiple="">
 								<optgroup label="点击选择，可多选">
-									<option>Ahmedabad</option>
-									<option>Surat</option>
+									<option th:each="tag:${tags}" th:value="${tag.tagId}"
+										th:text="${tag.tagName}"></option>
 								</optgroup>
 							</select>
 						</div>
@@ -82,7 +87,7 @@
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control" id="articleThumbnail"
-									name=""> <span class="input-group-btn">
+									name="articleThumbnail"> <span class="input-group-btn">
 									<button class="btn btn-default " type="button"
 										th:onclick="'javascript:openChoice(\''+articleThumbnail+'\')'">选择</button>
 								</span>
@@ -92,11 +97,12 @@
 					<div class="form-group row">
 						<label class="control-label col-md-3">文章摘要:</label>
 						<div class="col-md-9">
-							<textarea class="form-control" rows="3"></textarea>
+							<textarea class="form-control" name="articleSummary" rows="3"></textarea>
 						</div>
 					</div>
 					<div class="tile-footer">
-						<button class="btn btn-outline-secondary" type="button">保存草稿</button>
+						<button class="btn btn-outline-secondary" onclick="save()"
+							type="button">保存草稿</button>
 						<button class="btn btn-outline-primary pull-right" type="button">发布文章</button>
 					</div>
 				</div>
@@ -165,7 +171,6 @@
 	        return flag;
 	    } 
    });
-   
  	//选择略缩图
 	function openChoice(id){
 		layer.open({
@@ -178,7 +183,32 @@
 			shadeClose: true
 		});
 	}
-   
+ 	//保存文章
+ 	function save(){
+ 		var contentMd=simplemde.value();
+ 		if(contentMd!=""){
+ 			$("#articleContent").val(contentMd);
+ 			$("#articleContentMd").val(simplemde.markdown(contentMd));
+ 			var categorysData=$("#categorySelect").select2("data");
+ 			var tagsData=$("#tagSelect").select2("data");
+ 			if(categorysData.length==0 || tagsData.length==0){
+ 				layer.msg("分类与标签不能为空！")
+ 			}else{
+				var obj=$("#articleFrom").serialize();
+ 				$.ajax({
+ 					type : "post",
+ 					url : "/admin/article/new/save",
+ 					data : obj,
+ 					dataType : "json",
+ 					success : function(data){
+ 						console.log(data.data);
+ 					}
+ 				});
+ 			}
+ 		}else{
+            layer.msg("请输入文章内容！")
+        }
+ 	}
     $('#categorySelect').select2();
 	$('#tagSelect').select2();
    </script>
