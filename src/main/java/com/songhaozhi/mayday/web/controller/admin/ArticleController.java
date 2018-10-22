@@ -2,6 +2,8 @@ package com.songhaozhi.mayday.web.controller.admin;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +16,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.songhaozhi.mayday.model.domain.Article;
 import com.songhaozhi.mayday.model.domain.Category;
 import com.songhaozhi.mayday.model.domain.Tag;
+import com.songhaozhi.mayday.model.domain.User;
 import com.songhaozhi.mayday.model.dto.JsonResult;
+import com.songhaozhi.mayday.model.dto.MaydayConst;
+import com.songhaozhi.mayday.model.enums.MaydayEnums;
 import com.songhaozhi.mayday.service.ArticleService;
 import com.songhaozhi.mayday.service.CategoryService;
 import com.songhaozhi.mayday.service.TagService;
+
+import cn.hutool.core.date.DateUtil;
 
 /**
 * @author 宋浩志
@@ -50,11 +57,26 @@ public class ArticleController extends BaseController{
 		model.addAttribute("tags", tags);
 		return "/admin/admin_new_article";
 	}
+	/**
+	 * 保存文章
+	 * @param article 文章
+	 * @param tags 标签
+	 * @param categorys 分类
+	 * @return
+	 */
 	@PostMapping(value="/new/save")
 	@ResponseBody
-	public JsonResult save(Article article,Integer[] tag,Integer[] category) {
-		
-		return new JsonResult(true, null, tag);
+	public JsonResult save(Article article,Long[] tags,Long[] categorys,HttpServletRequest request) {
+		try {
+			User user=(User) request.getAttribute(MaydayConst.USER_SESSION_KEY);
+			article.setUserId(user.getUserId());
+			article.setArticleNewstime(DateUtil.date());
+			article.setArticleUpdatetime(DateUtil.date());
+			articleService.save(article,tags,categorys);
+		} catch (Exception e) {
+			return new JsonResult(MaydayEnums.PRESERVE_ERROR.isFlag(),MaydayEnums.PRESERVE_ERROR.getMessage());
+		}
+		return new JsonResult(MaydayEnums.PRESERVE_SUCCESS.isFlag(),MaydayEnums.PRESERVE_SUCCESS.getMessage());
 	}
 
 }

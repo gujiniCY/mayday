@@ -112,7 +112,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.songhaozhi.mayday.model.domain.Article">
+  <insert id="insert" parameterType="com.songhaozhi.mayday.model.domain.Article" useGeneratedKeys="true" keyProperty="id">
     insert into mayday_article (id, user_id, article_content, 
       article_content_md, article_newstime, article_status, 
       article_summary, article_thumbnail, article_title, 

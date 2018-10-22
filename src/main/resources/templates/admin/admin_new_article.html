@@ -19,6 +19,8 @@
 	<form id="articleFrom" class="form-horizontal">
 		<input type="hidden" id="articleContent" name="articleContent">
 		<input type="hidden" id="articleContentMd" name="articleContentMd">
+		<input type="hidden" id="articleStatus" name="articleStatus">
+		<input type="hidden" id="articlePost" name="articlePost" value="post">
 		<div class="row">
 			<div class="col-md-8">
 				<div class="tile">
@@ -60,7 +62,7 @@
 					<div class="form-group row">
 						<label class="control-label col-md-3">文章分类:</label>
 						<div class="col-md-9">
-							<select name="category" class="form-control" id="categorySelect"
+							<select name="categorys" class="form-control" id="categorySelect"
 								multiple="">
 								<optgroup label="点击选择，可多选">
 									<option th:each="category:${categorys}"
@@ -73,7 +75,7 @@
 					<div class="form-group row">
 						<label class="control-label col-md-3">文章标签:</label>
 						<div class="col-md-9">
-							<select name="tag" class="form-control" id="tagSelect"
+							<select name="tags" class="form-control" id="tagSelect"
 								multiple="">
 								<optgroup label="点击选择，可多选">
 									<option th:each="tag:${tags}" th:value="${tag.tagId}"
@@ -101,9 +103,9 @@
 						</div>
 					</div>
 					<div class="tile-footer">
-						<button class="btn btn-outline-secondary" onclick="save()"
+						<button class="btn btn-outline-secondary" onclick="save(1)"
 							type="button">保存草稿</button>
-						<button class="btn btn-outline-primary pull-right" type="button">发布文章</button>
+						<button class="btn btn-outline-primary pull-right" onclick="save(0)" type="button">发布文章</button>
 					</div>
 				</div>
 			</div>
@@ -122,7 +124,7 @@
    var simplemde = new SimpleMDE({ 
 	   element: document.getElementById("articleMd"),
 	   //如果设置为true，则强制下载Font Awesome（用于图标）。如果设置为false，则阻止下载。默认为undefined，将智能检查是否已包含Font Awesome，然后相应下载。
-	   autoDownloadFontAwesome:true,
+	   autoDownloadFontAwesome:false,
 	   //如果设置为true，则自动对焦编辑器。默认为false。
 	   autofocus:true,
 	   //自动保存
@@ -184,7 +186,7 @@
 		});
 	}
  	//保存文章
- 	function save(){
+ 	function save(articleStatus){
  		var contentMd=simplemde.value();
  		if(contentMd!=""){
  			$("#articleContent").val(contentMd);
@@ -194,6 +196,7 @@
  			if(categorysData.length==0 || tagsData.length==0){
  				layer.msg("分类与标签不能为空！")
  			}else{
+ 				$("#articleStatus").val(articleStatus);
 				var obj=$("#articleFrom").serialize();
  				$.ajax({
  					type : "post",
@@ -201,7 +204,39 @@
  					data : obj,
  					dataType : "json",
  					success : function(data){
- 						console.log(data.data);
+ 						if(data.flag==true){
+ 							simplemde.clearAutosavedValue();
+ 	 						 $.toast({
+ 	 	                         text: data.msg,
+ 	 	                         heading: '提示',
+ 	 	                         icon: 'success',
+ 	 	                         showHideTransition: 'fade',
+ 	 	                         allowToastClose: true,
+ 	 	                         hideAfter: 1000,
+ 	 	                         stack: 1,
+ 	 	                         position: 'top-center',
+ 	 	                         textAlign: 'left',
+ 	 	                         loader: true,
+ 	 	                         loaderBg: '#ffffff',
+ 	 	                         afterHidden: function () {
+ 	 	                        	 window.location.href = "/admin/article"; 
+ 	 	                         }
+ 	 	                     });
+ 						}else{
+ 							 $.toast({
+ 	 	                         text: data.msg,
+ 	 	                         heading: '提示',
+ 	 	                         icon: 'error',
+ 	 	                         showHideTransition: 'fade',
+ 	 	                         allowToastClose: true,
+ 	 	                         hideAfter: 1000,
+ 	 	                         stack: 1,
+ 	 	                         position: 'top-center',
+ 	 	                         textAlign: 'left',
+ 	 	                         loader: true,
+ 	 	                         loaderBg: '#ffffff',
+ 	 	                     });
+ 						}
  					}
  				});
  			}

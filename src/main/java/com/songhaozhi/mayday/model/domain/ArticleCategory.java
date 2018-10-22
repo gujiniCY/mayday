@@ -1,15 +1,15 @@
 package com.songhaozhi.mayday.model.domain;
 
 public class ArticleCategory {
-    private Long articleId;
+    private Integer articleId;
 
     private Long categoryId;
 
-    public Long getArticleId() {
+    public Integer getArticleId() {
         return articleId;
     }
 
-    public void setArticleId(Long articleId) {
+    public void setArticleId(Integer articleId) {
         this.articleId = articleId;
     }
 
