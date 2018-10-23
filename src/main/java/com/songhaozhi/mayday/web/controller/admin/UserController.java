@@ -59,9 +59,10 @@ public class UserController extends BaseController {
 	 */
 	@PostMapping(value = "updateProfile")
 	@ResponseBody
-	public JsonResult updateProfile(User user) {
+	public JsonResult updateProfile(User user,HttpSession session) {
 		try {
 			userService.updateDatum(user);
+			session.invalidate();
 		} catch (Exception e) {
 			log.error("修改资料：未知错误", e);
 			return new JsonResult(MaydayEnums.ERROR.isFlag(), MaydayEnums.ERROR.getMessage());
