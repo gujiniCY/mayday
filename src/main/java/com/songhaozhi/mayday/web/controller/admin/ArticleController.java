@@ -58,6 +58,17 @@ public class ArticleController extends BaseController{
 		return "/admin/admin_new_article";
 	}
 	/**
+	 * 过滤空格
+	 * @param articleTitle
+	 * @return
+	 */
+	@PostMapping(value="/filter")
+	@ResponseBody
+	public JsonResult filter(String articleTitle) {
+		articleTitle=articleTitle.replaceAll(" ", "-");
+		return new JsonResult(true,articleTitle);
+	}
+	/**
 	 * 保存文章
 	 * @param article 文章
 	 * @param tags 标签
@@ -68,7 +79,7 @@ public class ArticleController extends BaseController{
 	@ResponseBody
 	public JsonResult save(Article article,Long[] tags,Long[] categorys,HttpServletRequest request) {
 		try {
-			User user=(User) request.getAttribute(MaydayConst.USER_SESSION_KEY);
+			User user=(User) request.getSession().getAttribute(MaydayConst.USER_SESSION_KEY);
 			article.setUserId(user.getUserId());
 			article.setArticleNewstime(DateUtil.date());
 			article.setArticleUpdatetime(DateUtil.date());
@@ -78,5 +89,4 @@ public class ArticleController extends BaseController{
 		}
 		return new JsonResult(MaydayEnums.PRESERVE_SUCCESS.isFlag(),MaydayEnums.PRESERVE_SUCCESS.getMessage());
 	}
-
 }

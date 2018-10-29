@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.songhaozhi.mayday.model.domain.Options;
 import com.songhaozhi.mayday.model.dto.JsonResult;
+import com.songhaozhi.mayday.model.dto.MaydayConst;
 import com.songhaozhi.mayday.model.enums.MaydayEnums;
 import com.songhaozhi.mayday.service.OptionsService;
 
@@ -53,6 +54,11 @@ public class OptionsController extends BaseController {
 	public JsonResult save(@RequestParam Map<String, String> map) {
 		try {
 			optionsService.save(map);
+			MaydayConst.options.clear();
+			List<Options> ListMap = optionsService.selectMap();
+			for (Options options : ListMap) {
+				MaydayConst.options.put(options.getOptionName(), options.getOptionValue());
+			}
 		} catch (Exception e) {
 			return new JsonResult(MaydayEnums.PRESERVE_ERROR.isFlag(), MaydayEnums.PRESERVE_ERROR.getMessage());
 		}

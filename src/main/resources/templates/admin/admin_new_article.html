@@ -26,8 +26,12 @@
 				<div class="tile">
 					<div class="table-responsive">
 						<div class="form-group">
-							<input class="form-control" name="articleTitle" id="" type="text"
+							<input class="form-control" name="articleTitle" id="articleTitle" type="text"
 								placeholder="输入文章标题">
+						</div>
+						<div class="form-group">
+							<input class="form-control" name="articleUrl" id="articleUrl" type="text"
+								placeholder="输入文章链接">
 						</div>
 						<div class="form-group">
 							<textarea class="form-control" id="articleMd"></textarea>
@@ -120,6 +124,9 @@
 		src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+	<script src="/plugins/pinyinjs/pinyin_dict_notone.js"></script>	
+	<script src="/plugins/pinyinjs/pinyinUtil.js"></script>	
+	<script src="/plugins/inline-attachment/codemirror-4.inline-attachment.min.js"></script>
 	<script type="text/javascript">
    var simplemde = new SimpleMDE({ 
 	   element: document.getElementById("articleMd"),
@@ -146,9 +153,8 @@
 	   //如果设置，则自定义选项卡大小。默认为2。
 	   tabSize:4,
    });
-   
    $(function(){
-	   var PC = IsPC();
+	    var PC = IsPC();
 	    if (PC) {
 	    	var style = document.createElement("style");
 	    	style.type = "text/css";
@@ -171,7 +177,22 @@
 	            }
 	        }
 	        return flag;
-	    } 
+	    }
+		   inlineAttachment.editors.codemirror4.attach(simplemde.codemirror, {
+	           uploadUrl: "/admin/attachment/upload"
+	       });
+	   //生成url链接
+	   $("#articleTitle").blur(function(){
+		   $.ajax({
+			  url:"/admin/article/filter",
+			  type:"post",
+			  data:{"articleTitle":pinyinUtil.getPinyin($("#articleTitle").val())},
+			  dataType:"json",
+			  success:function(data){
+				  $("#articleUrl").val(data.msg);
+			  }
+		   });
+	   }); 
    });
  	//选择略缩图
 	function openChoice(id){
@@ -194,7 +215,7 @@
  			var categorysData=$("#categorySelect").select2("data");
  			var tagsData=$("#tagSelect").select2("data");
  			if(categorysData.length==0 || tagsData.length==0){
- 				layer.msg("分类与标签不能为空！")
+ 				layer.msg("分类与标签不能为空！");
  			}else{
  				$("#articleStatus").val(articleStatus);
 				var obj=$("#articleFrom").serialize();
