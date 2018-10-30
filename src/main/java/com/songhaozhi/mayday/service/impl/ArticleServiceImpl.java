@@ -5,11 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.songhaozhi.mayday.mapper.generator.ArticleCategoryMapper;
 import com.songhaozhi.mayday.mapper.generator.ArticleMapper;
 import com.songhaozhi.mayday.mapper.generator.ArticleTagMapper;
 import com.songhaozhi.mayday.model.domain.Article;
 import com.songhaozhi.mayday.model.domain.ArticleCategory;
+import com.songhaozhi.mayday.model.domain.ArticleCustom;
 import com.songhaozhi.mayday.model.domain.ArticleTag;
 import com.songhaozhi.mayday.service.ArticleService;
 
@@ -47,8 +50,16 @@ public class ArticleServiceImpl implements ArticleService {
 			articleTagMapper.insert(articleTag);
 		}
 	}
+	
 	@Override
 	public List<Article> findAllArticle(String value) {
 		return articleMapper.selectByExample(null);
+	}
+
+	@Override
+	public PageInfo<Article> findPageArticle(ArticleCustom articleCustom, int page, int limit) {
+		PageHelper.startPage(page, limit);
+		List<Article> lists=articleMapper.selectByExample(null);
+		return new PageInfo<>(lists);
 	}
 }

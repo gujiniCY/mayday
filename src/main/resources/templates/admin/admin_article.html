@@ -55,26 +55,8 @@
 		<div class="col-md-12">
 			<div class="tile">
 				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>First Name</th>
-								<th>Last Name</th>
-								<th>Username</th>
-								<th>操作</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>@mdo</td>
-								<td><button class="btn btn-outline-primary">修改</button>
-									<button class="btn btn-outline-danger">删除</button></td>
-							</tr>
-						</tbody>
+					<table class="table" id="article_table">
+						
 					</table>
 				</div>
 			</div>
@@ -82,5 +64,43 @@
 	</div>
 	</main>
 	<div th:replace="admin/module/macros :: comm"></div>
+	<script src="/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="/plugins/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+	<script src="/plugins/bootstrap-table/bootstrap-table-toolbar.min.js"></script>
+	<script type="text/javascript">
+	
+		$(function() {
+			$('#article_table').bootstrapTable({
+				url : '/api/admin/article/page', //请求后台的URL（*）
+			        showRefresh: true,
+			        showPaginationSwitch: true,
+			        cache: false,
+			        locale:'zh-CN',//中文支持
+			        pagination: true,  //开启分页
+			        sidePagination: 'server',
+			        pageNumber: 1,//默认加载页
+			        pageSize: 1,//每页数据
+			        striped: true,//设置为 true 会有隔行变色效果
+			        pageList: [1,10,15,20],//可选的每页数据
+				columns : [ {
+					field : 'id',
+					title : '序号'
+				}, {
+					field : 'articleNewstime',
+					title : '创建时间'
+				}, /* {
+					title : '操作',
+					align : 'center',
+					formatter : function(value, row, index) {
+					}
+				} */ ],
+				responseHandler:function(res){ //在ajax获取到数据，渲染表格之前，修改数据源
+			        var nres = [];
+			        nres.push({total:res.total,rows:res.list});
+			        return nres[0];
+			    }
+		});
+		});
+	</script>
 </body>
 </html>

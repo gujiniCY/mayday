@@ -66,6 +66,11 @@ public class CategoryController extends BaseController {
 	}
 		return "redirect:/admin/category";
 	}
+	/**
+	 * 删除
+	 * @param categoryId
+	 * @return
+	 */
 	@GetMapping(value="/remove")
 	public String remove(@RequestParam(value="categoryId") int categoryId) {
 		try {

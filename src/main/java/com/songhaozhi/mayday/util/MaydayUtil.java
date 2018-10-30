@@ -6,6 +6,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.github.pagehelper.PageInfo;
+import com.songhaozhi.mayday.model.dto.PageJson;
 
 /**
  * @author 作者:宋浩志
@@ -64,8 +69,15 @@ public class MaydayUtil {
 		}
 		return result;
 	}
-	public static void main(String[] args) {
-		String a=baiduPost("https://blog.songhaozhi.com", "G59tiR6XIzZYEhcd", "https://blog.songhaozhi.com/archives/1-da");
-	System.out.println(a);
+
+	public static PageJson tablePage(Long total, List<?> list) {
+		return new PageJson(total, list);
+	}
+
+	public static PageJson tablePage(PageInfo pageInfo) {
+		if (pageInfo == null) {
+			return new PageJson(0L, new ArrayList<>());
+		}
+		return tablePage(pageInfo.getTotal(), pageInfo.getList());
 	}
 }

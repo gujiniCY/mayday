@@ -72,7 +72,11 @@ public class LinksController extends BaseController {
 		}
 		return "redirect:/admin/links";
 	}
-
+	/**
+	 * 删除
+	 * @param linkId
+	 * @return
+	 */
 	@GetMapping(value = "remove")
 	public String remove(@RequestParam(value = "linkId") int linkId) {
 		try {
