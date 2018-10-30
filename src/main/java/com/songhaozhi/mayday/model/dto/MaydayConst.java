@@ -15,5 +15,5 @@ public class MaydayConst {
 	/**
 	 * 所有设置选项
 	 */
-	public static Map<String, Object> options=new HashMap<String, Object>();
+	public static Map<String, String> options=new HashMap<String, String>();
 }

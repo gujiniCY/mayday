@@ -1,5 +1,7 @@
 package com.songhaozhi.mayday.service;
 
+import java.util.List;
+
 import com.songhaozhi.mayday.model.domain.Article;
 
 /**
@@ -13,5 +15,7 @@ public interface ArticleService {
 	 * @param article
 	 */
 	void save(Article article, Long[] tags, Long[] categorys);
+
+	List<Article> findAllArticle(String value);
 
 }

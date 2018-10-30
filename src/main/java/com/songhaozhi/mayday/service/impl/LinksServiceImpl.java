@@ -1,12 +1,10 @@
 package com.songhaozhi.mayday.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.songhaozhi.mayday.mapper.custom.LinkMapperCustom;
 import com.songhaozhi.mayday.mapper.generator.LinkMapper;
 import com.songhaozhi.mayday.model.domain.Link;
 import com.songhaozhi.mayday.service.LinksService;

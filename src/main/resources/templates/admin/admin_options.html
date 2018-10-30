@@ -44,20 +44,20 @@
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">博客标题：</label>
 							<div class="col-md-5">
-								<input class="form-control" type="text" name="blog_name" th:value="${options.blog_name}">
+								<input class="form-control" type="text" name="blog_name" th:value="${options?.blog_name}">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">博客地址：</label>
 							<div class="col-md-5">
-								<input class="form-control" type="text" name="blog_url" th:value="${options.blog_url}">
+								<input class="form-control" type="text" name="blog_url" th:value="${options?.blog_url}">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">LOGO：</label>
 							<div class="col-md-5">
 							<div class="input-group">
-								<input class="form-control" type="text" name="blog_logo" id="blog_logo" th:value="${options.blog_logo}">
+								<input class="form-control" type="text" name="blog_logo" id="blog_logo" th:value="${options?.blog_logo}">
 								<span class="input-group-btn">
 								<button class="btn btn-default " type="button" th:onclick="'javascript:openChoice(\''+blog_logo+'\')'">选择</button>
 								</span>
@@ -68,7 +68,7 @@
 							<label class="control-label col-md-2">页脚信息：</label>
 							<div class="col-md-5">
 								<div class="input-group">
-									<textarea class="form-control" title="支持HTML" rows="3" th:text="${options.blog_footer}" th:value="${options.blog_footer}" id=""
+									<textarea class="form-control" title="支持HTML" rows="3" th:text="${options?.blog_footer}" th:value="${options?.blog_footer}" id=""
 										name="blog_footer" style="resize: none"></textarea>
 								</div>
 							</div>
@@ -111,9 +111,9 @@
 							</span></label>
 							<div class="col-md-5">
 								<div class="input-group">
-									<input type="text" class="form-control" name="seo_baidu_token">
+									<input type="text" class="form-control" id="baiduToken" th:value="${options?.seo_baidu_token}" name="seo_baidu_token">
 									<span class="input-group-btn">
-										<button class="btn btn-default " type="button">推送</button>
+										<button class="btn btn-default" onclick="pushBaidu()" type="button">推送</button>
 									</span>
 								</div>
 							</div>
@@ -190,11 +190,11 @@
 	<script src="/plugins/layer/layer.js"></script>
 	<script type="text/javascript">
 	//保存设置项
-	function save(id){
+	 function save(id){
 		var from =$("#"+id).serialize();
 		$.ajax({
 			type:"post",
-			url:"/admin/option/save",
+			url:"/api/admin/options/save",
 			data:from,
 			dataType:"json",
 			success:function(data){
@@ -213,8 +213,24 @@
 			content : "/admin/profile/openChoice?id=" + id,
 			maxmin : true
 		});
-	}
-	
+	} 
+	 //推送百度
+	function pushBaidu(){
+		 var token= $("#baiduToken").val();
+		$.ajax({
+			url:"/api/admin/article/pushBaidu",
+			type:"post",
+			data:{token:token},
+			dataType:"json",
+			success:function(data){
+				if(data.flag==true){
+					showMsg(data.msg,"success",3000);
+				}else if(data.flag==false){
+					showMsg(data.msg,"error",3000);
+				}
+			}
+		});
+	} 
 	</script>
 </body>
 </html>

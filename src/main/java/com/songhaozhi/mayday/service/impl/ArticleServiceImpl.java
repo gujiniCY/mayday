@@ -1,5 +1,7 @@
 package com.songhaozhi.mayday.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,5 +46,9 @@ public class ArticleServiceImpl implements ArticleService {
 			articleTag.setTagId(tag);
 			articleTagMapper.insert(articleTag);
 		}
+	}
+	@Override
+	public List<Article> findAllArticle(String value) {
+		return articleMapper.selectByExample(null);
 	}
 }

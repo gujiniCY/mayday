@@ -4,12 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="/plugins/vali/css/main.css">
-    <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/plugins/toast/jquery.toast.css">
-  	<title>Login - MayDay Admin</title>
+  	<title th:text="${options.blog_name}+' | 后台管理'"></title>
   </head>
   <body>
     <section class="material-half-bg">
@@ -41,7 +39,7 @@
         var userPwd=$("#userPwd").val();
         $.ajax({
             type: "post",
-            url: "/admin/getLogin",
+            url: "/api/admin/getLogin",
             dataType :"json",
             data: {userName:userName,userPwd: userPwd},
             success:function (data) {

@@ -179,12 +179,12 @@
 	        return flag;
 	    }
 		   inlineAttachment.editors.codemirror4.attach(simplemde.codemirror, {
-	           uploadUrl: "/admin/attachment/upload"
+	           uploadUrl: "/api/admin/attachment/upload"
 	       });
 	   //生成url链接
 	   $("#articleTitle").blur(function(){
 		   $.ajax({
-			  url:"/admin/article/filter",
+			  url:"/api/admin/article/filter",
 			  type:"post",
 			  data:{"articleTitle":pinyinUtil.getPinyin($("#articleTitle").val())},
 			  dataType:"json",
@@ -221,7 +221,7 @@
 				var obj=$("#articleFrom").serialize();
  				$.ajax({
  					type : "post",
- 					url : "/admin/article/new/save",
+ 					url : "/api/admin/article/new/save",
  					data : obj,
  					dataType : "json",
  					success : function(data){

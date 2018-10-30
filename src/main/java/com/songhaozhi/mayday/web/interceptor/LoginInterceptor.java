@@ -7,13 +7,11 @@ package com.songhaozhi.mayday.web.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.songhaozhi.mayday.model.dto.MaydayConst;
-import com.songhaozhi.mayday.service.OptionsService;
 
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
@@ -33,7 +31,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		/*modelAndView.addObject("options",MaydayConst.options);*/
+		modelAndView.addObject("options",MaydayConst.options);
 	}
 
 	@Override

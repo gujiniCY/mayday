@@ -153,7 +153,7 @@
 			var obj = $('#dataFrom').serialize();
 			$.ajax({
 				type : "POST",
-				url : "/admin/profile/updateProfile",
+				url : "/api/admin/profile/updateProfile",
 				data : obj,
 				dataType : "json",
 				success : function(data) {
@@ -188,7 +188,7 @@
 			var userId = $("#userId").val();
 			$.ajax({
 				type : "POST",
-				url : "/admin/profile/updatePwd",
+				url : "/api/admin/profile/updatePwd",
 				data : {
 					"formerlyPwd" : formerlyPwd,
 					"nowPwd" : nowPwd,

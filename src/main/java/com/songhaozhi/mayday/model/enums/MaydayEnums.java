@@ -27,9 +27,6 @@ public enum MaydayEnums {
 	PRESERVE_ERROR(false, "保存失败");
 	private boolean flag;
 	private String message;
-
-	
-
 	private MaydayEnums(boolean flag, String message) {
 		this.flag = flag;
 		this.message = message;
