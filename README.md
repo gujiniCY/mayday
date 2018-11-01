@@ -6,7 +6,6 @@
 
 >个人博客[https://www.songhaozhi.com](https://www.songhaozhi.com)
 
->mayday使用[GPL-v3.0协议开源](https://gitee.com/song_haozhi/mayday/blob/master/LICENSE)
 
 ## 已完成部分
 ## 图片演示
@@ -24,7 +23,8 @@
 ![](https://img.songhaozhi.com/doc/%E9%99%84%E4%BB%B6.png)
 ![](https://img.songhaozhi.com/doc/%E9%99%84%E4%BB%B62.png)
 ![](https://img.songhaozhi.com/doc/%E9%99%84%E4%BB%B6%E8%AF%A6%E6%83%85.png)
-
+## 开源协议
+[MIT](https://gitee.com/song_haozhi/mayday/blob/master/LICENSE)
 ## 致谢：
  1. [springboot](http://spring.io/projects/spring-boot) 版本2.2.4
  2. [mybatis](http://www.mybatis.org/mybatis-3/) ORM框架
