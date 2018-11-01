@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.songhaozhi.mayday.mapper.custom.ArticleMapperCustom">
+<select id="articleMapperCustom" resultType="com.songhaozhi.mayday.model.domain.ArticleCustom">
+SELECT *,REPLACE((SELECT GROUP_CONCAT(mayday_category.category_name) from mayday_category where category_id in(SELECT category_id FROM mayday_article_category WHERE article_id=a.id) ),',',' ') categorys
+,REPLACE((SELECT GROUP_CONCAT(mayday_tag.tag_name) FROM mayday_tag WHERE tag_id in (SELECT tag_id FROM mayday_article_tag WHERE article_id = a.id)),',',' ') tags
+FROM mayday_article a 
+</select>
+</mapper>
