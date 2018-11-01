@@ -5,5 +5,19 @@ package com.songhaozhi.mayday.model.domain;
 * 
 */
 public class ArticleCustom extends Article{
-
+	private String categorys;
+	private String tags;
+	public String getCategorys() {
+		return categorys;
+	}
+	public void setCategorys(String categorys) {
+		this.categorys = categorys;
+	}
+	public String getTags() {
+		return tags;
+	}
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+	
 }

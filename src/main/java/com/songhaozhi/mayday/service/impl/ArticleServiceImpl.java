@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.songhaozhi.mayday.mapper.custom.ArticleMapperCustom;
 import com.songhaozhi.mayday.mapper.generator.ArticleCategoryMapper;
 import com.songhaozhi.mayday.mapper.generator.ArticleMapper;
 import com.songhaozhi.mayday.mapper.generator.ArticleTagMapper;
@@ -30,6 +31,8 @@ public class ArticleServiceImpl implements ArticleService {
 	private ArticleCategoryMapper articleCategoryMapper;
 	@Autowired
 	private ArticleTagMapper articleTagMapper;
+	@Autowired
+	private ArticleMapperCustom articleMapperCustom;
 	/**
 	 * 自动生成的mapper里配置了useGeneratedKeys="true" keyProperty="id"
 	 * 如重新生成请复制过去
@@ -57,9 +60,9 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public PageInfo<Article> findPageArticle(ArticleCustom articleCustom, int page, int limit) {
+	public PageInfo<ArticleCustom> findPageArticle(ArticleCustom articleCustom, int page, int limit) {
 		PageHelper.startPage(page, limit);
-		List<Article> lists=articleMapper.selectByExample(null);
+		List<ArticleCustom> lists=articleMapperCustom.articleMapperCustom();
 		return new PageInfo<>(lists);
 	}
 }

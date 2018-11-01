@@ -30,6 +30,6 @@ public interface ArticleService {
 	 * @param page 
 	 * @return
 	 */
-	PageInfo<Article> findPageArticle(ArticleCustom articleCustom, int page, int limit);
+	PageInfo<ArticleCustom> findPageArticle(ArticleCustom articleCustom, int page, int limit);
 
 }

@@ -38,9 +38,8 @@ public class ApiArticleController extends BaseController {
 	@Autowired
 	private ArticleService articleService;
 	@GetMapping(value="/page")
-	public PageInfo article(ArticleCustom articleCustom , @RequestParam(value="page",defaultValue="1") int page,@RequestParam(value="limit",defaultValue="10") int limit, Model model) {
-		PageInfo<Article> pageInfo=articleService.findPageArticle(articleCustom,page, limit);
-		//PageJson a=MaydayUtil.tablePage(pageInfo);
+	public PageInfo<ArticleCustom> article(ArticleCustom articleCustom , @RequestParam(value="offset") int page,@RequestParam(value="limit") int limit, Model model) {
+		PageInfo<ArticleCustom> pageInfo=articleService.findPageArticle(articleCustom,page, limit);
 		return pageInfo;
 	}
 	/**

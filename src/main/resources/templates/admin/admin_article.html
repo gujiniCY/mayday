@@ -16,11 +16,11 @@
 			<li class="breadcrumb-item">所有文章</li>
 		</ul>
 	</div>
-	<div class="row">
+	<!--<div class="row">
 		<div class="col-md-12">
 			<div class="tile">
 				<div class="table-responsive">
-					<div>
+					 <div>
 						<form class="form-inline" role="form">
 							<div class="form-group col-md-2 col-*">
 								<label class="form-label ">标题：</label> <input type="text"
@@ -50,7 +50,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<div class="row">
 		<div class="col-md-12">
 			<div class="tile">
@@ -74,21 +74,30 @@
 				url : '/api/admin/article/page', //请求后台的URL（*）
 			        showRefresh: true,
 			        showPaginationSwitch: true,
-			        cache: false,
+			        cache: true,
 			        locale:'zh-CN',//中文支持
 			        pagination: true,  //开启分页
 			        sidePagination: 'server',
 			        pageNumber: 1,//默认加载页
-			        pageSize: 1,//每页数据
+			        pageSize: 10,//每页数据
 			        striped: true,//设置为 true 会有隔行变色效果
-			        pageList: [1,10,15,20],//可选的每页数据
+			        pageList: [1,10,20,30,50],//可选的每页数据
 				columns : [ {
 					field : 'id',
 					title : '序号'
 				}, {
+					field : 'articleTitle',
+					title : '文章标题'
+				}, {
+					field : 'categorys',
+					title : '所在分类'
+				},  {
+					field : 'tags',
+					title : '标签'
+				}, {
 					field : 'articleNewstime',
 					title : '创建时间'
-				}, /* {
+				},/* {
 					title : '操作',
 					align : 'center',
 					formatter : function(value, row, index) {
