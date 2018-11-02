@@ -45,6 +45,47 @@
 		</ul>
 	</div>
 </div>
+<div th:fragment="remove">
+<div class="modal fade" id="removeModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">提示信息</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">您确定要删除吗？</div>
+				<!-- 模态框底部 -->
+				<div class="modal-footer">
+					<input type="hidden" id="tagid" />
+					<button type="button" class="btn btn-outline-secondary"
+						data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-outline-primary" onclick="remove()">确定</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div th:fragment="header">
+<!-- 顶部栏 -->
+ <head>
+	<meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <title th:text="${options?.blog_name}+' | 后台管理'"></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="/plugins/bootstrap/css/bootstrap.min.css">  
+	 <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="/plugins/vali/css/main.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/plugins/toast/jquery.toast.css">
+	<link rel="stylesheet" href="/plugins/simplemde/simplemde.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/admin_comm.css">
+</head>
+</div>
 
 <div th:fragment="sidebar">
  <!-- Navbar-->

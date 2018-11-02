@@ -2,6 +2,8 @@ package com.songhaozhi.mayday.mapper.custom;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.songhaozhi.mayday.model.domain.ArticleCustom;
 
 /**
@@ -10,6 +12,12 @@ import com.songhaozhi.mayday.model.domain.ArticleCustom;
 */
 public interface ArticleMapperCustom {
 
-	List<ArticleCustom> articleMapperCustom();
+	List<ArticleCustom> articleMapperCustom(@Param(value="status") int status);
+
+	List<ArticleCustom> findAllArticle(@Param(value="status") int status);
+
+	Integer countByStatus(@Param(value="status") int status);
+
+	void updateStatus(@Param(value="id")int id, @Param(value="status")int status);
 
 }

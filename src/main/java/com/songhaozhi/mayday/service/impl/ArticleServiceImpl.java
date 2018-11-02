@@ -55,14 +55,25 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 	
 	@Override
-	public List<Article> findAllArticle(String value) {
-		return articleMapper.selectByExample(null);
+	public List<ArticleCustom> findAllArticle(int status) {
+		return articleMapperCustom.findAllArticle(status);
 	}
 
 	@Override
-	public PageInfo<ArticleCustom> findPageArticle(ArticleCustom articleCustom, int page, int limit) {
+	public PageInfo<ArticleCustom> findPageArticle( int page, int limit, int status) {
 		PageHelper.startPage(page, limit);
-		List<ArticleCustom> lists=articleMapperCustom.articleMapperCustom();
+		List<ArticleCustom> lists=articleMapperCustom.articleMapperCustom(status);
 		return new PageInfo<>(lists);
+	}
+
+	@Override
+	public Integer countByStatus(int status) {
+		return articleMapperCustom.countByStatus(status);
+	}
+
+	@Override
+	public void remove(int id) {
+		int status=2;
+		articleMapperCustom.updateStatus(id,status);
 	}
 }

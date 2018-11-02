@@ -5,22 +5,17 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.pagehelper.PageInfo;
 import com.songhaozhi.mayday.model.domain.Article;
 import com.songhaozhi.mayday.model.domain.ArticleCustom;
 import com.songhaozhi.mayday.model.domain.User;
 import com.songhaozhi.mayday.model.dto.JsonResult;
 import com.songhaozhi.mayday.model.dto.MaydayConst;
-import com.songhaozhi.mayday.model.dto.PageJson;
 import com.songhaozhi.mayday.model.enums.MaydayEnums;
-import com.songhaozhi.mayday.model.enums.PostType;
 import com.songhaozhi.mayday.service.ArticleService;
 import com.songhaozhi.mayday.util.MaydayUtil;
 import com.songhaozhi.mayday.web.controller.admin.BaseController;
@@ -37,11 +32,6 @@ import cn.hutool.core.util.StrUtil;
 public class ApiArticleController extends BaseController {
 	@Autowired
 	private ArticleService articleService;
-	@GetMapping(value="/page")
-	public PageInfo<ArticleCustom> article(ArticleCustom articleCustom , @RequestParam(value="offset") int page,@RequestParam(value="limit") int limit, Model model) {
-		PageInfo<ArticleCustom> pageInfo=articleService.findPageArticle(articleCustom,page, limit);
-		return pageInfo;
-	}
 	/**
 	 * 过滤空格
 	 * 
@@ -73,11 +63,10 @@ public class ApiArticleController extends BaseController {
 			article.setArticleUpdatetime(DateUtil.date());
 			articleService.save(article, tags, categorys);
 		} catch (Exception e) {
-			return new JsonResult(MaydayEnums.PRESERVE_ERROR.isFlag(), MaydayEnums.PRESERVE_ERROR.getMessage());
+			return new JsonResult(MaydayEnums.ERROR.isFlag(), MaydayEnums.ERROR.getMessage());
 		}
 		return new JsonResult(MaydayEnums.PRESERVE_SUCCESS.isFlag(), MaydayEnums.PRESERVE_SUCCESS.getMessage());
 	}
-
 	/**
 	 * 推送百度
 	 * 
@@ -90,10 +79,12 @@ public class ApiArticleController extends BaseController {
 		if(StrUtil.isEmpty(token)) {
 			return new JsonResult(false,"请先填写token");
 		}
+		//文章为已发布
+		int status=0;
 		String blog_url=MaydayConst.options.get("blog_url");
-		List<Article> articles=articleService.findAllArticle(PostType.POST_TYPE_POST.getValue());
+		List<ArticleCustom> articles=articleService.findAllArticle(status);
 		StringBuffer urls=new StringBuffer();
-		for (Article article : articles) {
+		for (ArticleCustom article : articles) {
 			urls.append(blog_url).append("/archives/").append(article.getArticleUrl()).append("\n");
 		}
 		String result=MaydayUtil.baiduPost(blog_url, token, urls.toString());

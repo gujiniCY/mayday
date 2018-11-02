@@ -18,5 +18,6 @@ public interface LogConstant {
 	String LOGIN_SUCCES="登录成功";
 	
 	String LOGIN_ERROR="登录失败";
+	
 
 }

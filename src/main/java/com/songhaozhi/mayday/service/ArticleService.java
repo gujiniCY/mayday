@@ -20,16 +20,28 @@ public interface ArticleService {
 	/**
 	 * 不分页查询所有文章
 	 * @param value
+	 * @paramstatus 文章状态
 	 * @return
 	 */
-	List<Article> findAllArticle(String value);
+	List<ArticleCustom> findAllArticle(int status);
 	/**
 	 * 分页查询所有文章
-	 * @param articleCustom
 	 * @param limit 
 	 * @param page 
+	 * @param status 文章状态
 	 * @return
 	 */
-	PageInfo<ArticleCustom> findPageArticle(ArticleCustom articleCustom, int page, int limit);
+	PageInfo<ArticleCustom> findPageArticle(int page, int limit, int status);
+	/**
+	 * 状态统计条数
+	 * @param status 文章状态
+	 * @return
+	 */
+	Integer countByStatus(int status);
+	/**
+	 * 修改文章状态为回收站
+	 * @param id
+	 */
+	void remove(int id);
 
 }

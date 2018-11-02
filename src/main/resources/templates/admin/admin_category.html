@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="admin/module/header.html"></div>
+<div th:replace="admin/module/macros :: header"></div>
 <body class="app sidebar-mini rtl">
 	<div th:replace="admin/module/macros :: sidebar"></div>
 	<main class="app-content">
@@ -93,25 +93,7 @@
 	</div>
 	</main>
 	<!-- 删除确认弹出层 -->
-	<div class="modal fade" id="removeModal">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">提示信息</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-				<div class="modal-body">您确定要删除吗？</div>
-				<!-- 模态框底部 -->
-				<div class="modal-footer">
-					<input type="hidden" id="categoryid" />
-					<button type="button" class="btn btn-outline-secondary"
-						data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-outline-primary" onclick="remove()">确定</button>
-				</div>
-
-			</div>
-		</div>
-	</div>
+	<div th:replace="admin/module/macros :: remove"></div>
 	<div th:replace="admin/module/macros :: comm"></div>
 	<div th:replace="admin/module/macros :: bootstrapValidator"></div>
 	<script type="text/javascript">
