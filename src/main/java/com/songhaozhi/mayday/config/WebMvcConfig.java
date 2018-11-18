@@ -27,7 +27,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginAuthenticator).addPathPatterns("/admin/**").excludePathPatterns("/admin/login")
-				.excludePathPatterns("/admin/getLogin").excludePathPatterns("/static/**").excludePathPatterns("/api/**");
+				.excludePathPatterns("/admin/getLogin").excludePathPatterns("/static/**");
 	}
 
 	/**
@@ -50,8 +50,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	@Bean
 	public MultipartConfigElement multipartConfigElement() {
 		MultipartConfigFactory factory = new MultipartConfigFactory();
-		// 单个文件最大
-		factory.setMaxFileSize("10240KB"); // KB,MB
+		// 单个文件最大  KB,MB
+		factory.setMaxFileSize("10240KB"); 
 		/// 设置总上传数据总大小
 		factory.setMaxRequestSize("102400KB");
 		return factory.createMultipartConfig();

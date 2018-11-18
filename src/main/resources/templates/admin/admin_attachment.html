@@ -1,28 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="admin/module/macros :: header"></div>
+<div th:replace="admin/module/macros :: head"></div>
 <body class="app sidebar-mini rtl">
-	<div th:replace="admin/module/macros :: sidebar"></div>
-	<link rel="stylesheet" href="/plugins/bootstrap-fileinput/css/fileinput.min.css">
-	<style type="text/css" rel="stylesheet">
-.div-thumbnail {
-	transition: all .5s ease-in-out;
-	padding: 10px;
-	display: table-cell;
-	vertical-align: middle;
-	text-align: center;
-	display: table-cell;
-}
-
-.img-thumbnail:hover {
-	border: solid #009688;
-}
-
-.thumbnail {
-	margin-bottom: 0;
-}
-</style>
 	<main class="app-content">
+	<div th:replace="admin/module/macros :: header"></div>
+	<div th:replace="admin/module/macros :: sidebar"></div>
 	<div class="app-title">
 		<div>
 			<h1>
@@ -76,7 +58,7 @@
 		$("#input-fas").fileinput(
 				{
 					theme : "fa",
-					uploadUrl : "/api/admin/attachment/upload",
+					uploadUrl : "/admin/attachment/upload",
 					language : 'zh',
 					uploadAsync : true,
 					allowedFileExtensions : [ 'jpg', 'gif', 'png', 'jpeg',

@@ -72,8 +72,13 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
+	public void recycle(int id, Integer integer) {
+		articleMapperCustom.updateStatus(id,integer);
+	}
+
+	@Override
 	public void remove(int id) {
-		int status=2;
-		articleMapperCustom.updateStatus(id,status);
+		articleMapper.deleteByPrimaryKey(id);
+		
 	}
 }

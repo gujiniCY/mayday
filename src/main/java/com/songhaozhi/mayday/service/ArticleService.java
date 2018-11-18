@@ -14,13 +14,14 @@ import com.songhaozhi.mayday.model.domain.ArticleCustom;
 public interface ArticleService {
 	/**
 	 * 保存文章
-	 * @param article
+	 * @param article 文章
+	 * @param tags 标签
+	 * @param categorys 分类
 	 */
 	void save(Article article, Long[] tags, Long[] categorys);
 	/**
 	 * 不分页查询所有文章
-	 * @param value
-	 * @paramstatus 文章状态
+	 * @param status
 	 * @return
 	 */
 	List<ArticleCustom> findAllArticle(int status);
@@ -43,5 +44,11 @@ public interface ArticleService {
 	 * @param id
 	 */
 	void remove(int id);
+	/**
+	 * 修改文章状态为回收站
+	 * @param id
+	 * @param integer 
+	 */
+	void recycle(int id, Integer integer);
 
 }

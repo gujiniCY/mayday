@@ -27,9 +27,9 @@ public class StartupConfig implements ApplicationListener<ContextRefreshedEvent>
      * 加载设置选项
      */
     private void loadOptions() {
-    	List<Options> ListMap = optionsService.selectMap();
-		if(ListMap.size()>0 && !ListMap.isEmpty()) {
-			for (Options options : ListMap) {
+    	List<Options> listMap = optionsService.selectMap();
+		if(listMap.size()>0 && !listMap.isEmpty()) {
+			for (Options options : listMap) {
 				MaydayConst.options.put(options.getOptionName(), options.getOptionValue());
 			}
 		}

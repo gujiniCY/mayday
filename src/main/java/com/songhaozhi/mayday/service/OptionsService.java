@@ -22,9 +22,14 @@ public interface OptionsService {
 	List<Options> selectMap();
 	/**
 	 * 保存单个
+	 * @param key
+	 * @param value
 	 */
 	void saveOption(String key, String value);
-	
+	/**
+	 * 删除
+	 * @param options
+	 */
 	void delete(Options options);
 	
 }

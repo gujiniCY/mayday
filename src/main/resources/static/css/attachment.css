@@ -1,0 +1,16 @@
+.div-thumbnail {
+	transition: all .5s ease-in-out;
+	padding: 10px;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	display: table-cell;
+}
+
+.img-thumbnail:hover {
+	border: solid #009688;
+}
+
+.thumbnail {
+	margin-bottom: 0;
+}

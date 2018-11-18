@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="admin/module/macros :: header"></div>
+<div th:replace="admin/module/macros :: head"></div>
 <body class="app sidebar-mini rtl">
+	<main class="app-content">
+	<div th:replace="admin/module/macros :: header"></div>
 	<div th:replace="admin/module/macros :: sidebar"></div>
-	<main class="app-content"> <!-- Navs-->
 	<div class="tile mb-4">
 		<div class="row">
 			<div class="col-lg-12">
@@ -153,7 +154,7 @@
 			var obj = $('#dataFrom').serialize();
 			$.ajax({
 				type : "POST",
-				url : "/api/admin/profile/updateProfile",
+				url : "/admin/profile/updateProfile",
 				data : obj,
 				dataType : "json",
 				success : function(data) {
@@ -188,7 +189,7 @@
 			var userId = $("#userId").val();
 			$.ajax({
 				type : "POST",
-				url : "/api/admin/profile/updatePwd",
+				url : "/admin/profile/updatePwd",
 				data : {
 					"formerlyPwd" : formerlyPwd,
 					"nowPwd" : nowPwd,

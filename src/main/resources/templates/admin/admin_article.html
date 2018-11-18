@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="admin/module/macros :: header"></div>
+<div th:replace="admin/module/macros :: head"></div>
 <body class="app sidebar-mini rtl">
-	<div th:replace="admin/module/macros :: sidebar"></div>
 	<main class="app-content">
+	<div th:replace="admin/module/macros :: header"></div>
+	<div th:replace="admin/module/macros :: sidebar"></div>
 	<div class="app-title">
 		<div>
 			<h1>
@@ -80,16 +81,16 @@
 								<td th:switch="${article.articleStatus}"><th:block
 										th:case="0">
 										<button onclick="" class="btn btn-outline-primary">查看</button>
-										<button href="#" onclick="" class="btn btn-outline-info">编辑</button>
-										<button th:onclick="'javascript:showModel('+${article.id}+')'"
+										<button onclick="" class="btn btn-outline-info">编辑</button>
+										<button th:onclick="'javascript:recycleModel('+${article.id}+')'"
 											class="btn btn-outline-danger">丢弃</button>
 									</th:block> <th:block th:case="1">
 										<button onclick="" class="btn btn-outline-primary">编辑</button>
-										<button href="#" onclick="" class="btn btn-outline-info">发布</button>
-										<button th:onclick="'javascript:showModel('+${article.id}+')'"
+										<button onclick="" class="btn btn-outline-info">发布</button>
+										<button th:onclick="'javascript:recycleModel('+${article.id}+')'"
 											class="btn btn-outline-danger">丢弃</button>
 									</th:block> <th:block th:case="2">
-										<button onclick="" class="btn btn-outline-primary">还原</button>
+										<button th:onclick="'javascript:restore('+${article.id}+')'" class="btn btn-outline-primary">还原</button>
 										<button th:onclick="'javascript:showModel('+${article.id}+')'"
 											class="btn btn-outline-danger">彻底删除(不可逆)</button>
 									</th:block></td>
@@ -103,8 +104,17 @@
 	</div>
 	</main>
 	<div th:replace="admin/module/macros :: remove"></div>
+	<div th:replace="admin/module/macros :: recycle"></div>
 	<div th:replace="admin/module/macros :: comm"></div>
 	<script type="text/javascript">
+	function recycleModel(id) {
+		$("#articleId").val(id);
+		$("#recycleModal").modal();
+	}
+	function recycle(){
+		window.location.href = "/admin/article/recycle?id="
+			+ $("#articleId").val();
+	}
 	function showModel(id) {
 		$("#articleId").val(id);
 		$("#removeModal").modal();
@@ -113,6 +123,22 @@
 		window.location.href = "/admin/article/remove?id="
 			+ $("#articleId").val();
 	}
+	function restore(id){
+		$.ajax({
+			url:"/admin/article/restore",
+			type:"post",
+			data:{id:id},
+			dataType:"json",
+			success:function(data){
+				if(data.flag==true){
+					window.location.reload();
+				}else{
+					showMsg(data.msg,"error","3000");
+				}
+			}
+		});
+	}
+	
 	</script>
 </body>
 </html>

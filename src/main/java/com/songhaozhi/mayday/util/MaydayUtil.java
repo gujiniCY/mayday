@@ -6,11 +6,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.github.pagehelper.PageInfo;
-import com.songhaozhi.mayday.model.dto.PageJson;
 
 /**
  * @author 作者:宋浩志
@@ -28,10 +23,10 @@ public class MaydayUtil {
 	 *            文章路径
 	 * @return
 	 */
-	public static String baiduPost(String blog_url, String token, String urls) {
+	public static String baiduPost(String blogUrl, String token, String urls) {
 		String result = "";
 		try {
-			URL url = new URL("	http://data.zz.baidu.com/urls?site=" + blog_url + "&token=" + token + "");
+			URL url = new URL("	http://data.zz.baidu.com/urls?site=" + blogUrl + "&token=" + token + "");
 			// 打开和url之间的连接
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			PrintWriter out = null;
@@ -68,16 +63,5 @@ public class MaydayUtil {
 			e.printStackTrace();
 		}
 		return result;
-	}
-
-	public static PageJson tablePage(Long total, List<?> list) {
-		return new PageJson(total, list);
-	}
-
-	public static PageJson tablePage(PageInfo pageInfo) {
-		if (pageInfo == null) {
-			return new PageJson(0L, new ArrayList<>());
-		}
-		return tablePage(pageInfo.getTotal(), pageInfo.getList());
 	}
 }

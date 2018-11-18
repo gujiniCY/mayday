@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="admin/module/macros :: header"></div>
+<div th:replace="admin/module/macros :: head"></div>
 <body class="app sidebar-mini rtl">
-	<div th:replace="admin/module/macros :: sidebar"></div>
 	<main class="app-content">
+	<div th:replace="admin/module/macros :: header"></div>
+	<div th:replace="admin/module/macros :: sidebar"></div>
 	<div class="app-title">
 		<div>
 			<h1>
@@ -194,7 +195,7 @@
 		var from =$("#"+id).serialize();
 		$.ajax({
 			type:"post",
-			url:"/api/admin/options/save",
+			url:"/admin/options/save",
 			data:from,
 			dataType:"json",
 			success:function(data){
@@ -218,7 +219,7 @@
 	function pushBaidu(){
 		 var token= $("#baiduToken").val();
 		$.ajax({
-			url:"/api/admin/article/pushBaidu",
+			url:"/admin/article/pushBaidu",
 			type:"post",
 			data:{token:token},
 			dataType:"json",

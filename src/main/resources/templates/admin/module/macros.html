@@ -2,24 +2,24 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 
 <div th:fragment="comm">
-	<script type="text/javascript" src="/plugins/vali/js/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="/plugins/vali/js/popper.min.js"></script>
-	<script type="text/javascript" src="/plugins/vali/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/plugins/vali/js/main.js"></script>
-	<script type="text/javascript" src="/plugins/vali/js/plugins/pace.min.js"></script>
-	<script type="text/javascript" src="/js/public.js"></script>
-	<script type="text/javascript" src="/plugins/toast/jquery.toast.js"></script>
+	<script type="text/javascript" th:src="@{/plugins/vali/js/jquery-3.2.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/vali/js/popper.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/vali/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/vali/js/main.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/vali/js/plugins/pace.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/public.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/toast/jquery.toast.js}"></script>
 </div>
 
 <div th:fragment="bootstrapValidator">
-	<script src="/plugins/bootstrapvalidator/js/bootstrapValidator.min.js"></script>
-	<script src="/plugins/bootstrapvalidator/js/language/zh_CN.js"></script>
+	<script th:src="@{/plugins/bootstrapvalidator/js/bootstrapValidator.min.js}"></script>
+	<script th:src="@{/plugins/bootstrapvalidator/js/language/zh_CN.js}"></script>
 </div>
 
 <div th:fragment="bootstrapFileinput">
-<script type="text/javascript" src="/plugins/bootstrap-fileinput/js/fileinput.min.js"></script>
-<script type="text/javascript" src="/plugins/bootstrap-fileinput/js/locales/zh.js"></script>
-<script type="text/javascript" src="/plugins/bootstrap-fileinput/themes/fa/theme.js"></script>
+<script type="text/javascript" th:src="@{/plugins/bootstrap-fileinput/js/fileinput.min.js}"></script>
+<script type="text/javascript" th:src="@{/plugins/bootstrap-fileinput/js/locales/zh.js}"></script>
+<script type="text/javascript" th:src="@{/plugins/bootstrap-fileinput/themes/fa/theme.js}"></script>
 </div>
 
 <div th:fragment="pageAdminNav(pageInfo)">
@@ -45,15 +45,14 @@
 		</ul>
 	</div>
 </div>
-<div th:fragment="remove">
-<div class="modal fade" id="removeModal">
+<div th:fragment="remove" class="modal fade" id="removeModal">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title">提示信息</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
-				<div class="modal-body">您确定要删除吗？</div>
+				<div class="modal-body">您确定要删除吗？(不可逆)</div>
 				<!-- 模态框底部 -->
 				<div class="modal-footer">
 					<input type="hidden" id="tagid" />
@@ -65,31 +64,43 @@
 			</div>
 		</div>
 	</div>
+<div th:fragment="recycle" class="modal fade" id="recycleModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">提示信息</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">您确定要放入回收站吗？</div>
+				<!-- 模态框底部 -->
+				<div class="modal-footer">
+					<input type="hidden" id="tagid" />
+					<button type="button" class="btn btn-outline-secondary"
+						data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-outline-primary" onclick="recycle()">确定</button>
+				</div>
+
+			</div>
+		</div>
 </div>
 
-<div th:fragment="header">
 <!-- 顶部栏 -->
- <head>
+ <head th:fragment="head">
 	<meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title th:text="${options?.blog_name}+' | 后台管理'"></title>
+    <title th:text="${session.options?.blog_name}+' | 后台管理'"></title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="/plugins/bootstrap/css/bootstrap.min.css">  
-	 <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="/plugins/vali/css/main.css">
-    <!-- Font-icon css-->
-    <link rel="stylesheet" type="text/css" href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="/plugins/toast/jquery.toast.css">
-	<link rel="stylesheet" href="/plugins/simplemde/simplemde.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
-	<link rel="stylesheet" type="text/css" href="/css/admin_comm.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">  
+    <link rel="stylesheet" type="text/css" th:href="@{/plugins/vali/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/plugins/toast/jquery.toast.css}">
+	<link rel="stylesheet" th:href="@{/plugins/simplemde/simplemde.min.css}">
+	<link rel="stylesheet" th:href="@{//cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css}">
+	<link rel="stylesheet" th:href="@{/plugins/bootstrap-fileinput/css/fileinput.min.css}">
+	<link rel="stylesheet" th:href="@{/css/attachment.css}">
 </head>
-</div>
-
-<div th:fragment="sidebar">
- <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="/admin">Mayday</a>
+<header th:fragment="header" class="app-header"><a class="app-header__logo" href="/admin">Mayday</a>
      <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <ul class="app-nav">
       <a class="app-nav__item" href="/"  aria-label="Show notifications"><i class="fa fa-paper-plane fa-lg"></i></a>
@@ -133,6 +144,8 @@
         </li>
       </ul>
     </header>
+<div th:fragment="sidebar">
+ <!-- Navbar-->
  <!-- 侧边栏-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">

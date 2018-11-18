@@ -3,8 +3,12 @@
  * Vali Admin
  * Author: Pratik Borsadiya
  * ================================*/
-@import url(https://fonts.googleapis.com/css?family=Lato:300,400,400i,700);
+/*@import url(https://fonts.googleapis.com/css?family=Lato:300,400,400i,700);
 @import url(https://fonts.googleapis.com/css?family=Niconne);
+----网速不行给替换了
+*/
+@import url(/plugins/vali/css/fonts.googleapis.css);
+@import url(/plugins/vali/css/Niconne.css);
 /*!
  * Bootstrap v4.1.1 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
