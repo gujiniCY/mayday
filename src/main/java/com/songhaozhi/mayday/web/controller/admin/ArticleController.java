@@ -227,7 +227,7 @@ public class ArticleController extends BaseController {
 	 * @param article_id 文章id
 	 * @return 该篇文章关联的分类和标签
 	 */
-	@PostMapping(value="/ids")
+	@PostMapping(value="/ids") 
 	@ResponseBody
 	public Map<String, Object> ids(Integer article_id) {
 		Map<String, Object> map=new HashMap<String, Object>();
