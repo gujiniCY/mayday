@@ -50,5 +50,11 @@ public interface ArticleService {
 	 * @param integer 
 	 */
 	void recycle(int id, Integer integer);
+	/**
+	 * id查询文章
+	 * @param article_id
+	 * @return
+	 */
+	ArticleCustom findByArticleId(Integer article_id);
 
 }

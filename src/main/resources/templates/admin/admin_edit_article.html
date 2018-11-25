@@ -22,7 +22,7 @@
 		<input type="hidden" id="articleContentMd" name="articleContentMd">
 		<input type="hidden" id="articleStatus" name="articleStatus">
 		<input type="hidden" id="articlePost" name="articlePost" value="post">
-		<input type="hidden" />
+		<input type="hidden" id="article_id" th:value="${articleCustom.id}" name="id">
 		<div class="row">
 			<div class="col-md-8">
 				<div class="tile">
@@ -46,10 +46,10 @@
 					<div class="form-group row">
 						<label class="control-label col-md-3">文章类型:</label>
 						<div class="col-md-9">
-							<select name="articleType" class="form-control">
+							<select name="articleType" th:value="${articleCustom.articleType}" class="form-control">
 								<optgroup label="请选择">
-									<option value="0">原创</option>
-									<option value="1">转载</option>
+									<option th:selected="${articleCustom.articleType==0}" value="0">原创</option>
+									<option th:selected="${articleCustom.articleType==1}" value="1">转载</option>
 								</optgroup>
 							</select>
 						</div>
@@ -57,10 +57,10 @@
 					<div class="form-group row">
 						<label class="control-label col-md-3">开启评论:</label>
 						<div class="col-md-9">
-							<select name="articleComment" class="form-control">
+							<select name="articleComment" th:value="${articleCustom.articleComment}" class="form-control">
 								<optgroup label="请选择">
-									<option value="0">是</option>
-									<option value="1">否</option>
+									<option th:selected="${articleCustom.articleComment==0}" value="0">是</option>
+									<option th:selected="${articleCustom.articleComment==1}" value="1">否</option>
 								</optgroup>
 							</select>
 						</div>
@@ -71,8 +71,7 @@
 							<select name="categorys" class="form-control" id="categorySelect"
 								multiple="">
 								<optgroup label="点击选择，可多选">
-									<option th:each="category:${categorys}"
-										th:value="${category.categoryId}"
+									<option th:each="category :${categorys}" th:value="${category.categoryId}"
 										th:text="${category.categoryName}"></option>
 								</optgroup>
 							</select>
@@ -84,10 +83,12 @@
 							<select name="tags" class="form-control" id="tagSelect"
 								multiple="">
 								<optgroup label="点击选择，可多选">
-									<option th:each="tag:${tags}" th:value="${tag.tagId}"
+									<option th:each="tag :${tags}" th:value="${tag.tagId}"
 										th:text="${tag.tagName}"></option>
 								</optgroup>
 							</select>
+							
+							<span class="bb" th:each="a:${tagsIds}" th:text="${a}"></span>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -180,9 +181,10 @@
 	        }
 	        return flag;
 	    }
-		   inlineAttachment.editors.codemirror4.attach(simplemde.codemirror, {
-	           uploadUrl: "/admin/attachment/upload"
-	       });
+	    //编辑器拖拽文件上传
+		inlineAttachment.editors.codemirror4.attach(simplemde.codemirror, {
+	      	uploadUrl: "/admin/attachment/upload"
+	    });
 	   //生成url链接
 	   $("#articleTitle").blur(function(){
 		   $.ajax({
@@ -195,6 +197,20 @@
 			  }
 		   });
 	   }); 
+	    $('#categorySelect').select2();
+		$('#tagSelect').select2();
+		//设置默认选择
+		$.ajax({
+			   url:"/admin/article/ids",
+			   type:"post",
+			   async: false,
+			   data:{"article_id":$("#article_id").val()},
+			   dataType:"json",
+			   success:function(data){
+				   $('#categorySelect').val(data.categorysIds).trigger('change');
+				   $('#tagSelect').val(data.tagsIds).trigger('change');
+			   }
+		   })  
    });
  	//选择略缩图
 	function openChoice(id){
@@ -255,8 +271,6 @@
             showMsg("请输入文章内容！","error","3000");
         }
  	}
-    $('#categorySelect').select2();
-	$('#tagSelect').select2();
    </script>
 </body>
 </html>

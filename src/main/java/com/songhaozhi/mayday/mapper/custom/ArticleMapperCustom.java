@@ -20,4 +20,6 @@ public interface ArticleMapperCustom {
 
 	void updateStatus(@Param(value="id")int id, @Param(value="status")int status);
 
+	ArticleCustom findByArticleId(@Param(value="id")Integer article_id);
+
 }

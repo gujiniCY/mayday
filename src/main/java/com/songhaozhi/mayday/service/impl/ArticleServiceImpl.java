@@ -81,4 +81,9 @@ public class ArticleServiceImpl implements ArticleService {
 		articleMapper.deleteByPrimaryKey(id);
 		
 	}
+
+	@Override
+	public ArticleCustom findByArticleId(Integer article_id) {
+		return articleMapperCustom.findByArticleId(article_id);
+	}
 }

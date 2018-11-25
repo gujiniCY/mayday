@@ -1,6 +1,8 @@
 package com.songhaozhi.mayday.web.controller.admin;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -208,13 +210,35 @@ public class ArticleController extends BaseController {
 	 * @return
 	 */
 	@GetMapping(value="/edit")
-	public String editArticle(Model model) {
+	public String editArticle(Model model,@RequestParam(value="article_id")Integer article_id) {
+		//获取所有分类
 		List<Category> categorys = categoryService.findCategory();
+		//获取所有标签
 		List<Tag> tags = tagService.findTags();
-		//ArticleCustom
+		//获取文章信息
+		ArticleCustom articleCustom=articleService.findByArticleId(article_id);
 		model.addAttribute("categorys", categorys);
 		model.addAttribute("tags", tags);
+		model.addAttribute("articleCustom", articleCustom);
 		return "/admin/admin_edit_article";
 	}
+	/**
+	 * 
+	 * @param article_id 文章id
+	 * @return 该篇文章关联的分类和标签
+	 */
+	@PostMapping(value="/ids")
+	@ResponseBody
+	public Map<String, Object> ids(Integer article_id) {
+		Map<String, Object> map=new HashMap<String, Object>();
+		//获取文章信息
+		ArticleCustom articleCustom=articleService.findByArticleId(article_id);
+		String[] tags=articleCustom.getTags().split(",");
+		String[] categorys = articleCustom.getCategorys().split(",");
+		map.put("tagsIds", tags);
+		map.put("categorysIds", categorys);
+		return map;
+	}
+	
 	
 }
