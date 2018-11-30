@@ -21,22 +21,21 @@
 		<input type="hidden" id="articleContent" name="articleContent">
 		<input type="hidden" id="articleContentMd" name="articleContentMd">
 		<input type="hidden" id="articleStatus" name="articleStatus">
-		<input type="hidden" id="articlePost" name="articlePost" value="post">
 		<input type="hidden" id="article_id" th:value="${articleCustom.id}" name="id">
 		<div class="row">
 			<div class="col-md-8">
 				<div class="tile">
 					<div class="table-responsive">
 						<div class="form-group">
-							<input class="form-control" name="articleTitle" id="articleTitle" type="text"
+							<input class="form-control" th:value="${articleCustom.articleTitle}" name="articleTitle" id="articleTitle" type="text"
 								placeholder="输入文章标题">
 						</div>
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<input class="form-control" name="articleUrl" id="articleUrl" type="text"
 								placeholder="输入文章链接">
-						</div>
+						</div> -->
 						<div class="form-group">
-							<textarea class="form-control" id="articleMd"></textarea>
+							<textarea class="form-control" id="articleMd" th:text="${articleCustom.articleContentMd}"></textarea>
 						</div>
 					</div>
 				</div>
@@ -96,7 +95,7 @@
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control" id="articleThumbnail"
-									name="articleThumbnail"> <span class="input-group-btn">
+									name="articleThumbnail" th:value="${articleCustom.articleThumbnail}"> <span class="input-group-btn">
 									<button class="btn btn-default " type="button"
 										th:onclick="'javascript:openChoice(\''+articleThumbnail+'\')'">选择</button>
 								</span>
@@ -106,7 +105,7 @@
 					<div class="form-group row">
 						<label class="control-label col-md-3">文章摘要:</label>
 						<div class="col-md-9">
-							<textarea class="form-control" name="articleSummary" rows="3"></textarea>
+							<textarea class="form-control" th:text="${articleCustom.articleSummary}" th:value="${articleCustom.articleSummary}" name="articleSummary" rows="3"></textarea>
 						</div>
 					</div>
 					<div class="tile-footer">
@@ -138,14 +137,14 @@
 	   //如果设置为true，则自动对焦编辑器。默认为false。
 	   autofocus:true,
 	   //自动保存
-	   autosave:{
+	  /*  autosave:{
 		    //如果设置为true，则自动保存文本。默认为false。
 			enabled:true,
 			//保存之间的延迟，以毫秒为单位。默认为10000（10s）。
 			delay:5000,
 			//您必须设置唯一的字符串标识符，以便SimpleMDE可以自动保存。将此与您网站上其他地方的SimpleMDE实例区分开来的东西。
 			uniqueId:1
-	   },
+	   }, */
 	   //调整预览期间解析Markdown的设置
 	   renderingConfig:{
 		   ///如果设置为true，将使用highlight.js突出显示
@@ -185,18 +184,6 @@
 		inlineAttachment.editors.codemirror4.attach(simplemde.codemirror, {
 	      	uploadUrl: "/admin/attachment/upload"
 	    });
-	   //生成url链接
-	   $("#articleTitle").blur(function(){
-		   $.ajax({
-			  url:"/admin/article/filter",
-			  type:"post",
-			  data:{"articleTitle":pinyinUtil.getPinyin($("#articleTitle").val())},
-			  dataType:"json",
-			  success:function(data){
-				  $("#articleUrl").val(data.msg);
-			  }
-		   });
-	   }); 
 	    $('#categorySelect').select2();
 		$('#tagSelect').select2();
 		//设置默认选择
@@ -207,6 +194,7 @@
 			   data:{"article_id":$("#article_id").val()},
 			   dataType:"json",
 			   success:function(data){
+				   console.log(data);
 				   $('#categorySelect').val(data.categorysIds).trigger('change');
 				   $('#tagSelect').val(data.tagsIds).trigger('change');
 			   }
@@ -228,8 +216,8 @@
  	function save(articleStatus){
  		var contentMd=simplemde.value();
  		if(contentMd!=""){
- 			$("#articleContent").val(contentMd);
- 			$("#articleContentMd").val(simplemde.markdown(contentMd));
+ 			$("#articleContentMd").val(contentMd);
+ 			$("#articleContent").val(simplemde.markdown(contentMd));
  			var categorysData=$("#categorySelect").select2("data");
  			var tagsData=$("#tagSelect").select2("data");
  			if(categorysData.length==0 || tagsData.length==0){

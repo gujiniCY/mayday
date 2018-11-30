@@ -30,10 +30,10 @@
 							<input class="form-control" name="articleTitle" id="articleTitle" type="text"
 								placeholder="输入文章标题">
 						</div>
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<input class="form-control" name="articleUrl" id="articleUrl" type="text"
 								placeholder="输入文章链接">
-						</div>
+						</div> -->
 						<div class="form-group">
 							<textarea class="form-control" id="articleMd"></textarea>
 						</div>
@@ -142,7 +142,7 @@
 			//保存之间的延迟，以毫秒为单位。默认为10000（10s）。
 			delay:5000,
 			//您必须设置唯一的字符串标识符，以便SimpleMDE可以自动保存。将此与您网站上其他地方的SimpleMDE实例区分开来的东西。
-			uniqueId:1
+			uniqueId:"editor-1"
 	   },
 	   //调整预览期间解析Markdown的设置
 	   renderingConfig:{
@@ -182,7 +182,7 @@
 		   inlineAttachment.editors.codemirror4.attach(simplemde.codemirror, {
 	           uploadUrl: "/admin/attachment/upload"
 	       });
-	   //生成url链接
+	  /*  //生成url链接
 	   $("#articleTitle").blur(function(){
 		   $.ajax({
 			  url:"/admin/article/filter",
@@ -193,7 +193,7 @@
 				  $("#articleUrl").val(data.msg);
 			  }
 		   });
-	   }); 
+	   });  */
    });
  	//选择略缩图
 	function openChoice(id){
@@ -211,10 +211,11 @@
  	function save(articleStatus){
  		var contentMd=simplemde.value();
  		if(contentMd!=""){
- 			$("#articleContent").val(contentMd);
- 			$("#articleContentMd").val(simplemde.markdown(contentMd));
+ 			$("#articleContentMd").val(contentMd);
+ 			$("#articleContent").val(simplemde.markdown(contentMd));
  			var categorysData=$("#categorySelect").select2("data");
  			var tagsData=$("#tagSelect").select2("data");
+ 			console.log(categorysData);
  			if(categorysData.length==0 || tagsData.length==0){
  				showMsg("分类与标签不能为空！","error","3000");
  			}else{

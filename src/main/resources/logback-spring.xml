@@ -48,14 +48,14 @@
     </appender>
 
     <logger name="org.springframework">
-        <level value="info" />
+        <level value="DEBUG" />
     </logger>
 
     <logger name="org.springframework.web">
-        <level value="info" />
+        <level value="DEBUG" />
     </logger>
 
-    <root level="debug">
+    <root level="DEBUG">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
         <appender-ref ref="FILE-ERROR" />

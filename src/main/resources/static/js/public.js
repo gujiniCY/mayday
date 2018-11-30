@@ -10,6 +10,9 @@ function initMenu() {
 		var li = $(this);
 		li.find('a').each(function() {
 			var href = $(this).attr("href");
+			if(pathName == "/admin/article/edit"){
+				pathName = "/admin/article/new";
+			}
 			if (pathName == href) {
 				li.children().addClass("active").parent().addClass("is-expanded");
 				$(this).addClass("active");

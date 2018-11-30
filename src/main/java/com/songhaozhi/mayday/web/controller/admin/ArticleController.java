@@ -105,14 +105,18 @@ public class ArticleController extends BaseController {
 			if (StrUtil.isEmpty(article.getArticleTitle())) {
 				return new JsonResult(false, "文章标题不能为空");
 			}
-			if (StrUtil.isEmpty(article.getArticleUrl())) {
-				return new JsonResult(false, "文章链接不能为空");
+			if(article.getId()==null) {
+				User user = (User) request.getSession().getAttribute(MaydayConst.USER_SESSION_KEY);
+				article.setUserId(user.getUserId());
+				article.setArticleNewstime(DateUtil.date());
+				article.setArticleUpdatetime(DateUtil.date());
+				article.setArticleUrl(String.valueOf(System.currentTimeMillis()/1000));
+				articleService.save(article, tags, categorys);
+			}else {
+				//文章最后修改时间
+				article.setArticleUpdatetime(DateUtil.date());
+				articleService.update(article, tags, categorys);
 			}
-			User user = (User) request.getSession().getAttribute(MaydayConst.USER_SESSION_KEY);
-			article.setUserId(user.getUserId());
-			article.setArticleNewstime(DateUtil.date());
-			article.setArticleUpdatetime(DateUtil.date());
-			articleService.save(article, tags, categorys);
 		} catch (Exception e) {
 			return new JsonResult(MaydayEnums.ERROR.isFlag(), MaydayEnums.ERROR.getMessage());
 		}
@@ -178,7 +182,7 @@ public class ArticleController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/admin/article";
+		return "redirect:/admin/article?status=0";
 	}
 
 	/**
@@ -194,7 +198,7 @@ public class ArticleController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/admin/article";
+		return "redirect:/admin/article?status=2";
 	}
 
 	/**

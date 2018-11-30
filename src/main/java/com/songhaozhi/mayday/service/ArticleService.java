@@ -56,5 +56,13 @@ public interface ArticleService {
 	 * @return
 	 */
 	ArticleCustom findByArticleId(Integer article_id);
+	/**
+	 * 修改文章
+	 * @param article
+	 * @param tags
+	 * @param categorys
+	 * @throws Exception 
+	 */
+	void update(Article article, Long[] tags, Long[] categorys) throws Exception;
 
 }
