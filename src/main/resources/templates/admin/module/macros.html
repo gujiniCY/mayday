@@ -45,6 +45,24 @@
 		</ul>
 	</div>
 </div>
+
+<ol class="page-navigator" th:fragment="pageNav(pageInfo, prevText, nextText, prefix)">
+    <th:block th:if="${pageInfo.hasPreviousPage}">
+        <li class="prev"><a th:href="@{'/'+${prefix}+'/'+${pageInfo.prePage}}" th:text="${prevText}"></a></li>
+    </th:block>
+
+
+    <th:block th:each="navIndex :${ pageInfo.navigatepageNums}">
+        <li th:class="${pageInfo.pageNum==navIndex}?'current':''"><a th:href="@{'/page/'+${navIndex}}"
+                                                                     th:text="${navIndex}"></a></li>
+    </th:block>
+
+
+    <th:block th:if="${pageInfo.hasNextPage}">
+        <li class="next"><a th:href="@{'/'+${prefix}+'/'+${pageInfo.nextPage}}" th:text="${nextText}"></a></li>
+    </th:block>
+
+</ol>
 <div th:fragment="remove" class="modal fade" id="removeModal">
 		<div class="modal-dialog">
 			<div class="modal-content">

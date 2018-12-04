@@ -1,11 +1,17 @@
 package com.songhaozhi.mayday.web.controller.front;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.github.pagehelper.PageInfo;
+import com.songhaozhi.mayday.mapper.generator.ArticleMapper;
+import com.songhaozhi.mayday.model.domain.Article;
+import com.songhaozhi.mayday.model.domain.ArticleCustom;
+import com.songhaozhi.mayday.service.ArticleService;
 import com.songhaozhi.mayday.web.controller.admin.BaseController;
 
 /**
@@ -16,7 +22,8 @@ import com.songhaozhi.mayday.web.controller.admin.BaseController;
 @RequestMapping(value = { "/", "index" })
 @Controller
 public class IndexController extends BaseController {
-
+	@Autowired
+	private ArticleService articleService;
 	/**
 	 * 请求首页
 	 *
@@ -38,6 +45,10 @@ public class IndexController extends BaseController {
 	 */
 	@GetMapping(value = "page/{page}")
 	public String index(Model model, @PathVariable(value = "page") Integer page) {
+		//默认显示条数
+		Integer limit=12;
+		PageInfo<ArticleCustom> pageInfo=articleService.findPageArticle(page, limit, 0);
+		model.addAttribute("articles", pageInfo);
 		return this.render("index");
 	}
 

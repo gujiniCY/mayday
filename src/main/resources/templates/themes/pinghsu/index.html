@@ -5,48 +5,33 @@
 <div class="main-content index-page clearfix">
     <div class="post-lists">
         <div class="post-lists-body">
-            <div class="post-list-item">
+        
+            <div class="post-list-item" th:each="article : ${articles.list}">
                 <div class="post-list-item-container">
-                    <a class="item-thumb  bg-deepgrey">
-                        <dir class="item-desc"></dir>
+                    <a class="item-thumb bg-deepgrey" th:href="${article.articleUrl}" th:style="'background-image:url('+@{${article.articleThumbnail}}+');'" href="#">
+                        <dir class="item-desc" th:text="${article.tags}"></dir>
                     </a>
                     <div class="item-slant reverse-slant &lt; bg-deepgrey"></div>
                     <div class="item-slant"></div>
                     <div class="item-label">
-                        <div class="item-title"><a>1</a>
+                        <div class="item-title">
+                        <a href="#" th:href="${article.articleUrl}" th:text="${article.articleTitle}"></a>
                         </div>
                         <div class="item-meta clearfix">
-                            <div ></div>
+                            <div  th:style="'background: url('+@{/img/bg-ico.png}+');no-repeat;background-size: 40px auto;' "></div>
                             <div class="item-meta-cat">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-             <div class="post-list-item">
-                <div class="post-list-item-container">
-                    <a class="item-thumb  bg-deepgrey">
-                        <dir class="item-desc"></dir>
-                    </a>
-                    <div class="item-slant reverse-slant &lt; bg-deepgrey"></div>
-                    <div class="item-slant"></div>
-                    <div class="item-label">
-                        <div class="item-title"><a>2</a>
-                        </div>
-                        <div class="item-meta clearfix">
-                            <div ></div>
-                            <div class="item-meta-cat">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
-    <!-- <div class="lists-navigator clearfix">
-        <div th:replace="comm/macros::pageNav(${articles},'←','→','page')"></div>
-    </div> -->
+     <div class="lists-navigator clearfix">
+        <div th:replace="admin/module/macros::pageNav(${articles},'←','→','page')"></div>
+    </div>
 </div>
 </body>
-<!-- <div th:replace="themes/pinghsu/footer::footer"></div> -->
+ <!-- <div th:replace="themes/pinghsu/footer::footer"></div>  -->
 </html>

@@ -111,9 +111,13 @@ public class ArticleServiceImpl implements ArticleService {
 		//先查出关联的分类与标签
 		List<Integer> tagList=tagMapperCustom.selectByarticleId(article.getId());
 		List<Integer> cateList=categoryMapperCustom.selectByarticleId(article.getId());
-		//然后删除
-		tagMapperCustom.delete(tagList);
-		categoryMapperCustom.delete(cateList);
+		if(tagList!=null && tagList.size()>0) {
+			//然后删除
+			tagMapperCustom.delete(tagList);
+		}
+		if(cateList!=null && cateList.size()>0) {
+			categoryMapperCustom.delete(cateList);
+		}
 		//再添加
 		//鬼知道我最开始为什么这样子设计。。。等到都写完了就不愿意改了，先用着吧
 		for (Long cate : categorys) {
