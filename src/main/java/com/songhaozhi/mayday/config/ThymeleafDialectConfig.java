@@ -17,5 +17,4 @@ public class ThymeleafDialectConfig {
 	public ThSysDialect thSysDialect() {
 		return new ThSysDialect();
 	}
-
 }

@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/plugins/vali/css/main.css">
     <link rel="stylesheet" type="text/css" href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/plugins/toast/jquery.toast.css">
-  	<title th:text="${session.options.blog_name}+' | 后台管理'"></title>
+  	<title><thSys:title/></title>
   </head>
   <body>
     <section class="material-half-bg">
@@ -19,7 +19,7 @@
       </div>
       <div class="login-box">
         <form class="login-form">
-         <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
+         <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>登录</h3>
           <div class="form-group">
             <input class="form-control" id="userName" type="text" name="userName"  placeholder="用户名" autofocus>
           </div>

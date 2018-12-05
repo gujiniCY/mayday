@@ -61,7 +61,6 @@ public class AdminController extends BaseController {
 		if (user != null) {
 			return "redirect:/admin";
 		}
-		session.setAttribute("options", MaydayConst.options);
 		return "admin/admin_login";
 	}
 	
@@ -136,7 +135,7 @@ public class AdminController extends BaseController {
 	 */
 	@RequestMapping("/exitLogon")
 	public String exitLogon(HttpSession session) {
-		session.removeAttribute(MaydayConst.USER_SESSION_KEY);
+		session.invalidate();
 		return "admin/admin_login";
 	}
 }

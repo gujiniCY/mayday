@@ -5,7 +5,6 @@
 <div class="main-content index-page clearfix">
     <div class="post-lists">
         <div class="post-lists-body">
-        
             <div class="post-list-item" th:each="article : ${articles.list}">
                 <div class="post-list-item-container">
                     <a class="item-thumb bg-deepgrey" th:href="${article.articleUrl}" th:style="'background-image:url('+@{${article.articleThumbnail}}+');'" href="#">

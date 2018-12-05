@@ -12,6 +12,10 @@ public class MaydayConst {
 	 * user_session
 	 */
 	public static String USER_SESSION_KEY = "user_session";
+	  /**
+     * 最大页码
+     */
+    public static final int MAX_PAGE = 100;
 	/**
 	 * 所有设置选项
 	 */
