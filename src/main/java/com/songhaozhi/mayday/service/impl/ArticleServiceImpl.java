@@ -1,5 +1,8 @@
 package com.songhaozhi.mayday.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +20,13 @@ import com.songhaozhi.mayday.model.domain.Article;
 import com.songhaozhi.mayday.model.domain.ArticleCategory;
 import com.songhaozhi.mayday.model.domain.ArticleCategoryExample;
 import com.songhaozhi.mayday.model.domain.ArticleCustom;
+import com.songhaozhi.mayday.model.domain.ArticleExample;
 import com.songhaozhi.mayday.model.domain.ArticleTag;
 import com.songhaozhi.mayday.model.domain.ArticleTagExample;
+import com.songhaozhi.mayday.model.dto.ArchiveBo;
 import com.songhaozhi.mayday.service.ArticleService;
+
+import cn.hutool.core.date.DateUtil;
 
 /**
  * @author 宋浩志
@@ -41,9 +48,9 @@ public class ArticleServiceImpl implements ArticleService {
 	private TagMapperCustom tagMapperCustom;
 	@Autowired
 	private CategoryMapperCustom categoryMapperCustom;
+
 	/**
-	 * 自动生成的mapper里配置了useGeneratedKeys="true" keyProperty="id"
-	 * 如重新生成请复制过去
+	 * 自动生成的mapper里配置了useGeneratedKeys="true" keyProperty="id" 如重新生成请复制过去
 	 */
 	@Override
 	public void save(Article article, Long[] tags, Long[] categorys) {
@@ -61,16 +68,16 @@ public class ArticleServiceImpl implements ArticleService {
 			articleTagMapper.insert(articleTag);
 		}
 	}
-	
+
 	@Override
 	public List<ArticleCustom> findAllArticle(int status) {
 		return articleMapperCustom.findAllArticle(status);
 	}
 
 	@Override
-	public PageInfo<ArticleCustom> findPageArticle( int page, int limit, int status) {
+	public PageInfo<ArticleCustom> findPageArticle(int page, int limit, int status) {
 		PageHelper.startPage(page, limit);
-		List<ArticleCustom> lists=articleMapperCustom.articleMapperCustom(status);
+		List<ArticleCustom> lists = articleMapperCustom.articleMapperCustom(status);
 		return new PageInfo<>(lists);
 	}
 
@@ -81,20 +88,20 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public void recycle(int id, Integer integer) {
-		articleMapperCustom.updateStatus(id,integer);
+		articleMapperCustom.updateStatus(id, integer);
 	}
 
 	@Override
 	public void remove(int id) {
-		//删除文章表
+		// 删除文章表
 		articleMapper.deleteByPrimaryKey(id);
-		ArticleTagExample articleTagexample=new ArticleTagExample();
-		ArticleTagExample.Criteria tagCriteria =articleTagexample.createCriteria();
+		ArticleTagExample articleTagexample = new ArticleTagExample();
+		ArticleTagExample.Criteria tagCriteria = articleTagexample.createCriteria();
 		tagCriteria.andArticleIdEqualTo(id);
-		ArticleCategoryExample articleCategoryExample=new ArticleCategoryExample();
-		ArticleCategoryExample.Criteria categoryCriteria=articleCategoryExample.createCriteria();
+		ArticleCategoryExample articleCategoryExample = new ArticleCategoryExample();
+		ArticleCategoryExample.Criteria categoryCriteria = articleCategoryExample.createCriteria();
 		categoryCriteria.andArticleIdEqualTo(id);
-		//删除分类表和标签表
+		// 删除分类表和标签表
 		articleTagMapper.deleteByExample(articleTagexample);
 		articleCategoryMapper.deleteByExample(articleCategoryExample);
 	}
@@ -105,21 +112,21 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public void update(Article article, Long[] tags, Long[] categorys) throws Exception{
-		//修改文章
+	public void update(Article article, Long[] tags, Long[] categorys) throws Exception {
+		// 修改文章
 		articleMapper.updateByPrimaryKeySelective(article);
-		//先查出关联的分类与标签
-		List<Integer> tagList=tagMapperCustom.selectByarticleId(article.getId());
-		List<Integer> cateList=categoryMapperCustom.selectByarticleId(article.getId());
-		if(tagList!=null && tagList.size()>0) {
-			//然后删除
+		// 先查出关联的分类与标签
+		List<Integer> tagList = tagMapperCustom.selectByarticleId(article.getId());
+		List<Integer> cateList = categoryMapperCustom.selectByarticleId(article.getId());
+		if (tagList != null && tagList.size() > 0) {
+			// 然后删除
 			tagMapperCustom.delete(tagList);
 		}
-		if(cateList!=null && cateList.size()>0) {
+		if (cateList != null && cateList.size() > 0) {
 			categoryMapperCustom.delete(cateList);
 		}
-		//再添加
-		//鬼知道我最开始为什么这样子设计。。。等到都写完了就不愿意改了，先用着吧
+		// 再添加
+		// 鬼知道我最开始为什么这样子设计。。。等到都写完了就不愿意改了，先用着吧
 		for (Long cate : categorys) {
 			ArticleCategory articleCategory = new ArticleCategory();
 			articleCategory.setArticleId(article.getId());
@@ -132,5 +139,43 @@ public class ArticleServiceImpl implements ArticleService {
 			articleTag.setTagId(tag);
 			articleTagMapper.insert(articleTag);
 		}
+	}
+
+	@Override
+	public List<ArchiveBo> placeOnFile() throws Exception {
+		// 查询文章表各个时间段的文章数量 分别为DATE->时间段 count->文章数量
+		List<ArchiveBo> listforArchiveBo = articleMapperCustom.findDateAndCount();
+		if (listforArchiveBo != null) {
+			for (ArchiveBo archiveBo : listforArchiveBo) {
+				ArticleExample example = new ArticleExample();
+				// 在EXAMPLE对象中存放article_status和article_post
+				ArticleExample.Criteria criteria = example.createCriteria().andArticleStatusEqualTo(0)
+						.andArticlePostEqualTo("post");
+				example.setOrderByClause("article_newstime desc");
+				String date = archiveBo.getDate();
+				Date sd = DateUtil.parse(date, "yyyy年MM月");
+				// 在criteria对象中放入article_newstime大于或者等于的值
+				criteria.andArticleNewstimeGreaterThanOrEqualTo(sd);
+				Calendar cal = Calendar.getInstance();
+				// 判断获取的时间的月份是否小于12
+				if (sd.getMonth() < 12) {
+					cal.setTime(sd);
+					// 月份 +1
+					cal.add(Calendar.MONTH, +1);
+				} else {
+					cal.setTime(sd);
+					// 年 +1
+					cal.add(Calendar.YEAR, +1);
+				}
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月");
+				String date2 = sdf.format(cal.getTime());
+				Date date3 = DateUtil.parse(date2, "yyyy年MM月");
+				// 在criteria对象中放入article_newstime小于的值
+				criteria.andArticleNewstimeLessThan(date3);
+				List<Article> articles = articleMapper.selectByExample(example);
+				archiveBo.setArticles(articles);
+			}
+		}
+		return listforArchiveBo;
 	}
 }

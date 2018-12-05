@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.songhaozhi.mayday.model.domain.ArticleCustom;
+import com.songhaozhi.mayday.model.dto.ArchiveBo;
 
 /**
 * @author 作者:宋浩志
@@ -22,4 +23,5 @@ public interface ArticleMapperCustom {
 
 	ArticleCustom findByArticleId(@Param(value="id")Integer article_id);
 
+	List<ArchiveBo> findDateAndCount();
 }

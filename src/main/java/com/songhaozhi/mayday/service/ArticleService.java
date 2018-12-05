@@ -5,6 +5,7 @@ import java.util.List;
 import com.github.pagehelper.PageInfo;
 import com.songhaozhi.mayday.model.domain.Article;
 import com.songhaozhi.mayday.model.domain.ArticleCustom;
+import com.songhaozhi.mayday.model.dto.ArchiveBo;
 
 /**
 * @author 宋浩志
@@ -65,4 +66,9 @@ public interface ArticleService {
 	 */
 	void update(Article article, Long[] tags, Long[] categorys) throws Exception;
 
+	/**
+	 * 归档
+	 * @return
+	 */
+	List<ArchiveBo> placeOnFile() throws Exception;
 }
