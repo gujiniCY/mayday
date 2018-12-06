@@ -8,8 +8,8 @@ SELECT tag_id FROM mayday_article_tag WHERE article_id = #{value}
 <delete id="delete" parameterType="java.lang.Integer">
 delete from mayday_article_tag where tag_id in (
 <foreach collection="list" item="id" separator=",">
-#{id}
+${id}
 </foreach>
-)
+) and article_id=#{articleId} 
 </delete>
 </mapper>

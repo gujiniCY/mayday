@@ -215,10 +215,6 @@
  			$("#articleContent").val(simplemde.markdown(contentMd));
  			var categorysData=$("#categorySelect").select2("data");
  			var tagsData=$("#tagSelect").select2("data");
- 			console.log(categorysData);
- 			if(categorysData.length==0 || tagsData.length==0){
- 				showMsg("分类与标签不能为空！","error","3000");
- 			}else{
  				$("#articleStatus").val(articleStatus);
 				var obj=$("#articleFrom").serialize();
  				$.ajax({
@@ -250,7 +246,6 @@
  						}
  					}
  				});
- 			}
  		}else{
             showMsg("请输入文章内容！","error","3000");
         }

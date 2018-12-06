@@ -30,8 +30,12 @@ public class CategoryController extends BaseController {
 	 */
 	@GetMapping
 	public String category(Model model) {
-		List<Category> categorys = categoryService.findCategory();
-		model.addAttribute("Categorys", categorys);
+		try {
+			List<Category> categorys = categoryService.findCategory();
+			model.addAttribute("Categorys", categorys);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "/admin/admin_category";
 	}
 	/**
@@ -42,10 +46,14 @@ public class CategoryController extends BaseController {
 	 */
 	@GetMapping(value="/edit")
 	public String updateCategory(Model model,@RequestParam(value="categoryId") int categoryId) {
-		Category category = categoryService.findByCategoryId(categoryId);
-		List<Category> categorys = categoryService.findCategory();
-		model.addAttribute("Categorys", categorys);
-		model.addAttribute("category", category);
+		try {
+			Category category = categoryService.findByCategoryId(categoryId);
+			List<Category> categorys = categoryService.findCategory();
+			model.addAttribute("Categorys", categorys);
+			model.addAttribute("category", category);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "/admin/admin_category";
 	}
 	/**

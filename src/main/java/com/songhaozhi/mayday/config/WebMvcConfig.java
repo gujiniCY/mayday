@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.songhaozhi.mayday.web.interceptor.IndexInterceptor;
 import com.songhaozhi.mayday.web.interceptor.LoginInterceptor;
 
 /**
@@ -20,6 +21,8 @@ import com.songhaozhi.mayday.web.interceptor.LoginInterceptor;
 public class WebMvcConfig implements WebMvcConfigurer {
 	@Autowired
 	private LoginInterceptor loginAuthenticator;
+	@Autowired
+	private IndexInterceptor indexInterceptor;
 
 	/**
 	 * 注册拦截器
@@ -28,6 +31,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginAuthenticator).addPathPatterns("/admin/**").excludePathPatterns("/admin/login")
 				.excludePathPatterns("/admin/getLogin").excludePathPatterns("/static/**");
+		registry.addInterceptor(indexInterceptor);
 	}
 
 	/**

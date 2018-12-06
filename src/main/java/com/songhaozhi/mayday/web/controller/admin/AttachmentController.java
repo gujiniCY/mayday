@@ -47,8 +47,12 @@ public class AttachmentController extends BaseController {
 	@GetMapping
 	public String attachment(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "limit", defaultValue = "18") int limit) {
-		PageInfo<Attachment> info = attachmentService.getAttachment(page, limit);
-		model.addAttribute("info", info);
+		try {
+			PageInfo<Attachment> info = attachmentService.getAttachment(page, limit);
+			model.addAttribute("info", info);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "/admin/admin_attachment";
 	}
 

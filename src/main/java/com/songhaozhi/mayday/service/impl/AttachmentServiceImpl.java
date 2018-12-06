@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -17,21 +18,22 @@ import com.songhaozhi.mayday.service.AttachmentService;
  * @createDate 创建时间：2018年9月7日 上午10:34:39
  */
 @Service
+@Transactional(rollbackFor=RuntimeException.class)
 public class AttachmentServiceImpl implements AttachmentService {
 	@Autowired
 	private AttachmentMapper attachmentMapper;
 
 	@Override
-	public void save(Attachment attachment) {
+	public void save(Attachment attachment) throws Exception {
 		attachmentMapper.insert(attachment);
 	}
 
 	@Override
-	public PageInfo<Attachment> getAttachment(int page, int limit) {
+	public PageInfo<Attachment> getAttachment(int page, int limit) throws Exception {
 		PageHelper.startPage(page, limit);
-		AttachmentExample example=new AttachmentExample();
+		AttachmentExample example = new AttachmentExample();
 		example.setOrderByClause("id desc");
-		List<Attachment> lists=attachmentMapper.selectByExample(example);
+		List<Attachment> lists = attachmentMapper.selectByExample(example);
 		return new PageInfo<>(lists);
 	}
 
@@ -41,8 +43,8 @@ public class AttachmentServiceImpl implements AttachmentService {
 	}
 
 	@Override
-	public void deleteAttachment(int id) {
-		attachmentMapper.deleteByPrimaryKey(id);		
+	public void deleteAttachment(int id) throws Exception {
+		attachmentMapper.deleteByPrimaryKey(id);
 	}
 
 }

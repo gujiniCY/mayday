@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,8 +32,12 @@ public class LinksController extends BaseController {
 	 */
 	@GetMapping
 	public String links(Model model) {
-		List<Link> lists = linksService.findLinks();
-		model.addAttribute("links", lists);
+		try {
+			List<Link> lists = linksService.findLinks();
+			model.addAttribute("links", lists);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "/admin/admin_links";
 	}
 
@@ -45,10 +50,14 @@ public class LinksController extends BaseController {
 	 */
 	@GetMapping(value = "/edit")
 	public String linksEdit(Model model, @RequestParam(value = "linkId") int linkId) {
-		Link link = linksService.findByLindId(linkId);
-		List<Link> lists = linksService.findLinks();
-		model.addAttribute("links", lists);
-		model.addAttribute("link", link);
+		try {
+			Link link = linksService.findByLindId(linkId);
+			List<Link> lists = linksService.findLinks();
+			model.addAttribute("links", lists);
+			model.addAttribute("link", link);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "/admin/admin_links";
 	}
 
@@ -78,12 +87,9 @@ public class LinksController extends BaseController {
 	 * @return
 	 */
 	@GetMapping(value = "remove")
+	@Transactional
 	public String remove(@RequestParam(value = "linkId") int linkId) {
-		try {
 			linksService.remove(linkId);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		return "redirect:/admin/links";
 	}
 

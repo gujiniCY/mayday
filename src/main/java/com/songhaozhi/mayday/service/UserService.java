@@ -18,14 +18,14 @@ public interface UserService {
 	 *            用户密码
 	 * @return
 	 */
-	User getByNameAndPwd(String name, String pwd);
+	User getByNameAndPwd(String name, String pwd) throws Exception;
 
 	/**
 	 * 修改用户资料
 	 * 
 	 * @param user
 	 */
-	void updateDatum(User user);
+	void updateDatum(User user) throws Exception;
 
 	/**
 	 * 用户id获取用户信息
@@ -43,28 +43,34 @@ public interface UserService {
 	 *            原密码
 	 * @return
 	 */
-	User findByUserIdAndUserPwd(Integer userId, String formerlyPwd);
+	User findByUserIdAndUserPwd(Integer userId, String formerlyPwd) throws Exception;
 
 	/**
 	 * 修改最后登录时间
 	 * 
 	 * @param date
-	 * @param userId 
-	 */
-	void updateLoginLastTime(Date date, Integer userId);
-	/**
-	 * 修改用户状态为正常
 	 * @param userId
 	 */
-	void updateUserNormal(Integer userId);
+	void updateLoginLastTime(Date date, Integer userId) throws Exception;
+
+	/**
+	 * 修改用户状态为正常
+	 * 
+	 * @param userId
+	 */
+	void updateUserNormal(Integer userId) throws Exception;
+
 	/**
 	 * 更新登录失败次数
-	 * @return 
+	 * 
+	 * @return
 	 */
-	Integer updateError();
+	Integer updateError() throws Exception;
+
 	/**
 	 * 禁止登录
+	 * 
 	 * @param enable
 	 */
-	void updateLoginEnable(String enable);
+	void updateLoginEnable(String enable) throws Exception;
 }

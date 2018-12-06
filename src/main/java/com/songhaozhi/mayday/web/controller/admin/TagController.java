@@ -31,8 +31,12 @@ public class TagController extends BaseController {
 	 */
 	@GetMapping
 	public String tag(Model model) {
-		List<Tag> lists = tagService.findTags();
-		model.addAttribute("tags", lists);
+		try {
+			List<Tag> lists = tagService.findTags();
+			model.addAttribute("tags", lists);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "/admin/admin_tag";
 	}
 
@@ -45,10 +49,14 @@ public class TagController extends BaseController {
 	 */
 	@GetMapping(value = "/edit")
 	public String edit(Model model, @RequestParam(value = "tagId") int tagId) {
-		Tag tag = tagService.findByTagId(tagId);
-		List<Tag> lists = tagService.findTags();
-		model.addAttribute("tags", lists);
-		model.addAttribute("tag", tag);
+		try {
+			Tag tag = tagService.findByTagId(tagId);
+			List<Tag> lists = tagService.findTags();
+			model.addAttribute("tags", lists);
+			model.addAttribute("tag", tag);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "/admin/admin_tag";
 	}
 

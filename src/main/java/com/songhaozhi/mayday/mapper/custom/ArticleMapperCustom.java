@@ -24,4 +24,6 @@ public interface ArticleMapperCustom {
 	ArticleCustom findByArticleId(@Param(value="id")Integer article_id);
 
 	List<ArchiveBo> findDateAndCount();
+
+	List<ArticleCustom> findPageArticle(int status);
 }

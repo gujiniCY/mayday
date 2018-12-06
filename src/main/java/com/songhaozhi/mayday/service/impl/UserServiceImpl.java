@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.songhaozhi.mayday.mapper.custom.UserMapperCustom;
 import com.songhaozhi.mayday.mapper.generator.UserMapper;
@@ -16,6 +17,7 @@ import com.songhaozhi.mayday.model.domain.User;
 import com.songhaozhi.mayday.service.UserService;
 
 @Service
+@Transactional(rollbackFor=RuntimeException.class)
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapperCustom userMapperCustom;
@@ -23,12 +25,12 @@ public class UserServiceImpl implements UserService {
 	private UserMapper userMapper;
 
 	@Override
-	public User getByNameAndPwd(String name, String pwd) {
+	public User getByNameAndPwd(String name, String pwd) throws Exception {
 		return userMapperCustom.getByNameAndPwd(name, pwd);
 	}
 
 	@Override
-	public void updateDatum(User user) {
+	public void updateDatum(User user) throws Exception {
 		userMapper.updateByPrimaryKeySelective(user);
 	}
 
@@ -43,12 +45,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findByUserIdAndUserPwd(Integer userId, String formerlyPwd) {
+	public User findByUserIdAndUserPwd(Integer userId, String formerlyPwd) throws Exception {
 		return userMapperCustom.findByUserIdAndUserPwd(userId, formerlyPwd);
 	}
 
 	@Override
-	public void updateLoginLastTime(Date date, Integer userId) {
+	public void updateLoginLastTime(Date date, Integer userId) throws Exception {
 		User user = new User();
 		user.setLoginLastTime(date);
 		user.setUserId(userId);
@@ -57,7 +59,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateUserNormal(Integer userId) {
+	public void updateUserNormal(Integer userId) throws Exception {
 		User user = new User();
 		user.setLoginError(0);
 		user.setLoginEnable("false");
@@ -67,7 +69,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Integer updateError() {
+	public Integer updateError() throws Exception {
 		User user = this.findUser();
 		user.setLoginError((user.getLoginError() == null ? 0 : user.getLoginError()) + 1);
 		userMapper.updateByPrimaryKeySelective(user);
@@ -75,7 +77,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateLoginEnable(String enable) {
+	public void updateLoginEnable(String enable) throws Exception {
 		User user = this.findUser();
 		user.setLoginEnable(enable);
 		userMapper.updateByPrimaryKeySelective(user);

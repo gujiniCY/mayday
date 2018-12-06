@@ -30,13 +30,13 @@
 							<input type="hidden" name="categoryId"
 								th:value="${category!=null ? category.categoryId :''}">
 							<div class="form-group">
-								<label class="col-form-label" for="inputDefault">名称</label> <input
+								<label class="col-form-label" for="inputDefault">*名称</label> <input
 									class="form-control" id="inputDefault"
 									th:value="${category != null ? category.categoryName : ''}"
 									name="categoryName" type="text">
 							</div>
 							<div class="form-group">
-								<label class="col-form-label" for="inputDefault">路径名称</label> <input
+								<label class="col-form-label" for="inputDefault">*路径名称</label> <input
 									class="form-control" id="inputDefault"
 									th:value="${category != null ? category.categoryUrl : ''}"
 									type="text" name="categoryUrl">

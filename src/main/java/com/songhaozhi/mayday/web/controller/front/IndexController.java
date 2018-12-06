@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.github.pagehelper.PageInfo;
 import com.songhaozhi.mayday.model.domain.ArticleCustom;
@@ -21,7 +20,6 @@ import com.songhaozhi.mayday.web.controller.admin.BaseController;
  * @createDate 创建时间：2018年12月2日 下午5:12:40
  * 
  */
-@RequestMapping(value = { "/", "index" })
 @Controller
 public class IndexController extends BaseController {
 	@Autowired
@@ -30,12 +28,11 @@ public class IndexController extends BaseController {
 	 * 请求首页
 	 *
 	 * @param model
-	 *            model
-	 * @param i
 	 * @return 模板路径
 	 */
-	@GetMapping
+	@GetMapping(value = { "/", "index" })
 	public String index(Model model) {
+		
 		// 调用方法渲染首页
 		return this.index(model, 1);
 	}
@@ -47,11 +44,15 @@ public class IndexController extends BaseController {
 	 */
 	@GetMapping(value = "page/{page}")
 	public String index(Model model, @PathVariable(value = "page") Integer page) {
-		page=page<0 || page>MaydayConst.MAX_PAGE ? 1 : page;
-		//默认显示条数
-		Integer limit=12;
-		PageInfo<ArticleCustom> pageInfo=articleService.findPageArticle(page, limit, 0);
-		model.addAttribute("articles", pageInfo);
+		try {
+			page=page<0 || page>MaydayConst.MAX_PAGE ? 1 : page;
+			//默认显示条数
+			Integer limit=12;
+			PageInfo<ArticleCustom> pageInfo=articleService.findPageArticle(page, limit, 0);
+			model.addAttribute("articles", pageInfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return this.render("index");
 	}
 	
@@ -61,9 +62,9 @@ public class IndexController extends BaseController {
 	 * @return 
 	 * @throws Exception 
 	 */
-	@GetMapping(value="placeOnFile")
-	public String placeOnFile(Model model) throws Exception{
-		List<ArchiveBo> archiveBos=articleService.placeOnFile();
+	@GetMapping(value="archives")
+	public String archives(Model model) throws Exception{
+		List<ArchiveBo> archiveBos=articleService.archives();
 		model.addAttribute("articleList", archiveBos);
 		return this.render("archives");
 	}

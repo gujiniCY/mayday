@@ -14,27 +14,27 @@ public interface CategoryService {
 	 * 查询所有分类
 	 * @return
 	 */
-	List<Category> findCategory();
+	List<Category> findCategory() throws Exception;
 	/**
 	 * 根据id查询
 	 * @param categoryId
 	 * @return
 	 */
-	Category findByCategoryId(int categoryId);
+	Category findByCategoryId(int categoryId) throws Exception;
 	/**
 	 * 添加
 	 * @param category
 	 */
-	void save(Category category);
+	void save(Category category) throws Exception;
 	/**
 	 * 修改
 	 * @param category
 	 */
-	void update(Category category);
+	void update(Category category) throws Exception;
 	/**
 	 * 删除
 	 * @param categoryId
 	 */
-	void delete(int categoryId);
+	void delete(int categoryId) throws Exception;
 
 }

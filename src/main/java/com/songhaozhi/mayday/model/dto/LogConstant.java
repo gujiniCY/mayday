@@ -7,6 +7,10 @@ public interface LogConstant {
 	
 	String LOGIN="登录后台";
 	
+	String SUCCESS="操作成功";
+	
+	String ERROR="操作失败";
+	
 	String UPLOAD_ATTACHMENT="上传附件";
 	
 	String UPLOAD_SUCCESS="上传成功";
@@ -18,6 +22,12 @@ public interface LogConstant {
 	String LOGIN_SUCCES="登录成功";
 	
 	String LOGIN_ERROR="登录失败";
+	
+	String PUBLISH_AN_ARTICLE="发表文章";
+
+	String UPDATE_AN_ARTICLE="更新文章";
+	
+	String REMOVE_AN_ARTICLE="删除文章";
 	
 
 }

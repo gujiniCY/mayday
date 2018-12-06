@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -34,6 +35,7 @@ import cn.hutool.core.date.DateUtil;
  * 
  */
 @Service
+@Transactional(rollbackFor=RuntimeException.class)
 public class ArticleServiceImpl implements ArticleService {
 
 	@Autowired
@@ -53,46 +55,50 @@ public class ArticleServiceImpl implements ArticleService {
 	 * 自动生成的mapper里配置了useGeneratedKeys="true" keyProperty="id" 如重新生成请复制过去
 	 */
 	@Override
-	public void save(Article article, Long[] tags, Long[] categorys) {
+	public void save(Article article, Long[] tags, Long[] categorys) throws Exception {
 		articleMapper.insert(article);
-		for (Long cate : categorys) {
-			ArticleCategory articleCategory = new ArticleCategory();
-			articleCategory.setArticleId(article.getId());
-			articleCategory.setCategoryId(cate);
-			articleCategoryMapper.insert(articleCategory);
+		if(categorys!=null) {
+			for (Long cate : categorys) {
+				ArticleCategory articleCategory = new ArticleCategory();
+				articleCategory.setArticleId(article.getId());
+				articleCategory.setCategoryId(cate);
+				articleCategoryMapper.insert(articleCategory);
+			}
 		}
-		for (Long tag : tags) {
-			ArticleTag articleTag = new ArticleTag();
-			articleTag.setArticleId(article.getId());
-			articleTag.setTagId(tag);
-			articleTagMapper.insert(articleTag);
+		if(tags!=null) {
+			for (Long tag : tags) {
+				ArticleTag articleTag = new ArticleTag();
+				articleTag.setArticleId(article.getId());
+				articleTag.setTagId(tag);
+				articleTagMapper.insert(articleTag);
+			}
 		}
 	}
 
 	@Override
-	public List<ArticleCustom> findAllArticle(int status) {
+	public List<ArticleCustom> findAllArticle(int status) throws Exception {
 		return articleMapperCustom.findAllArticle(status);
 	}
 
 	@Override
-	public PageInfo<ArticleCustom> findPageArticle(int page, int limit, int status) {
+	public PageInfo<ArticleCustom> findPageArticle(int page, int limit, int status) throws Exception {
 		PageHelper.startPage(page, limit);
-		List<ArticleCustom> lists = articleMapperCustom.articleMapperCustom(status);
+		List<ArticleCustom> lists = articleMapperCustom.findPageArticle(status);
 		return new PageInfo<>(lists);
 	}
 
 	@Override
-	public Integer countByStatus(int status) {
+	public Integer countByStatus(int status) throws Exception {
 		return articleMapperCustom.countByStatus(status);
 	}
 
 	@Override
-	public void recycle(int id, Integer integer) {
+	public void recycle(int id, Integer integer) throws Exception {
 		articleMapperCustom.updateStatus(id, integer);
 	}
 
 	@Override
-	public void remove(int id) {
+	public void remove(int id) throws Exception {
 		// 删除文章表
 		articleMapper.deleteByPrimaryKey(id);
 		ArticleTagExample articleTagexample = new ArticleTagExample();
@@ -107,7 +113,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public ArticleCustom findByArticleId(Integer article_id) {
+	public ArticleCustom findByArticleId(Integer article_id) throws Exception {
 		return articleMapperCustom.findByArticleId(article_id);
 	}
 
@@ -120,10 +126,10 @@ public class ArticleServiceImpl implements ArticleService {
 		List<Integer> cateList = categoryMapperCustom.selectByarticleId(article.getId());
 		if (tagList != null && tagList.size() > 0) {
 			// 然后删除
-			tagMapperCustom.delete(tagList);
+			tagMapperCustom.delete(tagList, article.getId());
 		}
 		if (cateList != null && cateList.size() > 0) {
-			categoryMapperCustom.delete(cateList);
+			categoryMapperCustom.delete(cateList, article.getId());
 		}
 		// 再添加
 		// 鬼知道我最开始为什么这样子设计。。。等到都写完了就不愿意改了，先用着吧
@@ -142,7 +148,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public List<ArchiveBo> placeOnFile() throws Exception {
+	public List<ArchiveBo> archives() throws Exception {
 		// 查询文章表各个时间段的文章数量 分别为DATE->时间段 count->文章数量
 		List<ArchiveBo> listforArchiveBo = articleMapperCustom.findDateAndCount();
 		if (listforArchiveBo != null) {

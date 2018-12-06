@@ -19,9 +19,11 @@ import com.github.pagehelper.PageInfo;
 import com.songhaozhi.mayday.model.domain.Article;
 import com.songhaozhi.mayday.model.domain.ArticleCustom;
 import com.songhaozhi.mayday.model.domain.Category;
+import com.songhaozhi.mayday.model.domain.Log;
 import com.songhaozhi.mayday.model.domain.Tag;
 import com.songhaozhi.mayday.model.domain.User;
 import com.songhaozhi.mayday.model.dto.JsonResult;
+import com.songhaozhi.mayday.model.dto.LogConstant;
 import com.songhaozhi.mayday.model.dto.MaydayConst;
 import com.songhaozhi.mayday.model.enums.ArticleStatus;
 import com.songhaozhi.mayday.model.enums.MaydayEnums;
@@ -32,6 +34,7 @@ import com.songhaozhi.mayday.util.MaydayUtil;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.servlet.ServletUtil;
 
 /**
  * @author 宋浩志
@@ -60,17 +63,21 @@ public class ArticleController extends BaseController {
 	public String article(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "limit", defaultValue = "10") int limit,
 			@RequestParam(value = "status", defaultValue = "0") int status) {
-		PageInfo<ArticleCustom> pageInfo = articleService.findPageArticle(page, limit, status);
-		// 已发布条数
-		Integer published = articleService.countByStatus(0);
-		// 草稿条数
-		Integer draft = articleService.countByStatus(1);
-		// 回收站条数
-		Integer recycle = articleService.countByStatus(2);
-		model.addAttribute("info", pageInfo);
-		model.addAttribute("draft", draft);
-		model.addAttribute("recycle", recycle);
-		model.addAttribute("published", published);
+		try {
+			PageInfo<ArticleCustom> pageInfo = articleService.findPageArticle(page, limit, status);
+			// 已发布条数
+			Integer published = articleService.countByStatus(0);
+			// 草稿条数
+			Integer draft = articleService.countByStatus(1);
+			// 回收站条数
+			Integer recycle = articleService.countByStatus(2);
+			model.addAttribute("info", pageInfo);
+			model.addAttribute("draft", draft);
+			model.addAttribute("recycle", recycle);
+			model.addAttribute("published", published);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "/admin/admin_article";
 	}
 
@@ -112,12 +119,20 @@ public class ArticleController extends BaseController {
 				article.setArticleUpdatetime(DateUtil.date());
 				article.setArticleUrl(String.valueOf(System.currentTimeMillis()/1000));
 				articleService.save(article, tags, categorys);
+				//添加日志
+				logService.save(new Log(LogConstant.PUBLISH_AN_ARTICLE, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
+						DateUtil.date()));
 			}else {
 				//文章最后修改时间
 				article.setArticleUpdatetime(DateUtil.date());
 				articleService.update(article, tags, categorys);
+				//添加日志
+				logService.save(new Log(LogConstant.UPDATE_AN_ARTICLE, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
+						DateUtil.date()));
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("添加或更新文章失败"+e.getMessage());
 			return new JsonResult(MaydayEnums.ERROR.isFlag(), MaydayEnums.ERROR.getMessage());
 		}
 		return new JsonResult(MaydayEnums.PRESERVE_SUCCESS.isFlag(), MaydayEnums.PRESERVE_SUCCESS.getMessage());
@@ -133,20 +148,24 @@ public class ArticleController extends BaseController {
 	@PostMapping(value = "/pushBaidu")
 	@ResponseBody
 	public JsonResult pushBaidu(@RequestParam(value = "token") String token) {
-		if (StrUtil.isEmpty(token)) {
-			return new JsonResult(false, "请先填写token");
-		}
-		// 文章为已发布
-		int status = 0;
-		String blogUrl = MaydayConst.options.get("blog_url");
-		List<ArticleCustom> articles = articleService.findAllArticle(status);
-		StringBuffer urls = new StringBuffer();
-		for (ArticleCustom article : articles) {
-			urls.append(blogUrl).append("/archives/").append(article.getArticleUrl()).append("\n");
-		}
-		String result = MaydayUtil.baiduPost(blogUrl, token, urls.toString());
-		if (StrUtil.isEmpty(result)) {
-			return new JsonResult(false, "推送失败");
+		try {
+			if (StrUtil.isEmpty(token)) {
+				return new JsonResult(false, "请先填写token");
+			}
+			// 文章为已发布
+			int status = 0;
+			String blogUrl = MaydayConst.options.get("blog_url");
+			List<ArticleCustom> articles = articleService.findAllArticle(status);
+			StringBuffer urls = new StringBuffer();
+			for (ArticleCustom article : articles) {
+				urls.append(blogUrl).append("/archives/").append(article.getArticleUrl()).append("\n");
+			}
+			String result = MaydayUtil.baiduPost(blogUrl, token, urls.toString());
+			if (StrUtil.isEmpty(result)) {
+				return new JsonResult(false, "推送失败");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return new JsonResult(true, "推送成功");
 	}
@@ -192,11 +211,15 @@ public class ArticleController extends BaseController {
 	 * @return
 	 */
 	@GetMapping(value = "/remove")
-	public String remove(@RequestParam(value = "id") int id) {
+	public String remove(@RequestParam(value = "id") int id, HttpServletRequest request) {
 		try {
 			articleService.remove(id);
+			//添加日志
+			logService.save(new Log(LogConstant.REMOVE_AN_ARTICLE, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
+					DateUtil.date()));
 		} catch (Exception e) {
 			e.printStackTrace();
+			log.error("删除文章失败"+e.getMessage());
 		}
 		return "redirect:/admin/article?status=2";
 	}
@@ -209,10 +232,14 @@ public class ArticleController extends BaseController {
 	 */
 	@GetMapping(value = "/new")
 	public String newArticle(Model model) {
-		List<Category> categorys = categoryService.findCategory();
-		List<Tag> tags = tagService.findTags();
-		model.addAttribute("categorys", categorys);
-		model.addAttribute("tags", tags);
+		try {
+			List<Category> categorys = categoryService.findCategory();
+			List<Tag> tags = tagService.findTags();
+			model.addAttribute("categorys", categorys);
+			model.addAttribute("tags", tags);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "/admin/admin_new_article";
 	}
 
@@ -224,15 +251,19 @@ public class ArticleController extends BaseController {
 	 */
 	@GetMapping(value = "/edit")
 	public String editArticle(Model model, @RequestParam(value = "article_id") Integer article_id) {
-		// 获取所有分类
-		List<Category> categorys = categoryService.findCategory();
-		// 获取所有标签
-		List<Tag> tags = tagService.findTags();
-		// 获取文章信息
-		ArticleCustom articleCustom = articleService.findByArticleId(article_id);
-		model.addAttribute("categorys", categorys);
-		model.addAttribute("tags", tags);
-		model.addAttribute("articleCustom", articleCustom);
+		try {
+			// 获取所有分类
+			List<Category> categorys = categoryService.findCategory();
+			// 获取所有标签
+			List<Tag> tags = tagService.findTags();
+			// 获取文章信息
+			ArticleCustom articleCustom = articleService.findByArticleId(article_id);
+			model.addAttribute("categorys", categorys);
+			model.addAttribute("tags", tags);
+			model.addAttribute("articleCustom", articleCustom);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "/admin/admin_edit_article";
 	}
 
@@ -246,12 +277,18 @@ public class ArticleController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> ids(Integer article_id) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		// 获取文章信息
-		ArticleCustom articleCustom = articleService.findByArticleId(article_id);
-		String[] tags = articleCustom.getTags().split(",");
-		String[] categorys = articleCustom.getCategorys().split(",");
-		map.put("tagsIds", tags);
-		map.put("categorysIds", categorys);
+		try {
+			// 获取文章信息
+			ArticleCustom articleCustom = articleService.findByArticleId(article_id);
+			if(articleCustom.getTags()!=null) {
+				map.put("tagsIds", articleCustom.getTags().split(","));
+			}
+			if(articleCustom.getCategorys()!=null) {
+				map.put("categorysIds", articleCustom.getCategorys().split(","));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return map;
 	}
 

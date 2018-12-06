@@ -78,27 +78,27 @@ public class AdminController extends BaseController {
 	@ResponseBody
 	public JsonResult getLogin(@RequestParam(value = "userName") String userName,
 			@RequestParam(value = "userPwd") String userPwd, HttpSession session) {
-		// 禁止时间10分子
-		int inhibitTime = 10;
-		// 为true禁止登录
-		String flag = "true";
-		// 错误总次数5次
-		Integer errorCount = 5;
-		// 已注册用户
-		User users = userService.findUser();
-		// 判断账户是否被禁用十分钟
-		Date date = null;
-		if (users.getLoginLastTime() != null) {
-			date = users.getLoginLastTime();
-		}
-		// 计算两个日期之间的时间差
-		long between = DateUtil.between(date, DateUtil.date(), DateUnit.MINUTE);
-		if (StringUtils.equals(users.getLoginEnable(), flag) && (between < inhibitTime)) {
-			return new JsonResult(false, "账户被禁止登录10分钟，请稍后重试");
-		}
-		// 验证用户名密码
-		User user = userService.getByNameAndPwd(userName, SecureUtil.md5(userPwd));
 		try {
+			// 禁止时间10分子
+			int inhibitTime = 10;
+			// 为true禁止登录
+			String flag = "true";
+			// 错误总次数5次
+			Integer errorCount = 5;
+			// 已注册用户
+			User users = userService.findUser();
+			// 判断账户是否被禁用十分钟
+			Date date = null;
+			if (users.getLoginLastTime() != null) {
+				date = users.getLoginLastTime();
+			}
+			// 计算两个日期之间的时间差
+			long between = DateUtil.between(date, DateUtil.date(), DateUnit.MINUTE);
+			if (StringUtils.equals(users.getLoginEnable(), flag) && (between < inhibitTime)) {
+				return new JsonResult(false, "账户被禁止登录10分钟，请稍后重试");
+			}
+			// 验证用户名密码
+			User user = userService.getByNameAndPwd(userName, SecureUtil.md5(userPwd));
 			// 修改最后登录时间
 			userService.updateLoginLastTime(DateUtil.date(), users.getUserId());
 			if (user != null) {

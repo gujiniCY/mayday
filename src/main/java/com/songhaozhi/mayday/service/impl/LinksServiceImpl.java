@@ -4,19 +4,21 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.songhaozhi.mayday.mapper.generator.LinkMapper;
 import com.songhaozhi.mayday.model.domain.Link;
 import com.songhaozhi.mayday.service.LinksService;
 
 /**
-* @author 宋浩志
-* @createDate 创建时间：2018年9月25日 下午10:12:35
-* 
-*/
+ * @author 宋浩志
+ * @createDate 创建时间：2018年9月25日 下午10:12:35
+ * 
+ */
 @Service
-public class LinksServiceImpl implements LinksService{
-	
+@Transactional(rollbackFor=RuntimeException.class)
+public class LinksServiceImpl implements LinksService {
+
 	@Autowired
 	private LinkMapper linkMapper;
 
@@ -31,7 +33,7 @@ public class LinksServiceImpl implements LinksService{
 	}
 
 	@Override
-	public void save(Link link) {
+	public void save(Link link) throws Exception {
 		linkMapper.insert(link);
 	}
 
@@ -41,8 +43,8 @@ public class LinksServiceImpl implements LinksService{
 	}
 
 	@Override
-	public void remove(int linkId) {
-		linkMapper.deleteByPrimaryKey(linkId);		
+	public void remove(int linkId){
+		linkMapper.deleteByPrimaryKey(linkId);
 	}
 
 }

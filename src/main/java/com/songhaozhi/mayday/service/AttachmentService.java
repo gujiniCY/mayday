@@ -12,14 +12,14 @@ public interface AttachmentService {
 	 * 保存
 	 * @param attachment
 	 */
-	void save(Attachment attachment);
+	void save(Attachment attachment) throws Exception;
 	/**
 	 * 分页查询附件
 	 * @param page
 	 * @param limit
 	 * @return
 	 */
-	PageInfo<Attachment> getAttachment(int page, int limit);
+	PageInfo<Attachment> getAttachment(int page, int limit) throws Exception;
 	/**
 	 * 根据id查询
 	 * @param id
@@ -30,6 +30,6 @@ public interface AttachmentService {
 	 * 删除
 	 * @param id
 	 */
-	void deleteAttachment(int id);
+	void deleteAttachment(int id) throws Exception;
 
 }

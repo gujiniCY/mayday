@@ -24,8 +24,9 @@ public interface LinksService {
 	/**
 	 * 保存
 	 * @param link
+	 * @throws Exception 
 	 */
-	void save(Link link);
+	public void save(Link link) throws Exception ;
 	/**
 	 * 修改
 	 * @param link
