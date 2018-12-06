@@ -16,10 +16,10 @@ public interface ArticleService {
 	/**
 	 * 保存文章
 	 * @param article 文章
-	 * @param tags 标签
-	 * @param categorys 分类
+	 * @param tagsName 标签id
+	 * @param categorys 分类id
 	 */
-	void save(Article article, Long[] tags, Long[] categorys) throws Exception;
+	void save(Article article, Long[] tagsName, Long[] categorys) throws Exception;
 	/**
 	 * 不分页查询所有文章
 	 * @param status
@@ -60,8 +60,8 @@ public interface ArticleService {
 	/**
 	 * 修改文章
 	 * @param article
-	 * @param tags
-	 * @param categorys
+	 * @param tags 标签id
+	 * @param categorys 分类id
 	 * @throws Exception 
 	 */
 	void update(Article article, Long[] tags, Long[] categorys) throws Exception;

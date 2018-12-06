@@ -50,14 +50,10 @@
     <th:block th:if="${pageInfo.hasPreviousPage}">
         <li class="prev"><a th:href="@{'/'+${prefix}+'/'+${pageInfo.prePage}}" th:text="${prevText}"></a></li>
     </th:block>
-
-
     <th:block th:each="navIndex :${ pageInfo.navigatepageNums}">
         <li th:class="${pageInfo.pageNum==navIndex}?'current':''"><a th:href="@{'/page/'+${navIndex}}"
                                                                      th:text="${navIndex}"></a></li>
     </th:block>
-
-
     <th:block th:if="${pageInfo.hasNextPage}">
         <li class="next"><a th:href="@{'/'+${prefix}+'/'+${pageInfo.nextPage}}" th:text="${nextText}"></a></li>
     </th:block>
@@ -121,7 +117,7 @@
 <header th:fragment="header" class="app-header"><a class="app-header__logo" href="/admin">Mayday</a>
      <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <ul class="app-nav">
-      <a class="app-nav__item" href="/"  aria-label="Show notifications"><i class="fa fa-paper-plane fa-lg"></i></a>
+      <a class="app-nav__item" href="/" th:target="_blank"  aria-label="Show notifications"><i class="fa fa-paper-plane fa-lg"></i></a>
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
           <ul class="app-notification dropdown-menu dropdown-menu-right">
             <li class="app-notification__title">3条未读消息</li>

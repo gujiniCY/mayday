@@ -72,8 +72,8 @@
 						<th:block th:each="article : ${info.list}">
 							<tr>
 								<td th:text="${#strings.abbreviate(article.articleTitle,20)}"></td>
-								<td th:text="${#strings.abbreviate(article.categorys,20)}"></td>
-								<td th:text="${#strings.abbreviate(article.tags,20)}"></td>
+								<td th:text="${#strings.abbreviate(article.categorysName,20)}"></td>
+								<td th:text="${#strings.abbreviate(article.tagsName,20)}"> </td>
 								<td></td>
 								<td></td>
 								<td

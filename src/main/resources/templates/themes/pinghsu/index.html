@@ -18,20 +18,21 @@
                         <a href="#" th:href="${article.articleUrl}" th:text="${article.articleTitle}"></a>
                         </div>
                         <div class="item-meta clearfix">
-                         <div th:class="'item-meta-ico '+ ${commons.show_icon(article.id)}"
+                         <div th:class="'item-meta-ico '+ ${commons.show_icon(article.id)}">
                             <div  th:style="'background: url('+@{/img/bg-ico.png}+');no-repeat;background-size: 40px auto;' "></div>
-                           <div class="item-meta-cat" th:utext="${commons.show_categories(article.categorys)}">
-                            </div>
                         </div>
+                        <div class="item-meta-cat" th:utext="${commons.show_categories(article.categorysUrl,article.categorysName)}">
+                            </div>
                     </div>
                 </div>
             </div>
             
         </div>
     </div>
-     <div class="lists-navigator clearfix">
-        <div th:replace="admin/module/macros::pageNav(${articles},'←','→','page')"></div>
-    </div>
+     	<div class="lists-navigator clearfix">
+      	  <div th:replace="admin/module/macros::pageNav(${articles},'←','→','page')"></div>
+    	</div>
+	</div>
 </div>
 </body>
  <!-- <div th:replace="themes/pinghsu/footer::footer"></div>  -->
