@@ -9,7 +9,7 @@
                 <div class="post-list-item-container">
                     <a class="item-thumb bg-deepgrey" th:href="${article.articleUrl}"
                     	 th:style="'background-image:url('+@{${article.articleThumbnail}}+');'" href="#">
-                        <dir class="item-desc" th:text="${article.tags}"></dir>
+                        <dir class="item-desc" th:text="${article.tagsName}"></dir>
                     </a>
                     <div class="item-slant reverse-slant &lt; bg-deepgrey"></div>
                     <div class="item-slant"></div>
@@ -18,9 +18,8 @@
                         <a href="#" th:href="${article.articleUrl}" th:text="${article.articleTitle}"></a>
                         </div>
                         <div class="item-meta clearfix">
-                         <div th:class="'item-meta-ico '+ ${commons.show_icon(article.id)}">
-                            <div  th:style="'background: url('+@{/img/bg-ico.png}+');no-repeat;background-size: 40px auto;' "></div>
-                        </div>
+                         <div th:class="'item-meta-ico '+ ${commons.show_icon(article.id)}"
+                             th:style="'background: url('+@{/img/bg-ico.png}+');no-repeat;background-size: 40px auto;' "></div>
                         <div class="item-meta-cat" th:utext="${commons.show_categories(article.categorysUrl,article.categorysName)}">
                             </div>
                     </div>
