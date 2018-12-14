@@ -76,25 +76,30 @@
 								<td th:text="${#strings.abbreviate(article.tagsName,20)}"> </td>
 								<td></td>
 								<td></td>
-								<td
-									th:text="${#dates.format(article.articleNewstime,'yyyy/MM/dd HH:mm:ss')}"></td>
-								<td th:switch="${article.articleStatus}"><th:block
-										th:case="0">
+								<td th:text="${#dates.format(article.articleNewstime,'yyyy/MM/dd HH:mm:ss')}"></td>
+								<td th:switch="${article.articleStatus}">
+								<th:block th:case="0">
 										<button onclick="" class="btn btn-outline-primary">查看</button>
 										<a th:href="@{/admin/article/edit(article_id=${article.id})}"  class="btn btn-outline-info">编辑</a>
 										<button th:onclick="'javascript:recycleModel('+${article.id}+')'"
 											class="btn btn-outline-danger">丢弃</button>
-									</th:block> <th:block th:case="1">
+								</th:block> 
+								<th:block th:case="1">
 										<a th:href="@{/admin/article/edit(article_id=${article.id})}"  class="btn btn-outline-primary">编辑</a>
 										<button onclick="" class="btn btn-outline-info">发布</button>
 										<button th:onclick="'javascript:recycleModel('+${article.id}+')'"
 											class="btn btn-outline-danger">丢弃</button>
-									</th:block> <th:block th:case="2">
+								</th:block> 
+								<th:block th:case="2">
 										<button th:onclick="'javascript:restore('+${article.id}+')'" class="btn btn-outline-primary">还原</button>
 										<button th:onclick="'javascript:showModel('+${article.id}+')'"
 											class="btn btn-outline-danger">彻底删除(不可逆)</button>
-									</th:block></td>
+								</th:block>
+								</td>
 							</tr>
+						</th:block>
+						<th:block th:if="${info.list} == 0">
+						暂无文章
 						</th:block>
 					</table>
 				</div>

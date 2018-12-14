@@ -16,7 +16,7 @@
 		(SELECT GROUP_CONCAT(mayday_category.category_url) from
 		mayday_category where category_id in(SELECT category_id FROM
 		mayday_article_category WHERE article_id=a.id) ) categorysUrl
-		FROM mayday_article a WHERE article_status=0  
+		FROM mayday_article a WHERE article_status=#{status}  
 		ORDER BY article_updatetime DESC,article_newstime DESC
 	</select>
 	

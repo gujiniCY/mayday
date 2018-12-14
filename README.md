@@ -35,7 +35,7 @@
  7. [Vali Admin](https://github.com/pratikborsadiya/vali-admin) 后台模板
  8. [jquery toast插件](http://www.jqueryfuns.com/resource/2412) 信息提示插件
  9. [fontawesome](http://www.fontawesome.com.cn/faicons/) 图标库
- 10. [thumbnailator](https://github.com/coobird/thumbnailator) 压缩图片工具栏
+ 10. [thumbnailator](https://github.com/coobird/thumbnailator) 压缩图片工具类
  11. [hutool](http://hutool.mydoc.io/) Hutool是一个Java工具包
  12. [pagehelper](https://pagehelper.github.io/) mybatis分页插件
  13. [bootstrap-fileinput](https://github.com/kartik-v/bootstrap-fileinput) bootstrap上传控件
