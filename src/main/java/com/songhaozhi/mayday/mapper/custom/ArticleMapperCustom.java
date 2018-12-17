@@ -26,4 +26,6 @@ public interface ArticleMapperCustom {
 	List<ArchiveBo> findDateAndCount();
 
 	List<ArticleCustom> findPageArticle(int status);
+
+	int findRepeatByUrl(@Param(value="articleUrl")String articleUrl);
 }

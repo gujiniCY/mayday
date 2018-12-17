@@ -71,4 +71,10 @@ public interface ArticleService {
 	 * @return
 	 */
 	List<ArchiveBo> archives() throws Exception;
+	/**
+	 * 统计重复链接
+	 * @param articleUrl 文章链接
+	 * @return
+	 */
+	int findRepeatByUrl(String articleUrl);
 }

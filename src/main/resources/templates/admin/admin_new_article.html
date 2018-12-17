@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org" xmlns:thSys="">
-<div th:replace="admin/module/macros :: head"></div>
+<div th:replace="admin/module/macros :: head('新建文章 - ')"></div>
 <body class="app sidebar-mini rtl">
 	<main class="app-content">
 	<div th:replace="admin/module/macros :: header"></div>
@@ -30,10 +30,10 @@
 							<input class="form-control" name="articleTitle" id="articleTitle" type="text"
 								placeholder="输入文章标题">
 						</div>
-						<!-- <div class="form-group">
+						<div class="form-group">
 							<input class="form-control" name="articleUrl" id="articleUrl" type="text"
-								placeholder="输入文章链接">
-						</div> -->
+								placeholder="默认为拼音，如果为空责自动生成链接">
+						</div> 
 						<div class="form-group">
 							<textarea class="form-control" id="articleMd"></textarea>
 						</div>
@@ -182,7 +182,7 @@
 		   inlineAttachment.editors.codemirror4.attach(simplemde.codemirror, {
 	           uploadUrl: "/admin/attachment/upload"
 	       });
-	  /*  //生成url链接
+	    //生成url链接
 	   $("#articleTitle").blur(function(){
 		   $.ajax({
 			  url:"/admin/article/filter",
@@ -193,7 +193,7 @@
 				  $("#articleUrl").val(data.msg);
 			  }
 		   });
-	   });  */
+	   });  
    });
  	//选择略缩图
 	function openChoice(id){
@@ -224,7 +224,6 @@
  					dataType : "json",
  					success : function(data){
  						if(data.flag==true){
- 							simplemde.clearAutosavedValue();
  	 						 $.toast({
  	 	                         text: data.msg,
  	 	                         heading: '提示',
@@ -241,6 +240,7 @@
  	 	                        	 window.location.href = "/admin/article"; 
  	 	                         }
  	 	                     });
+ 	 						simplemde.clearAutosavedValue();
  						}else{
  							showMsg(data.msg,"error","3000");
  						}

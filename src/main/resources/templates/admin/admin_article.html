@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org" xmlns:thSys="">
-<div th:replace="admin/module/macros :: head"></div>
+<div th:replace="admin/module/macros :: head('文章管理 - ')"></div>
 <body class="app sidebar-mini rtl">
 	<main class="app-content">
 	<div th:replace="admin/module/macros :: header"></div>
@@ -69,38 +69,38 @@
 							<td>创建时间</td>
 							<td>操作</td>
 						</tr>
-						<th:block th:each="article : ${info.list}">
-							<tr>
-								<td th:text="${#strings.abbreviate(article.articleTitle,20)}"></td>
-								<td th:text="${#strings.abbreviate(article.categorysName,20)}"></td>
-								<td th:text="${#strings.abbreviate(article.tagsName,20)}"> </td>
-								<td></td>
-								<td></td>
-								<td th:text="${#dates.format(article.articleNewstime,'yyyy/MM/dd HH:mm:ss')}"></td>
-								<td th:switch="${article.articleStatus}">
-								<th:block th:case="0">
-										<button onclick="" class="btn btn-outline-primary">查看</button>
-										<a th:href="@{/admin/article/edit(article_id=${article.id})}"  class="btn btn-outline-info">编辑</a>
-										<button th:onclick="'javascript:recycleModel('+${article.id}+')'"
-											class="btn btn-outline-danger">丢弃</button>
-								</th:block> 
-								<th:block th:case="1">
-										<a th:href="@{/admin/article/edit(article_id=${article.id})}"  class="btn btn-outline-primary">编辑</a>
-										<button onclick="" class="btn btn-outline-info">发布</button>
-										<button th:onclick="'javascript:recycleModel('+${article.id}+')'"
-											class="btn btn-outline-danger">丢弃</button>
-								</th:block> 
-								<th:block th:case="2">
-										<button th:onclick="'javascript:restore('+${article.id}+')'" class="btn btn-outline-primary">还原</button>
-										<button th:onclick="'javascript:showModel('+${article.id}+')'"
-											class="btn btn-outline-danger">彻底删除(不可逆)</button>
-								</th:block>
-								</td>
-							</tr>
-						</th:block>
-						<th:block th:if="${info.list} == 0">
-						暂无文章
-						</th:block>
+						<tr th:each="article,iterStat : ${info.list}">
+							<td th:text="${#strings.abbreviate(article.articleTitle,20)}"></td>
+							<td th:text="${#strings.abbreviate(article.categorysName,20)}"></td>
+							<td th:text="${#strings.abbreviate(article.tagsName,20)}"></td>
+							<td></td>
+							<td></td>
+							<td th:text="${#dates.format(article.articleNewstime,'yyyy/MM/dd HH:mm:ss')}"></td>
+							<td th:switch="${article.articleStatus}"><th:block
+									th:case="0">
+									<button onclick="" class="btn btn-outline-primary">查看</button>
+									<a th:href="@{/admin/article/edit(article_id=${article.id})}"
+										class="btn btn-outline-info">编辑</a>
+									<button
+										th:onclick="'javascript:recycleModel('+${article.id}+')'"
+										class="btn btn-outline-danger">丢弃</button>
+								</th:block> <th:block th:case="1">
+									<a th:href="@{/admin/article/edit(article_id=${article.id})}"
+										class="btn btn-outline-primary">编辑</a>
+									<button onclick="" class="btn btn-outline-info">发布</button>
+									<button
+										th:onclick="'javascript:recycleModel('+${article.id}+')'"
+										class="btn btn-outline-danger">丢弃</button>
+								</th:block> <th:block th:case="2">
+									<button th:onclick="'javascript:restore('+${article.id}+')'"
+										class="btn btn-outline-primary">还原</button>
+									<button th:onclick="'javascript:showModel('+${article.id}+')'"
+										class="btn btn-outline-danger">彻底删除(不可逆)</button>
+								</th:block></td>
+						</tr>
+						<tr th:unless="${info.list.total} != 0">
+							<td th:text="暂无文章" th:attr="colspan='7',align='center'" ></td>
+						</tr>
 					</table>
 				</div>
 				<div th:replace="admin/module/macros :: pageAdminNav(${info})"></div>

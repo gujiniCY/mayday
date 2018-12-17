@@ -184,4 +184,9 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 		return listforArchiveBo;
 	}
+
+	@Override
+	public int findRepeatByUrl(String articleUrl) {
+		return articleMapperCustom.findRepeatByUrl(articleUrl);
+	}
 }

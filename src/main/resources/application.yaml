@@ -11,6 +11,8 @@ spring:
     servlet:
       content-type: text/html
     mode: HTML
+    encoding: UTF-8
+    cache: false
   datasource: 
         type: com.alibaba.druid.pool.DruidDataSource
         url: jdbc:mysql://47.106.22.160:3306/mayday

@@ -28,15 +28,22 @@
 	<select id="countByStatus" resultType="integer">
 		SELECT COUNT(*) FROM mayday_article WHERE article_status=#{status}
 	</select>
+	
 	<update id="updateStatus" parameterType="int">
 	update mayday_article set article_status=#{status} where id = #{id}
 	</update>
+	
 	<select id="findByArticleId" resultType="com.songhaozhi.mayday.model.domain.ArticleCustom" parameterType="Integer">
 	SELECT a.id,a.user_id,a.article_content,a.article_content_md,a.article_newstime,a.article_summary,a.article_thumbnail,a.article_title,article_type,a.article_comment,a.article_url,GROUP_CONCAT(distinct  b.category_id) categorys ,GROUP_CONCAT(distinct  c.tag_id) tags FROM mayday_article a INNER JOIN mayday_article_category b INNER JOIN mayday_article_tag c on a.id=b.article_id AND b.article_id=c.article_id WHERE a.id=#{id}
 	</select>
+	
 	<select id="findDateAndCount" resultType="com.songhaozhi.mayday.model.dto.ArchiveBo">
 	select DATE_FORMAT(article_newstime, '%Y年%m月') as date, count(*) as count from mayday_article
 	where article_post = 'post' and article_status = 0
 	group by date order by date desc
+	</select>
+	
+	<select id="findRepeatByUrl" parameterType="String" resultType="Integer">
+	SELECT COUNT(*) FROM mayday_article WHERE article_url = #{articleUrl}
 	</select>
 </mapper>

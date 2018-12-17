@@ -9,7 +9,7 @@ import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.standard.processor.StandardXmlNsTagProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
 
-import com.songhaozhi.mayday.config.thymeleaf.tag.ThSysDictProcessor;
+import com.songhaozhi.mayday.config.thymeleaf.tag.ThSysTagProcessor;
 
 /**
  * 系统方言
@@ -29,7 +29,7 @@ public class ThSysDialect extends AbstractProcessorDialect{
 	@Override
 	public Set<IProcessor> getProcessors(String dialectPrefix) {
 		Set<IProcessor> processors=new HashSet<IProcessor>();
-		processors.add(new ThSysDictProcessor(dialectPrefix));
+		processors.add(new ThSysTagProcessor(dialectPrefix));
 		processors.add(new StandardXmlNsTagProcessor(TemplateMode.HTML, dialectPrefix));
 		return processors;
 	}

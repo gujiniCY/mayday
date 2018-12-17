@@ -33,6 +33,7 @@ import com.songhaozhi.mayday.service.TagService;
 import com.songhaozhi.mayday.util.MaydayUtil;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.ServletUtil;
 
@@ -112,12 +113,27 @@ public class ArticleController extends BaseController {
 			if (StrUtil.isEmpty(article.getArticleTitle())) {
 				return new JsonResult(false, "文章标题不能为空");
 			}
+			//判断文章链接是否重复
+			if(!StrUtil.isEmpty(article.getArticleUrl())) {
+				//查询url是否重复
+				int repeat=articleService.findRepeatByUrl(article.getArticleUrl());
+				if(repeat !=0 ) {
+					return new JsonResult(false, "文章路径已存在");
+				}
+			}
 			if(article.getId()==null) {
 				User user = (User) request.getSession().getAttribute(MaydayConst.USER_SESSION_KEY);
 				article.setUserId(user.getUserId());
 				article.setArticleNewstime(DateUtil.date());
 				article.setArticleUpdatetime(DateUtil.date());
-				article.setArticleUrl(String.valueOf(System.currentTimeMillis()/1000));
+				//如果自定义链接为空则按时间戳生成链接
+				if(StrUtil.isEmpty(article.getArticleUrl())) {
+					article.setArticleUrl(String.valueOf(System.currentTimeMillis()/1000));
+				}
+				//如果没有选择略缩图则随机一张图
+				if(StrUtil.isEmpty(article.getArticleThumbnail())) {
+					article.setArticleThumbnail("/static/img/rand/"+RandomUtil.randomInt(0, 19)+".jpg");
+				}
 				articleService.save(article, tags, categorys);
 				//添加日志
 				logService.save(new Log(LogConstant.PUBLISH_AN_ARTICLE, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
