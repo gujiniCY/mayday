@@ -43,6 +43,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		// 通过addResourceHandler添加资源映射路径，然后通过addResourceLocations来指定路径。可以访问自定义upload文件夹
 		registry.addResourceHandler("/upload/**").addResourceLocations("classpath:/upload/")
 				.addResourceLocations("file:///" + System.getProperties().getProperty("user.home") + "/mayday/upload/");
+		registry.addResourceHandler("/source/**").addResourceLocations("classpath:/templates/themes/");
 		WebMvcConfigurer.super.addResourceHandlers(registry);
 	}
 

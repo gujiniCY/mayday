@@ -7,7 +7,7 @@
 	<div th:replace="admin/module/macros :: sidebar"></div>
 	<div class="app-title">
 		<div>
-			<h1>分类目录</h1>
+			<h1>菜单管理</h1>
 		</div>
 		<ul class="app-breadcrumb breadcrumb">
 			<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -19,33 +19,43 @@
 			<div class="tile">
 				<div class="row">
 					<div class="col-lg-5">
-						<h4 class="tile-title">添加菜单</h4>
-						<form>
+					<th:block th:if="${menu} == null">
+					<h4 class="tile-title">添加菜单</h4>
+					</th:block>
+					<th:block th:if="${menu} != null">
+					<h4 class="tile-title">修改菜单</h4>
+					</th:block>
+						<form action="/admin/menus/save" method="post">
+						<input type="hidden" name="menuId" id="menuId"
+								th:value="${menu != null ? menu.menuId :''}">
 							<div class="form-group">
 								<label class="col-form-label">名称</label> <input
-									class="form-control" name="menuName" type="text">
+									class="form-control" th:value="${menu != null ?menu.menuName : ''}" name="menuName" type="text">
 							</div>
 							<div class="form-group">
 								<label class="col-form-label">路径</label> <input
-									class="form-control" name="menuUrl" type="text">
+									class="form-control" th:value="${menu != null ?menu.menuUrl : ''}" name="menuUrl" type="text">
 							</div>
 							<div class="form-group">
 								<label class="col-form-label">排序编号</label> <input
-									class="form-control" name="menuSort" type="text">
+									class="form-control" th:value="${menu != null ?menu.menuSort : ''}" name="menuSort" type="text">
 							</div>
 							<div class="form-group">
 								<label class="col-form-label">图标</label> <input
-									class="form-control" name="menuIcon" type="text">
+									class="form-control" th:value="${menu != null ?menu.menuIcon : ''}" name="menuIcon" type="text">
 							</div>
 							<div class="form-group">
 								<label>打开方式</label><select
 									class="form-control" name="menuTarget">
-									<option>新窗口</option>
-									<option>当前窗口</option>
+									<option th:selected="${menu != null ? menu.menuTarget=='_blank' : ''}" value="_blank">新窗口</option>
+									<option th:selected="${menu != null ? menu.menuTarget=='_self' : ''}" value="_self">当前窗口</option>
 								</select>
 							</div>
 							<div class="tile-footer">
 								<button class="btn btn-outline-primary" type="submit">保存菜单</button>
+							<th:block th:if="${menu} != null">
+									<a class="btn btn-outline-info" href="/admin/menus">返回添加</a>
+								</th:block>
 							</div>
 						</form>
 					</div>
@@ -125,6 +135,14 @@
            }
 		});
 	});
+	function showModel(menuId) {
+		$("#menuId").val(menuId);
+		$("#removeModal").modal();
+	}
+	function remove() {
+		window.location.href = "/admin/menus/remove?menuId="
+				+ $("#menuId").val();
+	}
 	</script>
 </body>
 </html>

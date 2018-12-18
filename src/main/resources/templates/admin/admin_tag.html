@@ -26,7 +26,7 @@
 							<h4 class="tile-title">修改标签</h4>
 						</th:block>
 						<form action="/admin/tag/save" method="post" autocomplete="off">
-							<input type="hidden" name="tagId"
+							<input type="hidden" name="tagId" id="tagid"
 								th:value="${tag!=null ? tag.tagId :''}">
 							<div class="form-group">
 								<label class="col-form-label" for="inputDefault">*名称<span
@@ -120,6 +120,7 @@
 	});
 		function showModel(tagId) {
 			$("#tagid").val(tagId);
+			console.log($("#tagid"));
 			$("#removeModal").modal();
 		}
 		function remove() {

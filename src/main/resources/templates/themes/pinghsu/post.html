@@ -9,8 +9,12 @@
         </h1>
         <div class="post-data">
             <time itemprop="datePublished" th:text="'发布于 '+ ${#dates.format(article.articleNewstime,'yyyy/MM/dd HH:mm:ss')}"></time>
-            / <th:block th:utext="${commons.show_categories(article.categorysUrl,article.categorysName)}"/> / <a href="#comments" th:text="${article.articleComment ?: 0}+' 条评论'"></a> /
-            <!-- <th:block th:text="${article.hits}"/>浏览 -->
+            / <th:block th:utext="${commons.show_categories(article.categorysUrl,article.categorysName)}"/>/
+            	<!-- id 将作为查询条件 -->
+		<span th:id="'/post/'+${article.articleUrl}" class="leancloud-visitors">
+    		<em class="post-meta-item-text">阅读量 </em>
+  		 	 <i class="leancloud-visitors-count"></i>
+		</span>
         </div>
     </div>
     <div id="post-content" class="post-content" itemprop="articleBody">
@@ -21,8 +25,21 @@
             <th:block th:text="${#dates.format(article.articleUpdatetime,'yyyy/MM/dd HH:mm:ss')}"/>
         </p>
     </div>
+    <div id="vcomments" class="post-info"></div>
 </article>
-<!-- <div th:replace="themes/default/comments::comments"></div>
-<div th:replace="themes/default/footer::footer"></div> -->
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'yyxErCzYD99NmfEJoq23DtHI-gzGzoHsz',
+            appKey: 'gw00k4VJMMFYwPh7f1tAfYiC',
+            notify:false, 
+            verify:false, 
+            avatar:'mm', 
+            placeholder: '来了就说点什么吧' ,
+            avatar:'retro', // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+            visitor: true
+        })
+    </script>
+<!-- <div th:replace="themes/default/footer::footer"></div> -->
 </body>
 </html>

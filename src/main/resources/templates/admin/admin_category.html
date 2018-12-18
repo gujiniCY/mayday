@@ -27,7 +27,7 @@
 						</th:block>
 						<form action="/admin/category/save" method="post"
 							autocomplete="off">
-							<input type="hidden" name="categoryId"
+							<input type="hidden" name="categoryId" id="categoryid"
 								th:value="${category!=null ? category.categoryId :''}">
 							<div class="form-group">
 								<label class="col-form-label" for="inputDefault">*名称</label> <input
