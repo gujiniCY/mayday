@@ -68,4 +68,19 @@ public class IndexController extends BaseController {
 		model.addAttribute("articleList", archiveBos);
 		return this.render("archives");
 	}
+	/**
+	 * 文章页
+	 * @param model
+	 * @param articleUrl 文章url
+	 * @return
+	 */
+	@GetMapping(value= {"post/{articleUrl}","post/{articleUrl}.html"})
+	public String post(Model model,@PathVariable(value="articleUrl") String articleUrl) {
+		ArticleCustom  articleCustom=articleService.findByArticleUrl(articleUrl);
+		if(articleCustom==null) {
+			return this.render_404();
+		}
+		model.addAttribute("article", articleCustom);
+		return this.render("post");
+	}
 }

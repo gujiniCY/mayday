@@ -35,7 +35,7 @@ import cn.hutool.core.date.DateUtil;
  * 
  */
 @Service
-@Transactional(rollbackFor=RuntimeException.class)
+@Transactional(rollbackFor = RuntimeException.class)
 public class ArticleServiceImpl implements ArticleService {
 
 	@Autowired
@@ -57,7 +57,7 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public void save(Article article, Long[] tags, Long[] categorys) throws Exception {
 		articleMapper.insert(article);
-		if(categorys!=null) {
+		if (categorys != null) {
 			for (Long cate : categorys) {
 				ArticleCategory articleCategory = new ArticleCategory();
 				articleCategory.setArticleId(article.getId());
@@ -65,7 +65,7 @@ public class ArticleServiceImpl implements ArticleService {
 				articleCategoryMapper.insert(articleCategory);
 			}
 		}
-		if(tags!=null) {
+		if (tags != null) {
 			for (Long tag : tags) {
 				ArticleTag articleTag = new ArticleTag();
 				articleTag.setArticleId(article.getId());
@@ -133,17 +133,21 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 		// 再添加
 		// 鬼知道我最开始为什么这样子设计。。。等到都写完了就不愿意改了，先用着吧
-		for (Long cate : categorys) {
-			ArticleCategory articleCategory = new ArticleCategory();
-			articleCategory.setArticleId(article.getId());
-			articleCategory.setCategoryId(cate);
-			articleCategoryMapper.insert(articleCategory);
+		if (categorys != null) {
+			for (Long cate : categorys) {
+				ArticleCategory articleCategory = new ArticleCategory();
+				articleCategory.setArticleId(article.getId());
+				articleCategory.setCategoryId(cate);
+				articleCategoryMapper.insert(articleCategory);
+			}
 		}
-		for (Long tag : tags) {
-			ArticleTag articleTag = new ArticleTag();
-			articleTag.setArticleId(article.getId());
-			articleTag.setTagId(tag);
-			articleTagMapper.insert(articleTag);
+		if (tags != null) {
+			for (Long tag : tags) {
+				ArticleTag articleTag = new ArticleTag();
+				articleTag.setArticleId(article.getId());
+				articleTag.setTagId(tag);
+				articleTagMapper.insert(articleTag);
+			}
 		}
 	}
 
@@ -188,5 +192,10 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public int findRepeatByUrl(String articleUrl) {
 		return articleMapperCustom.findRepeatByUrl(articleUrl);
+	}
+
+	@Override
+	public ArticleCustom findByArticleUrl(String articleUrl) {
+		return articleMapperCustom.findByArticleUrl(articleUrl);
 	}
 }

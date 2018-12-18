@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org" xmlns:thSys="">
-<div th:replace="admin/module/macros :: head('菜单管理 - ')"></div>
+<div th:replace="admin/module/macros :: head('菜单管理')"></div>
 <body class="app sidebar-mini rtl">
 	<main class="app-content">
 	<div th:replace="admin/module/macros :: header"></div>
@@ -22,26 +22,30 @@
 						<h4 class="tile-title">添加菜单</h4>
 						<form>
 							<div class="form-group">
-								<label class="col-form-label" for="inputDefault">名称</label> <input
-									class="form-control" id="inputDefault" type="text">
+								<label class="col-form-label">名称</label> <input
+									class="form-control" name="menuName" type="text">
 							</div>
 							<div class="form-group">
-								<label class="col-form-label" for="inputDefault">路径</label> <input
-									class="form-control" id="inputDefault" type="text">
+								<label class="col-form-label">路径</label> <input
+									class="form-control" name="menuUrl" type="text">
 							</div>
 							<div class="form-group">
-								<label class="col-form-label" for="inputDefault">排序编号</label> <input
-									class="form-control" id="inputDefault" type="text">
+								<label class="col-form-label">排序编号</label> <input
+									class="form-control" name="menuSort" type="text">
 							</div>
 							<div class="form-group">
-								<label for="exampleSelect1">打开方式</label> <select
-									class="form-control" id="exampleSelect1">
-									<option>当前窗口</option>
+								<label class="col-form-label">图标</label> <input
+									class="form-control" name="menuIcon" type="text">
+							</div>
+							<div class="form-group">
+								<label>打开方式</label><select
+									class="form-control" name="menuTarget">
 									<option>新窗口</option>
+									<option>当前窗口</option>
 								</select>
 							</div>
 							<div class="tile-footer">
-								<button class="btn btn-outline-primary" type="submit">添加</button>
+								<button class="btn btn-outline-primary" type="submit">保存菜单</button>
 							</div>
 						</form>
 					</div>
@@ -51,37 +55,24 @@
 							<table class="table">
 								<thead>
 									<tr>
-										<th>#</th>
-										<th>First Name</th>
-										<th>Last Name</th>
-										<th>Username</th>
+										<th>名称</th>
+										<th>路径</th>
+										<th>排序</th>
+										<th>图标</th>
+										<th>操作</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>Mark</td>
-										<td>Otto</td>
-										<td>@mdo</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Jacob</td>
-										<td>Thornton</td>
-										<td>@fat</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>Larry</td>
-										<td>the Bird</td>
-										<td>@twitter</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>Jacob</td>
-										<td>Thornton</td>
-										<td>@fat</td>
-										<td><button>修改</button><button>删除</button></td>
+									<tr th:each="menu : ${menus}">
+										<td th:text="${menu.menuName}"></td>
+										<td th:text="${menu.menuUrl}"></td>
+										<td th:text="${menu.menuSort}"></td>
+										<td th:text="${menu.menuIcon}"></td>
+										<td><a class="btn btn-outline-primary"
+											th:href="@{/admin/menus/edit(menuId=${menu.menuId})}">修改</a>
+											<button class="btn btn-outline-danger"
+												th:onclick="'javascript:showModel('+${menu.menuId}+')'">删除</button>
+										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -93,6 +84,47 @@
 		</div>
 	</div>
 	</main>
+	<!-- 删除确认弹出层 -->
+	<div th:replace="admin/module/macros :: remove"></div>
 	<div th:replace="admin/module/macros :: comm" ></div>
+	<div th:replace="admin/module/macros :: bootstrapValidator"></div>
+	<script type="text/javascript">
+	$(function(){
+		$("form").bootstrapValidator({
+			message: 'This value is not valid',
+           　		feedbackIcons: {
+               　　　　　　　　valid: 'glyphicon glyphicon-ok',
+               　　　　　　　　invalid: 'glyphicon glyphicon-remove',
+               　　　　　　　　validating: 'glyphicon glyphicon-refresh'
+           　　　　　　　　   },
+            fields: {
+            	menuName: {
+                   message: '名称验证失败',
+                   validators: {
+                       notEmpty: {
+                           message: '名称不能为空'
+                       }
+                   }
+               },
+               menuUrl: {
+            	   message: '路径验证失败',
+                   validators: {
+                       notEmpty: {
+                           message: '路径不能为空'
+                       }
+                   }
+               },
+               menuSort: {
+            	   message: '排序编号验证失败',
+                   validators: {
+                       notEmpty: {
+                           message: '排序编号不能为空'
+                       }
+                   }
+               },
+           }
+		});
+	});
+	</script>
 </body>
 </html>

@@ -132,13 +132,17 @@ public class ArticleController extends BaseController {
 				}
 				//如果没有选择略缩图则随机一张图
 				if(StrUtil.isEmpty(article.getArticleThumbnail())) {
-					article.setArticleThumbnail("/static/img/rand/"+RandomUtil.randomInt(0, 19)+".jpg");
+					article.setArticleThumbnail("/static/img/rand/"+RandomUtil.randomInt(1, 19)+".jpg");
 				}
 				articleService.save(article, tags, categorys);
 				//添加日志
 				logService.save(new Log(LogConstant.PUBLISH_AN_ARTICLE, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
 						DateUtil.date()));
 			}else {
+				//如果没有选择略缩图则随机一张图
+				if(StrUtil.isEmpty(article.getArticleThumbnail())) {
+					article.setArticleThumbnail("/static/img/rand/"+RandomUtil.randomInt(1, 19)+".jpg");
+				}
 				//文章最后修改时间
 				article.setArticleUpdatetime(DateUtil.date());
 				articleService.update(article, tags, categorys);

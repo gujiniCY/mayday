@@ -28,4 +28,6 @@ public interface ArticleMapperCustom {
 	List<ArticleCustom> findPageArticle(int status);
 
 	int findRepeatByUrl(@Param(value="articleUrl")String articleUrl);
+
+	ArticleCustom findByArticleUrl(@Param(value="articleUrl")String articleUrl);
 }

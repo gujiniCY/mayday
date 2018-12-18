@@ -33,4 +33,11 @@ public class BaseController {
         themeStr.append("/");
         return themeStr.append(pageName).toString();
     }
+    /**
+     * 404页面
+     * @return
+     */
+    public String render_404() {
+        return "error/404";
+    }
 }

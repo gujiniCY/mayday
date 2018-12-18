@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:yh="http://www.thymeleaf.org">
-<div th:replace="themes/default/header::header(${article.title},${article.tags})"></div>
+<div th:replace="themes/pinghsu/header::header(${article.articleTitle},${article.tagsName})"></div>
 <body>
 <article class="main-content post-page" itemscope="" itemtype="http://schema.org/Article">
     <div class="post-header">
         <h1 class="post-title" itemprop="name headline">
-            <a th:href="${commons.permalink(article)}" th:text="${article.title}" data-no-instant=""></a>
+            <a th:href="@{'/post/'+${article.articleUrl}}" th:text="${article.articleTitle}" data-no-instant=""></a>
         </h1>
         <div class="post-data">
-            <time th:datetime="${commons.fmtdate(article.created)}" itemprop="datePublished" th:text="'发布于 '+ ${commons.fmtdate(article.created)}"></time>
-            / <th:block th:utext="${commons.show_categories(article.categories)}"/> / <a href="#comments" th:text="${article.commentsNum ?: 0}+' 条评论'"></a> /
-            <th:block th:text="${article.hits}"/>浏览
+            <time itemprop="datePublished" th:text="'发布于 '+ ${#dates.format(article.articleNewstime,'yyyy/MM/dd HH:mm:ss')}"></time>
+            / <th:block th:utext="${commons.show_categories(article.categorysUrl,article.categorysName)}"/> / <a href="#comments" th:text="${article.articleComment ?: 0}+' 条评论'"></a> /
+            <!-- <th:block th:text="${article.hits}"/>浏览 -->
         </div>
     </div>
     <div id="post-content" class="post-content" itemprop="articleBody">
-        <p class="post-tags" th:utext="${commons.show_tags(article.tags)}"></p>
-        <th:block th:utext="${commons.article(article.content)}"/>
+        <p class="post-tags" th:utext="${commons.show_tags(article.tagsUrl,article.tagsName)}"></p>
+        <th:block th:utext="${article.articleContent}"/>
         <p class="post-info">
             本站文章除注明转载/出处外，均为本站原创或翻译，转载前请务必署名,转载请标明出处<br/>最后编辑时间为:
-            <th:block th:text="${commons.fmtdate(article.modified, 'yyyy/MM/dd HH:mm')}"/>
+            <th:block th:text="${#dates.format(article.articleUpdatetime,'yyyy/MM/dd HH:mm:ss')}"/>
         </p>
     </div>
 </article>
-<div th:replace="themes/default/comments::comments"></div>
-<div th:replace="themes/default/footer::footer"></div>
+<!-- <div th:replace="themes/default/comments::comments"></div>
+<div th:replace="themes/default/footer::footer"></div> -->
 </body>
 </html>

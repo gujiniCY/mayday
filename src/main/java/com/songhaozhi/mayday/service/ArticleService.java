@@ -77,4 +77,10 @@ public interface ArticleService {
 	 * @return
 	 */
 	int findRepeatByUrl(String articleUrl);
+	/**
+	 * 文章链接查询
+	 * @param articleUrl
+	 * @return 文章
+	 */
+	ArticleCustom findByArticleUrl(String articleUrl);
 }

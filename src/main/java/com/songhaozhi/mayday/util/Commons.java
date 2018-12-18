@@ -46,5 +46,25 @@ public class Commons {
 		}
 		return sb.toString();
 	}
+	/**
+	 * 显示标签
+	 * @param categorysUrl
+	 * @param categorysName
+	 * @return
+	 * @throws Exception
+	 */
+	public static String show_tags(String tagsUrl,String tagsName) throws Exception {
+		StringBuffer sb = new StringBuffer();
+		if (StrUtil.isNotBlank(tagsUrl)) {
+			String[] tagUrl = tagsUrl.split(",");
+			String[] tagName=tagsName.split(",");
+			int i=0;
+			for (String url : tagUrl) {
+				sb.append("<a href=\"/tag/" + URLEncoder.encode(url, "UTF-8") + "\">" + tagName[i] + "</a>");
+				i++;	
+			}
+		}
+		return sb.toString();
+	}
 
 }

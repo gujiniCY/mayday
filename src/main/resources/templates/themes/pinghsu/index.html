@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="themes/pinghsu/header::header('首页 - ',null)"></div>
+<div th:replace="themes/pinghsu/header::header('首页',null)"></div>
 <body>
 <div class="main-content index-page clearfix">
     <div class="post-lists">
         <div class="post-lists-body">
             <div class="post-list-item" th:each="article : ${articles.list}">
                 <div class="post-list-item-container">
-                    <a class="item-thumb bg-deepgrey" th:href="${article.articleUrl}"
+                    <a class="item-thumb bg-deepgrey" th:href="@{'/post/'+${article.articleUrl}}"
                     	 th:style="'background-image:url('+@{${article.articleThumbnail}}+');'" href="#">
                         <dir class="item-desc" th:text="${article.tagsName}"></dir>
                     </a>
@@ -15,7 +15,7 @@
                     <div class="item-slant"></div>
                     <div class="item-label">
                         <div class="item-title">
-                        <a href="#" th:href="${article.articleUrl}" th:text="${article.articleTitle}"></a>
+                        <a href="#" th:href="@{'/post/'+${article.articleUrl}}" th:text="${article.articleTitle}"></a>
                         </div>
                         <div class="item-meta clearfix">
                          <div th:class="'item-meta-ico '+ ${commons.show_icon(article.id)}"
