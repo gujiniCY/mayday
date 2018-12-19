@@ -173,8 +173,55 @@
 				</div>
 				<!-- 评论 -->
 				<div id="comment" class="tab-pane fade">
-					<form class="form-horizontal">
-						
+					<form class="form-horizontal" id="commentOptions">
+						<div class="form-group row">
+							<label class="col-form-label col-md-2">APP ID:<span
+								data-toggle="tooltip" data-placement="top" title="Leancloud申请的appid"
+								style="cursor: pointer"> <i class="fa fa-question-circle"
+									aria-hidden="true"></i>
+							</span></label>
+							<div class="col-md-5">
+								<input class="form-control" type="text" th:value="${options?.comment_valine_appid}" name="comment_valine_appid">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-form-label col-md-2">APP KEY:<span
+								data-toggle="tooltip" data-placement="top" title="Leancloud申请的appkey"
+								style="cursor: pointer"> <i class="fa fa-question-circle"
+									aria-hidden="true"></i>
+							</span></label>
+							<div class="col-md-5">
+								<input class="form-control" type="text" th:value="${options?.comment_valine_appkey}" name="comment_valine_appkey">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-form-label col-md-2">头像类型:</label>
+							<div class="col-md-5">
+								<select class="form-control" name="comment_valine_portrait">
+								<option th:selected="${options.comment_valine_portrait=='identicon'}" value="identicon">抽象几何图形</option>
+								<option th:selected="${options.comment_valine_portrait=='monsterid'}" value="monsterid">小怪物</option>
+								<option th:selected="${options.comment_valine_portrait=='wavatar'}" value="wavatar">wavatar</option>
+								<option th:selected="${options.comment_valine_portrait=='retro'}" value="retro">复古</option>
+								<option th:selected="${options.comment_valine_portrait=='robohash'}" value="robohash">机器人</option>
+								<option th:selected="${options.comment_valine_portrait=='hide'}" value="hide">不显示头像</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-form-label col-md-2">占位提示:</label>
+							<div class="col-md-5">
+								<input class="form-control" type="text" th:value="${options?.comment_valine_hint}" name="comment_valine_hint">
+							</div>
+						</div>
+						<div class="tile-footer">
+							<div class="row">
+								<div class="col-md-8 col-md-offset-3">
+									<button class="btn btn-outline-primary" type="button" onclick="save('commentOptions')">
+										<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
+									</button>
+								</div>
+							</div>
+						</div>
 					</form>
 				</div>
 				<!-- 附件 -->
@@ -195,7 +242,7 @@
 		var from =$("#"+id).serialize();
 		$.ajax({
 			type:"post",
-			url:"/admin/options/save",
+			url:"/admin/option/save",
 			data:from,
 			dataType:"json",
 			success:function(data){

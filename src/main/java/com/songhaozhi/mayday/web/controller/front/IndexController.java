@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.github.pagehelper.PageInfo;
 import com.songhaozhi.mayday.model.domain.ArticleCustom;
+import com.songhaozhi.mayday.model.domain.Link;
 import com.songhaozhi.mayday.model.dto.ArchiveBo;
 import com.songhaozhi.mayday.model.dto.MaydayConst;
 import com.songhaozhi.mayday.service.ArticleService;
+import com.songhaozhi.mayday.service.LinksService;
 import com.songhaozhi.mayday.web.controller.admin.BaseController;
 
 /**
@@ -24,6 +26,8 @@ import com.songhaozhi.mayday.web.controller.admin.BaseController;
 public class IndexController extends BaseController {
 	@Autowired
 	private ArticleService articleService;
+	@Autowired
+	private LinksService linksService;
 	/**
 	 * 请求首页
 	 *
@@ -82,5 +86,16 @@ public class IndexController extends BaseController {
 		}
 		model.addAttribute("article", articleCustom);
 		return this.render("post");
+	}
+	/**
+	 * 友链
+	 * @param model
+	 * @return
+	 */
+	@GetMapping(value="links")
+	public String links(Model model) {
+		List<Link> links=linksService.findLinks();
+		model.addAttribute("links", links);
+		return this.render("links");
 	}
 }

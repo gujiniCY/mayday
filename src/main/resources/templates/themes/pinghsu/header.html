@@ -34,13 +34,11 @@
 <![endif]-->
 <header id="header" class="header bg-white">
     <div class="navbar-container">
-        <a  class="navbar-logo" href="">
+        <a  class="navbar-logo" th:href="${options.blog_url}">
            <img src="/static/img/transparent.png" alt="首页"/>
         </a>
-        <div class="navbar-menu">
-            <a  href="/archives">归档</a>
-            <a  href="#">友链</a>
-            <a  href="#">关于</a>
+        <div class="navbar-menu" th:each="menu : ${menus}">
+            <a th:href="${menu.menuUrl}" th:text="${menu.menuName}" th:target="${menu.menuTarget}"></a>
         </div>
         <div class="navbar-search" onclick="">
             <span class="icon-search"></span>
@@ -54,9 +52,9 @@
         <div class="navbar-mobile-menu" onclick="">
             <span class="icon-menu cross"><span class="middle"></span></span>
             <ul>
-                <li><a  href="#">归档</a></li>
-                <li><a  href="#">友链</a></li>
-                <li><a  href="#">关于</a></li>
+                <li th:each="menu : ${menus}">
+                <a th:href="${menu.menuUrl}" th:text="${menu.menuName}" th:target="${menu.menuTarget}"></a>
+                </li>
             </ul>
         </div>
     </div>

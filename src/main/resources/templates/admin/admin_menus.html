@@ -29,15 +29,15 @@
 						<input type="hidden" name="menuId" id="menuId"
 								th:value="${menu != null ? menu.menuId :''}">
 							<div class="form-group">
-								<label class="col-form-label">名称</label> <input
+								<label class="col-form-label">*名称</label> <input
 									class="form-control" th:value="${menu != null ?menu.menuName : ''}" name="menuName" type="text">
 							</div>
 							<div class="form-group">
-								<label class="col-form-label">路径</label> <input
+								<label class="col-form-label">*路径</label> <input
 									class="form-control" th:value="${menu != null ?menu.menuUrl : ''}" name="menuUrl" type="text">
 							</div>
 							<div class="form-group">
-								<label class="col-form-label">排序编号</label> <input
+								<label class="col-form-label">*排序编号</label> <input
 									class="form-control" th:value="${menu != null ?menu.menuSort : ''}" name="menuSort" type="text">
 							</div>
 							<div class="form-group">

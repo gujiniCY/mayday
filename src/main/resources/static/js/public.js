@@ -6,13 +6,25 @@ $(document).ready(function() {
  */
 function initMenu() {
 	var pathName = location.pathname;
+	if(pathName == "/admin/article/edit"){
+		pathName = "/admin/article/new";
+	}
+	if(pathName == "/admin/category/edit"){
+		pathName = "/admin/category";
+	}
+	if(pathName == "/admin/tag/edit"){
+		pathName = "/admin/tag";
+	}
+	if(pathName == "/admin/links/edit"){
+		pathName = "/admin/links";
+	}
+	if(pathName == "/admin/menus/edit"){
+		pathName = "/admin/menus";
+	}
 	$(".app-menu").children().each(function() {
 		var li = $(this);
 		li.find('a').each(function() {
 			var href = $(this).attr("href");
-			if(pathName == "/admin/article/edit"){
-				pathName = "/admin/article/new";
-			}
 			if (pathName == href) {
 				li.children().addClass("active").parent().addClass("is-expanded");
 				$(this).addClass("active");

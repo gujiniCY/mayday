@@ -27,19 +27,24 @@
     </div>
     <div id="vcomments" class="post-info"></div>
 </article>
-    <script>
-        new Valine({
+    <script th:inline="javascript" type="text/javascript">
+    $(function(){
+    	//获取拦截器传来的设置项
+        /*<![CDATA[*/
+    	var options=/*[[${options}]]*/;
+        /*]]>*/
+     	 new Valine({
             el: '#vcomments',
-            appId: 'yyxErCzYD99NmfEJoq23DtHI-gzGzoHsz',
-            appKey: 'gw00k4VJMMFYwPh7f1tAfYiC',
+            appId: options.comment_valine_appid,
+            appKey: options.comment_valine_appkey,
             notify:false, 
             verify:false, 
-            avatar:'mm', 
-            placeholder: '来了就说点什么吧' ,
-            avatar:'retro', // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
+            placeholder: options.comment_valine_hint,
+            avatar: options.comment_valine_portrait,
             visitor: true
         })
+    });
     </script>
-<!-- <div th:replace="themes/default/footer::footer"></div> -->
+ <div th:replace="themes/pinghsu/footer::footer"></div> 
 </body>
 </html>
