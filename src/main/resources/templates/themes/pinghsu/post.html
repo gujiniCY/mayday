@@ -25,8 +25,9 @@
             <th:block th:text="${#dates.format(article.articleUpdatetime,'yyyy/MM/dd HH:mm:ss')}"/>
         </p>
     </div>
-    <div id="vcomments" class="post-info"></div>
+    <div id="vcomments"></div>
 </article>
+
     <script th:inline="javascript" type="text/javascript">
     $(function(){
     	//获取拦截器传来的设置项

@@ -134,6 +134,8 @@ public class ArticleController extends BaseController {
 				if(StrUtil.isEmpty(article.getArticleThumbnail())) {
 					article.setArticleThumbnail("/static/img/rand/"+RandomUtil.randomInt(1, 19)+".jpg");
 				}
+				//如果摘要为空则取前五十字为摘要
+				
 				articleService.save(article, tags, categorys);
 				//添加日志
 				logService.save(new Log(LogConstant.PUBLISH_AN_ARTICLE, LogConstant.SUCCESS, ServletUtil.getClientIP(request),

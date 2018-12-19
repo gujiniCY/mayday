@@ -30,10 +30,10 @@
 						href="#comment">评论设置</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="tab"
 						href="#attachment">附件设置</a></li>
-					<li class="nav-item"><a class="nav-link" data-toggle="tab"
+					<!-- <li class="nav-item"><a class="nav-link" data-toggle="tab"
 						href="#admin">后台设置</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="tab"
-						href="#email">邮箱设置</a></li>
+						href="#email">邮箱设置</a></li> -->
 					<li class="nav-item"><a class="nav-link" data-toggle="tab"
 						href="#other">其他设置</a></li>
 				</ul>
@@ -95,13 +95,13 @@
 									aria-hidden="true"></i>
 							</span></label>
 							<div class="col-md-5">
-								<input class="form-control" type="text" name="seo_keyword">
+								<input class="form-control" type="text" th:value="${options?.seo_keyword}" name="seo_keyword">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">博客描述：</label>
 							<div class="col-md-5">
-								<input class="form-control" type="text" name="seo_describe">
+								<input class="form-control" type="text" th:value="${options.seo_describe !=null ? options?.seo_describe : ''}" name="seo_describe">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -140,23 +140,20 @@
 									aria-hidden="true"></i>
 							</span></label>
 							<div class="col-md-5">
-								<input class="form-control" type="text">
+								<input class="form-control" type="text" th:value="${options.index_article !=null ? options?.index_article : '' }" name="index_article">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">RSS显示条数：</label>
 							<div class="col-md-5">
-								<input class="form-control" type="text">
+								<input class="form-control" type="text" th:value="${options?.rss_number !=null ? options?.rss_number : ''}" name="rss_number">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">文章摘要字数：</label>
 							<div class="col-md-5">
 								<div class="input-group">
-									<input type="text" class="form-control" id="" name="">
-									<span class="input-group-btn">
-										<button class="btn btn-default " id="" type="button">更新</button>
-									</span>
+									<input type="text" class="form-control" th:value="${options?.article_summary !=null ? options?.article_summary : '' }" id="" name="article_summary">
 								</div>
 							</div>
 						</div>
@@ -181,7 +178,7 @@
 									aria-hidden="true"></i>
 							</span></label>
 							<div class="col-md-5">
-								<input class="form-control" type="text" th:value="${options?.comment_valine_appid}" name="comment_valine_appid">
+								<input class="form-control" type="text" th:value="${options?.comment_valine_appid !=null ?}" name="comment_valine_appid">
 							</div>
 						</div>
 						<div class="form-group row">

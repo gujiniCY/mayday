@@ -28,7 +28,7 @@
 						</th:block>
 						<form id="linkFrom" action="/admin/links/save" method="post"
 							autocomplete="off">
-							<input type="hidden" name="linkId"
+							<input type="hidden" name="linkId" id="linkid"
 								th:value="${link!=null ? link.linkId :''}">
 							<div class="form-group">
 								<label class="col-form-label">*网站名称<span

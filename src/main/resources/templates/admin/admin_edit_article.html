@@ -30,10 +30,10 @@
 							<input class="form-control" th:value="${articleCustom.articleTitle}" name="articleTitle" id="articleTitle" type="text"
 								placeholder="输入文章标题">
 						</div>
-						<!-- <div class="form-group">
+						 <div class="form-group">
 							<input class="form-control" name="articleUrl" id="articleUrl" type="text"
-								placeholder="输入文章链接">
-						</div> -->
+								placeholder="默认拼音链接，如果为空则自动生成时间戳链接">
+						</div> 
 						<div class="form-group">
 							<textarea class="form-control" id="articleMd" th:text="${articleCustom.articleContentMd}"></textarea>
 						</div>
@@ -184,6 +184,19 @@
 		inlineAttachment.editors.codemirror4.attach(simplemde.codemirror, {
 	      	uploadUrl: "/admin/attachment/upload"
 	    });
+		 //生成url链接
+		   $("#articleTitle").blur(function(){
+			   $.ajax({
+				  url:"/admin/article/filter",
+				  type:"post",
+				  data:{"articleTitle":pinyinUtil.getPinyin($("#articleTitle").val())},
+				  dataType:"json",
+				  success:function(data){
+					  $("#articleUrl").val(data.msg);
+				  }
+			   });
+		   });  
+		 
 	    $('#categorySelect').select2();
 		$('#tagSelect').select2();
 		//设置默认选择

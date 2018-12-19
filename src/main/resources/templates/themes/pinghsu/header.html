@@ -7,10 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta http-equiv="Cache-Control" content="no-transform"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-<!--     <meta name="keywords" th:content=""/>
-    <meta name="description" th:content=""/>
-    <link rel="shortcut icon" th:href=""/>
-    <link rel="apple-touch-icon" th:href=""/> -->
+    <meta name="author" th:content="${options.blog_name}">
+    <meta name="keywords" th:content="${title}+','+${keywords} + ','+${options.seo_keyword}"/>
+    <meta name="description" th:content="${article !=null ?article.articleSummary: ''}"/>
     <link rel="shortcut icon" th:href="@{/static/img/favicon.ico}"/>
    	<title thSys:text="${title}"></title>
     <link th:href="@{//cdn.bootcss.com/highlight.js/9.9.0/styles/xcode.min.css}" rel="stylesheet"/>

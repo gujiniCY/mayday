@@ -64,8 +64,6 @@
 							<td>文章标题</td>
 							<td>所在分类</td>
 							<td>标签</td>
-							<td>评论</td>
-							<td>访问量</td>
 							<td>创建时间</td>
 							<td>操作</td>
 						</tr>
@@ -73,12 +71,10 @@
 							<td th:text="${#strings.abbreviate(article.articleTitle,20)}"></td>
 							<td th:text="${#strings.abbreviate(article.categorysName,20)}"></td>
 							<td th:text="${#strings.abbreviate(article.tagsName,20)}"></td>
-							<td></td>
-							<td></td>
 							<td th:text="${#dates.format(article.articleNewstime,'yyyy/MM/dd HH:mm:ss')}"></td>
 							<td th:switch="${article.articleStatus}"><th:block
 									th:case="0">
-									<button onclick="" class="btn btn-outline-primary">查看</button>
+									<a th:href="@{'/post/'+${article.articleUrl}}" th:target="_blank" class="btn btn-outline-primary">查看</a>
 									<a th:href="@{/admin/article/edit(article_id=${article.id})}"
 										class="btn btn-outline-info">编辑</a>
 									<button
