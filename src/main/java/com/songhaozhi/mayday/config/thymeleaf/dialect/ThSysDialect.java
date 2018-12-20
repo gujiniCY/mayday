@@ -10,7 +10,6 @@ import org.thymeleaf.standard.processor.StandardXmlNsTagProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
 
 import com.songhaozhi.mayday.config.thymeleaf.tag.ThSysTagProcessor;
-
 /**
  * 系统方言
 * @author 宋浩志

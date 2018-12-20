@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>404 Not Found</title>
@@ -123,7 +123,7 @@ body, html {
 					</div>
 				</div>
 				<div class="footer">
-					<span>Copyright © 2018</span> <a href="https://www.songhaozhi.com">宋浩志</a>
+					<span>Copyright © 2018</span> <a th:href="${options['blog_url']}" th:text="${options['blog_name']}"></a>
 					<span style="float: right"> Background image from <a
 						href="https://cn.bing.com/" target="_blank">Bing</a>.
 					</span>

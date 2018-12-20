@@ -10,11 +10,11 @@
         <div class="post-data">
             <time itemprop="datePublished" th:text="'发布于 '+ ${#dates.format(article.articleNewstime,'yyyy/MM/dd HH:mm:ss')}"></time>
             / <th:block th:utext="${commons.show_categories(article.categorysUrl,article.categorysName)}"/>/
-            	<!-- id 将作为查询条件 -->
+            	<!-- id 将作为查询条件
 		<span th:id="'/post/'+${article.articleUrl}" class="leancloud-visitors">
     		<em class="post-meta-item-text">阅读量 </em>
   		 	 <i class="leancloud-visitors-count"></i>
-		</span>
+		</span> -->
         </div>
     </div>
     <div id="post-content" class="post-content" itemprop="articleBody">
@@ -27,7 +27,7 @@
     </div>
     <div id="vcomments"></div>
 </article>
-
+<th:block th:if="${article.articleComment} ==0 ">
     <script th:inline="javascript" type="text/javascript">
     $(function(){
     	//获取拦截器传来的设置项
@@ -42,10 +42,11 @@
             verify:false, 
             placeholder: options.comment_valine_hint,
             avatar: options.comment_valine_portrait,
-            visitor: true
+            //visitor: true
         })
     });
     </script>
+</th:block>
  <div th:replace="themes/pinghsu/footer::footer"></div> 
 </body>
 </html>

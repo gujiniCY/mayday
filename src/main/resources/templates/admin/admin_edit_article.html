@@ -30,10 +30,10 @@
 							<input class="form-control" th:value="${articleCustom.articleTitle}" name="articleTitle" id="articleTitle" type="text"
 								placeholder="输入文章标题">
 						</div>
-						 <div class="form-group">
-							<input class="form-control" name="articleUrl" id="articleUrl" type="text"
+					<!-- 	 <div class="form-group">
+							<input class="form-control" name="articleUrl" th:value="${articleCustom.articleUrl}" id="articleUrl" type="text"
 								placeholder="默认拼音链接，如果为空则自动生成时间戳链接">
-						</div> 
+						</div>  -->
 						<div class="form-group">
 							<textarea class="form-control" id="articleMd" th:text="${articleCustom.articleContentMd}"></textarea>
 						</div>

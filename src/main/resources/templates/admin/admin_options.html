@@ -45,20 +45,20 @@
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">博客标题：</label>
 							<div class="col-md-5">
-								<input class="form-control" type="text" name="blog_name" th:value="${options?.blog_name}">
+								<input class="form-control" type="text" th:value="${options['blog_name']}" name="blog_name">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">博客地址：</label>
 							<div class="col-md-5">
-								<input class="form-control" type="text" name="blog_url" th:value="${options?.blog_url}">
+								<input class="form-control" type="text" name="blog_url" th:value="${options['blog_url']}">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">LOGO：</label>
 							<div class="col-md-5">
 							<div class="input-group">
-								<input class="form-control" type="text" name="blog_logo" id="blog_logo" th:value="${options?.blog_logo}">
+								<input class="form-control" type="text" name="blog_logo" id="blog_logo" th:value="${options['blog_logo']}">
 								<span class="input-group-btn">
 								<button class="btn btn-default " type="button" th:onclick="'javascript:openChoice(\''+blog_logo+'\')'">选择</button>
 								</span>
@@ -69,7 +69,7 @@
 							<label class="control-label col-md-2">页脚信息：</label>
 							<div class="col-md-5">
 								<div class="input-group">
-									<textarea class="form-control" title="支持HTML" rows="3" th:text="${options?.blog_footer}" th:value="${options?.blog_footer}" id=""
+									<textarea class="form-control" title="支持HTML" rows="3" th:text="${options['blog_footer']}" th:value="${options['blog_footer']}" id=""
 										name="blog_footer" style="resize: none"></textarea>
 								</div>
 							</div>
@@ -95,13 +95,13 @@
 									aria-hidden="true"></i>
 							</span></label>
 							<div class="col-md-5">
-								<input class="form-control" type="text" th:value="${options?.seo_keyword}" name="seo_keyword">
+								<input class="form-control" type="text" th:value="${options['seo_keyword']}" name="seo_keyword">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">博客描述：</label>
 							<div class="col-md-5">
-								<input class="form-control" type="text" th:value="${options.seo_describe !=null ? options?.seo_describe : ''}" name="seo_describe">
+								<input class="form-control" type="text" th:value="${options['seo_describe']}" name="seo_describe">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -112,7 +112,7 @@
 							</span></label>
 							<div class="col-md-5">
 								<div class="input-group">
-									<input type="text" class="form-control" id="baiduToken" th:value="${options?.seo_baidu_token}" name="seo_baidu_token">
+									<input type="text" class="form-control" id="baiduToken" th:value="${options['seo_baidu_token']}" name="seo_baidu_token">
 									<span class="input-group-btn">
 										<button class="btn btn-default" onclick="pushBaidu()" type="button">推送</button>
 									</span>
@@ -131,43 +131,43 @@
 					</form>
 				</div>
 				<!-- 文章 -->
-				<div id="article" class="tab-pane fade">
-					<form class="form-horizontal">
+				 <div id="article" class="tab-pane fade">
+					<form class="form-horizontal" id="articleOptions">
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">首页显示条数： <span
-								data-toggle="tooltip" data-placement="top" title="默认为10条"
+								data-toggle="tooltip" data-placement="top" title="默认为12条"
 								style="cursor: pointer"> <i class="fa fa-question-circle"
 									aria-hidden="true"></i>
 							</span></label>
 							<div class="col-md-5">
-								<input class="form-control" type="text" th:value="${options.index_article !=null ? options?.index_article : '' }" name="index_article">
+								<input class="form-control" type="text" th:value="${options['index_article']}" name="index_article">
 							</div>
 						</div>
-						<div class="form-group row">
+						 <div class="form-group row">
 							<label class="col-form-label col-md-2">RSS显示条数：</label>
 							<div class="col-md-5">
-								<input class="form-control" type="text" th:value="${options?.rss_number !=null ? options?.rss_number : ''}" name="rss_number">
+								<input class="form-control" type="text" th:value="${options['rss_number']}" name="rss_number">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">文章摘要字数：</label>
 							<div class="col-md-5">
 								<div class="input-group">
-									<input type="text" class="form-control" th:value="${options?.article_summary !=null ? options?.article_summary : '' }" id="" name="article_summary">
+									<input type="text" class="form-control" name="post_summary" th:value="${options['post_summary']}">
 								</div>
 							</div>
 						</div>
 						<div class="tile-footer">
 							<div class="row">
 								<div class="col-md-8 col-md-offset-3">
-									<button class="btn btn-outline-primary" type="button" onclick="">
+									<button class="btn btn-outline-primary" type="button" onclick="save('articleOptions')">
 										<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
 									</button>
 								</div>
 							</div>
 						</div>
 					</form>
-				</div>
+				</div> 
 				<!-- 评论 -->
 				<div id="comment" class="tab-pane fade">
 					<form class="form-horizontal" id="commentOptions">
@@ -178,7 +178,7 @@
 									aria-hidden="true"></i>
 							</span></label>
 							<div class="col-md-5">
-								<input class="form-control" type="text" th:value="${options?.comment_valine_appid !=null ?}" name="comment_valine_appid">
+								<input class="form-control" type="text" th:value="${options['comment_valine_appid']}" name="comment_valine_appid">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -188,26 +188,26 @@
 									aria-hidden="true"></i>
 							</span></label>
 							<div class="col-md-5">
-								<input class="form-control" type="text" th:value="${options?.comment_valine_appkey}" name="comment_valine_appkey">
+								<input class="form-control" type="text" th:value="${options['comment_valine_appkey']}" name="comment_valine_appkey">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">头像类型:</label>
 							<div class="col-md-5">
 								<select class="form-control" name="comment_valine_portrait">
-								<option th:selected="${options.comment_valine_portrait=='identicon'}" value="identicon">抽象几何图形</option>
-								<option th:selected="${options.comment_valine_portrait=='monsterid'}" value="monsterid">小怪物</option>
-								<option th:selected="${options.comment_valine_portrait=='wavatar'}" value="wavatar">wavatar</option>
-								<option th:selected="${options.comment_valine_portrait=='retro'}" value="retro">复古</option>
-								<option th:selected="${options.comment_valine_portrait=='robohash'}" value="robohash">机器人</option>
-								<option th:selected="${options.comment_valine_portrait=='hide'}" value="hide">不显示头像</option>
+								<option th:selected="${options['comment_valine_portrait']=='identicon'}" value="identicon">抽象几何图形</option>
+								<option th:selected="${options['comment_valine_portrait']=='monsterid'}" value="monsterid">小怪物</option>
+								<option th:selected="${options['comment_valine_portrait']=='wavatar'}" value="wavatar">wavatar</option>
+								<option th:selected="${options['comment_valine_portrait']=='retro'}" value="retro">复古</option>
+								<option th:selected="${options['comment_valine_portrait']=='robohash'}" value="robohash">机器人</option>
+								<option th:selected="${options['comment_valine_portrait']=='hide'}" value="hide">不显示头像</option>
 								</select>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">占位提示:</label>
 							<div class="col-md-5">
-								<input class="form-control" type="text" th:value="${options?.comment_valine_hint}" name="comment_valine_hint">
+								<input class="form-control" type="text" th:value="${options['comment_valine_hint']}" name="comment_valine_hint">
 							</div>
 						</div>
 						<div class="tile-footer">

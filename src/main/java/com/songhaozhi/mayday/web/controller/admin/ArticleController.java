@@ -36,6 +36,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.ServletUtil;
+import cn.hutool.http.HtmlUtil;
 
 /**
  * @author 宋浩志
@@ -66,16 +67,13 @@ public class ArticleController extends BaseController {
 			@RequestParam(value = "status", defaultValue = "0") int status) {
 		try {
 			PageInfo<ArticleCustom> pageInfo = articleService.findPageArticle(page, limit, status);
-			// 已发布条数
-			Integer published = articleService.countByStatus(0);
-			// 草稿条数
-			Integer draft = articleService.countByStatus(1);
-			// 回收站条数
-			Integer recycle = articleService.countByStatus(2);
 			model.addAttribute("info", pageInfo);
-			model.addAttribute("draft", draft);
-			model.addAttribute("recycle", recycle);
-			model.addAttribute("published", published);
+			// 已发布条数
+			model.addAttribute("published", articleService.countByStatus(0));
+			// 草稿条数
+			model.addAttribute("draft", articleService.countByStatus(1));
+			// 回收站条数
+			model.addAttribute("recycle", articleService.countByStatus(2));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -135,7 +133,18 @@ public class ArticleController extends BaseController {
 					article.setArticleThumbnail("/static/img/rand/"+RandomUtil.randomInt(1, 19)+".jpg");
 				}
 				//如果摘要为空则取前五十字为摘要
-				
+				int post_summary=50;
+				if(StrUtil.isNotEmpty(MaydayConst.options.get("post_summary"))) {
+					post_summary=Integer.parseInt(MaydayConst.options.get("post_summary"));
+				}
+				//清理html标签和空白字符
+				String summaryText=StrUtil.cleanBlank(HtmlUtil.cleanHtmlTag(article.getArticleContent()));
+				//设置文章摘要
+				if(summaryText.length()>post_summary) {
+					article.setArticleSummary(summaryText.substring(0, post_summary));
+				}else {
+					article.setArticleSummary(summaryText);
+				}
 				articleService.save(article, tags, categorys);
 				//添加日志
 				logService.save(new Log(LogConstant.PUBLISH_AN_ARTICLE, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
@@ -144,6 +153,19 @@ public class ArticleController extends BaseController {
 				//如果没有选择略缩图则随机一张图
 				if(StrUtil.isEmpty(article.getArticleThumbnail())) {
 					article.setArticleThumbnail("/static/img/rand/"+RandomUtil.randomInt(1, 19)+".jpg");
+				}
+				//如果摘要为空则取前五十字为摘要
+				int post_summary=50;
+				if(StrUtil.isNotEmpty(MaydayConst.options.get("post_summary"))) {
+					post_summary=Integer.parseInt(MaydayConst.options.get("post_summary"));
+				}
+				//清理html标签和空白字符
+				String summaryText=StrUtil.cleanBlank(HtmlUtil.cleanHtmlTag(article.getArticleContent()));
+				//设置文章摘要
+				if(summaryText.length()>post_summary) {
+					article.setArticleSummary(summaryText.substring(0, post_summary));
+				}else {
+					article.setArticleSummary(summaryText);
 				}
 				//文章最后修改时间
 				article.setArticleUpdatetime(DateUtil.date());
