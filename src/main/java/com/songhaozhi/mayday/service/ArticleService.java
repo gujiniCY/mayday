@@ -29,10 +29,10 @@ public interface ArticleService {
 	 * 分页查询所有文章
 	 * @param limit 
 	 * @param page 
-	 * @param status 文章状态
+	 * @param articleCustom 文章对象
 	 * @return
 	 */
-	PageInfo<ArticleCustom> findPageArticle(int page, int limit, int status) throws Exception;
+	PageInfo<ArticleCustom> findPageArticle(int page, int limit, ArticleCustom articleCustom) throws Exception;
 	/**
 	 * 状态统计条数
 	 * @param status 状态

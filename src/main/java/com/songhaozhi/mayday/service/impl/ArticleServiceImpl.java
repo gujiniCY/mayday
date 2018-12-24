@@ -83,11 +83,8 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public PageInfo<ArticleCustom> findPageArticle(int page, int limit, int status) throws Exception {
+	public PageInfo<ArticleCustom> findPageArticle(int page, int limit, ArticleCustom articleCustom) throws Exception {
 		PageHelper.startPage(page, limit);
-		ArticleCustom articleCustom=new ArticleCustom();
-		articleCustom.setArticleStatus(status);
-		articleCustom.setArticlePost(PostType.POST_TYPE_PAGE.getValue());
 		List<ArticleCustom> lists = articleMapperCustom.findPageArticle(articleCustom);
 		return new PageInfo<>(lists);
 	}

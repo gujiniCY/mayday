@@ -27,26 +27,7 @@
     </div>
     <div id="vcomments"></div>
 </article>
-<th:block th:if="${article.articleComment} ==0 ">
-    <script th:inline="javascript" type="text/javascript">
-    $(function(){
-    	//获取拦截器传来的设置项
-        /*<![CDATA[*/
-    	var options=/*[[${options}]]*/;
-        /*]]>*/
-     	 new Valine({
-            el: '#vcomments',
-            appId: options.comment_valine_appid,
-            appKey: options.comment_valine_appkey,
-            notify:false, 
-            verify:false, 
-            placeholder: options.comment_valine_hint,
-            avatar: options.comment_valine_portrait,
-            //visitor: true
-        })
-    });
-    </script>
-</th:block>
- <div th:replace="themes/pinghsu/footer::footer"></div> 
+ <div th:replace="admin/module/macros :: comment"></div>  
+ <div th:replace="themes/pinghsu/footer :: footer"></div> 
 </body>
 </html>

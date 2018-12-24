@@ -100,7 +100,7 @@
 			//保存之间的延迟，以毫秒为单位。默认为10000（10s）。
 			delay:5000,
 			//您必须设置唯一的字符串标识符，以便SimpleMDE可以自动保存。将此与您网站上其他地方的SimpleMDE实例区分开来的东西。
-			uniqueId:"editor-1"
+			uniqueId:"editor-2"
 	   },
 	   //调整预览期间解析Markdown的设置
 	   renderingConfig:{
@@ -178,8 +178,10 @@
  					url : "/admin/page/new/save",
  					data : obj,
  					dataType : "json",
+ 					async: false,
  					success : function(data){
  						if(data.flag==true){
+ 							 simplemde.clearAutosavedValue();
  	 						 $.toast({
  	 	                         text: data.msg,
  	 	                         heading: '提示',
@@ -196,7 +198,6 @@
  	 	                        	 window.location.href = "/admin/page"; 
  	 	                         }
  	 	                     });
- 	 						simplemde.clearAutosavedValue();
  						}else{
  							showMsg(data.msg,"error","3000");
  						}

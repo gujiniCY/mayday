@@ -13,6 +13,7 @@ import com.songhaozhi.mayday.model.domain.ArticleCustom;
 import com.songhaozhi.mayday.model.domain.Link;
 import com.songhaozhi.mayday.model.dto.ArchiveBo;
 import com.songhaozhi.mayday.model.dto.MaydayConst;
+import com.songhaozhi.mayday.model.enums.PostType;
 import com.songhaozhi.mayday.service.ArticleService;
 import com.songhaozhi.mayday.service.LinksService;
 import com.songhaozhi.mayday.web.controller.admin.BaseController;
@@ -52,7 +53,10 @@ public class IndexController extends BaseController {
 			page=page<0 || page>MaydayConst.MAX_PAGE ? 1 : page;
 			//默认显示条数
 			Integer limit=12;
-			PageInfo<ArticleCustom> pageInfo=articleService.findPageArticle(page, limit, 0);
+			ArticleCustom articleCustom=new ArticleCustom();
+			articleCustom.setArticleStatus(0);
+			articleCustom.setArticlePost(PostType.POST_TYPE_POST.getValue());
+			PageInfo<ArticleCustom> pageInfo=articleService.findPageArticle(page, limit, articleCustom);
 			model.addAttribute("articles", pageInfo);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -97,5 +101,20 @@ public class IndexController extends BaseController {
 		List<Link> links=linksService.findLinks();
 		model.addAttribute("links", links);
 		return this.render("links");
+	}
+	/**
+	 * 自建页面
+	 * @param pagename
+	 * @param model
+	 * @return
+	 */
+	@GetMapping(value="/{articleUrl}")
+	public String page(@PathVariable String articleUrl,Model model) {
+		ArticleCustom  articleCustom=articleService.findByArticleUrl(articleUrl);
+		if(articleCustom==null) {
+			return this.render_404();
+		}
+		model.addAttribute("article", articleCustom);
+		return this.render("page");
 	}
 }

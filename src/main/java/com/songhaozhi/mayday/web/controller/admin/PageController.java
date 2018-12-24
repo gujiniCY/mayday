@@ -1,5 +1,7 @@
 package com.songhaozhi.mayday.web.controller.admin;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import com.songhaozhi.mayday.model.domain.Article;
 import com.songhaozhi.mayday.model.domain.ArticleCustom;
+import com.songhaozhi.mayday.model.domain.Category;
 import com.songhaozhi.mayday.model.domain.Log;
+import com.songhaozhi.mayday.model.domain.Tag;
 import com.songhaozhi.mayday.model.domain.User;
 import com.songhaozhi.mayday.model.dto.JsonResult;
 import com.songhaozhi.mayday.model.dto.LogConstant;
@@ -51,7 +55,10 @@ public class PageController extends BaseController {
 			@RequestParam(value = "limit", defaultValue = "10") int limit,
 			@RequestParam(value = "status", defaultValue = "0") int status) {
 		try {
-			PageInfo<ArticleCustom> pageInfo = articleService.findPageArticle(page, limit, status);
+			ArticleCustom articleCustom=new ArticleCustom();
+			articleCustom.setArticleStatus(status);
+			articleCustom.setArticlePost(PostType.POST_TYPE_PAGE.getValue());
+			PageInfo<ArticleCustom> pageInfo = articleService.findPageArticle(page, limit, articleCustom);
 			model.addAttribute("info", pageInfo);
 			// 已发布条数
 			model.addAttribute("published", articleService.countByStatus(0, PostType.POST_TYPE_PAGE.getValue()));
@@ -132,5 +139,41 @@ public class PageController extends BaseController {
 			return new JsonResult(MaydayEnums.ERROR.isFlag(), MaydayEnums.ERROR.getMessage());
 		}
 		return new JsonResult(MaydayEnums.PRESERVE_SUCCESS.isFlag(), MaydayEnums.PRESERVE_SUCCESS.getMessage());
+	}
+	/**
+	 * 彻底删除页面
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@GetMapping(value = "/remove")
+	public String remove(@RequestParam(value = "id") int id, HttpServletRequest request) {
+		try {
+			articleService.remove(id);
+			//添加日志
+			logService.save(new Log(LogConstant.REMOVE_AN_PAGE, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
+					DateUtil.date()));
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("删除文章失败"+e.getMessage());
+		}
+		return "redirect:/admin/page?status=0";
+	}
+	/**
+	 * 修改页面
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@GetMapping(value = "/edit")
+	public String editArticle(Model model, @RequestParam(value = "article_id") Integer article_id) {
+		try {
+			// 获取文章信息
+			ArticleCustom articleCustom = articleService.findByArticleId(article_id);
+			model.addAttribute("articleCustom", articleCustom);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/admin/admin_edit_page";
 	}
 }

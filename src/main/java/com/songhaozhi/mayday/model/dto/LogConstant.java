@@ -29,10 +29,10 @@ public interface LogConstant {
 	
 	String REMOVE_AN_ARTICLE="删除文章";
 	
-	String PUBLISH_AN_PAGE="发表文章";
+	String PUBLISH_AN_PAGE="发布页面";
 
-	String UPDATE_AN_PAGE="更新文章";
+	String UPDATE_AN_PAGE="更新页面";
 	
-	String REMOVE_AN_PAGE="删除文章";
+	String REMOVE_AN_PAGE="删除页面";
 
 }

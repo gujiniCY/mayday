@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org" xmlns:thSys="">
-<div th:replace="admin/module/macros :: head('新建文章')"></div>
+<div th:replace="admin/module/macros :: head('编辑页面')"></div>
 <body class="app sidebar-mini rtl">
 	<main class="app-content">
 	<div th:replace="admin/module/macros :: header"></div>
@@ -8,34 +8,34 @@
 	<div class="app-title">
 		<div>
 			<h1>
-				<i class="fa fa-book"></i>新建文章
+				<i class="fa fa-book"></i>修改页面
 			</h1>
 		</div>
 		<ul class="app-breadcrumb breadcrumb">
 			<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-			<li class="breadcrumb-item"><a href="/admin/article">文章管理</a></li>
-			<li class="breadcrumb-item">新建文章</li>
+			<li class="breadcrumb-item"><a href="/admin/article">页面管理</a></li>
+			<li class="breadcrumb-item">修改页面</li>
 		</ul>
 	</div>
 	<form id="articleFrom" class="form-horizontal">
 		<input type="hidden" id="articleContent" name="articleContent">
 		<input type="hidden" id="articleContentMd" name="articleContentMd">
 		<input type="hidden" id="articleStatus" name="articleStatus">
-		<input type="hidden" id="articlePost" name="articlePost" value="post">
+		<input type="hidden" id="article_id" th:value="${articleCustom.id}" name="id">
 		<div class="row">
 			<div class="col-md-8">
 				<div class="tile">
 					<div class="table-responsive">
 						<div class="form-group">
-							<input class="form-control" name="articleTitle" id="articleTitle" type="text"
-								placeholder="输入文章标题">
+							<input class="form-control" th:value="${articleCustom.articleTitle}" name="articleTitle" id="articleTitle" type="text"
+								placeholder="输入标题">
 						</div>
-						<div class="form-group">
-							<input class="form-control" name="articleUrl" id="articleUrl" type="text"
-								placeholder="默认生成拼音链接，如果为空则后台生成时间戳链接">
+						 <div class="form-group">
+							<input class="form-control" name="articleUrl" th:value="${articleCustom.articleUrl}" id="articleUrl" type="text"
+								placeholder="默认拼音链接，如果为空则自动生成时间戳链接">
 						</div> 
 						<div class="form-group">
-							<textarea class="form-control" id="articleMd"></textarea>
+							<textarea class="form-control" id="articleMd" th:text="${articleCustom.articleContentMd}"></textarea>
 						</div>
 					</div>
 				</div>
@@ -43,48 +43,12 @@
 			<div class="col-md-4">
 				<div class="tile">
 					<div class="form-group row">
-						<label class="control-label col-md-3">文章类型:</label>
-						<div class="col-md-9">
-							<select name="articleType" class="form-control">
-								<optgroup label="请选择">
-									<option value="0">原创</option>
-									<option value="1">转载</option>
-								</optgroup>
-							</select>
-						</div>
-					</div>
-					<div class="form-group row">
 						<label class="control-label col-md-3">开启评论:</label>
 						<div class="col-md-9">
-							<select name="articleComment" class="form-control">
+							<select name="articleComment" th:value="${articleCustom.articleComment}" class="form-control">
 								<optgroup label="请选择">
-									<option value="0">是</option>
-									<option value="1">否</option>
-								</optgroup>
-							</select>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="control-label col-md-3">文章分类:</label>
-						<div class="col-md-9">
-							<select name="categorys" class="form-control" id="categorySelect"
-								multiple="">
-								<optgroup label="点击选择，可多选">
-									<option th:each="category:${categorys}"
-										th:value="${category.categoryId}"
-										th:text="${category.categoryName}"></option>
-								</optgroup>
-							</select>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="control-label col-md-3">文章标签:</label>
-						<div class="col-md-9">
-							<select name="tags" class="form-control" id="tagSelect"
-								multiple="">
-								<optgroup label="点击选择，可多选">
-									<option th:each="tag:${tags}" th:value="${tag.tagId}"
-										th:text="${tag.tagName}"></option>
+									<option th:selected="${articleCustom.articleComment==0}" value="0">是</option>
+									<option th:selected="${articleCustom.articleComment==1}" value="1">否</option>
 								</optgroup>
 							</select>
 						</div>
@@ -94,17 +58,11 @@
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control" id="articleThumbnail"
-									name="articleThumbnail"> <span class="input-group-btn">
+									name="articleThumbnail" th:value="${articleCustom.articleThumbnail}"> <span class="input-group-btn">
 									<button class="btn btn-default " type="button"
 										th:onclick="'javascript:openChoice(\''+articleThumbnail+'\')'">选择</button>
 								</span>
 							</div>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="control-label col-md-3">文章摘要:</label>
-						<div class="col-md-9">
-							<textarea class="form-control" name="articleSummary" placeholder="如果为空则自动生成摘要" rows="3"></textarea>
 						</div>
 					</div>
 					<div class="tile-footer">
@@ -136,21 +94,21 @@
 	   //如果设置为true，则自动对焦编辑器。默认为false。
 	   autofocus:true,
 	   //自动保存
-	   autosave:{
+	  /*  autosave:{
 		    //如果设置为true，则自动保存文本。默认为false。
 			enabled:true,
 			//保存之间的延迟，以毫秒为单位。默认为10000（10s）。
 			delay:5000,
 			//您必须设置唯一的字符串标识符，以便SimpleMDE可以自动保存。将此与您网站上其他地方的SimpleMDE实例区分开来的东西。
-			uniqueId:"editor-1"
-	   },
+			uniqueId:1
+	   }, */
 	   //调整预览期间解析Markdown的设置
 	   renderingConfig:{
 		   ///如果设置为true，将使用highlight.js突出显示
 		   codeSyntaxHighlighting:true
 	   },
 	   //要显示的图标名称数组。可用于显示默认隐藏的特定图标，而无需完全自定义工具栏。
-	   showIcons: ["code", "table","clean-block", "horizontal-rule"],
+	   showIcons: ["code", "table"],
 	   //如果设置，则自定义选项卡大小。默认为2。
 	   tabSize:4,
    });
@@ -179,21 +137,22 @@
 	        }
 	        return flag;
 	    }
-		   inlineAttachment.editors.codemirror4.attach(simplemde.codemirror, {
-	           uploadUrl: "/admin/attachment/upload"
-	       });
-	    //生成url链接
-	   $("#articleTitle").blur(function(){
-		   $.ajax({
-			  url:"/admin/article/filter",
-			  type:"post",
-			  data:{"articleTitle":pinyinUtil.getPinyin($("#articleTitle").val())},
-			  dataType:"json",
-			  success:function(data){
-				  $("#articleUrl").val(data.msg);
-			  }
-		   });
-	   });  
+	    //编辑器拖拽文件上传
+		inlineAttachment.editors.codemirror4.attach(simplemde.codemirror, {
+	      	uploadUrl: "/admin/attachment/upload"
+	    });
+		 //生成url链接
+		   $("#articleTitle").blur(function(){
+			   $.ajax({
+				  url:"/admin/article/filter",
+				  type:"post",
+				  data:{"articleTitle":pinyinUtil.getPinyin($("#articleTitle").val())},
+				  dataType:"json",
+				  success:function(data){
+					  $("#articleUrl").val(data.msg);
+				  }
+			   });
+		   });  
    });
  	//选择略缩图
 	function openChoice(id){
@@ -217,12 +176,13 @@
 			var obj=$("#articleFrom").serialize();
  				$.ajax({
  					type : "post",
- 					url : "/admin/article/new/save",
+ 					url : "/admin/page/new/save",
  					data : obj,
  					dataType : "json",
  					async: false,
  					success : function(data){
  						if(data.flag==true){
+ 							simplemde.clearAutosavedValue();
  	 						 $.toast({
  	 	                         text: data.msg,
  	 	                         heading: '提示',
@@ -236,10 +196,9 @@
  	 	                         loader: true,
  	 	                         loaderBg: '#ffffff',
  	 	                         afterHidden: function () {
- 	 	                        	 window.location.href = "/admin/article"; 
+ 	 	                        	 window.location.href = "/admin/page"; 
  	 	                         }
  	 	                     });
- 	 						simplemde.clearAutosavedValue();
  						}else{
  							showMsg(data.msg,"error","3000");
  						}
@@ -249,8 +208,6 @@
             showMsg("请输入文章内容！","error","3000");
         }
  	}
-    $('#categorySelect').select2();
-	$('#tagSelect').select2();
    </script>
 </body>
 </html>

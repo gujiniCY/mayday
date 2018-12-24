@@ -67,14 +67,17 @@ public class ArticleController extends BaseController {
 			@RequestParam(value = "limit", defaultValue = "10") int limit,
 			@RequestParam(value = "status", defaultValue = "0") int status) {
 		try {
-			PageInfo<ArticleCustom> pageInfo = articleService.findPageArticle(page, limit, status);
+			ArticleCustom articleCustom=new ArticleCustom();
+			articleCustom.setArticleStatus(status);
+			articleCustom.setArticlePost(PostType.POST_TYPE_POST.getValue());
+			PageInfo<ArticleCustom> pageInfo = articleService.findPageArticle(page, limit, articleCustom);
 			model.addAttribute("info", pageInfo);
 			// 已发布条数
-			model.addAttribute("published", articleService.countByStatus(0,PostType.POST_TYPE_PAGE.getValue()));
+			model.addAttribute("published", articleService.countByStatus(0,PostType.POST_TYPE_POST.getValue()));
 			// 草稿条数
-			model.addAttribute("draft", articleService.countByStatus(1,PostType.POST_TYPE_PAGE.getValue()));
+			model.addAttribute("draft", articleService.countByStatus(1,PostType.POST_TYPE_POST.getValue()));
 			// 回收站条数
-			model.addAttribute("recycle", articleService.countByStatus(2,PostType.POST_TYPE_PAGE.getValue()));
+			model.addAttribute("recycle", articleService.countByStatus(2,PostType.POST_TYPE_POST.getValue()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

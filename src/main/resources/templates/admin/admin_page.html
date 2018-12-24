@@ -21,7 +21,7 @@
 		<div class="col-md-12">
 			<div class="tile">
 			<input type="hidden" id="articleId">
-			<a href="/admin/article?status=0">已发布(<th:block th:text="${published}"></th:block>)</a> | <a href="/admin/article?status=1">草稿(<th:block th:text="${draft}"></th:block>)</a>
+			<a href="/admin/page?status=0">已发布(<th:block th:text="${published}"></th:block>)</a> | <a href="/admin/page?status=1">草稿(<th:block th:text="${draft}"></th:block>)</a>
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-hover"
 						id="article_table">
@@ -33,10 +33,11 @@
 						</tr>
 						<tr th:each="article,iterStat : ${info.list}">
 							<td th:text="${#strings.abbreviate(article.articleTitle,20)}"></td>
+							<td th:text="${#strings.abbreviate(article.articleUrl,20)}"></td>
 							<td th:text="${#dates.format(article.articleNewstime,'yyyy/MM/dd HH:mm:ss')}"></td>
 							<td th:switch="${article.articleStatus}">
 								<th:block th:case="0">
-									<a th:href="@{'/post/'+${article.articleUrl}}" th:target="_blank" class="btn btn-outline-primary">查看</a>
+									<a th:href="@{'/'+${article.articleUrl}}" th:target="_blank" class="btn btn-outline-primary">查看</a>
 									<a th:href="@{/admin/page/edit(article_id=${article.id})}"
 										class="btn btn-outline-info">编辑</a>
 										<button th:onclick="'javascript:showModel('+${article.id}+')'"
@@ -45,7 +46,7 @@
 								 <th:block th:case="1">
 									<a th:href="@{/admin/page/edit(article_id=${article.id})}"
 										class="btn btn-outline-primary">编辑</a>
-									<button onclick="" class="btn btn-outline-info">发布</button>
+									<button th:onclick="'javascript:restore('+${article.id}+')'" class="btn btn-outline-info">发布</button>
 									<button th:onclick="'javascript:showModel('+${article.id}+')'"
 										class="btn btn-outline-danger">彻底删除(不可逆)</button>
 								</th:block>
@@ -64,13 +65,32 @@
 	<div th:replace="admin/module/macros :: remove"></div>
 	<div th:replace="admin/module/macros :: comm"></div>
 	<script type="text/javascript">
+	//显示询问框
 	function showModel(id) {
 		$("#articleId").val(id);
 		$("#removeModal").modal();
 	}
+	//删除
 	function remove(){
-		window.location.href = "/admin/article/remove?id="
+		window.location.href = "/admin/page/remove?id="
 			+ $("#articleId").val();
+	}
+	
+	//修改文章为发布状态
+	function restore(id){
+		$.ajax({
+			url:"/admin/article/restore",
+			type:"post",
+			data:{id:id},
+			dataType:"json",
+			success:function(data){
+				if(data.flag==true){
+					window.location.reload();
+				}else{
+					showMsg(data.msg,"error","3000");
+				}
+			}
+		});
 	}
 	</script>
 </body>

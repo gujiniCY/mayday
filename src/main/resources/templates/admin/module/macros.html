@@ -207,5 +207,26 @@
     </aside>
 </div>
 
+<th:block th:if="${article.articleComment} ==0 " th:fragment="comment">
+    <script th:inline="javascript" type="text/javascript">
+    $(function(){
+    	//获取拦截器传来的设置项
+        /*<![CDATA[*/
+    	var options=/*[[${options}]]*/;
+        /*]]>*/
+     	 new Valine({
+            el: '#vcomments',
+            appId: options.comment_valine_appid,
+            appKey: options.comment_valine_appkey,
+            notify:false, 
+            verify:false, 
+            placeholder: options.comment_valine_hint,
+            avatar: options.comment_valine_portrait,
+            //visitor: true
+        })
+    });
+    </script>
+</th:block>
+
 </body>
 </html>

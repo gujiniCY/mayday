@@ -238,6 +238,7 @@
  					url : "/admin/article/new/save",
  					data : obj,
  					dataType : "json",
+ 					async: false,
  					success : function(data){
  						if(data.flag==true){
  							simplemde.clearAutosavedValue();
