@@ -32,7 +32,7 @@
 						</div>
 						<div class="form-group">
 							<input class="form-control" name="articleUrl" id="articleUrl" type="text"
-								placeholder="默认拼音链接，如果为空则自动生成时间戳链接">
+								placeholder="默认生成拼音链接，如果为空则后台生成时间戳链接">
 						</div> 
 						<div class="form-group">
 							<textarea class="form-control" id="articleMd"></textarea>
@@ -213,10 +213,8 @@
  		if(contentMd!=""){
  			$("#articleContentMd").val(contentMd);
  			$("#articleContent").val(simplemde.markdown(contentMd));
- 			var categorysData=$("#categorySelect").select2("data");
- 			var tagsData=$("#tagSelect").select2("data");
- 				$("#articleStatus").val(articleStatus);
-				var obj=$("#articleFrom").serialize();
+ 			$("#articleStatus").val(articleStatus);
+			var obj=$("#articleFrom").serialize();
  				$.ajax({
  					type : "post",
  					url : "/admin/article/new/save",

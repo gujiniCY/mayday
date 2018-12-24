@@ -16,8 +16,8 @@ import com.songhaozhi.mayday.service.OptionsService;
 import cn.hutool.core.util.StrUtil;
 
 /**
- * @author 作者:宋浩志
- * @createDate 创建时间：2018年10月12日 上午10:07:36
+ * @author : 宋浩志
+ * @createDate : 2018年10月12日
  */
 @Service
 @Transactional(rollbackFor=RuntimeException.class)

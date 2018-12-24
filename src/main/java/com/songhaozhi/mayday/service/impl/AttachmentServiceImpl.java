@@ -14,8 +14,8 @@ import com.songhaozhi.mayday.model.domain.AttachmentExample;
 import com.songhaozhi.mayday.service.AttachmentService;
 
 /**
- * @author 作者:宋浩志
- * @createDate 创建时间：2018年9月7日 上午10:34:39
+ * @author : 宋浩志
+ * @createDate : 2018年9月7日
  */
 @Service
 @Transactional(rollbackFor=RuntimeException.class)

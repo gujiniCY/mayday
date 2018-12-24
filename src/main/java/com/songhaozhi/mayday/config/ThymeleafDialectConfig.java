@@ -7,8 +7,8 @@ import com.songhaozhi.mayday.config.thymeleaf.dialect.ThSysDialect;
 
 /**
  * Thymeleaf配置
-* @author 宋浩志
-* @createDate 创建时间：2018年12月4日 下午9:29:53
+* @author : 宋浩志
+* @createDate : 2018年12月4日
 * 
 */
 @Configuration

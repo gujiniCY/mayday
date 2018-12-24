@@ -4,8 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author 作者:宋浩志
- * @createDate 创建时间：2018年9月20日 上午11:44:23 公共常量
+ * 公共常量
+ * @author : 宋浩志
+ * @createDate : 2018年9月20日
  */
 public class MaydayConst {
 	/**

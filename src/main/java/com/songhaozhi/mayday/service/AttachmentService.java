@@ -4,8 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.songhaozhi.mayday.model.domain.Attachment;
 
 /**
- * @author 作者:宋浩志
- * @createDate 创建时间：2018年9月7日 上午10:34:32
+ * @author : 宋浩志
+ * @createDate : 2018年9月7日
  */
 public interface AttachmentService {
 	/**

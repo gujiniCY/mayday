@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.songhaozhi.mayday.model.domain.Tag;
 import com.songhaozhi.mayday.service.TagService;
 
+import cn.hutool.core.util.URLUtil;
+
 /**
- * @author 宋浩志
- * @createDate 创建时间：2018年9月25日 下午10:12:35
+ * @author : 宋浩志
+ * @createDate : 2018年9月25日
  * 标签
  */
 @Controller
@@ -71,8 +73,10 @@ public class TagController extends BaseController {
 	public String save(Tag tag, Model model) {
 		try {
 			if (tag.getTagId() == null) {
+				tag.setTagUrl(URLUtil.encode(tag.getTagUrl()));
 				tagService.save(tag);
 			} else {
+				tag.setTagUrl(URLUtil.encode(tag.getTagUrl()));
 				tagService.update(tag);
 			}
 		} catch (Exception e) {

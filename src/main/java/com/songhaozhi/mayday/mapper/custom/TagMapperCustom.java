@@ -5,8 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 /**
-* @author 作者:宋浩志
-* @createDate 创建时间：2018年9月27日 下午4:16:50
+* @author : 宋浩志
+* @createDate : 2018年9月27日 下午4:16:50
 */
 public interface TagMapperCustom {
 

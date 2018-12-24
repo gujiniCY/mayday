@@ -5,8 +5,8 @@ import java.util.List;
 import com.songhaozhi.mayday.model.domain.Menu;
 
 /**
-* @author 作者:宋浩志
-* @createDate 创建时间：2018年12月18日 下午4:12:49
+* @author : 宋浩志
+* @createDate : 2018年12月18日
 */
 public interface MenuService {
 	/**

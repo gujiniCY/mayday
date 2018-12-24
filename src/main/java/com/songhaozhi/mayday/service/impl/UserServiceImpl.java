@@ -1,7 +1,7 @@
 package com.songhaozhi.mayday.service.impl;
 /**
-* @author 作者:宋浩志
-* @createDate 创建时间：2018年8月27日 上午11:14:35
+* @author : 宋浩志
+* @createDate : 2018年8月27日
 */
 
 import java.util.Date;

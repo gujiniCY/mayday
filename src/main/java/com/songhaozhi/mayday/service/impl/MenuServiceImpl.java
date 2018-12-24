@@ -12,8 +12,8 @@ import com.songhaozhi.mayday.model.domain.MenuExample;
 import com.songhaozhi.mayday.service.MenuService;
 
 /**
-* @author 作者:宋浩志
-* @createDate 创建时间：2018年12月18日 下午4:12:59
+* @author : 宋浩志
+* @createDate : 2018年12月18日
 */
 @Service
 @Transactional(rollbackFor=RuntimeException.class)

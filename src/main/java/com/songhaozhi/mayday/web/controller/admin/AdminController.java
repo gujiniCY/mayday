@@ -5,7 +5,6 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,17 +18,17 @@ import com.songhaozhi.mayday.model.domain.User;
 import com.songhaozhi.mayday.model.dto.JsonResult;
 import com.songhaozhi.mayday.model.dto.LogConstant;
 import com.songhaozhi.mayday.model.dto.MaydayConst;
-import com.songhaozhi.mayday.model.enums.MaydayEnums;
 import com.songhaozhi.mayday.service.UserService;
 
 import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.extra.servlet.ServletUtil;
 
 /**
- * @author 作者:宋浩志
- * @createDate 创建时间：2018年8月27日 上午11:15:50
+ * @author : 宋浩志
+ * @createDate : 2018年8月27日
  */
 @RequestMapping(value = "/admin")
 @Controller
@@ -94,7 +93,7 @@ public class AdminController extends BaseController {
 			}
 			// 计算两个日期之间的时间差
 			long between = DateUtil.between(date, DateUtil.date(), DateUnit.MINUTE);
-			if (StringUtils.equals(users.getLoginEnable(), flag) && (between < inhibitTime)) {
+			if (StrUtil.equals(users.getLoginEnable(), flag) && (between < inhibitTime)) {
 				return new JsonResult(false, "账户被禁止登录10分钟，请稍后重试");
 			}
 			// 验证用户名密码

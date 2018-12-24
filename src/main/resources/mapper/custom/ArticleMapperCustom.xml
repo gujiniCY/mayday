@@ -3,7 +3,7 @@
 <mapper
 	namespace="com.songhaozhi.mayday.mapper.custom.ArticleMapperCustom">
 	<select id="findPageArticle"
-		resultType="com.songhaozhi.mayday.model.domain.ArticleCustom">
+		resultType="com.songhaozhi.mayday.model.domain.ArticleCustom" parameterType="com.songhaozhi.mayday.model.domain.ArticleCustom">
 		SELECT *,(SELECT GROUP_CONCAT(mayday_category.category_name) from
 		mayday_category where category_id in(SELECT category_id FROM
 		mayday_article_category WHERE article_id=a.id) ) categorysName
@@ -16,7 +16,7 @@
 		(SELECT GROUP_CONCAT(mayday_category.category_url) from
 		mayday_category where category_id in(SELECT category_id FROM
 		mayday_article_category WHERE article_id=a.id) ) categorysUrl
-		FROM mayday_article a WHERE article_status=#{status}  
+		FROM mayday_article a WHERE article_status=#{articleStatus} AND article_post=#{articlePost}
 		ORDER BY article_updatetime DESC,article_newstime DESC
 	</select>
 	
@@ -26,7 +26,7 @@
 	</select>
 
 	<select id="countByStatus" resultType="integer">
-		SELECT COUNT(*) FROM mayday_article WHERE article_status=#{status}
+		SELECT COUNT(*) FROM mayday_article WHERE article_status=#{status} and article_post=#{post}
 	</select>
 	
 	<update id="updateStatus" parameterType="int">

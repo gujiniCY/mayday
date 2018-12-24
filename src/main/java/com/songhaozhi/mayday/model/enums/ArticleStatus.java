@@ -1,7 +1,7 @@
 package com.songhaozhi.mayday.model.enums;
 /**
-* @author 宋浩志
-* @createDate 创建时间：2018年11月4日 下午4:36:46
+* @author : 宋浩志
+* @createDate : 2018年11月4日
 * 文章状态
 */
 public enum ArticleStatus {

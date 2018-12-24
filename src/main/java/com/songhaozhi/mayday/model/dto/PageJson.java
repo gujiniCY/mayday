@@ -4,8 +4,8 @@ import java.util.List;
 
 
 /**
- * @author 宋浩志
- * @createDate 创建时间：2018年10月30日 下午8:42:38
+ * @author : 宋浩志
+ * @createDate : 2018年10月30日
  * 
  */
 public class PageJson {

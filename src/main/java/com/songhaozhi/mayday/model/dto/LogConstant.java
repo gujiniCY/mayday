@@ -1,7 +1,7 @@
 package com.songhaozhi.mayday.model.dto;
 /**
-* @author 作者:宋浩志
-* @createDate 创建时间：2018年9月28日 下午3:11:20
+* @author : 宋浩志
+* @createDate : 2018年9月28日
 */
 public interface LogConstant {
 	
@@ -29,5 +29,10 @@ public interface LogConstant {
 	
 	String REMOVE_AN_ARTICLE="删除文章";
 	
+	String PUBLISH_AN_PAGE="发表文章";
+
+	String UPDATE_AN_PAGE="更新文章";
+	
+	String REMOVE_AN_PAGE="删除文章";
 
 }

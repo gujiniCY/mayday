@@ -1,6 +1,7 @@
 package com.songhaozhi.mayday.service.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -25,13 +26,14 @@ import com.songhaozhi.mayday.model.domain.ArticleExample;
 import com.songhaozhi.mayday.model.domain.ArticleTag;
 import com.songhaozhi.mayday.model.domain.ArticleTagExample;
 import com.songhaozhi.mayday.model.dto.ArchiveBo;
+import com.songhaozhi.mayday.model.enums.PostType;
 import com.songhaozhi.mayday.service.ArticleService;
 
 import cn.hutool.core.date.DateUtil;
 
 /**
- * @author 宋浩志
- * @createDate 创建时间：2018年10月15日 下午9:39:51
+ * @author : 宋浩志
+ * @createDate : 2018年10月15日
  * 
  */
 @Service
@@ -58,20 +60,20 @@ public class ArticleServiceImpl implements ArticleService {
 	public void save(Article article, Long[] tags, Long[] categorys) throws Exception {
 		articleMapper.insert(article);
 		if (categorys != null) {
-			for (Long cate : categorys) {
+			Arrays.asList(categorys).stream().forEach(cate->{
 				ArticleCategory articleCategory = new ArticleCategory();
 				articleCategory.setArticleId(article.getId());
 				articleCategory.setCategoryId(cate);
 				articleCategoryMapper.insert(articleCategory);
-			}
+			});
 		}
 		if (tags != null) {
-			for (Long tag : tags) {
+			Arrays.asList(tags).stream().forEach(tag -> {
 				ArticleTag articleTag = new ArticleTag();
 				articleTag.setArticleId(article.getId());
 				articleTag.setTagId(tag);
 				articleTagMapper.insert(articleTag);
-			}
+			});
 		}
 	}
 
@@ -83,13 +85,16 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public PageInfo<ArticleCustom> findPageArticle(int page, int limit, int status) throws Exception {
 		PageHelper.startPage(page, limit);
-		List<ArticleCustom> lists = articleMapperCustom.findPageArticle(status);
+		ArticleCustom articleCustom=new ArticleCustom();
+		articleCustom.setArticleStatus(status);
+		articleCustom.setArticlePost(PostType.POST_TYPE_PAGE.getValue());
+		List<ArticleCustom> lists = articleMapperCustom.findPageArticle(articleCustom);
 		return new PageInfo<>(lists);
 	}
 
 	@Override
-	public Integer countByStatus(int status) throws Exception {
-		return articleMapperCustom.countByStatus(status);
+	public Integer countByStatus(int status,String post) throws Exception {
+		return articleMapperCustom.countByStatus(status,post);
 	}
 
 	@Override
@@ -134,20 +139,20 @@ public class ArticleServiceImpl implements ArticleService {
 		// 再添加
 		// 鬼知道我最开始为什么这样子设计。。。等到都写完了就不愿意改了，先用着吧
 		if (categorys != null) {
-			for (Long cate : categorys) {
-				ArticleCategory articleCategory = new ArticleCategory();
-				articleCategory.setArticleId(article.getId());
-				articleCategory.setCategoryId(cate);
-				articleCategoryMapper.insert(articleCategory);
-			}
+			Arrays.asList(categorys).stream().forEach(cate -> {
+			ArticleCategory articleCategory = new ArticleCategory();
+			articleCategory.setArticleId(article.getId());
+			articleCategory.setCategoryId(cate);
+			articleCategoryMapper.insert(articleCategory);
+			});
 		}
 		if (tags != null) {
-			for (Long tag : tags) {
+			Arrays.asList(tags).stream().forEach(tag -> {
 				ArticleTag articleTag = new ArticleTag();
 				articleTag.setArticleId(article.getId());
 				articleTag.setTagId(tag);
 				articleTagMapper.insert(articleTag);
-			}
+			});
 		}
 	}
 

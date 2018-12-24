@@ -11,8 +11,8 @@ import com.songhaozhi.mayday.model.domain.Tag;
 import com.songhaozhi.mayday.service.TagService;
 
 /**
- * @author 宋浩志
- * @createDate 创建时间：2018年9月25日 下午10:12:35
+ * @author : 宋浩志
+ * @createDate : 2018年9月25日
  * 
  */
 @Service

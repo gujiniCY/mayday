@@ -3,8 +3,8 @@ package com.songhaozhi.mayday.service;
 import com.songhaozhi.mayday.model.domain.Log;
 
 /**
-* @author 作者:宋浩志
-* @createDate 创建时间：2018年9月28日 下午2:09:37
+* @author : 宋浩志
+* @createDate : 2018年9月28日
 */
 public interface LogService {
 	/**

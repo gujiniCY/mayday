@@ -1,8 +1,8 @@
 package com.songhaozhi.mayday.model.enums;
 
 /**
- * @author 作者:宋浩志
- * @createDate 创建时间：2018年10月30日 下午3:52:12
+ * @author : 宋浩志
+ * @createDate : 2018年10月30日
  */
 public enum PostType {
 	/**

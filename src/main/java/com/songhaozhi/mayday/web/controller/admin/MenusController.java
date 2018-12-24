@@ -13,14 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.songhaozhi.mayday.model.domain.Menu;
 import com.songhaozhi.mayday.service.MenuService;
 
-import cn.hutool.core.util.NumberUtil;
-import cn.hutool.core.util.StrUtil;
-
 /**
  * 菜单
- * 
- * @author 作者:宋浩志
- * @createDate 创建时间：2018年12月18日 下午4:10:28
+ * @author : 宋浩志
+ * @createDate : 2018年12月18日
  */
 @RequestMapping("/admin/menus")
 @Controller

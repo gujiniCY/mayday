@@ -8,8 +8,8 @@ import com.songhaozhi.mayday.model.domain.ArticleCustom;
 import com.songhaozhi.mayday.model.dto.ArchiveBo;
 
 /**
-* @author 作者:宋浩志
-* @createDate 创建时间：2018年11月1日 下午2:54:48
+* @author : 宋浩志
+* @createDate : 2018年11月1日
 */
 public interface ArticleMapperCustom {
 
@@ -17,7 +17,7 @@ public interface ArticleMapperCustom {
 
 	List<ArticleCustom> findAllArticle(@Param(value="status") int status);
 
-	Integer countByStatus(@Param(value="status") int status);
+	Integer countByStatus(@Param(value="status") int status,@Param(value="post") String post);
 
 	void updateStatus(@Param(value="id")int id, @Param(value="status")int status);
 
@@ -25,7 +25,7 @@ public interface ArticleMapperCustom {
 
 	List<ArchiveBo> findDateAndCount();
 
-	List<ArticleCustom> findPageArticle(int status);
+	List<ArticleCustom> findPageArticle(ArticleCustom articleCustom);
 
 	int findRepeatByUrl(@Param(value="articleUrl")String articleUrl);
 

@@ -14,8 +14,8 @@ import com.songhaozhi.mayday.web.interceptor.IndexInterceptor;
 import com.songhaozhi.mayday.web.interceptor.LoginInterceptor;
 
 /**
- * @author 作者:宋浩志
- * @createDate 创建时间：2018年9月10日 上午9:14:01
+ * @author : 宋浩志
+ * @createDate : 2018年9月10日
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {

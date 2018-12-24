@@ -27,6 +27,7 @@ import com.songhaozhi.mayday.model.dto.LogConstant;
 import com.songhaozhi.mayday.model.dto.MaydayConst;
 import com.songhaozhi.mayday.model.enums.ArticleStatus;
 import com.songhaozhi.mayday.model.enums.MaydayEnums;
+import com.songhaozhi.mayday.model.enums.PostType;
 import com.songhaozhi.mayday.service.ArticleService;
 import com.songhaozhi.mayday.service.CategoryService;
 import com.songhaozhi.mayday.service.TagService;
@@ -39,8 +40,8 @@ import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.http.HtmlUtil;
 
 /**
- * @author 宋浩志
- * @createDate 创建时间：2018年10月15日 下午9:40:36
+ * @author : 宋浩志
+ * @createDate : 2018年10月15日
  * 
  */
 @Controller
@@ -69,11 +70,11 @@ public class ArticleController extends BaseController {
 			PageInfo<ArticleCustom> pageInfo = articleService.findPageArticle(page, limit, status);
 			model.addAttribute("info", pageInfo);
 			// 已发布条数
-			model.addAttribute("published", articleService.countByStatus(0));
+			model.addAttribute("published", articleService.countByStatus(0,PostType.POST_TYPE_PAGE.getValue()));
 			// 草稿条数
-			model.addAttribute("draft", articleService.countByStatus(1));
+			model.addAttribute("draft", articleService.countByStatus(1,PostType.POST_TYPE_PAGE.getValue()));
 			// 回收站条数
-			model.addAttribute("recycle", articleService.countByStatus(2));
+			model.addAttribute("recycle", articleService.countByStatus(2,PostType.POST_TYPE_PAGE.getValue()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -109,14 +110,14 @@ public class ArticleController extends BaseController {
 	public JsonResult save(Article article, Long[] tags, Long[] categorys, HttpServletRequest request) {
 		try {
 			if (StrUtil.isEmpty(article.getArticleTitle())) {
-				return new JsonResult(false, "文章标题不能为空");
+				return new JsonResult(false, "标题不能为空");
 			}
 			//判断文章链接是否重复
 			if(!StrUtil.isEmpty(article.getArticleUrl())) {
 				//查询url是否重复
 				int repeat=articleService.findRepeatByUrl(article.getArticleUrl());
 				if(repeat !=0 ) {
-					return new JsonResult(false, "文章路径已存在");
+					return new JsonResult(false, "路径已存在");
 				}
 			}
 			if(article.getId()==null) {
@@ -176,7 +177,7 @@ public class ArticleController extends BaseController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.error("添加或更新文章失败"+e.getMessage());
+			log.error("添加或更新失败"+e.getMessage());
 			return new JsonResult(MaydayEnums.ERROR.isFlag(), MaydayEnums.ERROR.getMessage());
 		}
 		return new JsonResult(MaydayEnums.PRESERVE_SUCCESS.isFlag(), MaydayEnums.PRESERVE_SUCCESS.getMessage());
@@ -286,7 +287,6 @@ public class ArticleController extends BaseController {
 		}
 		return "/admin/admin_new_article";
 	}
-
 	/**
 	 * 修改文章页面
 	 * 

@@ -18,8 +18,8 @@ import com.songhaozhi.mayday.service.LinksService;
 import com.songhaozhi.mayday.web.controller.admin.BaseController;
 
 /**
- * @author 宋浩志
- * @createDate 创建时间：2018年12月2日 下午5:12:40
+ * @author : 宋浩志
+ * @createDate : 2018年12月2日
  * 
  */
 @Controller

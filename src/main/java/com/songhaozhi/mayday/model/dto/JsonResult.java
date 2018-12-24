@@ -1,8 +1,8 @@
 package com.songhaozhi.mayday.model.dto;
 
 /**
- * @author 作者:宋浩志
- * @createDate 创建时间：2018年8月27日 下午1:38:27
+ * @author : 宋浩志
+ * @createDate : 2018年8月27日
  */
 public class JsonResult {
 	private boolean flag;

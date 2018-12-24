@@ -8,8 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import com.songhaozhi.mayday.model.domain.Options;
 
 /**
-* @author 宋浩志
-* @createDate 创建时间：2018年10月14日 下午2:44:37
+* @author : 宋浩志
+* @createDate : 2018年10月14日
 * 
 */
 public interface OptionsMapperCustom {

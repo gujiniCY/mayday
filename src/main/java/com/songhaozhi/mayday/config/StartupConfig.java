@@ -12,8 +12,8 @@ import com.songhaozhi.mayday.model.dto.MaydayConst;
 import com.songhaozhi.mayday.service.OptionsService;
 
 /**
-* @author 作者:宋浩志
-* @createDate 创建时间：2018年10月30日 上午11:05:45
+* @author : 宋浩志
+* @createDate : 2018年10月30日
 */
 @Configuration
 public class StartupConfig implements ApplicationListener<ContextRefreshedEvent>{

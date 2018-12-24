@@ -8,8 +8,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * @author 作者:宋浩志
- * @createDate 创建时间：2018年10月30日 下午3:26:42
+ * @author : 宋浩志
+ * @createDate : 2018年10月30日
  */
 public class MaydayUtil {
 	/**

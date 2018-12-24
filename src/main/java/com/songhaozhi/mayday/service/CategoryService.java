@@ -5,8 +5,8 @@ import java.util.List;
 import com.songhaozhi.mayday.model.domain.Category;
 
 /**
-* @author 宋浩志
-* @createDate 创建时间：2018年9月26日 下午8:40:35
+* @author : 宋浩志
+* @createDate : 2018年9月26日
 * 
 */
 public interface CategoryService {

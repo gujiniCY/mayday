@@ -14,8 +14,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 import com.songhaozhi.mayday.model.dto.MaydayConst;
 
 /**
-* @author 作者:宋浩志
-* @createDate 创建时间：2018年12月17日 上午10:44:54
+* @author : 宋浩志
+* @createDate : 2018年12月17日
 */
 public class ThSysTagProcessor extends AbstractAttributeTagProcessor{
 	 private static final String TEXT_ATTRIBUTE  = "text";

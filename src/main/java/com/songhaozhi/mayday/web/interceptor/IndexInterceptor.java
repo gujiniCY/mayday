@@ -14,8 +14,8 @@ import com.songhaozhi.mayday.util.Commons;
 
 /**
  * 前台拦截器
-* @author 作者:宋浩志
-* @createDate 创建时间：2018年12月6日 上午11:42:11
+* @author : 宋浩志
+* @createDate : 2018年12月6日
 */
 @Component
 public class IndexInterceptor  implements HandlerInterceptor{

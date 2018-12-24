@@ -1,8 +1,8 @@
 package com.songhaozhi.mayday.model.enums;
 
 /**
- * @author 作者:宋浩志
- * @createDate 创建时间：2018年9月19日 下午2:45:51
+ * @author : 宋浩志
+ * @createDate : 2018年9月19日
  */
 public enum MaydayEnums {
 	/**

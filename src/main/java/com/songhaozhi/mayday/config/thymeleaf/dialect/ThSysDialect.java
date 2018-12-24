@@ -12,8 +12,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 import com.songhaozhi.mayday.config.thymeleaf.tag.ThSysTagProcessor;
 /**
  * 系统方言
-* @author 宋浩志
-* @createDate 创建时间：2018年12月4日 下午9:12:14
+* @author : 宋浩志
+* @createDate : 2018年12月4日
 * 
 */
 public class ThSysDialect extends AbstractProcessorDialect{

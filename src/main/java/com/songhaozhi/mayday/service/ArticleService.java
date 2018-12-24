@@ -8,9 +8,8 @@ import com.songhaozhi.mayday.model.domain.ArticleCustom;
 import com.songhaozhi.mayday.model.dto.ArchiveBo;
 
 /**
-* @author 宋浩志
-* @createDate 创建时间：2018年10月15日 下午9:39:38
-* 
+* @author : 宋浩志
+* @createDate : 2018年10月15日
 */
 public interface ArticleService {
 	/**
@@ -36,10 +35,11 @@ public interface ArticleService {
 	PageInfo<ArticleCustom> findPageArticle(int page, int limit, int status) throws Exception;
 	/**
 	 * 状态统计条数
-	 * @param status 文章状态
+	 * @param status 状态
+	 * @param post 类型
 	 * @return
 	 */
-	Integer countByStatus(int status) throws Exception;
+	Integer countByStatus(int status, String post) throws Exception;
 	/**
 	 * 修改文章状态为回收站
 	 * @param id

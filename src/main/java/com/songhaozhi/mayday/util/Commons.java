@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import cn.hutool.core.util.StrUtil;
 
 /**
- * @author 作者:宋浩志
- * @createDate 创建时间：2018年12月6日 上午10:22:49
+ * @author : 宋浩志
+ * @createDate : 2018年12月6日
  */
 @Component
 public class Commons {

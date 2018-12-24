@@ -30,8 +30,9 @@ import cn.hutool.extra.servlet.ServletUtil;
 import net.coobird.thumbnailator.Thumbnails;
 
 /**
- * @author 作者:宋浩志
- * @createDate 创建时间：2018年9月7日 上午10:35:55 附件
+ * @author : 宋浩志
+ * @createDate : 2018年9月7日
+ *  附件
  */
 @RequestMapping(value = "/admin/attachment")
 @Controller
