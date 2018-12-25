@@ -26,7 +26,6 @@ import com.songhaozhi.mayday.model.domain.ArticleExample;
 import com.songhaozhi.mayday.model.domain.ArticleTag;
 import com.songhaozhi.mayday.model.domain.ArticleTagExample;
 import com.songhaozhi.mayday.model.dto.ArchiveBo;
-import com.songhaozhi.mayday.model.enums.PostType;
 import com.songhaozhi.mayday.service.ArticleService;
 
 import cn.hutool.core.date.DateUtil;
@@ -60,7 +59,7 @@ public class ArticleServiceImpl implements ArticleService {
 	public void save(Article article, Long[] tags, Long[] categorys) throws Exception {
 		articleMapper.insert(article);
 		if (categorys != null) {
-			Arrays.asList(categorys).stream().forEach(cate->{
+			Arrays.asList(categorys).stream().forEach(cate -> {
 				ArticleCategory articleCategory = new ArticleCategory();
 				articleCategory.setArticleId(article.getId());
 				articleCategory.setCategoryId(cate);
@@ -78,20 +77,20 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public List<ArticleCustom> findAllArticle(int status) throws Exception {
+	public List<ArticleCustom> findAllArticle(int status) {
 		return articleMapperCustom.findAllArticle(status);
 	}
 
 	@Override
-	public PageInfo<ArticleCustom> findPageArticle(int page, int limit, ArticleCustom articleCustom) throws Exception {
+	public PageInfo<ArticleCustom> findPageArticle(int page, int limit, ArticleCustom articleCustom) {
 		PageHelper.startPage(page, limit);
 		List<ArticleCustom> lists = articleMapperCustom.findPageArticle(articleCustom);
 		return new PageInfo<>(lists);
 	}
 
 	@Override
-	public Integer countByStatus(int status,String post) throws Exception {
-		return articleMapperCustom.countByStatus(status,post);
+	public Integer countByStatus(Integer status, String post) {
+		return articleMapperCustom.countByStatus(status, post);
 	}
 
 	@Override
@@ -115,7 +114,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public ArticleCustom findByArticleId(Integer article_id) throws Exception {
+	public ArticleCustom findByArticleId(Integer article_id) {
 		return articleMapperCustom.findByArticleId(article_id);
 	}
 
@@ -137,10 +136,10 @@ public class ArticleServiceImpl implements ArticleService {
 		// 鬼知道我最开始为什么这样子设计。。。等到都写完了就不愿意改了，先用着吧
 		if (categorys != null) {
 			Arrays.asList(categorys).stream().forEach(cate -> {
-			ArticleCategory articleCategory = new ArticleCategory();
-			articleCategory.setArticleId(article.getId());
-			articleCategory.setCategoryId(cate);
-			articleCategoryMapper.insert(articleCategory);
+				ArticleCategory articleCategory = new ArticleCategory();
+				articleCategory.setArticleId(article.getId());
+				articleCategory.setCategoryId(cate);
+				articleCategoryMapper.insert(articleCategory);
 			});
 		}
 		if (tags != null) {
@@ -154,7 +153,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public List<ArchiveBo> archives() throws Exception {
+	public List<ArchiveBo> archives() {
 		// 查询文章表各个时间段的文章数量 分别为DATE->时间段 count->文章数量
 		List<ArchiveBo> listforArchiveBo = articleMapperCustom.findDateAndCount();
 		if (listforArchiveBo != null) {

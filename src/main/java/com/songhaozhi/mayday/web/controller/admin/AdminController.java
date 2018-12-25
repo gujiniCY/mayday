@@ -1,6 +1,7 @@
 package com.songhaozhi.mayday.web.controller.admin;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,11 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageInfo;
+import com.songhaozhi.mayday.model.domain.ArticleCustom;
+import com.songhaozhi.mayday.model.domain.Link;
 import com.songhaozhi.mayday.model.domain.Log;
 import com.songhaozhi.mayday.model.domain.User;
 import com.songhaozhi.mayday.model.dto.JsonResult;
 import com.songhaozhi.mayday.model.dto.LogConstant;
 import com.songhaozhi.mayday.model.dto.MaydayConst;
+import com.songhaozhi.mayday.model.enums.ArticleStatus;
+import com.songhaozhi.mayday.model.enums.PostType;
+import com.songhaozhi.mayday.service.ArticleService;
+import com.songhaozhi.mayday.service.AttachmentService;
+import com.songhaozhi.mayday.service.LinksService;
 import com.songhaozhi.mayday.service.UserService;
 
 import cn.hutool.core.date.DateUnit;
@@ -37,6 +46,12 @@ public class AdminController extends BaseController {
 	private UserService userService;
 	@Autowired
 	private HttpServletRequest request;
+	@Autowired
+	private ArticleService articleService;
+	@Autowired
+	private LinksService linksService;
+	@Autowired
+	private AttachmentService attachmentService;
 
 	/**
 	 * 后台首页
@@ -44,7 +59,26 @@ public class AdminController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = { "", "index" })
-	public String index() {
+	public String index(Model model) {
+		//查询已发布文章数
+		Integer countPublish=articleService.countByStatus(null,PostType.POST_TYPE_POST.getValue());
+		model.addAttribute("countPublish", countPublish);
+		//友链总数
+		List<Link> lists=linksService.findLinks();
+		model.addAttribute("countLinks", lists.size());
+		//附件总数
+		int countAttachment = attachmentService.countAttachment().size();
+		model.addAttribute("countAttachment", countAttachment);
+		//成立天数
+		
+		//查询最新的文章
+		ArticleCustom articleCustom=new ArticleCustom();
+		articleCustom.setArticlePost(PostType.POST_TYPE_POST.getValue());
+		PageInfo<ArticleCustom> pageInfo=articleService.findPageArticle(1, 5, articleCustom);
+		model.addAttribute("articles", pageInfo.getList());
+		//查询最新的日志
+		PageInfo<Log> info=logService.findLogs(1,5);
+		model.addAttribute("logs", info.getList());
 		return "admin/admin_index";
 	}
 

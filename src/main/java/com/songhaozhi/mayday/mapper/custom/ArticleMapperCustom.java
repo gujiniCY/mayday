@@ -17,7 +17,7 @@ public interface ArticleMapperCustom {
 
 	List<ArticleCustom> findAllArticle(@Param(value="status") int status);
 
-	Integer countByStatus(@Param(value="status") int status,@Param(value="post") String post);
+	Integer countByStatus(@Param(value="status") Integer status,@Param(value="post") String post);
 
 	void updateStatus(@Param(value="id")int id, @Param(value="status")int status);
 

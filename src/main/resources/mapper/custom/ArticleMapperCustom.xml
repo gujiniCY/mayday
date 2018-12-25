@@ -2,6 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="com.songhaozhi.mayday.mapper.custom.ArticleMapperCustom">
+	<sql id="whereArticle">
+	<where>1=1
+	<if test="status != null">
+		and article_status=#{status}
+	</if>
+	<if test="post != null">
+	  and article_post=#{post}
+	</if>
+	</where>
+	</sql>
+	<sql id="whereArticleCustom">
+	<where>1=1
+	<if test="articleStatus != null">
+		and article_status=#{articleStatus}
+	</if>
+	<if test="articlePost != null">
+	  and article_post=#{articlePost}
+	</if>
+	</where>
+	</sql>
 	<select id="findPageArticle"
 		resultType="com.songhaozhi.mayday.model.domain.ArticleCustom" parameterType="com.songhaozhi.mayday.model.domain.ArticleCustom">
 		SELECT *,(SELECT GROUP_CONCAT(mayday_category.category_name) from
@@ -16,17 +36,20 @@
 		(SELECT GROUP_CONCAT(mayday_category.category_url) from
 		mayday_category where category_id in(SELECT category_id FROM
 		mayday_article_category WHERE article_id=a.id) ) categorysUrl
-		FROM mayday_article a WHERE article_status=#{articleStatus} AND article_post=#{articlePost}
+		FROM mayday_article a 
+		<include refid="whereArticleCustom"></include>
 		ORDER BY article_updatetime DESC,article_newstime DESC
 	</select>
 	
 	<select id="findAllArticle"
 		resultType="com.songhaozhi.mayday.model.domain.ArticleCustom">
-		SELECT * FROM mayday_article a WHERE article_status=#{status}
+		SELECT * FROM mayday_article a 
+		<include refid="whereArticle"></include>
 	</select>
 
 	<select id="countByStatus" resultType="integer">
-		SELECT COUNT(*) FROM mayday_article WHERE article_status=#{status} and article_post=#{post}
+		SELECT COUNT(*) FROM mayday_article
+		<include refid="whereArticle"></include>
 	</select>
 	
 	<update id="updateStatus" parameterType="int">

@@ -24,7 +24,7 @@ public interface ArticleService {
 	 * @param status
 	 * @return
 	 */
-	List<ArticleCustom> findAllArticle(int status) throws Exception;
+	List<ArticleCustom> findAllArticle(int status);
 	/**
 	 * 分页查询所有文章
 	 * @param limit 
@@ -32,14 +32,14 @@ public interface ArticleService {
 	 * @param articleCustom 文章对象
 	 * @return
 	 */
-	PageInfo<ArticleCustom> findPageArticle(int page, int limit, ArticleCustom articleCustom) throws Exception;
+	PageInfo<ArticleCustom> findPageArticle(int page, int limit, ArticleCustom articleCustom) ;
 	/**
 	 * 状态统计条数
 	 * @param status 状态
 	 * @param post 类型
 	 * @return
 	 */
-	Integer countByStatus(int status, String post) throws Exception;
+	Integer countByStatus(Integer status, String post) ;
 	/**
 	 * 修改文章状态为回收站
 	 * @param id
@@ -56,7 +56,7 @@ public interface ArticleService {
 	 * @param article_id
 	 * @return
 	 */
-	ArticleCustom findByArticleId(Integer article_id) throws Exception;
+	ArticleCustom findByArticleId(Integer article_id) ;
 	/**
 	 * 修改文章
 	 * @param article
@@ -70,7 +70,7 @@ public interface ArticleService {
 	 * 归档
 	 * @return
 	 */
-	List<ArchiveBo> archives() throws Exception;
+	List<ArchiveBo> archives() ;
 	/**
 	 * 统计重复链接
 	 * @param articleUrl 文章链接

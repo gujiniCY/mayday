@@ -10,7 +10,7 @@
     <meta name="author" th:content="${options['blog_name']}">
     <meta name="keywords" th:content="${title}+','+${keywords} + ','+${options['seo_keyword']}"/>
     <meta name="description" th:content="${article !=null ?article.articleSummary: ''}"/>
-    <link rel="shortcut icon" th:href="${options['ico_logo'] == null ? '/static/img/favicon.ico' : options['ico_logo'] }"/>
+    <link rel="shortcut icon" th:href="${options['ico_logo'] == '' ? '/static/img/favicon.ico' : options['ico_logo'] }"/>
    	<title thSys:text="${title}"></title>
     <link th:href="@{//cdn.bootcss.com/highlight.js/9.9.0/styles/xcode.min.css}" rel="stylesheet"/>
     <link th:href="@{/static/themes/default.min.css}" rel="stylesheet"/>
@@ -34,7 +34,7 @@
 <header id="header" class="header bg-white">
     <div class="navbar-container">
         <a  class="navbar-logo" th:href="${options['blog_url']}">
-           <img th:src="${options['blog_logo'] == null ? '/static/img/transparent.png' : options['blog_logo'] }" alt="首页"/>
+           <img th:src="${options['blog_logo'] == '' ? '/static/img/transparent.png' : options['blog_logo'] }" alt="首页"/>
         </a>
         <div class="navbar-menu" th:each="menu : ${menus}">
             <a th:href="${menu.menuUrl}" th:text="${menu.menuName}" th:target="${menu.menuTarget}"></a>

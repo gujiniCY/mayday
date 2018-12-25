@@ -75,9 +75,9 @@ public class ArticleController extends BaseController {
 			// 已发布条数
 			model.addAttribute("published", articleService.countByStatus(0,PostType.POST_TYPE_POST.getValue()));
 			// 草稿条数
-			model.addAttribute("draft", articleService.countByStatus(1,PostType.POST_TYPE_POST.getValue()));
+			model.addAttribute("draft", articleService.countByStatus(ArticleStatus.DRAFT.getStatus(),PostType.POST_TYPE_POST.getValue()));
 			// 回收站条数
-			model.addAttribute("recycle", articleService.countByStatus(2,PostType.POST_TYPE_POST.getValue()));
+			model.addAttribute("recycle", articleService.countByStatus(ArticleStatus.RECYCLE.getStatus(),PostType.POST_TYPE_POST.getValue()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -200,10 +200,8 @@ public class ArticleController extends BaseController {
 			if (StrUtil.isEmpty(token)) {
 				return new JsonResult(false, "请先填写token");
 			}
-			// 文章为已发布
-			int status = 0;
 			String blogUrl = MaydayConst.options.get("blog_url");
-			List<ArticleCustom> articles = articleService.findAllArticle(status);
+			List<ArticleCustom> articles = articleService.findAllArticle(ArticleStatus.PUBLISH.getStatus());
 			StringBuffer urls = new StringBuffer();
 			for (ArticleCustom article : articles) {
 				urls.append(blogUrl).append("/archives/").append(article.getArticleUrl()).append("\n");

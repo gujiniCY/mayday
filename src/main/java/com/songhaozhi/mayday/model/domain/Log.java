@@ -13,7 +13,11 @@ public class Log {
 
     private Date logDate;
 
-    public Log(String logTitle, String logContent, String logIp, Date logDate) {
+    public Log() {
+		super();
+	}
+
+	public Log(String logTitle, String logContent, String logIp, Date logDate) {
 		super();
 		this.logTitle = logTitle;
 		this.logContent = logContent;

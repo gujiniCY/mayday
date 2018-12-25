@@ -1,5 +1,7 @@
 package com.songhaozhi.mayday.service;
 
+import java.util.List;
+
 import com.github.pagehelper.PageInfo;
 import com.songhaozhi.mayday.model.domain.Attachment;
 
@@ -19,7 +21,7 @@ public interface AttachmentService {
 	 * @param limit
 	 * @return
 	 */
-	PageInfo<Attachment> getAttachment(int page, int limit) throws Exception;
+	PageInfo<Attachment> getAttachment(int page, int limit);
 	/**
 	 * 根据id查询
 	 * @param id
@@ -31,5 +33,10 @@ public interface AttachmentService {
 	 * @param id
 	 */
 	void deleteAttachment(int id) throws Exception;
+	/**
+	 * 所有附件
+	 * @return
+	 */
+	List<Attachment> countAttachment();
 
 }

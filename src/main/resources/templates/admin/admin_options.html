@@ -58,7 +58,7 @@
 							<label class="col-form-label col-md-2">首页LOGO：</label>
 							<div class="col-md-5">
 							<div class="input-group">
-								<input class="form-control" type="text" name="blog_logo" id="blog_logo" th:value="${options['blog_logo']}">
+								<input class="form-control" type="text" readonly="readonly" name="blog_logo" id="blog_logo" th:value="${options['blog_logo']}">
 								<span class="input-group-btn">
 								<button class="btn btn-default " type="button" th:onclick="'javascript:openChoice(\''+blog_logo+'\')'">选择</button>
 								</span>
@@ -69,7 +69,7 @@
 							<label class="col-form-label col-md-2">标签页LOGO：</label>
 							<div class="col-md-5">
 							<div class="input-group">
-								<input class="form-control" type="text" name="ico_logo" id="ico_logo" th:value="${options['ico_logo']}">
+								<input class="form-control" type="text" name="ico_logo" readonly="readonly" id="ico_logo" th:value="${options['ico_logo']}">
 								<span class="input-group-btn">
 								<button class="btn btn-default " type="button" th:onclick="'javascript:openChoice(\''+ico_logo+'\')'">选择</button>
 								</span>

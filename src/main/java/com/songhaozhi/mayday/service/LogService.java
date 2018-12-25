@@ -1,5 +1,8 @@
 package com.songhaozhi.mayday.service;
 
+import java.util.List;
+
+import com.github.pagehelper.PageInfo;
 import com.songhaozhi.mayday.model.domain.Log;
 
 /**
@@ -12,4 +15,11 @@ public interface LogService {
 	 * @param log
 	 */
 	void save(Log log);
+	/**
+	 * 分页查询日志
+	 * @param page
+	 * @param limit
+	 * @return
+	 */
+	PageInfo<Log> findLogs(int page, int limit);
 }

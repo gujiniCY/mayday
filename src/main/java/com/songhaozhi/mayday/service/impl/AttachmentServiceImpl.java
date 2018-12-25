@@ -29,7 +29,7 @@ public class AttachmentServiceImpl implements AttachmentService {
 	}
 
 	@Override
-	public PageInfo<Attachment> getAttachment(int page, int limit) throws Exception {
+	public PageInfo<Attachment> getAttachment(int page, int limit) {
 		PageHelper.startPage(page, limit);
 		AttachmentExample example = new AttachmentExample();
 		example.setOrderByClause("id desc");
@@ -45,6 +45,11 @@ public class AttachmentServiceImpl implements AttachmentService {
 	@Override
 	public void deleteAttachment(int id) throws Exception {
 		attachmentMapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public List<Attachment> countAttachment() {
+		return attachmentMapper.selectByExample(null);
 	}
 
 }

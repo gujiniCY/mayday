@@ -1,7 +1,5 @@
 package com.songhaozhi.mayday.web.controller.admin;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import com.songhaozhi.mayday.model.domain.Article;
 import com.songhaozhi.mayday.model.domain.ArticleCustom;
-import com.songhaozhi.mayday.model.domain.Category;
 import com.songhaozhi.mayday.model.domain.Log;
-import com.songhaozhi.mayday.model.domain.Tag;
 import com.songhaozhi.mayday.model.domain.User;
 import com.songhaozhi.mayday.model.dto.JsonResult;
 import com.songhaozhi.mayday.model.dto.LogConstant;

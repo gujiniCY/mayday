@@ -94,7 +94,7 @@
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control" id="articleThumbnail"
-									name="articleThumbnail"> <span class="input-group-btn">
+									name="articleThumbnail" readonly="readonly"> <span class="input-group-btn">
 									<button class="btn btn-default " type="button"
 										th:onclick="'javascript:openChoice(\''+articleThumbnail+'\')'">选择</button>
 								</span>
@@ -215,15 +215,19 @@
  			$("#articleContent").val(simplemde.markdown(contentMd));
  			$("#articleStatus").val(articleStatus);
 			var obj=$("#articleFrom").serialize();
- 				$.ajax({
+ 			 $.ajax({
  					type : "post",
  					url : "/admin/article/new/save",
  					data : obj,
- 					dataType : "json",
  					async: false,
+ 					dataType : "json",
  					success : function(data){
  						if(data.flag==true){
- 	 						 $.toast({
+ 							//这个不管用，我也不知道为啥
+ 							//simplemde.clearAutosavedValue();
+ 							simplemde.toTextArea();
+ 							simplemde = null;
+ 	 					 	$.toast({
  	 	                         text: data.msg,
  	 	                         heading: '提示',
  	 	                         icon: 'success',
@@ -238,13 +242,12 @@
  	 	                         afterHidden: function () {
  	 	                        	 window.location.href = "/admin/article"; 
  	 	                         }
- 	 	                     });
- 	 						simplemde.clearAutosavedValue();
+ 	 	                     }); 
  						}else{
  							showMsg(data.msg,"error","3000");
  						}
  					}
- 				});
+ 				}); 
  		}else{
             showMsg("请输入文章内容！","error","3000");
         }

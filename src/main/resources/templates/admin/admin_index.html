@@ -20,7 +20,7 @@
           <div class="widget-small primary coloured-icon"><i class="icon fa fa-book fa-3x"></i>
             <div class="info">
               <h4>文章</h4>
-              <p><b>5</b></p>
+              <p><b th:text="${countPublish}"></b></p>
             </div>
           </div>
         </div>
@@ -28,7 +28,7 @@
           <div class="widget-small info coloured-icon"><i class="icon fa fa-link fa-3x"></i>
             <div class="info">
               <h4>友链</h4>
-              <p><b>25</b></p>
+              <p><b th:text="${countLinks}"></b></p>
             </div>
           </div>
         </div>
@@ -36,7 +36,7 @@
           <div class="widget-small warning coloured-icon"><i class="icon fa fa-file-image-o fa-3x"></i>
             <div class="info">
               <h4>媒体库</h4>
-              <p><b>10</b></p>
+              <p><b th:text="${countAttachment}"></b></p>
             </div>
           </div>
         </div>
@@ -49,57 +49,55 @@
           </div>
         </div>
       </div>
-      <!-- <div class="row">
-        <div class="col-md-6">
-          <div class="tile">
-            <h3 class="tile-title">Monthly Sales</h3>
-            <div class="embed-responsive embed-responsive-16by9">
-              <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="tile">
-            <h3 class="tile-title">Support Requests</h3>
-            <div class="embed-responsive embed-responsive-16by9">
-              <canvas class="embed-responsive-item" id="pieChartDemo"></canvas>
-            </div>
-          </div>
-        </div>
-      </div> -->
       <div class="row">
         <div class="col-lg-6 col-md-12">
           <div class="tile">
             <h3 class="tile-title">最新文章</h3>
             <table class="table">
-            <tr>
-            <td>23213</td>
+             <tr>
+             <td>标题</td>
+             <td>状态</td>
+             <td>时间</td>
+             </tr>
+            <tr th:each="article : ${articles}">
+            <td><a th:text="${article.articleTitle}" target="_blank" th:title="${article.articleTitle}" th:href="${article.articleUrl}"></a></td>
+           <td th:switch="${article.articleStatus}">
+           <th:block th:case="0">
+            <span class="badge badge-success">已发布</span>
+            </th:block>
+            <th:block th:case="1">
+            <span class="badge badge-info">草 稿</span>
+            </th:block>
+            <th:block th:case="2">
+            <span class="badge badge-danger">回收站</span>
+            </th:block>
+            </td>
+            <td th:text="${#dates.format(article.articleNewstime,'yyyy/MM/dd HH:mm:ss')}"></td>
             </tr>
             </table>
             </div>
         </div>
-       <div class="col-lg-6 col-md-12">
+         <div class="col-lg-6 col-md-12">
           <div class="tile">
-            <h3 class="tile-title">最新评论</h3>
+            <h3 class="tile-title">最新日志</h3>
             <table class="table">
             <tr>
-            <td>23213</td>
+            <td>事件</td>
+            <td>结果</td>
+            <td>IP</td>
+            <td>时间</td>
+            </tr>
+            <tr th:each="log : ${logs}">
+            <td th:text="${log.logTitle}"></td>
+            <td th:text="${log.logContent}"></td>
+            <td th:text="${log.logIp}"></td>
+            <td th:text="${#dates.format(log.logDate,'yyyy/MM/dd HH:mm:ss')}"></td>
             </tr>
             </table>
             </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-6 col-md-12">
-          <div class="tile">
-            <h3 class="tile-title">最新日志</h3>
-            <table class="table">
-            <tr>
-            <td>23213</td>
-            </tr>
-            </table>
-            </div>
-        </div>
       </div>
     </main>
    <div th:replace="admin/module/macros :: comm" ></div>
