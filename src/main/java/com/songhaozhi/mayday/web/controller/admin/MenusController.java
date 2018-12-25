@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.songhaozhi.mayday.model.domain.Menu;
+import com.songhaozhi.mayday.model.dto.MaydayConst;
 import com.songhaozhi.mayday.service.MenuService;
 
 /**
@@ -30,8 +31,7 @@ public class MenusController extends BaseController {
 	 */
 	@GetMapping
 	public String menus(Model model) {
-		List<Menu> menus = menuService.findMenus();
-		model.addAttribute("menus", menus);
+		model.addAttribute("menus", MaydayConst.menus);
 		return "/admin/admin_menus";
 	}
 
@@ -61,6 +61,8 @@ public class MenusController extends BaseController {
 			} else {
 				menuService.edit(menu);
 			}
+			MaydayConst.menus.clear();
+			MaydayConst.menus=menuService.findMenus();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -70,6 +72,8 @@ public class MenusController extends BaseController {
 	public String remove(@RequestParam(value = "menuId") Integer menuId) {
 		try {
 			menuService.remove(menuId);
+			MaydayConst.menus.clear();
+			MaydayConst.menus=menuService.findMenus();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

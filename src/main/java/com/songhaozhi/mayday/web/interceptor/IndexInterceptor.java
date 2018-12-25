@@ -37,7 +37,7 @@ public class IndexInterceptor  implements HandlerInterceptor{
 		//设置项
 		request.setAttribute("options", MaydayConst.options);
 		//菜单
-		request.setAttribute("menus", menuService.findMenus());
+		request.setAttribute("menus", MaydayConst.menus);
 	}
 
 	@Override

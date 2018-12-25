@@ -15,7 +15,7 @@ public interface TagService {
 	 * 
 	 * @return
 	 */
-	List<Tag> findTags() throws Exception;
+	List<Tag> findTags();
 
 	/**
 	 * 根据tagid查询
@@ -23,7 +23,7 @@ public interface TagService {
 	 * @param tagId
 	 * @return
 	 */
-	Tag findByTagId(int tagId) throws Exception;
+	Tag findByTagId(int tagId);
 
 	/**
 	 * 保存

@@ -32,12 +32,8 @@ public class LinksController extends BaseController {
 	 */
 	@GetMapping
 	public String links(Model model) {
-		try {
-			List<Link> lists = linksService.findLinks();
-			model.addAttribute("links", lists);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		List<Link> lists = linksService.findLinks();
+		model.addAttribute("links", lists);
 		return "/admin/admin_links";
 	}
 
@@ -50,14 +46,10 @@ public class LinksController extends BaseController {
 	 */
 	@GetMapping(value = "/edit")
 	public String linksEdit(Model model, @RequestParam(value = "linkId") int linkId) {
-		try {
-			Link link = linksService.findByLindId(linkId);
-			List<Link> lists = linksService.findLinks();
-			model.addAttribute("links", lists);
-			model.addAttribute("link", link);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		Link link = linksService.findByLindId(linkId);
+		List<Link> lists = linksService.findLinks();
+		model.addAttribute("links", lists);
+		model.addAttribute("link", link);
 		return "/admin/admin_links";
 	}
 
@@ -87,9 +79,8 @@ public class LinksController extends BaseController {
 	 * @return
 	 */
 	@GetMapping(value = "remove")
-	@Transactional
 	public String remove(@RequestParam(value = "linkId") int linkId) {
-			linksService.remove(linkId);
+		linksService.remove(linkId);
 		return "redirect:/admin/links";
 	}
 

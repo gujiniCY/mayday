@@ -10,7 +10,9 @@
 	<packaging>jar</packaging>
 
 	<name>mayday</name>
-	<description>Demo project for Spring Boot</description>
+	<description>
+	mayday,一个为了学习springboot而诞生的博客项目
+	</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -23,6 +25,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<druid.version>1.1.10</druid.version>
+		<fastjson.version>1.2.47</fastjson.version>
+		<pagehelper.version>5.1.6</pagehelper.version>
+		<hutool-all.version>4.1.14</hutool-all.version>
+		<thumbnailator.version>0.4.8</thumbnailator.version>
+		<ehcache.version>3.6.3</ehcache.version>
 	</properties>
 
 	<dependencies>
@@ -42,6 +50,10 @@
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>1.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -70,18 +82,18 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
-			<version>1.1.10</version>
+			<version>${druid.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.47</version>
+			<version>${fastjson.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper</artifactId>
-			<version>5.1.6</version>
+			<version>${pagehelper.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper-spring-boot-autoconfigure -->
 		<dependency>
@@ -100,7 +112,7 @@
 		<dependency>
 			<groupId>cn.hutool</groupId>
 			<artifactId>hutool-all</artifactId>
-			<version>4.1.14</version>
+			<version>${hutool-all.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 		<dependency>
@@ -118,10 +130,14 @@
 		<dependency>
 			<groupId>net.coobird</groupId>
 			<artifactId>thumbnailator</artifactId>
-			<version>0.4.8</version>
+			<version>${thumbnailator.version}</version>
 		</dependency>
-
-
+		<!-- https://mvnrepository.com/artifact/org.ehcache/ehcache -->
+		<dependency>
+			<groupId>org.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>${ehcache.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

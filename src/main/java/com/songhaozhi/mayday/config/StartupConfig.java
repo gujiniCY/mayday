@@ -9,6 +9,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 
 import com.songhaozhi.mayday.model.domain.Options;
 import com.songhaozhi.mayday.model.dto.MaydayConst;
+import com.songhaozhi.mayday.service.MenuService;
 import com.songhaozhi.mayday.service.OptionsService;
 
 /**
@@ -19,9 +20,12 @@ import com.songhaozhi.mayday.service.OptionsService;
 public class StartupConfig implements ApplicationListener<ContextRefreshedEvent>{
 	@Autowired
 	private OptionsService optionsService;
+	@Autowired
+	private MenuService menuService;
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
 		this.loadOptions();
+		this.loadMenus();
 	}
 	/**
      * 加载设置选项
@@ -33,6 +37,12 @@ public class StartupConfig implements ApplicationListener<ContextRefreshedEvent>
 				MaydayConst.options.put(options.getOptionName(), options.getOptionValue());
 			}
 		}
+    }
+    /**
+     * 加载菜单
+     */
+    private void loadMenus() {
+    	MaydayConst.menus=menuService.findMenus();
     }
 
 }

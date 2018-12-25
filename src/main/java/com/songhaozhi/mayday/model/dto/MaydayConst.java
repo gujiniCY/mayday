@@ -1,7 +1,11 @@
 package com.songhaozhi.mayday.model.dto;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import com.songhaozhi.mayday.model.domain.Menu;
 
 /**
  * 公共常量
@@ -21,4 +25,8 @@ public class MaydayConst {
 	 * 所有设置选项
 	 */
 	public static Map<String, String> options=new HashMap<String, String>();
+	/**
+	 * 所有菜单
+	 */
+	public static List<Menu> menus=new ArrayList<Menu>();
 }

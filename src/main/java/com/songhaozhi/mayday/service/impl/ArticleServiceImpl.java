@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,7 +40,10 @@ import cn.hutool.core.date.DateUtil;
 @Service
 @Transactional(rollbackFor = RuntimeException.class)
 public class ArticleServiceImpl implements ArticleService {
-
+	
+	private static final String ARTICLES_CACHE_KEY="'article'";
+	
+	private static final String ARTICLES_CACHE_NAME="articles";
 	@Autowired
 	private ArticleMapper articleMapper;
 	@Autowired
@@ -56,6 +61,7 @@ public class ArticleServiceImpl implements ArticleService {
 	 * 自动生成的mapper里配置了useGeneratedKeys="true" keyProperty="id" 如重新生成请复制过去
 	 */
 	@Override
+	@CacheEvict(value=ARTICLES_CACHE_NAME,allEntries=true,beforeInvocation=true)
 	public void save(Article article, Long[] tags, Long[] categorys) throws Exception {
 		articleMapper.insert(article);
 		if (categorys != null) {
@@ -77,6 +83,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
+	@Cacheable(value=ARTICLES_CACHE_NAME,key="'findAllArticle'+#status")
 	public List<ArticleCustom> findAllArticle(int status) {
 		return articleMapperCustom.findAllArticle(status);
 	}
@@ -89,16 +96,19 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
+	@Cacheable(value=ARTICLES_CACHE_NAME,key="'Post_status'+#status+#post")
 	public Integer countByStatus(Integer status, String post) {
 		return articleMapperCustom.countByStatus(status, post);
 	}
 
 	@Override
+	@CacheEvict(value=ARTICLES_CACHE_NAME,allEntries=true,beforeInvocation=true)
 	public void recycle(int id, Integer integer) throws Exception {
 		articleMapperCustom.updateStatus(id, integer);
 	}
 
 	@Override
+	@CacheEvict(value=ARTICLES_CACHE_NAME,allEntries=true,beforeInvocation=true)
 	public void remove(int id) throws Exception {
 		// 删除文章表
 		articleMapper.deleteByPrimaryKey(id);
@@ -114,11 +124,13 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
+	@Cacheable(value=ARTICLES_CACHE_NAME,key="'findByArticleId'+#article_id")
 	public ArticleCustom findByArticleId(Integer article_id) {
 		return articleMapperCustom.findByArticleId(article_id);
 	}
 
 	@Override
+	@CacheEvict(value=ARTICLES_CACHE_NAME,allEntries=true,beforeInvocation=true)
 	public void update(Article article, Long[] tags, Long[] categorys) throws Exception {
 		// 修改文章
 		articleMapper.updateByPrimaryKeySelective(article);
@@ -153,6 +165,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
+	@Cacheable(value=ARTICLES_CACHE_NAME,key=ARTICLES_CACHE_KEY)
 	public List<ArchiveBo> archives() {
 		// 查询文章表各个时间段的文章数量 分别为DATE->时间段 count->文章数量
 		List<ArchiveBo> listforArchiveBo = articleMapperCustom.findDateAndCount();
@@ -191,11 +204,13 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
+	@Cacheable(value=ARTICLES_CACHE_NAME,key="'articleUrlInt'+#articleUrl")
 	public int findRepeatByUrl(String articleUrl) {
 		return articleMapperCustom.findRepeatByUrl(articleUrl);
 	}
 
 	@Override
+	@Cacheable(value=ARTICLES_CACHE_NAME,key="'articleUrl'+#articleUrl")
 	public ArticleCustom findByArticleUrl(String articleUrl) {
 		return articleMapperCustom.findByArticleUrl(articleUrl);
 	}

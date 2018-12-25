@@ -22,7 +22,6 @@ import com.songhaozhi.mayday.model.domain.User;
 import com.songhaozhi.mayday.model.dto.JsonResult;
 import com.songhaozhi.mayday.model.dto.LogConstant;
 import com.songhaozhi.mayday.model.dto.MaydayConst;
-import com.songhaozhi.mayday.model.enums.ArticleStatus;
 import com.songhaozhi.mayday.model.enums.PostType;
 import com.songhaozhi.mayday.service.ArticleService;
 import com.songhaozhi.mayday.service.AttachmentService;
