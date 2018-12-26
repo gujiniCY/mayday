@@ -1,0 +1,37 @@
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org" xmlns:thSys="">
+<head>
+<meta charset="UTF-8">
+<title>所有日志</title>
+<link rel="stylesheet" type="text/css"
+	href="/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/plugins/vali/css/main.css">
+</head>
+<body>
+<div class="container-fluid">
+<div class="row mt-3">
+	<div class="col">
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered table-hover">
+				<tr>
+					<td>事件</td>
+					<td>结果</td>
+					<td>IP</td>
+					<td>时间</td>
+				</tr>
+				<tr th:each="log : ${logs.list}">
+					<td th:text="${log?.logTitle}"></td>
+            		<td th:text="${log?.logContent}"></td>
+            		<td th:text="${log?.logIp}"></td>
+            		<td th:text="${#dates.format(log?.logDate,'yyyy/MM/dd HH:mm:ss')}"></td>
+				</tr>
+				<tr th:unless="${logs.list.total} != 0">
+							<td th:text="暂无文章" th:attr="colspan='4',align='center'" ></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+<div th:replace="admin/module/macros :: pageAdminNav(${logs})"></div>	
+</div>
+</body>
+</html>
