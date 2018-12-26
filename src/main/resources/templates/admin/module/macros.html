@@ -22,8 +22,7 @@
 <script type="text/javascript" th:src="@{/plugins/bootstrap-fileinput/themes/fa/theme.js}"></script>
 </div>
 
-<div th:fragment="pageAdminNav(pageInfo)">
-	<div class="clearfix">
+	<div class="clearfix" th:fragment="pageAdminNav(pageInfo)">
 		<ul class="pagination no-margin pull-right">
 			<li th:if="${pageInfo.pages}!=0" class="page-item"><a class="page-link" href="#" th:text="'共'+ ${pageInfo.pages}+'页'"></a></li>
 			<li th:if="${pageInfo.hasPreviousPage}" class="page-item"><a
@@ -44,7 +43,6 @@
 			</th:block>
 		</ul>
 	</div>
-</div>
 
 <ol class="page-navigator" th:fragment="pageNav(pageInfo, prevText, nextText, prefix)">
     <th:block th:if="${pageInfo.hasPreviousPage}">
@@ -118,7 +116,7 @@
      <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <ul class="app-nav">
       <a class="app-nav__item" href="/" th:target="_blank"  aria-label="Show notifications"><i class="fa fa-paper-plane fa-lg"></i></a>
-        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
+        <!-- <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
           <ul class="app-notification dropdown-menu dropdown-menu-right">
             <li class="app-notification__title">3条未读消息</li>
             <div class="app-notification__content">
@@ -147,7 +145,7 @@
             </div>
             <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
           </ul>
-        </li>
+        </li> -->
         <!-- User Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">

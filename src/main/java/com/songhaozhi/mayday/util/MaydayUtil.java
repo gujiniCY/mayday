@@ -1,11 +1,16 @@
 package com.songhaozhi.mayday.util;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import javax.imageio.ImageIO;
 
 /**
  * @author : 宋浩志
@@ -64,4 +69,44 @@ public class MaydayUtil {
 		}
 		return result;
 	}
+	/**
+	 * 转换文件大小
+	 * @param size
+	 * @return
+	 */
+    public static String parseSize(long size) {
+        if (size < 1024) {
+            return String.valueOf(size) + "B";
+        } else {
+            size = size / 1024;
+        }
+        if (size < 1024) {
+            return String.valueOf(size) + "KB";
+        } else {
+            size = size / 1024;
+        }
+        if (size < 1024) {
+            size = size * 100;
+            return String.valueOf((size / 100)) + "." + String.valueOf((size % 100)) + "MB";
+        } else {
+            size = size * 100 / 1024;
+            return String.valueOf((size / 100)) + "." + String.valueOf((size % 100)) + "GB";
+        }
+    }
+	
+    /**
+     * 获取文件长和宽
+     *
+     * @param file file
+     * @return String
+     */
+    public static String getImageWh(File file) {
+        try {
+            BufferedImage image = ImageIO.read(new FileInputStream(file));
+            return image.getWidth() + "x" + image.getHeight();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
 }

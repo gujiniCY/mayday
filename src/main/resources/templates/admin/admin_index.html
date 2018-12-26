@@ -79,7 +79,18 @@
         </div>
          <div class="col-lg-6 col-md-12">
           <div class="tile">
-            <h3 class="tile-title">最新日志</h3>
+          <div>
+          <h3 class="tile-title" style="float: left;">最新日志</h3>
+		  <div class="dropdown" style="float: right;">
+			   <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
+			    <i class="fa fa-bars"></i>
+			   </button>
+			   <div class="dropdown-menu">
+			      <a class="dropdown-item" href="#" onclick="viewLogs()">查看所有</a>
+			      <a class="dropdown-item" href="#">清空日志</a>
+			   </div>
+		  </div>
+		  </div>
             <table class="table">
             <tr>
             <td>事件</td>
@@ -101,5 +112,18 @@
       </div>
     </main>
    <div th:replace="admin/module/macros :: comm" ></div>
+   <script type="text/javascript" src="/static/plugins/layer/layer.js"></script>
+   <script type="text/javascript">
+   function viewLogs(){
+	   layer.open({
+			type : 2,
+			title : '所有日志',
+			anim : 2,
+			area : [ '90%', '90%' ],
+			maxmin : true,
+			content : "/admin/logs"
+		});
+   }
+   </script>
   </body>
 </html>

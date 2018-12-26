@@ -24,6 +24,7 @@ import com.songhaozhi.mayday.model.dto.JsonResult;
 import com.songhaozhi.mayday.model.dto.LogConstant;
 import com.songhaozhi.mayday.model.enums.MaydayEnums;
 import com.songhaozhi.mayday.service.AttachmentService;
+import com.songhaozhi.mayday.util.MaydayUtil;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.extra.servlet.ServletUtil;
@@ -48,13 +49,9 @@ public class AttachmentController extends BaseController {
 	@GetMapping
 	public String attachment(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "limit", defaultValue = "18") int limit) {
-		try {
 			PageInfo<Attachment> info = attachmentService.getAttachment(page, limit);
 			model.addAttribute("info", info);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "/admin/admin_attachment";
+			return "/admin/admin_attachment";
 	}
 
 	/**
@@ -121,12 +118,12 @@ public class AttachmentController extends BaseController {
 			try {
 				// 获取用户目录
 				String userPath = System.getProperties().getProperty("user.home") + "/mayday";
-				// 上传路径
-				StringBuffer sb = new StringBuffer("upload/");
+				// 保存目录
+				StringBuffer hold = new StringBuffer("upload/");
 				// 获取时间，以年月创建目录
 				Date date = DateUtil.date();
-				sb.append(DateUtil.thisYear()).append("/").append(DateUtil.thisMonth() + 1).append("/");
-				File mediaPath = new File(userPath, sb.toString());
+				hold.append(DateUtil.thisYear()).append("/").append(DateUtil.thisMonth() + 1).append("/");
+				File mediaPath = new File(userPath, hold.toString());
 				// 如果没有该目录则创建
 				if (!mediaPath.exists()) {
 					mediaPath.mkdirs();
@@ -140,24 +137,36 @@ public class AttachmentController extends BaseController {
 				// 文件后缀
 				String fileSuffix = file.getOriginalFilename()
 						.substring(file.getOriginalFilename().lastIndexOf(".") + 1);
-				// 上传文件名
+				// 上传文件名加后缀
 				String fileName = nameSuffix + "." + fileSuffix;
+				
+				//转存文件
 				file.transferTo(new File(mediaPath.toString(), fileName));
+				
+				//原图片路径
+				StringBuffer originalPath=new StringBuffer();
+				originalPath.append(mediaPath.getAbsolutePath()).append("/").append(fileName);
+				//压缩图片路径
+				StringBuffer compressPath=new StringBuffer();
+				compressPath.append(mediaPath.getAbsolutePath()).append("/").append(nameSuffix).append("_small.").append(fileSuffix);
 				// 压缩图片
-				Thumbnails.of(new StringBuffer(mediaPath.getAbsolutePath()).append("/").append(fileName).toString())
-						.size(256, 256).keepAspectRatio(false).toFile(new StringBuffer(mediaPath.getAbsolutePath())
-								.append("/").append(nameSuffix).append("_small.").append(fileSuffix).toString());
+				Thumbnails.of(originalPath.toString()).size(256, 256).keepAspectRatio(false).toFile(compressPath.toString());
+				//原图数据库路径
+				StringBuffer originalDataPath=new StringBuffer();
+				originalDataPath.append("/").append(hold).append(fileName);
+				//压缩图数据库路径
+				StringBuffer compressDataPath=new StringBuffer();
+				compressDataPath.append("/").append(hold).append(nameSuffix).append("_small.").append(fileSuffix);
 				// 添加数据库
 				Attachment attachment = new Attachment();
 				attachment.setPictureName(fileName);
-				attachment.setPicturePath(new StringBuffer("/upload/").append(DateUtil.thisYear()).append("/")
-						.append(DateUtil.thisMonth() + 1).append("/").append(fileName).toString());
+				attachment.setPicturePath(originalDataPath.toString());
 				attachment.setPictureType(file.getContentType());
 				attachment.setPictureCreateDate(date);
 				attachment.setPictureSuffix(new StringBuffer().append(".").append(fileSuffix).toString());
-				attachment.setPictureSmallPath(new StringBuffer("/upload/").append(DateUtil.thisYear()).append("/")
-						.append(DateUtil.thisMonth() + 1).append("/").append(nameSuffix).append("_small.")
-						.append(fileSuffix).toString());
+				attachment.setPictureSmallPath(compressDataPath.toString());
+				attachment.setPictureWh(MaydayUtil.getImageWh(new File(mediaPath.toString()+"/"+fileName)));
+				attachment.setPictureSize(MaydayUtil.parseSize(new File(mediaPath.toString()+"/"+fileName).length()));
 				attachmentService.save(attachment);
 				// 添加日志
 				logService.save(new Log(LogConstant.UPLOAD_ATTACHMENT, LogConstant.UPLOAD_SUCCESS,

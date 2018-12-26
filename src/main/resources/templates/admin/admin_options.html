@@ -18,7 +18,7 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 tile">
-			<div class="row">
+		<div class="bs-component">
 				<ul class="nav nav-tabs" role="tablist">
 					<li class="nav-item"><a class="nav-link active"
 						data-toggle="tab" href="#routine">常规设置</a></li>
@@ -37,12 +37,11 @@
 					<li class="nav-item"><a class="nav-link" data-toggle="tab"
 						href="#other">其他设置</a></li>
 				</ul>
-			</div>
 			<!-- Tab panes -->
 			<div class="tab-content">
-				<div id="routine" class="tab-pane active ">
+				<div id="routine" class="tab-pane active">
 					<form class="form-horizontal" id="commonOptions">
-						<div class="form-group row">
+						<div class="form-group row mt-3">
 							<label class="col-form-label col-md-2">博客标题：</label>
 							<div class="col-md-5">
 								<input class="form-control" type="text" th:value="${options['blog_name']}" name="blog_name">
@@ -99,7 +98,7 @@
 				<!-- SEO表单 -->
 				<div id="seo" class="tab-pane fade">
 					<form class="form-horizontal" id="seoOptions">
-						<div class="form-group row">
+						<div class="form-group row mt-3">
 							<label class="col-form-label col-md-2">关键词： <span
 								data-toggle="tooltip" data-placement="top" title="多个关键词使用,隔开"
 								style="cursor: pointer"> <i class="fa fa-question-circle"
@@ -144,7 +143,7 @@
 				<!-- 文章 -->
 				 <div id="article" class="tab-pane fade">
 					<form class="form-horizontal" id="articleOptions">
-						<div class="form-group row">
+						<div class="form-group row mt-3">
 							<label class="col-form-label col-md-2">首页显示条数： <span
 								data-toggle="tooltip" data-placement="top" title="默认为12条"
 								style="cursor: pointer"> <i class="fa fa-question-circle"
@@ -182,7 +181,7 @@
 				<!-- 评论 -->
 				<div id="comment" class="tab-pane fade">
 					<form class="form-horizontal" id="commentOptions">
-						<div class="form-group row">
+						<div class="form-group row mt-3">
 							<label class="col-form-label col-md-2">APP ID:<span
 								data-toggle="tooltip" data-placement="top" title="Leancloud申请的appid"
 								style="cursor: pointer"> <i class="fa fa-question-circle"
@@ -241,7 +240,7 @@
 				<!-- 邮箱 -->
 				<div id="email" class="tab-pane fade">
 					<form class="form-horizontal" id="emailOptions">
-						<div class="form-group row">
+						<div class="form-group row mt-3">
 							<label class="col-form-label col-md-2">邮箱账号:</label>
 							<div class="col-md-5">
 								<input class="form-control" type="text" th:value="${options['email_username']}" name="email_username">
@@ -261,7 +260,8 @@
 			</div>
 		</div>
 	</div>
-	</main>
+</div>
+</main>
 	<div th:replace="admin/module/macros :: comm"></div>
 	<script src="/plugins/layer/layer.js"></script>
 	<script type="text/javascript">

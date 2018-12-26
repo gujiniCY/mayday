@@ -35,7 +35,7 @@ public class LogServiceImpl implements LogService{
 	}
 
 	@Override
-	@Cacheable(value=LOGS_CACHE_NAME,key="'findLogs'")
+	@Cacheable(value=LOGS_CACHE_NAME,key="'findLogs'+#page+#limit")
 	public PageInfo<Log> findLogs(int page, int limit) {
 		PageHelper.startPage(page, limit);
 		LogExample example=new LogExample();
