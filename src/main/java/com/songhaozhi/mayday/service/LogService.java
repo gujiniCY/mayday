@@ -22,4 +22,8 @@ public interface LogService {
 	 * @return
 	 */
 	PageInfo<Log> findLogs(int page, int limit);
+	/**
+	 * 删除所有日志
+	 */
+	void clear();
 }

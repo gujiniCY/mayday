@@ -60,6 +60,7 @@ public class PageController extends BaseController {
 			model.addAttribute("published", articleService.countByStatus(0, PostType.POST_TYPE_PAGE.getValue()));
 			// 草稿条数
 			model.addAttribute("draft", articleService.countByStatus(1, PostType.POST_TYPE_PAGE.getValue()));
+			model.addAttribute("status", status);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

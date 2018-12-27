@@ -111,12 +111,12 @@ public class AdminController extends BaseController {
 	public JsonResult getLogin(@RequestParam(value = "userName") String userName,
 			@RequestParam(value = "userPwd") String userPwd, HttpSession session) {
 		try {
-			// 禁止时间10分子
+			// 禁止时间10分钟
 			int inhibitTime = 10;
 			// 为true禁止登录
 			String flag = "true";
 			// 错误总次数5次
-			Integer errorCount = 5;
+			int errorCount = 5;
 			// 已注册用户
 			User users = userService.findUser();
 			// 判断账户是否被禁用十分钟

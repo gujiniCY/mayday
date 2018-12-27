@@ -66,7 +66,6 @@ public class ArticleController extends BaseController {
 	public String article(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "limit", defaultValue = "10") int limit,
 			@RequestParam(value = "status", defaultValue = "0") int status) {
-		try {
 			ArticleCustom articleCustom=new ArticleCustom();
 			articleCustom.setArticleStatus(status);
 			articleCustom.setArticlePost(PostType.POST_TYPE_POST.getValue());
@@ -78,10 +77,8 @@ public class ArticleController extends BaseController {
 			model.addAttribute("draft", articleService.countByStatus(ArticleStatus.DRAFT.getStatus(),PostType.POST_TYPE_POST.getValue()));
 			// 回收站条数
 			model.addAttribute("recycle", articleService.countByStatus(ArticleStatus.RECYCLE.getStatus(),PostType.POST_TYPE_POST.getValue()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "/admin/admin_article";
+			model.addAttribute("status", status);
+			return "/admin/admin_article";
 	}
 
 	/**

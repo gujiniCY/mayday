@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.songhaozhi.mayday.mapper.custom.LogMapperCustom;
 import com.songhaozhi.mayday.mapper.generator.LogMapper;
 import com.songhaozhi.mayday.model.domain.Log;
 import com.songhaozhi.mayday.model.domain.LogExample;
@@ -27,6 +28,9 @@ public class LogServiceImpl implements LogService{
 	
 	@Autowired
 	private LogMapper logMapper;
+	
+	@Autowired
+	private LogMapperCustom logMapperCustom;
 
 	@Override
 	@CacheEvict(value=LOGS_CACHE_NAME,allEntries=true,beforeInvocation=true)
@@ -42,6 +46,12 @@ public class LogServiceImpl implements LogService{
 		example.setOrderByClause("log_id DESC ");
 		List<Log> logs=logMapper.selectByExample(example);
 		return new PageInfo<>(logs);
+	}
+
+	@Override
+	@CacheEvict(value=LOGS_CACHE_NAME,allEntries=true,beforeInvocation=true)
+	public void clear() {
+		logMapperCustom.clear();
 	}
 
 }

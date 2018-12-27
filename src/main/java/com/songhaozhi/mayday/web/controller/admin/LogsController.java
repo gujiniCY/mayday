@@ -27,5 +27,14 @@ public class LogsController extends BaseController{
 		model.addAttribute("logs", info);
 		return "/admin/view_logs";
 	}
+	@GetMapping("/clear")
+	public String clear() {
+		try {
+			logService.clear();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/admin";
+	}
 
 }
