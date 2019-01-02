@@ -4,6 +4,8 @@ import java.net.URLEncoder;
 
 import org.springframework.stereotype.Component;
 
+import com.github.pagehelper.PageInfo;
+
 import cn.hutool.core.util.StrUtil;
 
 /**
@@ -66,5 +68,15 @@ public class Commons {
 		}
 		return sb.toString();
 	}
+	
+	 /**
+     * 判断分页中是否有数据
+     *
+     * @param paginator
+     * @return
+     */
+    public static boolean is_empty(PageInfo paginator) {
+        return paginator == null || (paginator.getList() == null) || (paginator.getList().size() == 0);
+    }
 
 }

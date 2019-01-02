@@ -27,6 +27,7 @@ import com.songhaozhi.mayday.model.domain.ArticleCustom;
 import com.songhaozhi.mayday.model.domain.ArticleExample;
 import com.songhaozhi.mayday.model.domain.ArticleTag;
 import com.songhaozhi.mayday.model.domain.ArticleTagExample;
+import com.songhaozhi.mayday.model.domain.Category;
 import com.songhaozhi.mayday.model.dto.ArchiveBo;
 import com.songhaozhi.mayday.service.ArticleService;
 
@@ -213,5 +214,12 @@ public class ArticleServiceImpl implements ArticleService {
 	@Cacheable(value=ARTICLES_CACHE_NAME,key="'articleUrl'+#articleUrl")
 	public ArticleCustom findByArticleUrl(String articleUrl) {
 		return articleMapperCustom.findByArticleUrl(articleUrl);
+	}
+
+	@Override
+	public PageInfo<ArticleCustom> findArtileByCategory(int page, int limit, Category category) {
+		PageHelper.startPage(page, limit);
+		List<ArticleCustom> list=articleMapperCustom.findArtileByCategory(category);
+		return new PageInfo<>(list);
 	}
 }

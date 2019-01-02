@@ -5,6 +5,7 @@ import java.util.List;
 import com.github.pagehelper.PageInfo;
 import com.songhaozhi.mayday.model.domain.Article;
 import com.songhaozhi.mayday.model.domain.ArticleCustom;
+import com.songhaozhi.mayday.model.domain.Category;
 import com.songhaozhi.mayday.model.dto.ArchiveBo;
 
 /**
@@ -83,4 +84,12 @@ public interface ArticleService {
 	 * @return 文章
 	 */
 	ArticleCustom findByArticleUrl(String articleUrl);
+	/**
+	 * 分页查询分类下的所有文章
+	 * @param page
+	 * @param limit
+	 * @param category
+	 * @return
+	 */
+	PageInfo<ArticleCustom> findArtileByCategory(int page, int limit, Category category);
 }

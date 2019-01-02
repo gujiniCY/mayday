@@ -49,7 +49,7 @@
         <li class="prev"><a th:href="@{'/'+${prefix}+'/'+${pageInfo.prePage}}" th:text="${prevText}"></a></li>
     </th:block>
     <th:block th:each="navIndex :${ pageInfo.navigatepageNums}">
-        <li th:class="${pageInfo.pageNum==navIndex}?'current':''"><a th:href="@{'/page/'+${navIndex}}"
+        <li th:class="${pageInfo.pageNum==navIndex}?'current':''"><a th:href="@{'/'+${prefix}+'/'+${navIndex}}"
                                                                      th:text="${navIndex}"></a></li>
     </th:block>
     <th:block th:if="${pageInfo.hasNextPage}">

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.songhaozhi.mayday.mapper.generator.CategoryMapper;
 import com.songhaozhi.mayday.model.domain.Category;
+import com.songhaozhi.mayday.model.domain.CategoryExample;
 import com.songhaozhi.mayday.service.CategoryService;
 
 /**
@@ -53,6 +54,14 @@ public class CategoryServiceImpl implements CategoryService {
 	@CacheEvict(value=CATEGORYS_CACHE_NAME,allEntries=true,beforeInvocation=true)
 	public void delete(int categoryId) throws Exception {
 		categoryMapper.deleteByPrimaryKey(categoryId);
+	}
+
+	@Override
+	public Category findByCateUrl(String cateUrl) {
+		CategoryExample categoryExample=new CategoryExample();
+		CategoryExample.Criteria criteria=categoryExample.createCriteria();
+		criteria.andCategoryUrlEqualTo(cateUrl);
+		return categoryMapper.selectByExample(categoryExample).get(0);
 	}
 
 }

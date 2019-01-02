@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.songhaozhi.mayday.model.domain.ArticleCustom;
+import com.songhaozhi.mayday.model.domain.Category;
 import com.songhaozhi.mayday.model.dto.ArchiveBo;
 
 /**
@@ -30,4 +31,6 @@ public interface ArticleMapperCustom {
 	int findRepeatByUrl(@Param(value="articleUrl")String articleUrl);
 
 	ArticleCustom findByArticleUrl(@Param(value="articleUrl")String articleUrl);
+
+	List<ArticleCustom> findArtileByCategory(Category category);
 }

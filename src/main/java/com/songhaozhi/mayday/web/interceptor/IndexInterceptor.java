@@ -9,7 +9,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.songhaozhi.mayday.model.dto.MaydayConst;
-import com.songhaozhi.mayday.service.MenuService;
 import com.songhaozhi.mayday.util.Commons;
 
 /**
@@ -21,8 +20,6 @@ import com.songhaozhi.mayday.util.Commons;
 public class IndexInterceptor  implements HandlerInterceptor{
 	@Autowired
 	 private Commons commons;
-	@Autowired
-	private MenuService menuService;
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {

@@ -84,4 +84,8 @@
 		mayday_article_category WHERE article_id=a.id) ) categorysUrl
 		FROM mayday_article a WHERE article_url=#{articleUrl}
 	</select>
+	
+	<select id="findArtileByCategory" parameterType="com.songhaozhi.mayday.model.domain.Category" resultType="com.songhaozhi.mayday.model.domain.ArticleCustom">
+	SELECT * FROM mayday_article WHERE id in (SELECT article_id FROM mayday_article_category WHERE category_id=(SELECT category_id FROM mayday_category WHERE category_url=#{categoryUrl}))
+	</select>
 </mapper>

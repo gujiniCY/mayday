@@ -36,5 +36,11 @@ public interface CategoryService {
 	 * @param categoryId
 	 */
 	void delete(int categoryId) throws Exception;
+	/**
+	 * 验证是否存在该路径
+	 * @param cateUrl
+	 * @return
+	 */
+	Category findByCateUrl(String cateUrl);
 
 }

@@ -7,9 +7,13 @@
         <div class="post-lists-body">
             <div class="post-list-item" th:each="article : ${articles.list}">
                 <div class="post-list-item-container">
-                    <a class="item-thumb bg-deepgrey" th:href="@{'/post/'+${article.articleUrl}}"
-                    	 th:style="'background-image:url('+@{${article.articleThumbnail}}+');'" href="#">
-                        <dir class="item-desc" th:text="${article.tagsName}"></dir>
+                    <div class="item-thumb bg-deepgrey" th:href="@{'/post/'+${article.articleUrl}}"
+                    	 th:style="'background-image:url('+@{${article.articleThumbnail}}+');'"></div>
+                        <!-- <dir class="item-desc" th:text="${article.tagsName}"></dir> -->
+                    <a th:href="@{'/post/'+${article.articleUrl}}"> 
+                       <div class="item-desc">
+								<p th:text="${article.tagsName}"></p>
+						</div>
                     </a>
                     <div class="item-slant reverse-slant &lt; bg-deepgrey"></div>
                     <div class="item-slant"></div>
@@ -25,7 +29,6 @@
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
 	</div>
