@@ -45,5 +45,11 @@ public interface TagService {
 	 * @param tagId
 	 */
 	void remove(int tagId) throws Exception;
+	/**
+	 * url查询标签是否存在
+	 * @param tagUrl
+	 * @return
+	 */
+	Tag findByTagUrl(String tagUrl);
 
 }

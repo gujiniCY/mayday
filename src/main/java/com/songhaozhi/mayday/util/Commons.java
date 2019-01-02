@@ -62,7 +62,7 @@ public class Commons {
 			String[] tagName=tagsName.split(",");
 			int i=0;
 			for (String url : tagUrl) {
-				sb.append("<a href=\"/tag/" + URLEncoder.encode(url, "UTF-8") + "\">" + tagName[i] + "</a>");
+				sb.append("<a href=\"/tags/" + URLEncoder.encode(url, "UTF-8") + "\">" + tagName[i] + "</a>");
 				i++;	
 			}
 		}

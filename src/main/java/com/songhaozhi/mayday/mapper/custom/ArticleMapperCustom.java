@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.songhaozhi.mayday.model.domain.ArticleCustom;
 import com.songhaozhi.mayday.model.domain.Category;
+import com.songhaozhi.mayday.model.domain.Tag;
 import com.songhaozhi.mayday.model.dto.ArchiveBo;
 
 /**
@@ -33,4 +34,6 @@ public interface ArticleMapperCustom {
 	ArticleCustom findByArticleUrl(@Param(value="articleUrl")String articleUrl);
 
 	List<ArticleCustom> findArtileByCategory(Category category);
+
+	List<ArticleCustom> findArtileByTag(Tag tag);
 }

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.songhaozhi.mayday.mapper.generator.TagMapper;
 import com.songhaozhi.mayday.model.domain.Tag;
+import com.songhaozhi.mayday.model.domain.TagExample;
 import com.songhaozhi.mayday.service.TagService;
 
 /**
@@ -52,6 +53,14 @@ public class TagServiceImpl implements TagService {
 	@CacheEvict(value=TAGS_CACHE_NAME,allEntries=true,beforeInvocation=true)
 	public void remove(int tagId) throws Exception {
 		tagMapper.deleteByPrimaryKey(tagId);
+	}
+
+	@Override
+	public Tag findByTagUrl(String tagUrl) {
+		TagExample tagExample=new TagExample();
+		TagExample.Criteria criteria=tagExample.createCriteria();
+		criteria.andTagUrlEqualTo(tagUrl);
+		return tagMapper.selectByExample(tagExample).get(0);
 	}
 
 }

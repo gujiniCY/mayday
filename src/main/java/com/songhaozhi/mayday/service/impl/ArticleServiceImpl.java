@@ -28,7 +28,10 @@ import com.songhaozhi.mayday.model.domain.ArticleExample;
 import com.songhaozhi.mayday.model.domain.ArticleTag;
 import com.songhaozhi.mayday.model.domain.ArticleTagExample;
 import com.songhaozhi.mayday.model.domain.Category;
+import com.songhaozhi.mayday.model.domain.Tag;
 import com.songhaozhi.mayday.model.dto.ArchiveBo;
+import com.songhaozhi.mayday.model.enums.ArticleStatus;
+import com.songhaozhi.mayday.model.enums.PostType;
 import com.songhaozhi.mayday.service.ArticleService;
 
 import cn.hutool.core.date.DateUtil;
@@ -217,9 +220,31 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
+	@Cacheable(value=ARTICLES_CACHE_NAME,key="'findArtileByCategory'+#page+#limit")
 	public PageInfo<ArticleCustom> findArtileByCategory(int page, int limit, Category category) {
 		PageHelper.startPage(page, limit);
 		List<ArticleCustom> list=articleMapperCustom.findArtileByCategory(category);
+		return new PageInfo<>(list);
+	}
+
+	@Override
+	@Cacheable(value=ARTICLES_CACHE_NAME,key="'findArtileByTag'+#page+#limit")
+	public PageInfo<ArticleCustom> findArtileByTag(Integer page, Integer limit, Tag tag) {
+		PageHelper.startPage(page, limit);
+		List<ArticleCustom> list=articleMapperCustom.findArtileByTag(tag);
+		return new PageInfo<>(list);
+	}
+
+	@Override
+	public PageInfo<Article> findArticleByKeywords(String keywords, Integer page, Integer limit) {
+		PageHelper.startPage(page, limit);
+		ArticleExample articleExample=new ArticleExample();
+		ArticleExample.Criteria criteria=articleExample.createCriteria();
+		criteria.andArticlePostEqualTo(PostType.POST_TYPE_POST.getValue());
+		criteria.andArticleStatusEqualTo(ArticleStatus.PUBLISH.getStatus());
+		criteria.andArticleTitleLike("%" + keywords + "%");
+		articleExample.setOrderByClause("article_newstime desc");
+		List<Article> list=articleMapper.selectByExample(articleExample);
 		return new PageInfo<>(list);
 	}
 }

@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.songhaozhi.mayday.model.domain.Article;
 import com.songhaozhi.mayday.model.domain.ArticleCustom;
 import com.songhaozhi.mayday.model.domain.Category;
+import com.songhaozhi.mayday.model.domain.Tag;
 import com.songhaozhi.mayday.model.dto.ArchiveBo;
 
 /**
@@ -92,4 +93,20 @@ public interface ArticleService {
 	 * @return
 	 */
 	PageInfo<ArticleCustom> findArtileByCategory(int page, int limit, Category category);
+	/**
+	 * 分页查询标签下的所有文章
+	 * @param page
+	 * @param size
+	 * @param tag
+	 * @return
+	 */
+	PageInfo<ArticleCustom> findArtileByTag(Integer page, Integer limit, Tag tag);
+	/**
+	 * 标题分页搜索文章
+	 * @param keywords
+	 * @param page
+	 * @param size
+	 * @return
+	 */
+	PageInfo<Article> findArticleByKeywords(String keywords, Integer page, Integer limit);
 }

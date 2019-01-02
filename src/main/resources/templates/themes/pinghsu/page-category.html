@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="themes/pinghsu/header::header(${cateUrl},null)"></div>
+<div th:replace="themes/pinghsu/header::header(${keywords},null)"></div>
 <body>
 <div class="main-content common-page clearfix">
     <div class="categorys-item">
         <div class="common-title">
-            <th:block th:text="${type}"/> : <th:block th:text="${cateUrl}"/>
+            <th:block th:text="${type}"/> : <th:block th:text="${keywords}"/>
         </div>
         <th:block th:if="${commons.is_empty(articles)}">
             <div>
@@ -38,7 +38,7 @@
     </div>
 </div>
 <div class="lists-navigator clearfix">
-      	  <div th:replace="admin/module/macros::pageNav(${articles},'←','→','category/'+${cateUrl})"></div>
+      	  <div th:replace="admin/module/macros::pageNav(${articles},'←','→',${url})"></div>
     	</div>
 </body>
 <div th:replace="themes/pinghsu/footer::footer"></div>
