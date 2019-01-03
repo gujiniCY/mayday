@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="themes/pinghsu/header::header(${article.articleTitle},null)"></div>
+<div th:replace="themes/pinghsu/header::header(${article.articleTitle},${article.tagsName})"></div>
 <body>
-<article class="main-content page-page">
+<article class="main-content page-page" >
     <div class="post-header">
         <h1 class="post-title" itemprop="name headline" th:text="${article.articleTitle}"></h1>
         <div class="post-data">
@@ -13,6 +13,6 @@
 <div id="vcomments"></div>
 </article>
 <div th:replace="admin/module/macros :: comment"></div> 
-<div th:replace="themes/pinghsu/footer::footer"></div>
+<div th:replace="themes/pinghsu/footer :: footer"></div> 
 </body>
 </html>

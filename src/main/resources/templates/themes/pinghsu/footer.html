@@ -157,7 +157,7 @@
 <script th:inline="javascript">
     /*<![CDATA[*/
     var isOk = [[${article?.articlePost}]];
-    if (isOk) {
+    if (isOk=='post') {
         var postDirectory = new Headroom(document.getElementById("directory-content"), {
             tolerance: 0,
             offset: 100,
@@ -178,7 +178,7 @@
             unpinned: "slideUp"
         }
     });
-    header.init();
+    	header.init();
     $('#search-inp').keypress(function (e) {
         var key = e.which; //e.which是按键的值
         if (key == 13) {

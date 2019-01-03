@@ -112,15 +112,15 @@ public class ArticleController extends BaseController {
 			if (StrUtil.isEmpty(article.getArticleTitle())) {
 				return new JsonResult(false, "标题不能为空");
 			}
-			//判断文章链接是否重复
-			if(!StrUtil.isEmpty(article.getArticleUrl())) {
-				//查询url是否重复
-				int repeat=articleService.findRepeatByUrl(article.getArticleUrl());
-				if(repeat !=0 ) {
-					return new JsonResult(false, "路径已存在");
-				}
-			}
 			if(article.getId()==null) {
+				//判断文章链接是否重复
+				if(!StrUtil.isEmpty(article.getArticleUrl())) {
+					//查询url是否重复
+					int repeat=articleService.findRepeatByUrl(article.getArticleUrl());
+					if(repeat !=0 ) {
+						return new JsonResult(false, "路径已存在");
+					}
+				}
 				User user = (User) request.getSession().getAttribute(MaydayConst.USER_SESSION_KEY);
 				article.setUserId(user.getUserId());
 				article.setArticleNewstime(DateUtil.date());

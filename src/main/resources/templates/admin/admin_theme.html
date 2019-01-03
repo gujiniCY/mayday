@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org" xmlns:thSys="">
+<div th:replace="admin/module/macros :: head('主题管理')"></div>
+<body class="app sidebar-mini rtl">
+	<main class="app-content">
+	<div th:replace="admin/module/macros :: header"></div>
+	<div th:replace="admin/module/macros :: sidebar"></div>
+	<div class="app-title">
+		<div>
+			<h1>
+				<i class="fa fa-book"></i>主题管理
+			</h1>
+		</div>
+		<ul class="app-breadcrumb breadcrumb">
+			<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+			<li class="breadcrumb-item"><a href="/admin/article">主题管理</a></li>
+			<li class="breadcrumb-item">所有主题</li>
+		</ul>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="tile">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover"
+						id="article_table">
+						<tr>
+							<td>文章标题</td>
+							<td>所在分类</td>
+							<td>标签</td>
+							<td>创建时间</td>
+							<td>操作</td>
+						</tr>
+						
+						<!-- <tr th:unless="${info.list.total} != 0">
+							<td th:text="暂无文章" th:attr="colspan='7',align='center'" ></td>
+						</tr> -->
+					</table>
+				</div>
+				<!-- <div th:replace="admin/module/macros :: pageAdminNav(${info})"></div> -->
+			</div>
+		</div>
+	</div>
+	</main>
+	<!-- <div th:replace="admin/module/macros :: remove"></div> -->
+	<div th:replace="admin/module/macros :: comm"></div>
+	<!-- <script type="text/javascript">
+	function showModel(id) {
+		$("#themeId").val(id);
+		$("#removeModal").modal();
+	}
+	function remove(){
+		window.location.href = "/admin/theme/remove?id="
+			+ $("#themeId").val();
+	}
+	</script> -->
+</body>
+</html>
