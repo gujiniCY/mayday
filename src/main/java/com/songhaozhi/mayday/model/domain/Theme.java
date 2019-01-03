@@ -11,7 +11,7 @@ public class Theme {
 
     private String themeImg;
 
-    private String themeStatus;
+    private Integer themeStatus;
 
     private Date createTime;
 
@@ -47,12 +47,12 @@ public class Theme {
         this.themeImg = themeImg == null ? null : themeImg.trim();
     }
 
-    public String getThemeStatus() {
+    public Integer getThemeStatus() {
         return themeStatus;
     }
 
-    public void setThemeStatus(String themeStatus) {
-        this.themeStatus = themeStatus == null ? null : themeStatus.trim();
+    public void setThemeStatus(Integer themeStatus) {
+        this.themeStatus = themeStatus;
     }
 
     public Date getCreateTime() {

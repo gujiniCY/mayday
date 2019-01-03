@@ -385,62 +385,52 @@ public class ThemeExample {
             return (Criteria) this;
         }
 
-        public Criteria andThemeStatusEqualTo(String value) {
+        public Criteria andThemeStatusEqualTo(Integer value) {
             addCriterion("theme_status =", value, "themeStatus");
             return (Criteria) this;
         }
 
-        public Criteria andThemeStatusNotEqualTo(String value) {
+        public Criteria andThemeStatusNotEqualTo(Integer value) {
             addCriterion("theme_status <>", value, "themeStatus");
             return (Criteria) this;
         }
 
-        public Criteria andThemeStatusGreaterThan(String value) {
+        public Criteria andThemeStatusGreaterThan(Integer value) {
             addCriterion("theme_status >", value, "themeStatus");
             return (Criteria) this;
         }
 
-        public Criteria andThemeStatusGreaterThanOrEqualTo(String value) {
+        public Criteria andThemeStatusGreaterThanOrEqualTo(Integer value) {
             addCriterion("theme_status >=", value, "themeStatus");
             return (Criteria) this;
         }
 
-        public Criteria andThemeStatusLessThan(String value) {
+        public Criteria andThemeStatusLessThan(Integer value) {
             addCriterion("theme_status <", value, "themeStatus");
             return (Criteria) this;
         }
 
-        public Criteria andThemeStatusLessThanOrEqualTo(String value) {
+        public Criteria andThemeStatusLessThanOrEqualTo(Integer value) {
             addCriterion("theme_status <=", value, "themeStatus");
             return (Criteria) this;
         }
 
-        public Criteria andThemeStatusLike(String value) {
-            addCriterion("theme_status like", value, "themeStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andThemeStatusNotLike(String value) {
-            addCriterion("theme_status not like", value, "themeStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andThemeStatusIn(List<String> values) {
+        public Criteria andThemeStatusIn(List<Integer> values) {
             addCriterion("theme_status in", values, "themeStatus");
             return (Criteria) this;
         }
 
-        public Criteria andThemeStatusNotIn(List<String> values) {
+        public Criteria andThemeStatusNotIn(List<Integer> values) {
             addCriterion("theme_status not in", values, "themeStatus");
             return (Criteria) this;
         }
 
-        public Criteria andThemeStatusBetween(String value1, String value2) {
+        public Criteria andThemeStatusBetween(Integer value1, Integer value2) {
             addCriterion("theme_status between", value1, value2, "themeStatus");
             return (Criteria) this;
         }
 
-        public Criteria andThemeStatusNotBetween(String value1, String value2) {
+        public Criteria andThemeStatusNotBetween(Integer value1, Integer value2) {
             addCriterion("theme_status not between", value1, value2, "themeStatus");
             return (Criteria) this;
         }

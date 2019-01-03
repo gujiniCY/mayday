@@ -34,5 +34,9 @@ public interface LogConstant {
 	String UPDATE_AN_PAGE="更新页面";
 	
 	String REMOVE_AN_PAGE="删除页面";
+	
+	String PUBLISH_AN_THEME="添加主题";
+	
+	String REMOVE_AN_THEME="删除主题";
 
 }

@@ -6,7 +6,7 @@
     <result column="theme_name" jdbcType="VARCHAR" property="themeName" />
     <result column="theme_describe" jdbcType="VARCHAR" property="themeDescribe" />
     <result column="theme_img" jdbcType="VARCHAR" property="themeImg" />
-    <result column="theme_status" jdbcType="VARCHAR" property="themeStatus" />
+    <result column="theme_status" jdbcType="INTEGER" property="themeStatus" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -106,7 +106,7 @@
       theme_img, theme_status, create_time
       )
     values (#{id,jdbcType=INTEGER}, #{themeName,jdbcType=VARCHAR}, #{themeDescribe,jdbcType=VARCHAR}, 
-      #{themeImg,jdbcType=VARCHAR}, #{themeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      #{themeImg,jdbcType=VARCHAR}, #{themeStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.songhaozhi.mayday.model.domain.Theme">
@@ -145,7 +145,7 @@
         #{themeImg,jdbcType=VARCHAR},
       </if>
       <if test="themeStatus != null">
-        #{themeStatus,jdbcType=VARCHAR},
+        #{themeStatus,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -174,7 +174,7 @@
         theme_img = #{record.themeImg,jdbcType=VARCHAR},
       </if>
       <if test="record.themeStatus != null">
-        theme_status = #{record.themeStatus,jdbcType=VARCHAR},
+        theme_status = #{record.themeStatus,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -190,7 +190,7 @@
       theme_name = #{record.themeName,jdbcType=VARCHAR},
       theme_describe = #{record.themeDescribe,jdbcType=VARCHAR},
       theme_img = #{record.themeImg,jdbcType=VARCHAR},
-      theme_status = #{record.themeStatus,jdbcType=VARCHAR},
+      theme_status = #{record.themeStatus,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -209,7 +209,7 @@
         theme_img = #{themeImg,jdbcType=VARCHAR},
       </if>
       <if test="themeStatus != null">
-        theme_status = #{themeStatus,jdbcType=VARCHAR},
+        theme_status = #{themeStatus,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -222,7 +222,7 @@
     set theme_name = #{themeName,jdbcType=VARCHAR},
       theme_describe = #{themeDescribe,jdbcType=VARCHAR},
       theme_img = #{themeImg,jdbcType=VARCHAR},
-      theme_status = #{themeStatus,jdbcType=VARCHAR},
+      theme_status = #{themeStatus,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>

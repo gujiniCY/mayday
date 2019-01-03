@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org" xmlns:thSys="">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:thSys="">
 <div th:replace="admin/module/macros :: head('主题管理')"></div>
 <body class="app sidebar-mini rtl">
 	<main class="app-content">
@@ -20,30 +20,59 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="tile">
+			<input type="hidden" id="themeId">
+			<button class="btn btn-outline-primary mb-3" onclick="saveTheme()">添加主题</button>
 				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-hover"
-						id="article_table">
+					<table class="table m-auto table-striped table-bordered table-hover text-center" id="">
 						<tr>
-							<td>文章标题</td>
-							<td>所在分类</td>
-							<td>标签</td>
+							<td>主题名</td>
+							<td>主题描述</td>
+							<td>预览图</td>
 							<td>创建时间</td>
 							<td>操作</td>
 						</tr>
-						
-						<!-- <tr th:unless="${info.list.total} != 0">
-							<td th:text="暂无文章" th:attr="colspan='7',align='center'" ></td>
-						</tr> -->
+						<tr th:each="theme : ${info.list}">
+						<td th:text="${theme.themeName}"></td>
+						<td th:text="${theme.themeDescribe}"></td>
+						<td><img style="width: 100px;height: 60px" th:src="${theme.themeImg}"></td>
+						<td th:text="${#dates.format(theme.createTime,'yyyy/MM/dd HH:mm:ss')}"></td>
+						<td>
+						<button class="btn btn-secondary">启用</button>
+						<button class="btn btn-primary">设置</button>
+						<button th:onclick="'javascript:showModel('+${theme.id}+')'"
+										class="btn btn-outline-danger">删除</button>
+						</td>
+						</tr>
+						 <tr th:unless="${info.list.total} != 0">
+							<td th:text="暂无主题" th:attr="colspan='7',align='center'" ></td>
+						</tr> 
 					</table>
 				</div>
-				<!-- <div th:replace="admin/module/macros :: pageAdminNav(${info})"></div> -->
+				 <div th:replace="admin/module/macros :: pageAdminNav(${info})"></div>
 			</div>
 		</div>
 	</div>
 	</main>
-	<!-- <div th:replace="admin/module/macros :: remove"></div> -->
+	 <div th:replace="admin/module/macros :: remove"></div> 
 	<div th:replace="admin/module/macros :: comm"></div>
-	<!-- <script type="text/javascript">
+	<script type="text/javascript" src="/static/plugins/layer/layer.js"></script>
+	 <script type="text/javascript">
+	 
+	 function saveTheme(){
+		 layer.open({
+			 type : 1,
+			 title : '新增主题',
+			 anim : 2,
+			 area : [ '40%', '40%' ],
+			 maxmin : true,
+			 content: $('#saveTheme'),
+			 btn: ['保存', '取消'],
+			 yes: function(index, layero){
+				    //do something
+				    layer.close(index); //如果设定了yes回调，需进行手工关闭
+			 }
+		});
+	 }
 	function showModel(id) {
 		$("#themeId").val(id);
 		$("#removeModal").modal();
@@ -52,6 +81,32 @@
 		window.location.href = "/admin/theme/remove?id="
 			+ $("#themeId").val();
 	}
-	</script> -->
+	</script>
+	<div class="col" id="saveTheme">
+		<div class="row">
+			<div class="col-md-12">
+				<form action="" method="post">
+					<div class="form-group row mt-3">
+						<label class="control-label col-md-3">主题名称：</label>
+						<div class="col-md-9">
+							<input class="form-control" type="text" name="themeName">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="control-label col-md-3">主题描述：</label>
+						<div class="col-md-9">
+							<input class="form-control" type="text" name="themeDescribe">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="control-label col-md-3">主题预览图：</label>
+						<div class="col-md-9">
+							<input class="form-control" type="text" name="themeImg">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

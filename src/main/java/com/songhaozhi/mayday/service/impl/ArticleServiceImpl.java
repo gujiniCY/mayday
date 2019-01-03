@@ -236,6 +236,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
+	@Cacheable(value=ARTICLES_CACHE_NAME,key="'findArticleByKeywords'+#keywords+#page+#limit")
 	public PageInfo<Article> findArticleByKeywords(String keywords, Integer page, Integer limit) {
 		PageHelper.startPage(page, limit);
 		ArticleExample articleExample=new ArticleExample();
