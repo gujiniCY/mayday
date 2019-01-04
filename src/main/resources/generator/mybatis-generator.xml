@@ -34,7 +34,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!--生成对应表及类名-->
-        <table tableName="mayday_menu" domainObjectName="Menu" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+        <table tableName="mayday_theme" domainObjectName="Theme" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
         	<!-- <columnOverride column="article_content" javaType="java.lang.String" jdbcType="VARCHAR" />
         		<columnOverride column="article_content_md" javaType="java.lang.String" jdbcType="VARCHAR" /> -->
         		<!-- Mybatis自动生成Xml文件，针对字段类型为text等会默认产生XXXXWithBlobs的方法问题 -->

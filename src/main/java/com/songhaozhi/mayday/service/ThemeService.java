@@ -14,4 +14,6 @@ public interface ThemeService {
 
 	void saveTheme(Theme theme);
 
+	void remove(int id);
+
 }

@@ -37,7 +37,10 @@
 						<td><img style="width: 100px;height: 60px" th:src="${theme.themeImg}"></td>
 						<td th:text="${#dates.format(theme.createTime,'yyyy/MM/dd HH:mm:ss')}"></td>
 						<td>
-						<button class="btn btn-secondary">启用</button>
+						<button class="btn btn-secondary" th:disabled="${theme.themeStatus == 1}">
+						<th:block th:if="${theme.themeStatus == 1}">已启用</th:block>
+						<th:block th:if="${theme.themeStatus == 0}">启用</th:block>
+						</button>
 						<button class="btn btn-primary">设置</button>
 						<button th:onclick="'javascript:showModel('+${theme.id}+')'"
 										class="btn btn-outline-danger">删除</button>
@@ -53,24 +56,69 @@
 		</div>
 	</div>
 	</main>
-	 <div th:replace="admin/module/macros :: remove"></div> 
+	<div th:replace="admin/module/macros :: remove"></div> 
 	<div th:replace="admin/module/macros :: comm"></div>
+	<div th:replace="admin/module/macros :: bootstrapValidator"></div>
 	<script type="text/javascript" src="/static/plugins/layer/layer.js"></script>
 	 <script type="text/javascript">
-	 
+	 $(function(){
+		 $("#themeFrom").bootstrapValidator({
+				message: 'This value is not valid',
+	           　		feedbackIcons: {
+	               　　　　　　　　valid: 'glyphicon glyphicon-ok',
+	               　　　　　　　　invalid: 'glyphicon glyphicon-remove',
+	               　　　　　　　　validating: 'glyphicon glyphicon-refresh'
+	           　　　　　　　　   },
+	            fields: {
+	            	themeName: {
+	                   message: '主题名称验证失败',
+	                   validators: {
+	                       notEmpty: {
+	                           message: '主题名称不能为空'
+	                       }
+	                   }
+	               }
+	           }
+			}); 
+	 });
+	 //保存主题
 	 function saveTheme(){
+		 var width=500;
+		 var height=300;
+		//如果是移动端，就使用自适应大小弹窗
+     	if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
+     	    width = 'auto';
+     	    height = 'auto';
+     	}
 		 layer.open({
 			 type : 1,
 			 title : '新增主题',
 			 anim : 2,
-			 area : [ '40%', '40%' ],
 			 maxmin : true,
+			 area: [width + 'px', height + 'px'],
 			 content: $('#saveTheme'),
 			 btn: ['保存', '取消'],
 			 yes: function(index, layero){
-				    //do something
-				    layer.close(index); //如果设定了yes回调，需进行手工关闭
-			 }
+			 var bootstrapValidator = $("#themeFrom").data("bootstrapValidator");
+			 bootstrapValidator.validate();
+			 if(bootstrapValidator.isValid()){
+				 var obj=$("#themeFrom").serialize();
+				 $.ajax({
+					type :"post",
+					async :false,
+					url :"/admin/theme/saveTheme",
+					data :obj,
+					dataType :"json",
+					success :function(data){
+						 layer.close(index); 
+						 window.location.href = "/admin/theme"; 
+					}
+				 });
+				}
+			 },
+     	     cancel: function(index) {
+    	        return true;
+    	     }
 		});
 	 }
 	function showModel(id) {
@@ -82,25 +130,25 @@
 			+ $("#themeId").val();
 	}
 	</script>
-	<div class="col" id="saveTheme">
+	<div class="col" id="saveTheme" style="display: none;">
 		<div class="row">
 			<div class="col-md-12">
-				<form action="" method="post">
+				<form id="themeFrom">
 					<div class="form-group row mt-3">
-						<label class="control-label col-md-3">主题名称：</label>
-						<div class="col-md-9">
+						<label class="control-label col-md-4">*主题名称：</label>
+						<div class="col-md-8">
 							<input class="form-control" type="text" name="themeName">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="control-label col-md-3">主题描述：</label>
-						<div class="col-md-9">
+						<label class="control-label col-md-4">主题描述：</label>
+						<div class="col-md-8">
 							<input class="form-control" type="text" name="themeDescribe">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="control-label col-md-3">主题预览图：</label>
-						<div class="col-md-9">
+						<label class="control-label col-md-4">主题预览图：</label>
+						<div class="col-md-8">
 							<input class="form-control" type="text" name="themeImg">
 						</div>
 					</div>

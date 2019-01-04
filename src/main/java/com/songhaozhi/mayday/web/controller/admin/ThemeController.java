@@ -66,4 +66,22 @@ public class ThemeController extends BaseController {
 		}
 		return new JsonResult(MaydayEnums.PRESERVE_SUCCESS.isFlag(),MaydayEnums.PRESERVE_SUCCESS.getMessage());
 	}
+	/**
+	 * 删除主题
+	 * @param id
+	 * @param request
+	 * @return
+	 */
+	@GetMapping("/remove")
+	public String remove(int id,HttpServletRequest request) {
+		try {
+			themeService.remove(id);
+			//添加日志
+			logService.save(new Log(LogConstant.REMOVE_AN_THEME, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
+					DateUtil.date()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/admin/theme";
+	}
 }

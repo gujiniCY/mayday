@@ -13,6 +13,8 @@ import com.songhaozhi.mayday.model.domain.Theme;
 import com.songhaozhi.mayday.model.domain.ThemeExample;
 import com.songhaozhi.mayday.service.ThemeService;
 
+import cn.hutool.core.date.DateUtil;
+
 /**
 * @author 宋浩志
 * @createDate 创建时间：2019年1月3日
@@ -35,7 +37,13 @@ public class ThemeServiceImpl implements ThemeService{
 
 	@Override
 	public void saveTheme(Theme theme) {
-		themeMapper.insert(theme);
+		theme.setCreateTime(DateUtil.date());
+		themeMapper.insertSelective(theme);
+	}
+
+	@Override
+	public void remove(int id) {
+		themeMapper.deleteByPrimaryKey(id);		
 	}
 	
 	

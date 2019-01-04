@@ -60,7 +60,7 @@
              <td>时间</td>
              </tr>
             <tr th:each="article : ${articles}">
-            <td><a th:text="${article.articleTitle}" target="_blank" th:title="${article.articleTitle}" th:href="${article.articleUrl}"></a></td>
+            <td><a th:text="${article.articleTitle}" target="_blank" th:title="${article.articleTitle}" th:href="'/post/'+${article.articleUrl}"></a></td>
            <td th:switch="${article.articleStatus}">
            <th:block th:case="0">
             <span class="badge badge-success">已发布</span>
