@@ -13,31 +13,71 @@
 	<div class="col-md-12">
 		<div class="row">
 			<div class="col-lg-6 mt-3">
-				 <img alt="" class="img-thumbnail img-fluid"
-					th:src="${theme.themeImg}"> 
+				<img alt="" class="img-thumbnail img-fluid"
+					th:src="${theme.themeImg}">
 			</div>
 			<div class="col-lg-6 mt-3">
 				<div class="bs-component">
 					<ul class="nav nav-tabs" role="tablist">
 						<li class="nav-item"><a class="nav-link active"
-						data-toggle="tab" href="#sns">社交设置</a></li>
+							data-toggle="tab" href="#sns">社交资料</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-						href="#about">关于</a></li>
+							href="#about">关于</a></li>
 					</ul>
+					<!-- Tab panes -->
 					<div class="tab-content">
-					<div id="sns" class="tab-pane fade">
-					<form class="form-horizontal" id="seoOptions">
+						<div id="sns" class="container tab-pane active">
+							<form class="form-horizontal" id="snsOptions">
 						<div class="form-group row mt-3">
-							<label class="col-form-label col-md-2">微博： </label>
-							<div class="col-md-5">
+							<label class="col-form-label col-md-4 font-weight-bold">WEIBO：</label>
+							<div class="col-md-8">
 								<input class="form-control" type="text" th:value="${options['pinghsu_weibo']}" name="pinghsu_weibo">
 							</div>
 						</div>
-					</form>
-					</div>
-					<div id="about" class="tab-pane fade">
-					关于
-					</div>
+						<div class="form-group row mt-3">
+							<label class="col-form-label col-md-4 font-weight-bold">GITHUB：</label>
+							<div class="col-md-8">
+								<input class="form-control" type="text" th:value="${options['pinghsu_github']}" name="pinghsu_github">
+							</div>
+						</div>
+						<div class="form-group row mt-3">
+							<label class="col-form-label col-md-4 font-weight-bold">ZHIHU：</label>
+							<div class="col-md-8">
+								<input class="form-control" type="text" th:value="${options['pinghsu_zhihu']}" name="pinghsu_zhihu">
+							</div>
+						</div>
+						<div class="form-group row mt-3">
+							<label class="col-form-label col-md-4 font-weight-bold">TWITTER：</label>
+							<div class="col-md-8">
+								<input class="form-control" type="text" th:value="${options['pinghsu_twitter']}" name="pinghsu_twitter">
+							</div>
+						</div>
+						<div class="form-group row mt-3">
+							<label class="col-form-label col-md-4 font-weight-bold">QQ：</label>
+							<div class="col-md-8">
+								<input class="form-control" type="text" th:value="${options['pinghsu_qq']}" name="pinghsu_qq">
+							</div>
+						</div>
+						<div class="form-group row mt-3">
+							<label class="col-form-label col-md-4 font-weight-bold">Email：</label>
+							<div class="col-md-8">
+								<input class="form-control" type="text" th:value="${options['pinghsu_email']}" name="pinghsu_email">
+							</div>
+						</div>
+						<div class="form-group row">
+								<div class="col-md-8 offset-md-10 ml-auto">
+									<button class="btn btn-outline-primary" type="button" onclick="save('snsOptions')">
+										<i class="fa fa-fw fa-lg fa-check-circle"></i>保存设置
+									</button>
+								</div>
+							</div>
+						</form>
+						</div>
+						<div id="about" class="container tab-pane fade">
+                        	<div class="">
+                        	
+                        	</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -52,7 +92,19 @@
 	<script type="text/javascript" src="/plugins/toast/jquery.toast.js"></script>
 	<script type="text/javascript" src="/static/plugins/layer/layer.js"></script>
 	<script type="text/javascript">
-		
+	//保存设置项
+	 function save(id){
+		var from =$("#"+id).serialize();
+		$.ajax({
+			type:"post",
+			url:"/admin/option/save",
+			data:from,
+			dataType:"json",
+			success:function(data){
+				showMsg(data.msg,"success",3000)
+			}
+		});
+	}
 	</script>
 </body>
 </html>
