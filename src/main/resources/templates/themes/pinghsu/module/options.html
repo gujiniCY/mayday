@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:thSys="">
+<head>
+<meta charset="UTF-8">
+<title>pinghsu主题设置</title>
+<link rel="stylesheet" type="text/css"
+	href="/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/plugins/vali/css/main.css">
+<link rel="stylesheet" type="text/css"
+	href="/plugins/toast/jquery.toast.css">
+</head>
+<body>
+	<div class="col-md-12">
+		<div class="row">
+			<div class="col-lg-6 mt-3">
+				 <img alt="" class="img-thumbnail img-fluid"
+					th:src="${theme.themeImg}"> 
+			</div>
+			<div class="col-lg-6 mt-3">
+				<div class="bs-component">
+					<ul class="nav nav-tabs" role="tablist">
+						<li class="nav-item"><a class="nav-link active"
+						data-toggle="tab" href="#sns">社交设置</a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab"
+						href="#about">关于</a></li>
+					</ul>
+					<div class="tab-content">
+					<div id="sns" class="tab-pane fade">
+					<form class="form-horizontal" id="seoOptions">
+						<div class="form-group row mt-3">
+							<label class="col-form-label col-md-2">微博： </label>
+							<div class="col-md-5">
+								<input class="form-control" type="text" th:value="${options['pinghsu_weibo']}" name="pinghsu_weibo">
+							</div>
+						</div>
+					</form>
+					</div>
+					<div id="about" class="tab-pane fade">
+					关于
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript"
+		src="/plugins/vali/js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/plugins/vali/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="/plugins/vali/js/plugins/pace.min.js"></script>
+	<script type="text/javascript" src="/js/public.js"></script>
+	<script type="text/javascript" src="/plugins/toast/jquery.toast.js"></script>
+	<script type="text/javascript" src="/static/plugins/layer/layer.js"></script>
+	<script type="text/javascript">
+		
+	</script>
+</body>
+</html>

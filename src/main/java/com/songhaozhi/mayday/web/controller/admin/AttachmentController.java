@@ -193,7 +193,7 @@ public class AttachmentController extends BaseController {
 	public String viewDetails(Model model, @RequestParam(value = "id") int id) {
 		Attachment attachment = attachmentService.findById(id);
 		model.addAttribute("attachment", attachment);
-		return "/admin/view_details";
+		return "/admin/part/view_details";
 	}
 
 }

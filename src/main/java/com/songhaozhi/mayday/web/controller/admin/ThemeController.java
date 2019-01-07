@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,6 +57,10 @@ public class ThemeController extends BaseController {
 	@ResponseBody
 	public JsonResult saveTheme(Theme theme,HttpServletRequest request) {
 		try {
+			Theme th=themeService.findByThemeName(theme.getThemeName());
+			if(th!=null) {
+				return new JsonResult(MaydayEnums.PRESERVE_ERROR.isFlag(),"该主题已存在");
+			}
 			themeService.saveTheme(theme);
 			//添加日志
 			logService.save(new Log(LogConstant.PUBLISH_AN_THEME, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
@@ -83,5 +88,12 @@ public class ThemeController extends BaseController {
 			e.printStackTrace();
 		}
 		return "redirect:/admin/theme";
+	}
+	
+	@GetMapping(value="/{themeName}")
+	public String themeOption(@PathVariable String themeName,Model model) {
+		Theme theme=themeService.findByThemeName(themeName);
+		model.addAttribute("theme", theme);
+		return "/themes/"+themeName+"/module/options";
 	}
 }

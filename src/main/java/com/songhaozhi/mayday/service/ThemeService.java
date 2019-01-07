@@ -16,4 +16,6 @@ public interface ThemeService {
 
 	void remove(int id);
 
+	Theme findByThemeName(String themeName);
+
 }

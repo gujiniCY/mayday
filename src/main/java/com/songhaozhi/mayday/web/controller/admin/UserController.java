@@ -69,7 +69,7 @@ public class UserController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "/admin/open_choice";
+		return "/admin/part/open_choice";
 	}
 
 	/**

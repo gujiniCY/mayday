@@ -32,7 +32,7 @@ public class LogsController extends BaseController{
 			@RequestParam(value = "limit", defaultValue = "10") int limit) {
 		PageInfo<Log> info=logService.findLogs(page, limit);
 		model.addAttribute("logs", info);
-		return "/admin/view_logs";
+		return "/admin/part/view_logs";
 	}
 	/**
 	 * 清除所有日志

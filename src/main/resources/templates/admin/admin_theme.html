@@ -41,7 +41,7 @@
 						<th:block th:if="${theme.themeStatus == 1}">已启用</th:block>
 						<th:block th:if="${theme.themeStatus == 0}">启用</th:block>
 						</button>
-						<button class="btn btn-primary">设置</button>
+						<button class="btn btn-primary" th:onclick="'javascript:themeOption(\''+${theme.themeName}+'\')'">设置</button>
 						<button th:onclick="'javascript:showModel('+${theme.id}+')'"
 										class="btn btn-outline-danger">删除</button>
 						</td>
@@ -110,8 +110,12 @@
 					data :obj,
 					dataType :"json",
 					success :function(data){
-						 layer.close(index); 
-						 window.location.href = "/admin/theme"; 
+						if(data.flag==true){
+							 layer.close(index); 
+							 window.location.href = "/admin/theme"; 
+						}else{
+							 layer.alert(data.msg);
+						}
 					}
 				 });
 				}
@@ -129,13 +133,26 @@
 		window.location.href = "/admin/theme/remove?id="
 			+ $("#themeId").val();
 	}
+	
+	//设置项
+	function themeOption(themeName) {
+		layer.open({
+			type : 2,
+			title : themeName+'主题设置',
+			anim : 2,
+			area : [ '90%', '90%' ],
+			shadeClose : true,
+			content : "/admin/theme/"+themeName+"?themeName=" + themeName,
+			maxmin : true
+		});
+	} 
 	</script>
 	<div class="col" id="saveTheme" style="display: none;">
 		<div class="row">
 			<div class="col-md-12">
 				<form id="themeFrom">
 					<div class="form-group row mt-3">
-						<label class="control-label col-md-4">*主题名称：</label>
+						<label class="control-label col-md-4">主题名称：</label>
 						<div class="col-md-8">
 							<input class="form-control" type="text" name="themeName">
 						</div>

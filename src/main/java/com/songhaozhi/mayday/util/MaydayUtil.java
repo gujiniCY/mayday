@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -29,12 +30,13 @@ public class MaydayUtil {
 	 * @return
 	 */
 	public static String baiduPost(String blogUrl, String token, String urls) {
-		String result = "";
+		StringBuffer result = new StringBuffer();
+		PrintWriter out = null;
+		BufferedReader br = null;
 		try {
 			URL url = new URL("	http://data.zz.baidu.com/urls?site=" + blogUrl + "&token=" + token + "");
 			// 打开和url之间的连接
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			PrintWriter out = null;
 			// 设置通用的请求属性
 			conn.setRequestProperty("User-Agent", "curl/7.12.1");
 			conn.setRequestProperty("Host", "data.zz.baidu.com*");
@@ -54,10 +56,10 @@ public class MaydayUtil {
 			// 获取URLConnection对象对应的输入流
 			InputStream is = conn.getInputStream();
 			// 构造一个字符流缓存
-			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			br = new BufferedReader(new InputStreamReader(is));
 			String line = "";
 			while ((line = br.readLine()) != null) {
-				result += line;
+				result.append(line);
 			}
 			// 关闭流
 			is.close();
@@ -66,47 +68,61 @@ public class MaydayUtil {
 			conn.disconnect();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (out != null) {
+					out.close();
+				}
+				if (null != br) {
+					br.close();
+				}
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 		}
-		return result;
+		return result.toString();
 	}
+
 	/**
 	 * 转换文件大小
+	 * 
 	 * @param size
 	 * @return
 	 */
-    public static String parseSize(long size) {
-        if (size < 1024) {
-            return String.valueOf(size) + "B";
-        } else {
-            size = size / 1024;
-        }
-        if (size < 1024) {
-            return String.valueOf(size) + "KB";
-        } else {
-            size = size / 1024;
-        }
-        if (size < 1024) {
-            size = size * 100;
-            return String.valueOf((size / 100)) + "." + String.valueOf((size % 100)) + "MB";
-        } else {
-            size = size * 100 / 1024;
-            return String.valueOf((size / 100)) + "." + String.valueOf((size % 100)) + "GB";
-        }
-    }
-	
-    /**
-     * 获取文件长和宽
-     *
-     * @param file file
-     * @return String
-     */
-    public static String getImageWh(File file) {
-        try {
-            BufferedImage image = ImageIO.read(new FileInputStream(file));
-            return image.getWidth() + "x" + image.getHeight();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
+	public static String parseSize(long size) {
+		if (size < 1024) {
+			return String.valueOf(size) + "B";
+		} else {
+			size = size / 1024;
+		}
+		if (size < 1024) {
+			return String.valueOf(size) + "KB";
+		} else {
+			size = size / 1024;
+		}
+		if (size < 1024) {
+			size = size * 100;
+			return String.valueOf((size / 100)) + "." + String.valueOf((size % 100)) + "MB";
+		} else {
+			size = size * 100 / 1024;
+			return String.valueOf((size / 100)) + "." + String.valueOf((size % 100)) + "GB";
+		}
+	}
+
+	/**
+	 * 获取文件长和宽
+	 *
+	 * @param file
+	 *            file
+	 * @return String
+	 */
+	public static String getImageWh(File file) {
+		try {
+			BufferedImage image = ImageIO.read(new FileInputStream(file));
+			return image.getWidth() + "x" + image.getHeight();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
 }

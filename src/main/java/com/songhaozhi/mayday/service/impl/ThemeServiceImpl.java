@@ -45,6 +45,14 @@ public class ThemeServiceImpl implements ThemeService{
 	public void remove(int id) {
 		themeMapper.deleteByPrimaryKey(id);		
 	}
+
+	@Override
+	public Theme findByThemeName(String themeName) {
+		ThemeExample themeExample=new ThemeExample();
+		ThemeExample.Criteria criteria=themeExample.createCriteria();
+		criteria.andThemeNameEqualTo(themeName);
+		return themeMapper.selectByExample(themeExample).get(0);
+	}
 	
 	
 
