@@ -62,7 +62,7 @@
 							<label class="col-form-label col-md-4 font-weight-bold">Email：</label>
 							<div class="col-md-8">
 								<input class="form-control" type="text" th:value="${options['pinghsu_email']}" name="pinghsu_email">
-							</div>
+							</div> 
 						</div>
 						<div class="form-group row">
 								<div class="col-md-8 offset-md-10 ml-auto">
@@ -97,6 +97,7 @@
 		var from =$("#"+id).serialize();
 		$.ajax({
 			type:"post",
+			async: false,
 			url:"/admin/option/save",
 			data:from,
 			dataType:"json",

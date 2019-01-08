@@ -1,6 +1,10 @@
 server: 
-  port: 8090
-logging:
+  connection-timeout: 60000
+  servlet: 
+    session:
+      timeout: 86400
+  port: 8888 
+logging: 
   config: classpath:logback-spring.xml
   file: server.log
   path: /log/

@@ -35,7 +35,6 @@ public class OptionsController extends BaseController {
 	 */
 	@GetMapping
 	public String option(Model model) {
-		model.addAttribute("options", MaydayConst.options);
 		return "/admin/admin_options";
 	}
 	/**
