@@ -32,56 +32,61 @@ import cn.hutool.extra.servlet.ServletUtil;
 public class ThemeController extends BaseController {
 	@Autowired
 	private ThemeService themeService;
+
 	/**
 	 * 查看所有主题
+	 * 
 	 * @param model
 	 * @param page
 	 * @param limit
 	 * @return
 	 */
 	@GetMapping
-	public String theme(Model model ,@RequestParam(value = "page", defaultValue = "1") int page,
+	public String theme(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "limit", defaultValue = "10") int limit) {
-		PageInfo<Theme> info=themeService.findPageTheme(page,limit);
+		PageInfo<Theme> info = themeService.findPageTheme(page, limit);
 		model.addAttribute("info", info);
 		return "/admin/admin_theme";
 	}
-	
+
 	/**
 	 * 保存主题
+	 * 
 	 * @param theme
 	 * @param request
 	 * @return
 	 */
 	@PostMapping("/saveTheme")
 	@ResponseBody
-	public JsonResult saveTheme(Theme theme,HttpServletRequest request) {
+	public JsonResult saveTheme(Theme theme, HttpServletRequest request) {
 		try {
-			Theme th=themeService.findByThemeName(theme.getThemeName());
-			if(th!=null) {
-				return new JsonResult(MaydayEnums.PRESERVE_ERROR.isFlag(),"该主题已存在");
+			Theme th = themeService.findByThemeName(theme.getThemeName());
+			if (th != null) {
+				return new JsonResult(MaydayEnums.PRESERVE_ERROR.isFlag(), "该主题已存在");
 			}
 			themeService.saveTheme(theme);
-			//添加日志
+			// 添加日志
 			logService.save(new Log(LogConstant.PUBLISH_AN_THEME, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
 					DateUtil.date()));
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new JsonResult(MaydayEnums.PRESERVE_ERROR.isFlag(),MaydayEnums.PRESERVE_ERROR.getMessage());
+			return new JsonResult(MaydayEnums.PRESERVE_ERROR.isFlag(), MaydayEnums.PRESERVE_ERROR.getMessage());
 		}
-		return new JsonResult(MaydayEnums.PRESERVE_SUCCESS.isFlag(),MaydayEnums.PRESERVE_SUCCESS.getMessage());
+		return new JsonResult(MaydayEnums.PRESERVE_SUCCESS.isFlag(), MaydayEnums.PRESERVE_SUCCESS.getMessage());
 	}
+
 	/**
 	 * 删除主题
+	 * 
 	 * @param id
 	 * @param request
 	 * @return
 	 */
 	@GetMapping("/remove")
-	public String remove(int id,HttpServletRequest request) {
+	public String remove(int id, HttpServletRequest request) {
 		try {
 			themeService.remove(id);
-			//添加日志
+			// 添加日志
 			logService.save(new Log(LogConstant.REMOVE_AN_THEME, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
 					DateUtil.date()));
 		} catch (Exception e) {
@@ -89,11 +94,11 @@ public class ThemeController extends BaseController {
 		}
 		return "redirect:/admin/theme";
 	}
-	
-	@GetMapping(value="/{themeName}")
-	public String themeOption(@PathVariable String themeName,Model model) {
-		Theme theme=themeService.findByThemeName(themeName);
+
+	@GetMapping(value = "/{themeName}")
+	public String themeOption(@PathVariable String themeName, Model model) {
+		Theme theme = themeService.findByThemeName(themeName);
 		model.addAttribute("theme", theme);
-		return "/themes/"+themeName+"/module/options";
+		return "/themes/" + themeName + "/module/options";
 	}
 }

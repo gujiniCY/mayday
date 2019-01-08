@@ -17,7 +17,7 @@ import com.songhaozhi.mayday.model.domain.User;
 import com.songhaozhi.mayday.service.UserService;
 
 @Service
-@Transactional(rollbackFor=RuntimeException.class)
+@Transactional(rollbackFor = RuntimeException.class)
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapperCustom userMapperCustom;

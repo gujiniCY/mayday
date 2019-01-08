@@ -20,8 +20,8 @@
                     <div class="info-text">
                     <p>Theme is <a href="https://github.com/chakhsu/pinghsu" target="_blank">Pinghsu</a> by <a href="https://www.linpx.com/" target="_blank">Chakhsu</a></p>
                     <p>Powered by <a href="https://github.com/gujiniCY/mayday" target="_blank" rel="nofollow">mayday</a></p>
-                    <p>&copy;  <a th:href="${options['blog_url']}" th:text="${options['blog_name']}"></a></p>    
-                        <br/>
+                    <p>&copy; <th:block th:text="${commons.getYear()}"></th:block> <a th:href="${options['blog_url']}" th:text="${options['blog_name']}"></a></p>    
+                    <p><th:block th:utext="${options['blog_footer']}"></th:block></p>
                     </div>
                 </div>
             </div>

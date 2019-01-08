@@ -30,7 +30,7 @@ public interface OptionsService {
 	 * @param key
 	 * @param value
 	 */
-	void saveOption(String key, String value) ;
+	void saveOption(String key, String value);
 
 	/**
 	 * 删除

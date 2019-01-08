@@ -5,11 +5,6 @@ import com.songhaozhi.mayday.model.domain.UserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-/**
- * 
- * @author songhaozhi
- *
- */
 public interface UserMapper {
     long countByExample(UserExample example);
 

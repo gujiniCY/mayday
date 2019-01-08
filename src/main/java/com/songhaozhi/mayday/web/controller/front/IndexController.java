@@ -40,6 +40,7 @@ public class IndexController extends BaseController {
 	private CategoryService categoryService;
 	@Autowired
 	private TagService tagService;
+
 	/**
 	 * 请求首页
 	 *
@@ -62,7 +63,8 @@ public class IndexController extends BaseController {
 	public String index(Model model, @PathVariable(value = "page") Integer page) {
 		page = page < 0 || page > MaydayConst.MAX_PAGE ? 1 : page;
 		// 默认显示条数
-		Integer limit = MaydayConst.options.get("index_article") == null ? PageNumber.POST_INDEX_lIMIT.getLimit() : Integer.parseInt(MaydayConst.options.get("index_article"));
+		Integer limit = MaydayConst.options.get("index_article") == null ? PageNumber.POST_INDEX_lIMIT.getLimit()
+				: Integer.parseInt(MaydayConst.options.get("index_article"));
 		ArticleCustom articleCustom = new ArticleCustom();
 		articleCustom.setArticleStatus(ArticleStatus.PUBLISH.getStatus());
 		articleCustom.setArticlePost(PostType.POST_TYPE_POST.getValue());
@@ -155,11 +157,11 @@ public class IndexController extends BaseController {
 		PageInfo<ArticleCustom> info = articleService.findArtileByCategory(page, limit, category);
 		model.addAttribute("articles", info);
 		model.addAttribute("type", "分类");
-		model.addAttribute("url", "category/"+category.getCategoryUrl());
+		model.addAttribute("url", "category/" + category.getCategoryUrl());
 		model.addAttribute("keywords", category.getCategoryName());
 		return this.render("page-category");
 	}
-	
+
 	/**
 	 * 标签页
 	 *
@@ -182,10 +184,11 @@ public class IndexController extends BaseController {
 		PageInfo<ArticleCustom> info = articleService.findArtileByTag(page, limit, tag);
 		model.addAttribute("articles", info);
 		model.addAttribute("type", "标签");
-		model.addAttribute("url", "tags/"+tag.getTagUrl());
+		model.addAttribute("url", "tags/" + tag.getTagUrl());
 		model.addAttribute("keywords", tag.getTagName());
 		return this.render("page-category");
 	}
+
 	/**
 	 * 标题搜索
 	 *
@@ -200,13 +203,12 @@ public class IndexController extends BaseController {
 	public String search(Model model, @PathVariable String keywords, @PathVariable Integer page) {
 		Integer limit = PageNumber.POST_INDEX_lIMIT.getLimit();
 		page = page < 0 || page > MaydayConst.MAX_PAGE ? 1 : page;
-		PageInfo<Article> info = articleService.findArticleByKeywords(keywords,page,limit);
+		PageInfo<Article> info = articleService.findArticleByKeywords(keywords, page, limit);
 		model.addAttribute("articles", info);
 		model.addAttribute("type", "搜索");
 		model.addAttribute("keywords", keywords);
-		model.addAttribute("url", "search/"+keywords);
+		model.addAttribute("url", "search/" + keywords);
 		return this.render("page-category");
 	}
-	
-	
+
 }

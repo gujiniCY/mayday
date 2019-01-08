@@ -55,8 +55,16 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="tile">
-			<input type="hidden" id="articleId">
-			<a href="/admin/article" th:style="${status==0} ? 'color: #000' : ''"><span>已发布(<th:block th:text="${published}"></th:block>)</span></a> | <a href="/admin/article?status=1" th:style="${status==1} ? 'color: #000': ''"><span>草稿(<th:block th:text="${draft}"></th:block>)</span></a> | <a href="/admin/article?status=2" th:style="${status==2} ? 'color: #000': ''"><span>回收站(<th:block th:text="${recycle}"></th:block>)</span></a>
+				<input type="hidden" id="articleId"> <a
+					href="/admin/article" th:style="${status==0} ? 'color: #000' : ''"><span>已发布(<th:block
+							th:text="${published}"></th:block>)
+				</span></a> | <a href="/admin/article?status=1"
+					th:style="${status==1} ? 'color: #000': ''"><span>草稿(<th:block
+							th:text="${draft}"></th:block>)
+				</span></a> | <a href="/admin/article?status=2"
+					th:style="${status==2} ? 'color: #000': ''"><span>回收站(<th:block
+							th:text="${recycle}"></th:block>)
+				</span></a>
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-hover"
 						id="article_table">
@@ -71,25 +79,26 @@
 							<td th:text="${#strings.abbreviate(article.articleTitle,20)}"></td>
 							<td th:text="${#strings.abbreviate(article.categorysName,20)}"></td>
 							<td th:text="${#strings.abbreviate(article.tagsName,20)}"></td>
-							<td th:text="${#dates.format(article.articleNewstime,'yyyy/MM/dd HH:mm:ss')}"></td>
-							<td th:switch="${article.articleStatus}">
-								<th:block th:case="0">
-									<a th:href="@{'/post/'+${article.articleUrl}}" th:target="_blank" class="btn btn-outline-primary">查看</a>
+							<td
+								th:text="${#dates.format(article.articleNewstime,'yyyy/MM/dd HH:mm:ss')}"></td>
+							<td th:switch="${article.articleStatus}"><th:block
+									th:case="0">
+									<a th:href="@{'/post/'+${article.articleUrl}}"
+										th:target="_blank" class="btn btn-outline-primary">查看</a>
 									<a th:href="@{/admin/article/edit(article_id=${article.id})}"
 										class="btn btn-outline-info">编辑</a>
 									<button
 										th:onclick="'javascript:recycleModel('+${article.id}+')'"
 										class="btn btn-outline-danger">丢弃</button>
-								</th:block> 
-								<th:block th:case="1">
+								</th:block> <th:block th:case="1">
 									<a th:href="@{/admin/article/edit(article_id=${article.id})}"
 										class="btn btn-outline-primary">编辑</a>
-									<button th:onclick="'javascript:restore('+${article.id}+')'" class="btn btn-outline-info">发布</button>
+									<button th:onclick="'javascript:restore('+${article.id}+')'"
+										class="btn btn-outline-info">发布</button>
 									<button
 										th:onclick="'javascript:recycleModel('+${article.id}+')'"
 										class="btn btn-outline-danger">丢弃</button>
-								</th:block> 
-								<th:block th:case="2">
+								</th:block> <th:block th:case="2">
 									<button th:onclick="'javascript:restore('+${article.id}+')'"
 										class="btn btn-outline-primary">还原</button>
 									<button th:onclick="'javascript:showModel('+${article.id}+')'"
@@ -97,7 +106,7 @@
 								</th:block></td>
 						</tr>
 						<tr th:unless="${info.list.total} != 0">
-							<td th:text="暂无文章" th:attr="colspan='7',align='center'" ></td>
+							<td th:text="暂无文章" th:attr="colspan='7',align='center'"></td>
 						</tr>
 					</table>
 				</div>
@@ -110,37 +119,39 @@
 	<div th:replace="admin/module/macros :: recycle"></div>
 	<div th:replace="admin/module/macros :: comm"></div>
 	<script type="text/javascript">
-	function recycleModel(id) {
-		$("#articleId").val(id);
-		$("#recycleModal").modal();
-	}
-	function recycle(){
-		window.location.href = "/admin/article/recycle?id="
-			+ $("#articleId").val();
-	}
-	function showModel(id) {
-		$("#articleId").val(id);
-		$("#removeModal").modal();
-	}
-	function remove(){
-		window.location.href = "/admin/article/remove?id="
-			+ $("#articleId").val();
-	}
-	function restore(id){
-		$.ajax({
-			url:"/admin/article/restore",
-			type:"post",
-			data:{id:id},
-			dataType:"json",
-			success:function(data){
-				if(data.flag==true){
-					window.location.reload();
-				}else{
-					showMsg(data.msg,"error","3000");
+		function recycleModel(id) {
+			$("#articleId").val(id);
+			$("#recycleModal").modal();
+		}
+		function recycle() {
+			window.location.href = "/admin/article/recycle?id="
+					+ $("#articleId").val();
+		}
+		function showModel(id) {
+			$("#articleId").val(id);
+			$("#removeModal").modal();
+		}
+		function remove() {
+			window.location.href = "/admin/article/remove?id="
+					+ $("#articleId").val();
+		}
+		function restore(id) {
+			$.ajax({
+				url : "/admin/article/restore",
+				type : "post",
+				data : {
+					id : id
+				},
+				dataType : "json",
+				success : function(data) {
+					if (data.flag == true) {
+						window.location.reload();
+					} else {
+						showMsg(data.msg, "error", "3000");
+					}
 				}
-			}
-		});
-	}
+			});
+		}
 	</script>
 </body>
 </html>

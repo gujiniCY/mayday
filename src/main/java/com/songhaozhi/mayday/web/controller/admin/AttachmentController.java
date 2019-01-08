@@ -32,8 +32,7 @@ import net.coobird.thumbnailator.Thumbnails;
 
 /**
  * @author : 宋浩志
- * @createDate : 2018年9月7日
- *  附件
+ * @createDate : 2018年9月7日 附件
  */
 @RequestMapping(value = "/admin/attachment")
 @Controller
@@ -49,9 +48,9 @@ public class AttachmentController extends BaseController {
 	@GetMapping
 	public String attachment(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "limit", defaultValue = "18") int limit) {
-			PageInfo<Attachment> info = attachmentService.getAttachment(page, limit);
-			model.addAttribute("info", info);
-			return "/admin/admin_attachment";
+		PageInfo<Attachment> info = attachmentService.getAttachment(page, limit);
+		model.addAttribute("info", info);
+		return "/admin/admin_attachment";
 	}
 
 	/**
@@ -139,23 +138,25 @@ public class AttachmentController extends BaseController {
 						.substring(file.getOriginalFilename().lastIndexOf(".") + 1);
 				// 上传文件名加后缀
 				String fileName = nameSuffix + "." + fileSuffix;
-				
-				//转存文件
+
+				// 转存文件
 				file.transferTo(new File(mediaPath.toString(), fileName));
-				
-				//原图片路径
-				StringBuffer originalPath=new StringBuffer();
+
+				// 原图片路径
+				StringBuffer originalPath = new StringBuffer();
 				originalPath.append(mediaPath.getAbsolutePath()).append("/").append(fileName);
-				//压缩图片路径
-				StringBuffer compressPath=new StringBuffer();
-				compressPath.append(mediaPath.getAbsolutePath()).append("/").append(nameSuffix).append("_small.").append(fileSuffix);
+				// 压缩图片路径
+				StringBuffer compressPath = new StringBuffer();
+				compressPath.append(mediaPath.getAbsolutePath()).append("/").append(nameSuffix).append("_small.")
+						.append(fileSuffix);
 				// 压缩图片
-				Thumbnails.of(originalPath.toString()).size(256, 256).keepAspectRatio(false).toFile(compressPath.toString());
-				//原图数据库路径
-				StringBuffer originalDataPath=new StringBuffer();
+				Thumbnails.of(originalPath.toString()).size(256, 256).keepAspectRatio(false)
+						.toFile(compressPath.toString());
+				// 原图数据库路径
+				StringBuffer originalDataPath = new StringBuffer();
 				originalDataPath.append("/").append(hold).append(fileName);
-				//压缩图数据库路径
-				StringBuffer compressDataPath=new StringBuffer();
+				// 压缩图数据库路径
+				StringBuffer compressDataPath = new StringBuffer();
 				compressDataPath.append("/").append(hold).append(nameSuffix).append("_small.").append(fileSuffix);
 				// 添加数据库
 				Attachment attachment = new Attachment();
@@ -165,8 +166,9 @@ public class AttachmentController extends BaseController {
 				attachment.setPictureCreateDate(date);
 				attachment.setPictureSuffix(new StringBuffer().append(".").append(fileSuffix).toString());
 				attachment.setPictureSmallPath(compressDataPath.toString());
-				attachment.setPictureWh(MaydayUtil.getImageWh(new File(mediaPath.toString()+"/"+fileName)));
-				attachment.setPictureSize(MaydayUtil.parseSize(new File(mediaPath.toString()+"/"+fileName).length()));
+				attachment.setPictureWh(MaydayUtil.getImageWh(new File(mediaPath.toString() + "/" + fileName)));
+				attachment
+						.setPictureSize(MaydayUtil.parseSize(new File(mediaPath.toString() + "/" + fileName).length()));
 				attachmentService.save(attachment);
 				// 添加日志
 				logService.save(new Log(LogConstant.UPLOAD_ATTACHMENT, LogConstant.UPLOAD_SUCCESS,

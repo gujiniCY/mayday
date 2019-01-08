@@ -66,19 +66,21 @@ public class ArticleController extends BaseController {
 	public String article(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "limit", defaultValue = "10") int limit,
 			@RequestParam(value = "status", defaultValue = "0") int status) {
-			ArticleCustom articleCustom=new ArticleCustom();
-			articleCustom.setArticleStatus(status);
-			articleCustom.setArticlePost(PostType.POST_TYPE_POST.getValue());
-			PageInfo<ArticleCustom> pageInfo = articleService.findPageArticle(page, limit, articleCustom);
-			model.addAttribute("info", pageInfo);
-			// 已发布条数
-			model.addAttribute("published", articleService.countByStatus(0,PostType.POST_TYPE_POST.getValue()));
-			// 草稿条数
-			model.addAttribute("draft", articleService.countByStatus(ArticleStatus.DRAFT.getStatus(),PostType.POST_TYPE_POST.getValue()));
-			// 回收站条数
-			model.addAttribute("recycle", articleService.countByStatus(ArticleStatus.RECYCLE.getStatus(),PostType.POST_TYPE_POST.getValue()));
-			model.addAttribute("status", status);
-			return "/admin/admin_article";
+		ArticleCustom articleCustom = new ArticleCustom();
+		articleCustom.setArticleStatus(status);
+		articleCustom.setArticlePost(PostType.POST_TYPE_POST.getValue());
+		PageInfo<ArticleCustom> pageInfo = articleService.findPageArticle(page, limit, articleCustom);
+		model.addAttribute("info", pageInfo);
+		// 已发布条数
+		model.addAttribute("published", articleService.countByStatus(0, PostType.POST_TYPE_POST.getValue()));
+		// 草稿条数
+		model.addAttribute("draft",
+				articleService.countByStatus(ArticleStatus.DRAFT.getStatus(), PostType.POST_TYPE_POST.getValue()));
+		// 回收站条数
+		model.addAttribute("recycle",
+				articleService.countByStatus(ArticleStatus.RECYCLE.getStatus(), PostType.POST_TYPE_POST.getValue()));
+		model.addAttribute("status", status);
+		return "/admin/admin_article";
 	}
 
 	/**
@@ -112,12 +114,12 @@ public class ArticleController extends BaseController {
 			if (StrUtil.isEmpty(article.getArticleTitle())) {
 				return new JsonResult(false, "标题不能为空");
 			}
-			if(article.getId()==null) {
-				//判断文章链接是否重复
-				if(!StrUtil.isEmpty(article.getArticleUrl())) {
-					//查询url是否重复
-					int repeat=articleService.findRepeatByUrl(article.getArticleUrl());
-					if(repeat !=0 ) {
+			if (article.getId() == null) {
+				// 判断文章链接是否重复
+				if (!StrUtil.isEmpty(article.getArticleUrl())) {
+					// 查询url是否重复
+					int repeat = articleService.findRepeatByUrl(article.getArticleUrl());
+					if (repeat != 0) {
 						return new JsonResult(false, "路径已存在");
 					}
 				}
@@ -125,59 +127,59 @@ public class ArticleController extends BaseController {
 				article.setUserId(user.getUserId());
 				article.setArticleNewstime(DateUtil.date());
 				article.setArticleUpdatetime(DateUtil.date());
-				//如果自定义链接为空则按时间戳生成链接
-				if(StrUtil.isEmpty(article.getArticleUrl())) {
-					article.setArticleUrl(String.valueOf(System.currentTimeMillis()/1000));
+				// 如果自定义链接为空则按时间戳生成链接
+				if (StrUtil.isEmpty(article.getArticleUrl())) {
+					article.setArticleUrl(String.valueOf(System.currentTimeMillis() / 1000));
 				}
-				//如果没有选择略缩图则随机一张图
-				if(StrUtil.isEmpty(article.getArticleThumbnail())) {
-					article.setArticleThumbnail("/static/img/rand/"+RandomUtil.randomInt(1, 19)+".jpg");
+				// 如果没有选择略缩图则随机一张图
+				if (StrUtil.isEmpty(article.getArticleThumbnail())) {
+					article.setArticleThumbnail("/static/img/rand/" + RandomUtil.randomInt(1, 19) + ".jpg");
 				}
-				//如果摘要为空则取前五十字为摘要
-				int post_summary=50;
-				if(StrUtil.isNotEmpty(MaydayConst.options.get("post_summary"))) {
-					post_summary=Integer.parseInt(MaydayConst.options.get("post_summary"));
+				// 如果摘要为空则取前五十字为摘要
+				int post_summary = 50;
+				if (StrUtil.isNotEmpty(MaydayConst.options.get("post_summary"))) {
+					post_summary = Integer.parseInt(MaydayConst.options.get("post_summary"));
 				}
-				//清理html标签和空白字符
-				String summaryText=StrUtil.cleanBlank(HtmlUtil.cleanHtmlTag(article.getArticleContent()));
-				//设置文章摘要
-				if(summaryText.length()>post_summary) {
+				// 清理html标签和空白字符
+				String summaryText = StrUtil.cleanBlank(HtmlUtil.cleanHtmlTag(article.getArticleContent()));
+				// 设置文章摘要
+				if (summaryText.length() > post_summary) {
 					article.setArticleSummary(summaryText.substring(0, post_summary));
-				}else {
+				} else {
 					article.setArticleSummary(summaryText);
 				}
 				articleService.save(article, tags, categorys);
-				//添加日志
-				logService.save(new Log(LogConstant.PUBLISH_AN_ARTICLE, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
-						DateUtil.date()));
-			}else {
-				//如果没有选择略缩图则随机一张图
-				if(StrUtil.isEmpty(article.getArticleThumbnail())) {
-					article.setArticleThumbnail("/static/img/rand/"+RandomUtil.randomInt(1, 19)+".jpg");
+				// 添加日志
+				logService.save(new Log(LogConstant.PUBLISH_AN_ARTICLE, LogConstant.SUCCESS,
+						ServletUtil.getClientIP(request), DateUtil.date()));
+			} else {
+				// 如果没有选择略缩图则随机一张图
+				if (StrUtil.isEmpty(article.getArticleThumbnail())) {
+					article.setArticleThumbnail("/static/img/rand/" + RandomUtil.randomInt(1, 19) + ".jpg");
 				}
-				//如果摘要为空则取前五十字为摘要
-				int post_summary=50;
-				if(StrUtil.isNotEmpty(MaydayConst.options.get("post_summary"))) {
-					post_summary=Integer.parseInt(MaydayConst.options.get("post_summary"));
+				// 如果摘要为空则取前五十字为摘要
+				int post_summary = 50;
+				if (StrUtil.isNotEmpty(MaydayConst.options.get("post_summary"))) {
+					post_summary = Integer.parseInt(MaydayConst.options.get("post_summary"));
 				}
-				//清理html标签和空白字符
-				String summaryText=StrUtil.cleanBlank(HtmlUtil.cleanHtmlTag(article.getArticleContent()));
-				//设置文章摘要
-				if(summaryText.length()>post_summary) {
+				// 清理html标签和空白字符
+				String summaryText = StrUtil.cleanBlank(HtmlUtil.cleanHtmlTag(article.getArticleContent()));
+				// 设置文章摘要
+				if (summaryText.length() > post_summary) {
 					article.setArticleSummary(summaryText.substring(0, post_summary));
-				}else {
+				} else {
 					article.setArticleSummary(summaryText);
 				}
-				//文章最后修改时间
+				// 文章最后修改时间
 				article.setArticleUpdatetime(DateUtil.date());
 				articleService.update(article, tags, categorys);
-				//添加日志
-				logService.save(new Log(LogConstant.UPDATE_AN_ARTICLE, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
-						DateUtil.date()));
+				// 添加日志
+				logService.save(new Log(LogConstant.UPDATE_AN_ARTICLE, LogConstant.SUCCESS,
+						ServletUtil.getClientIP(request), DateUtil.date()));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.error("添加或更新失败"+e.getMessage());
+			log.error("添加或更新失败" + e.getMessage());
 			return new JsonResult(MaydayEnums.ERROR.isFlag(), MaydayEnums.ERROR.getMessage());
 		}
 		return new JsonResult(MaydayEnums.PRESERVE_SUCCESS.isFlag(), MaydayEnums.PRESERVE_SUCCESS.getMessage());
@@ -257,12 +259,12 @@ public class ArticleController extends BaseController {
 	public String remove(@RequestParam(value = "id") int id, HttpServletRequest request) {
 		try {
 			articleService.remove(id);
-			//添加日志
-			logService.save(new Log(LogConstant.REMOVE_AN_ARTICLE, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
-					DateUtil.date()));
+			// 添加日志
+			logService.save(new Log(LogConstant.REMOVE_AN_ARTICLE, LogConstant.SUCCESS,
+					ServletUtil.getClientIP(request), DateUtil.date()));
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.error("删除文章失败"+e.getMessage());
+			log.error("删除文章失败" + e.getMessage());
 		}
 		return "redirect:/admin/article?status=2";
 	}
@@ -285,6 +287,7 @@ public class ArticleController extends BaseController {
 		}
 		return "/admin/admin_new_article";
 	}
+
 	/**
 	 * 修改文章页面
 	 * 
@@ -322,10 +325,10 @@ public class ArticleController extends BaseController {
 		try {
 			// 获取文章信息
 			ArticleCustom articleCustom = articleService.findByArticleId(article_id);
-			if(articleCustom.getTags()!=null) {
+			if (articleCustom.getTags() != null) {
 				map.put("tagsIds", articleCustom.getTags().split(","));
 			}
-			if(articleCustom.getCategorys()!=null) {
+			if (articleCustom.getCategorys() != null) {
 				map.put("categorysIds", articleCustom.getCategorys().split(","));
 			}
 		} catch (Exception e) {

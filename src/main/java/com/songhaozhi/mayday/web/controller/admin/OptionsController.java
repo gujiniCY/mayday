@@ -28,8 +28,10 @@ import com.songhaozhi.mayday.service.OptionsService;
 public class OptionsController extends BaseController {
 	@Autowired
 	private OptionsService optionsService;
+
 	/**
 	 * 所有设置选项
+	 * 
 	 * @param model
 	 * @return
 	 */
@@ -37,8 +39,10 @@ public class OptionsController extends BaseController {
 	public String option(Model model) {
 		return "/admin/admin_options";
 	}
+
 	/**
 	 * 保存设置
+	 * 
 	 * @param map
 	 * @return
 	 */

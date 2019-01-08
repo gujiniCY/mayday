@@ -6,25 +6,25 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface CategoryMapper {
-    long countByExample(CategoryExample example);
+	long countByExample(CategoryExample example);
 
-    int deleteByExample(CategoryExample example);
+	int deleteByExample(CategoryExample example);
 
-    int deleteByPrimaryKey(Integer categoryId);
+	int deleteByPrimaryKey(Integer categoryId);
 
-    int insert(Category record);
+	int insert(Category record);
 
-    int insertSelective(Category record);
+	int insertSelective(Category record);
 
-    List<Category> selectByExample(CategoryExample example);
+	List<Category> selectByExample(CategoryExample example);
 
-    Category selectByPrimaryKey(Integer categoryId);
+	Category selectByPrimaryKey(Integer categoryId);
 
-    int updateByExampleSelective(@Param("record") Category record, @Param("example") CategoryExample example);
+	int updateByExampleSelective(@Param("record") Category record, @Param("example") CategoryExample example);
 
-    int updateByExample(@Param("record") Category record, @Param("example") CategoryExample example);
+	int updateByExample(@Param("record") Category record, @Param("example") CategoryExample example);
 
-    int updateByPrimaryKeySelective(Category record);
+	int updateByPrimaryKeySelective(Category record);
 
-    int updateByPrimaryKey(Category record);
+	int updateByPrimaryKey(Category record);
 }

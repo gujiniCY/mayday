@@ -6,25 +6,25 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface TagMapper {
-    long countByExample(TagExample example);
+	long countByExample(TagExample example);
 
-    int deleteByExample(TagExample example);
+	int deleteByExample(TagExample example);
 
-    int deleteByPrimaryKey(Integer tagId);
+	int deleteByPrimaryKey(Integer tagId);
 
-    int insert(Tag record);
+	int insert(Tag record);
 
-    int insertSelective(Tag record);
+	int insertSelective(Tag record);
 
-    List<Tag> selectByExample(TagExample example);
+	List<Tag> selectByExample(TagExample example);
 
-    Tag selectByPrimaryKey(Integer tagId);
+	Tag selectByPrimaryKey(Integer tagId);
 
-    int updateByExampleSelective(@Param("record") Tag record, @Param("example") TagExample example);
+	int updateByExampleSelective(@Param("record") Tag record, @Param("example") TagExample example);
 
-    int updateByExample(@Param("record") Tag record, @Param("example") TagExample example);
+	int updateByExample(@Param("record") Tag record, @Param("example") TagExample example);
 
-    int updateByPrimaryKeySelective(Tag record);
+	int updateByPrimaryKeySelective(Tag record);
 
-    int updateByPrimaryKey(Tag record);
+	int updateByPrimaryKey(Tag record);
 }

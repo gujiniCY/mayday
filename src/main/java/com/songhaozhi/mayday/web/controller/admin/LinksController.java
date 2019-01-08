@@ -16,11 +16,10 @@ import com.songhaozhi.mayday.service.LinksService;
 
 /**
  * @author : 宋浩志
- * @createDate : 2018年9月25日
- * 友情链接
+ * @createDate : 2018年9月25日 友情链接
  */
 @Controller
-@RequestMapping(value="/admin/links")
+@RequestMapping(value = "/admin/links")
 public class LinksController extends BaseController {
 	@Autowired
 	private LinksService linksService;
@@ -73,8 +72,10 @@ public class LinksController extends BaseController {
 		}
 		return "redirect:/admin/links";
 	}
+
 	/**
 	 * 删除
+	 * 
 	 * @param linkId
 	 * @return
 	 */

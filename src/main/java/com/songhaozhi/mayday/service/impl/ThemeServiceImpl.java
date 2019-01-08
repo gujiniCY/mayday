@@ -16,22 +16,22 @@ import com.songhaozhi.mayday.service.ThemeService;
 import cn.hutool.core.date.DateUtil;
 
 /**
-* @author 宋浩志
-* @createDate 创建时间：2019年1月3日
-* 
-*/
+ * @author 宋浩志
+ * @createDate 创建时间：2019年1月3日
+ * 
+ */
 @Service
-@Transactional(rollbackFor=RuntimeException.class)
-public class ThemeServiceImpl implements ThemeService{
+@Transactional(rollbackFor = RuntimeException.class)
+public class ThemeServiceImpl implements ThemeService {
 	@Autowired
 	private ThemeMapper themeMapper;
 
 	@Override
 	public PageInfo<Theme> findPageTheme(int page, int limit) {
 		PageHelper.startPage(page, limit);
-		ThemeExample themeExample=new ThemeExample();
+		ThemeExample themeExample = new ThemeExample();
 		themeExample.setOrderByClause("id desc");
-		List<Theme> lists=themeMapper.selectByExample(themeExample);
+		List<Theme> lists = themeMapper.selectByExample(themeExample);
 		return new PageInfo<>(lists);
 	}
 
@@ -43,17 +43,15 @@ public class ThemeServiceImpl implements ThemeService{
 
 	@Override
 	public void remove(int id) {
-		themeMapper.deleteByPrimaryKey(id);		
+		themeMapper.deleteByPrimaryKey(id);
 	}
 
 	@Override
 	public Theme findByThemeName(String themeName) {
-		ThemeExample themeExample=new ThemeExample();
-		ThemeExample.Criteria criteria=themeExample.createCriteria();
+		ThemeExample themeExample = new ThemeExample();
+		ThemeExample.Criteria criteria = themeExample.createCriteria();
 		criteria.andThemeNameEqualTo(themeName);
 		return themeMapper.selectByExample(themeExample).get(0);
 	}
-	
-	
 
 }

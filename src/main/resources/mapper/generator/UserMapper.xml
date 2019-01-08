@@ -9,7 +9,6 @@
     <result column="user_portrait" jdbcType="VARCHAR" property="userPortrait" />
     <result column="user_explain" jdbcType="VARCHAR" property="userExplain" />
     <result column="user_display_name" jdbcType="VARCHAR" property="userDisplayName" />
-    <result column="user_title" jdbcType="VARCHAR" property="userTitle" />
     <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
@@ -74,7 +73,7 @@
   </sql>
   <sql id="Base_Column_List">
     user_id, login_enable, login_error, login_last_time, user_portrait, user_explain, 
-    user_display_name, user_title, user_email, user_name, user_pwd
+    user_display_name, user_email, user_name, user_pwd
   </sql>
   <select id="selectByExample" parameterType="com.songhaozhi.mayday.model.domain.UserExample" resultMap="BaseResultMap">
     select
@@ -110,12 +109,12 @@
   <insert id="insert" parameterType="com.songhaozhi.mayday.model.domain.User">
     insert into mayday_user (user_id, login_enable, login_error, 
       login_last_time, user_portrait, user_explain, 
-      user_display_name, user_title, user_email, 
-      user_name, user_pwd)
+      user_display_name, user_email, user_name, 
+      user_pwd)
     values (#{userId,jdbcType=INTEGER}, #{loginEnable,jdbcType=VARCHAR}, #{loginError,jdbcType=INTEGER}, 
       #{loginLastTime,jdbcType=TIMESTAMP}, #{userPortrait,jdbcType=VARCHAR}, #{userExplain,jdbcType=VARCHAR}, 
-      #{userDisplayName,jdbcType=VARCHAR}, #{userTitle,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
-      #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR})
+      #{userDisplayName,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userPwd,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.songhaozhi.mayday.model.domain.User">
     insert into mayday_user
@@ -140,9 +139,6 @@
       </if>
       <if test="userDisplayName != null">
         user_display_name,
-      </if>
-      <if test="userTitle != null">
-        user_title,
       </if>
       <if test="userEmail != null">
         user_email,
@@ -175,9 +171,6 @@
       </if>
       <if test="userDisplayName != null">
         #{userDisplayName,jdbcType=VARCHAR},
-      </if>
-      <if test="userTitle != null">
-        #{userTitle,jdbcType=VARCHAR},
       </if>
       <if test="userEmail != null">
         #{userEmail,jdbcType=VARCHAR},
@@ -220,9 +213,6 @@
       <if test="record.userDisplayName != null">
         user_display_name = #{record.userDisplayName,jdbcType=VARCHAR},
       </if>
-      <if test="record.userTitle != null">
-        user_title = #{record.userTitle,jdbcType=VARCHAR},
-      </if>
       <if test="record.userEmail != null">
         user_email = #{record.userEmail,jdbcType=VARCHAR},
       </if>
@@ -246,7 +236,6 @@
       user_portrait = #{record.userPortrait,jdbcType=VARCHAR},
       user_explain = #{record.userExplain,jdbcType=VARCHAR},
       user_display_name = #{record.userDisplayName,jdbcType=VARCHAR},
-      user_title = #{record.userTitle,jdbcType=VARCHAR},
       user_email = #{record.userEmail,jdbcType=VARCHAR},
       user_name = #{record.userName,jdbcType=VARCHAR},
       user_pwd = #{record.userPwd,jdbcType=VARCHAR}
@@ -275,9 +264,6 @@
       <if test="userDisplayName != null">
         user_display_name = #{userDisplayName,jdbcType=VARCHAR},
       </if>
-      <if test="userTitle != null">
-        user_title = #{userTitle,jdbcType=VARCHAR},
-      </if>
       <if test="userEmail != null">
         user_email = #{userEmail,jdbcType=VARCHAR},
       </if>
@@ -298,7 +284,6 @@
       user_portrait = #{userPortrait,jdbcType=VARCHAR},
       user_explain = #{userExplain,jdbcType=VARCHAR},
       user_display_name = #{userDisplayName,jdbcType=VARCHAR},
-      user_title = #{userTitle,jdbcType=VARCHAR},
       user_email = #{userEmail,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
       user_pwd = #{userPwd,jdbcType=VARCHAR}

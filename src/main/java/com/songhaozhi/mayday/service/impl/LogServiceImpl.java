@@ -17,39 +17,39 @@ import com.songhaozhi.mayday.model.domain.LogExample;
 import com.songhaozhi.mayday.service.LogService;
 
 /**
-* @author : 宋浩志
-* @createDate : 2018年9月28日
-*/
+ * @author : 宋浩志
+ * @createDate : 2018年9月28日
+ */
 @Service
-@Transactional(rollbackFor=RuntimeException.class)
-public class LogServiceImpl implements LogService{
+@Transactional(rollbackFor = RuntimeException.class)
+public class LogServiceImpl implements LogService {
 
-	private static final String LOGS_CACHE_NAME="logs";
-	
+	private static final String LOGS_CACHE_NAME = "logs";
+
 	@Autowired
 	private LogMapper logMapper;
-	
+
 	@Autowired
 	private LogMapperCustom logMapperCustom;
 
 	@Override
-	@CacheEvict(value=LOGS_CACHE_NAME,allEntries=true,beforeInvocation=true)
+	@CacheEvict(value = LOGS_CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void save(Log log) {
-		logMapper.insert(log);		
+		logMapper.insert(log);
 	}
 
 	@Override
-	@Cacheable(value=LOGS_CACHE_NAME,key="'findLogs'+#page+#limit")
+	@Cacheable(value = LOGS_CACHE_NAME, key = "'findLogs'+#page+#limit")
 	public PageInfo<Log> findLogs(int page, int limit) {
 		PageHelper.startPage(page, limit);
-		LogExample example=new LogExample();
+		LogExample example = new LogExample();
 		example.setOrderByClause("log_id DESC ");
-		List<Log> logs=logMapper.selectByExample(example);
+		List<Log> logs = logMapper.selectByExample(example);
 		return new PageInfo<>(logs);
 	}
 
 	@Override
-	@CacheEvict(value=LOGS_CACHE_NAME,allEntries=true,beforeInvocation=true)
+	@CacheEvict(value = LOGS_CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void clear() {
 		logMapperCustom.clear();
 	}

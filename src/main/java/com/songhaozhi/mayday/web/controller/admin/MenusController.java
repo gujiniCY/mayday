@@ -16,6 +16,7 @@ import com.songhaozhi.mayday.service.MenuService;
 
 /**
  * 菜单
+ * 
  * @author : 宋浩志
  * @createDate : 2018年12月18日
  */
@@ -48,8 +49,10 @@ public class MenusController extends BaseController {
 		model.addAttribute("menu", menu);
 		return "/admin/admin_menus";
 	}
+
 	/**
 	 * 保存或修改
+	 * 
 	 * @param menu
 	 * @return
 	 */
@@ -62,18 +65,19 @@ public class MenusController extends BaseController {
 				menuService.edit(menu);
 			}
 			MaydayConst.menus.clear();
-			MaydayConst.menus=menuService.findMenus();
+			MaydayConst.menus = menuService.findMenus();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "redirect:/admin/menus";
 	}
+
 	@GetMapping("/remove")
 	public String remove(@RequestParam(value = "menuId") Integer menuId) {
 		try {
 			menuService.remove(menuId);
 			MaydayConst.menus.clear();
-			MaydayConst.menus=menuService.findMenus();
+			MaydayConst.menus = menuService.findMenus();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -59,24 +59,24 @@ public class AdminController extends BaseController {
 	 */
 	@RequestMapping(value = { "", "index" })
 	public String index(Model model) {
-		//查询已发布文章数
-		Integer countPublish=articleService.countByStatus(null,PostType.POST_TYPE_POST.getValue());
+		// 查询已发布文章数
+		Integer countPublish = articleService.countByStatus(null, PostType.POST_TYPE_POST.getValue());
 		model.addAttribute("countPublish", countPublish);
-		//友链总数
-		List<Link> lists=linksService.findLinks();
+		// 友链总数
+		List<Link> lists = linksService.findLinks();
 		model.addAttribute("countLinks", lists.size());
-		//附件总数
+		// 附件总数
 		int countAttachment = attachmentService.countAttachment().size();
 		model.addAttribute("countAttachment", countAttachment);
-		//成立天数
-		
-		//查询最新的文章
-		ArticleCustom articleCustom=new ArticleCustom();
+		// 成立天数
+
+		// 查询最新的文章
+		ArticleCustom articleCustom = new ArticleCustom();
 		articleCustom.setArticlePost(PostType.POST_TYPE_POST.getValue());
-		PageInfo<ArticleCustom> pageInfo=articleService.findPageArticle(1, 5, articleCustom);
+		PageInfo<ArticleCustom> pageInfo = articleService.findPageArticle(1, 5, articleCustom);
 		model.addAttribute("articles", pageInfo.getList());
-		//查询最新的日志
-		PageInfo<Log> info=logService.findLogs(1,5);
+		// 查询最新的日志
+		PageInfo<Log> info = logService.findLogs(1, 5);
 		model.addAttribute("logs", info.getList());
 		return "admin/admin_index";
 	}
@@ -95,7 +95,7 @@ public class AdminController extends BaseController {
 		}
 		return "admin/admin_login";
 	}
-	
+
 	/**
 	 * 验证
 	 * 

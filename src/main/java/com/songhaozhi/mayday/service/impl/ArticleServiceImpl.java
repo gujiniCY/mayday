@@ -44,10 +44,10 @@ import cn.hutool.core.date.DateUtil;
 @Service
 @Transactional(rollbackFor = RuntimeException.class)
 public class ArticleServiceImpl implements ArticleService {
-	
-	private static final String ARTICLES_CACHE_KEY="'article'";
-	
-	private static final String ARTICLES_CACHE_NAME="articles";
+
+	private static final String ARTICLES_CACHE_KEY = "'article'";
+
+	private static final String ARTICLES_CACHE_NAME = "articles";
 	@Autowired
 	private ArticleMapper articleMapper;
 	@Autowired
@@ -65,7 +65,7 @@ public class ArticleServiceImpl implements ArticleService {
 	 * 自动生成的mapper里配置了useGeneratedKeys="true" keyProperty="id" 如重新生成请复制过去
 	 */
 	@Override
-	@CacheEvict(value=ARTICLES_CACHE_NAME,allEntries=true,beforeInvocation=true)
+	@CacheEvict(value = ARTICLES_CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void save(Article article, Long[] tags, Long[] categorys) throws Exception {
 		articleMapper.insert(article);
 		if (categorys != null) {
@@ -87,7 +87,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	@Cacheable(value=ARTICLES_CACHE_NAME,key="'findAllArticle'+#status")
+	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'findAllArticle'+#status")
 	public List<ArticleCustom> findAllArticle(int status) {
 		return articleMapperCustom.findAllArticle(status);
 	}
@@ -100,19 +100,19 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	@Cacheable(value=ARTICLES_CACHE_NAME,key="'Post_status'+#status+#post")
+	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'Post_status'+#status+#post")
 	public Integer countByStatus(Integer status, String post) {
 		return articleMapperCustom.countByStatus(status, post);
 	}
 
 	@Override
-	@CacheEvict(value=ARTICLES_CACHE_NAME,allEntries=true,beforeInvocation=true)
+	@CacheEvict(value = ARTICLES_CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void recycle(int id, Integer integer) throws Exception {
 		articleMapperCustom.updateStatus(id, integer);
 	}
 
 	@Override
-	@CacheEvict(value=ARTICLES_CACHE_NAME,allEntries=true,beforeInvocation=true)
+	@CacheEvict(value = ARTICLES_CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void remove(int id) throws Exception {
 		// 删除文章表
 		articleMapper.deleteByPrimaryKey(id);
@@ -128,13 +128,13 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	@Cacheable(value=ARTICLES_CACHE_NAME,key="'findByArticleId'+#article_id")
+	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'findByArticleId'+#article_id")
 	public ArticleCustom findByArticleId(Integer article_id) {
 		return articleMapperCustom.findByArticleId(article_id);
 	}
 
 	@Override
-	@CacheEvict(value=ARTICLES_CACHE_NAME,allEntries=true,beforeInvocation=true)
+	@CacheEvict(value = ARTICLES_CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void update(Article article, Long[] tags, Long[] categorys) throws Exception {
 		// 修改文章
 		articleMapper.updateByPrimaryKeySelective(article);
@@ -169,7 +169,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	@Cacheable(value=ARTICLES_CACHE_NAME,key=ARTICLES_CACHE_KEY)
+	@Cacheable(value = ARTICLES_CACHE_NAME, key = ARTICLES_CACHE_KEY)
 	public List<ArchiveBo> archives() {
 		// 查询文章表各个时间段的文章数量 分别为DATE->时间段 count->文章数量
 		List<ArchiveBo> listforArchiveBo = articleMapperCustom.findDateAndCount();
@@ -208,44 +208,44 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	@Cacheable(value=ARTICLES_CACHE_NAME,key="'articleUrlInt'+#articleUrl")
+	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'articleUrlInt'+#articleUrl")
 	public int findRepeatByUrl(String articleUrl) {
 		return articleMapperCustom.findRepeatByUrl(articleUrl);
 	}
 
 	@Override
-	@Cacheable(value=ARTICLES_CACHE_NAME,key="'articleUrl'+#articleUrl")
+	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'articleUrl'+#articleUrl")
 	public ArticleCustom findByArticleUrl(String articleUrl) {
 		return articleMapperCustom.findByArticleUrl(articleUrl);
 	}
 
 	@Override
-	@Cacheable(value=ARTICLES_CACHE_NAME,key="'findArtileByCategory'+#page+#limit")
+	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'findArtileByCategory'+#page+#limit")
 	public PageInfo<ArticleCustom> findArtileByCategory(int page, int limit, Category category) {
 		PageHelper.startPage(page, limit);
-		List<ArticleCustom> list=articleMapperCustom.findArtileByCategory(category);
+		List<ArticleCustom> list = articleMapperCustom.findArtileByCategory(category);
 		return new PageInfo<>(list);
 	}
 
 	@Override
-	@Cacheable(value=ARTICLES_CACHE_NAME,key="'findArtileByTag'+#page+#limit")
+	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'findArtileByTag'+#page+#limit")
 	public PageInfo<ArticleCustom> findArtileByTag(Integer page, Integer limit, Tag tag) {
 		PageHelper.startPage(page, limit);
-		List<ArticleCustom> list=articleMapperCustom.findArtileByTag(tag);
+		List<ArticleCustom> list = articleMapperCustom.findArtileByTag(tag);
 		return new PageInfo<>(list);
 	}
 
 	@Override
-	@Cacheable(value=ARTICLES_CACHE_NAME,key="'findArticleByKeywords'+#keywords+#page+#limit")
+	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'findArticleByKeywords'+#keywords+#page+#limit")
 	public PageInfo<Article> findArticleByKeywords(String keywords, Integer page, Integer limit) {
 		PageHelper.startPage(page, limit);
-		ArticleExample articleExample=new ArticleExample();
-		ArticleExample.Criteria criteria=articleExample.createCriteria();
+		ArticleExample articleExample = new ArticleExample();
+		ArticleExample.Criteria criteria = articleExample.createCriteria();
 		criteria.andArticlePostEqualTo(PostType.POST_TYPE_POST.getValue());
 		criteria.andArticleStatusEqualTo(ArticleStatus.PUBLISH.getStatus());
 		criteria.andArticleTitleLike("%" + keywords + "%");
 		articleExample.setOrderByClause("article_newstime desc");
-		List<Article> list=articleMapper.selectByExample(articleExample);
+		List<Article> list = articleMapper.selectByExample(articleExample);
 		return new PageInfo<>(list);
 	}
 }

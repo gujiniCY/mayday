@@ -20,7 +20,7 @@ import cn.hutool.core.util.StrUtil;
  * @createDate : 2018年10月12日
  */
 @Service
-@Transactional(rollbackFor=RuntimeException.class)
+@Transactional(rollbackFor = RuntimeException.class)
 public class OptionsServiceImpl implements OptionsService {
 	@Autowired
 	private OptionsMapper optionsMapper;

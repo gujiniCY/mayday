@@ -20,16 +20,16 @@ import com.songhaozhi.mayday.service.AttachmentService;
  * @createDate : 2018年9月7日
  */
 @Service
-@Transactional(rollbackFor=RuntimeException.class)
+@Transactional(rollbackFor = RuntimeException.class)
 public class AttachmentServiceImpl implements AttachmentService {
-	
-	private static final String ATTACHMENTS_CACHE_NAME="attachments";
-	
+
+	private static final String ATTACHMENTS_CACHE_NAME = "attachments";
+
 	@Autowired
 	private AttachmentMapper attachmentMapper;
 
 	@Override
-	@CacheEvict(value=ATTACHMENTS_CACHE_NAME,allEntries=true,beforeInvocation=true)
+	@CacheEvict(value = ATTACHMENTS_CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void save(Attachment attachment) throws Exception {
 		attachmentMapper.insert(attachment);
 	}
@@ -44,19 +44,19 @@ public class AttachmentServiceImpl implements AttachmentService {
 	}
 
 	@Override
-	@Cacheable(value=ATTACHMENTS_CACHE_NAME,key="'findById'+#id")
+	@Cacheable(value = ATTACHMENTS_CACHE_NAME, key = "'findById'+#id")
 	public Attachment findById(int id) {
 		return attachmentMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	@CacheEvict(value=ATTACHMENTS_CACHE_NAME,allEntries=true,beforeInvocation=true)
+	@CacheEvict(value = ATTACHMENTS_CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void deleteAttachment(int id) throws Exception {
 		attachmentMapper.deleteByPrimaryKey(id);
 	}
 
 	@Override
-	@Cacheable(value=ATTACHMENTS_CACHE_NAME,key="'countAttachment'")
+	@Cacheable(value = ATTACHMENTS_CACHE_NAME, key = "'countAttachment'")
 	public List<Attachment> countAttachment() {
 		return attachmentMapper.selectByExample(null);
 	}

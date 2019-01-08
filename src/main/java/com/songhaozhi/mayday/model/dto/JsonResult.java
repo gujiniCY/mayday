@@ -12,6 +12,7 @@ public class JsonResult {
 	public JsonResult() {
 		super();
 	}
+
 	public JsonResult(boolean flag, String msg) {
 		super();
 		this.flag = flag;
@@ -24,8 +25,6 @@ public class JsonResult {
 		this.msg = msg;
 		this.data = data;
 	}
-
-
 
 	public boolean isFlag() {
 		return flag;

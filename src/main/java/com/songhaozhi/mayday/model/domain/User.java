@@ -1,15 +1,9 @@
 package com.songhaozhi.mayday.model.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable{
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 399882184371652646L;
-
-	private Integer userId;
+public class User {
+    private Integer userId;
 
     private String loginEnable;
 
@@ -22,8 +16,6 @@ public class User implements Serializable{
     private String userExplain;
 
     private String userDisplayName;
-
-    private String userTitle;
 
     private String userEmail;
 
@@ -85,14 +77,6 @@ public class User implements Serializable{
 
     public void setUserDisplayName(String userDisplayName) {
         this.userDisplayName = userDisplayName == null ? null : userDisplayName.trim();
-    }
-
-    public String getUserTitle() {
-        return userTitle;
-    }
-
-    public void setUserTitle(String userTitle) {
-        this.userTitle = userTitle == null ? null : userTitle.trim();
     }
 
     public String getUserEmail() {

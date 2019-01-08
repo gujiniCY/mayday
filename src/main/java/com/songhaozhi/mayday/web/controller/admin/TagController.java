@@ -17,11 +17,10 @@ import cn.hutool.core.util.URLUtil;
 
 /**
  * @author : 宋浩志
- * @createDate : 2018年9月25日
- * 标签
+ * @createDate : 2018年9月25日 标签
  */
 @Controller
-@RequestMapping(value="/admin/tag")
+@RequestMapping(value = "/admin/tag")
 public class TagController extends BaseController {
 	@Autowired
 	private TagService tagService;
@@ -76,8 +75,10 @@ public class TagController extends BaseController {
 		}
 		return "redirect:/admin/tag";
 	}
+
 	/**
 	 * 删除
+	 * 
 	 * @param tagId
 	 * @return
 	 */

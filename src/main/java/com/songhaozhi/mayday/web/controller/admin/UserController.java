@@ -24,8 +24,7 @@ import cn.hutool.crypto.SecureUtil;
 
 /**
  * @author : 宋浩志
- * @createDate : 2018年9月7日
- * 分类
+ * @createDate : 2018年9月7日 分类
  */
 @RequestMapping(value = "/admin/profile")
 @Controller

@@ -1,23 +1,23 @@
 package com.songhaozhi.mayday.model.domain;
 
 public class ArticleTag {
-    private Integer articleId;
+	private Integer articleId;
 
-    private Long tagId;
+	private Long tagId;
 
-    public Integer getArticleId() {
-        return articleId;
-    }
+	public Integer getArticleId() {
+		return articleId;
+	}
 
-    public void setArticleId(Integer articleId) {
-        this.articleId = articleId;
-    }
+	public void setArticleId(Integer articleId) {
+		this.articleId = articleId;
+	}
 
-    public Long getTagId() {
-        return tagId;
-    }
+	public Long getTagId() {
+		return tagId;
+	}
 
-    public void setTagId(Long tagId) {
-        this.tagId = tagId;
-    }
+	public void setTagId(Long tagId) {
+		this.tagId = tagId;
+	}
 }

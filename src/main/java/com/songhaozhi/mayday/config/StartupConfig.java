@@ -13,36 +13,39 @@ import com.songhaozhi.mayday.service.MenuService;
 import com.songhaozhi.mayday.service.OptionsService;
 
 /**
-* @author : 宋浩志
-* @createDate : 2018年10月30日
-*/
+ * @author : 宋浩志
+ * @createDate : 2018年10月30日
+ */
 @Configuration
-public class StartupConfig implements ApplicationListener<ContextRefreshedEvent>{
+public class StartupConfig implements ApplicationListener<ContextRefreshedEvent> {
 	@Autowired
 	private OptionsService optionsService;
 	@Autowired
 	private MenuService menuService;
+
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
 		this.loadOptions();
 		this.loadMenus();
 	}
+
 	/**
-     * 加载设置选项
-     */
-    private void loadOptions() {
-    	List<Options> listMap = optionsService.selectMap();
-		if(listMap.size()>0 && !listMap.isEmpty()) {
+	 * 加载设置选项
+	 */
+	private void loadOptions() {
+		List<Options> listMap = optionsService.selectMap();
+		if (listMap.size() > 0 && !listMap.isEmpty()) {
 			for (Options options : listMap) {
 				MaydayConst.options.put(options.getOptionName(), options.getOptionValue());
 			}
 		}
-    }
-    /**
-     * 加载菜单
-     */
-    private void loadMenus() {
-    	MaydayConst.menus=menuService.findMenus();
-    }
+	}
+
+	/**
+	 * 加载菜单
+	 */
+	private void loadMenus() {
+		MaydayConst.menus = menuService.findMenus();
+	}
 
 }

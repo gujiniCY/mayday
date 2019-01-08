@@ -8,7 +8,7 @@ public enum MaydayEnums {
 	/**
 	 * 运行错误
 	 */
-	ERROR(false,"系统错误"),
+	ERROR(false, "系统错误"),
 	/**
 	 * 操作成功
 	 */
@@ -27,6 +27,7 @@ public enum MaydayEnums {
 	PRESERVE_ERROR(false, "保存失败");
 	private boolean flag;
 	private String message;
+
 	private MaydayEnums(boolean flag, String message) {
 		this.flag = flag;
 		this.message = message;

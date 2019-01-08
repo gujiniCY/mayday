@@ -51,7 +51,7 @@ public class PageController extends BaseController {
 			@RequestParam(value = "limit", defaultValue = "10") int limit,
 			@RequestParam(value = "status", defaultValue = "0") int status) {
 		try {
-			ArticleCustom articleCustom=new ArticleCustom();
+			ArticleCustom articleCustom = new ArticleCustom();
 			articleCustom.setArticleStatus(status);
 			articleCustom.setArticlePost(PostType.POST_TYPE_PAGE.getValue());
 			PageInfo<ArticleCustom> pageInfo = articleService.findPageArticle(page, limit, articleCustom);
@@ -137,6 +137,7 @@ public class PageController extends BaseController {
 		}
 		return new JsonResult(MaydayEnums.PRESERVE_SUCCESS.isFlag(), MaydayEnums.PRESERVE_SUCCESS.getMessage());
 	}
+
 	/**
 	 * 彻底删除页面
 	 * 
@@ -147,15 +148,16 @@ public class PageController extends BaseController {
 	public String remove(@RequestParam(value = "id") int id, HttpServletRequest request) {
 		try {
 			articleService.remove(id);
-			//添加日志
+			// 添加日志
 			logService.save(new Log(LogConstant.REMOVE_AN_PAGE, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
 					DateUtil.date()));
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.error("删除文章失败"+e.getMessage());
+			log.error("删除文章失败" + e.getMessage());
 		}
 		return "redirect:/admin/page?status=0";
 	}
+
 	/**
 	 * 修改页面
 	 * 

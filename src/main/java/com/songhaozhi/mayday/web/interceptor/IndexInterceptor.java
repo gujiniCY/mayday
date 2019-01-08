@@ -13,27 +13,29 @@ import com.songhaozhi.mayday.util.Commons;
 
 /**
  * 前台拦截器
-* @author : 宋浩志
-* @createDate : 2018年12月6日
-*/
+ * 
+ * @author : 宋浩志
+ * @createDate : 2018年12月6日
+ */
 @Component
-public class IndexInterceptor  implements HandlerInterceptor{
+public class IndexInterceptor implements HandlerInterceptor {
 	@Autowired
-	 private Commons commons;
+	private Commons commons;
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-				return true;
+		return true;
 	}
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		//工具类
+		// 工具类
 		request.setAttribute("commons", commons);
-		//设置项
+		// 设置项
 		request.setAttribute("options", MaydayConst.options);
-		//菜单
+		// 菜单
 		request.setAttribute("menus", MaydayConst.menus);
 	}
 

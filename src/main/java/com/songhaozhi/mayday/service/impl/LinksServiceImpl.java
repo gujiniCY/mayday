@@ -18,18 +18,18 @@ import com.songhaozhi.mayday.service.LinksService;
  * 
  */
 @Service
-@Transactional(rollbackFor=RuntimeException.class)
+@Transactional(rollbackFor = RuntimeException.class)
 public class LinksServiceImpl implements LinksService {
-	
-	private static final String LINKS_CACHE_KEY="'link'";
-	
-	private static final String LINKS_CACHE_NAME="links";
+
+	private static final String LINKS_CACHE_KEY = "'link'";
+
+	private static final String LINKS_CACHE_NAME = "links";
 
 	@Autowired
 	private LinkMapper linkMapper;
 
 	@Override
-	@Cacheable(value=LINKS_CACHE_NAME,key=LINKS_CACHE_KEY)
+	@Cacheable(value = LINKS_CACHE_NAME, key = LINKS_CACHE_KEY)
 	public List<Link> findLinks() {
 		return linkMapper.selectByExample(null);
 	}
@@ -40,20 +40,20 @@ public class LinksServiceImpl implements LinksService {
 	}
 
 	@Override
-	@CacheEvict(value=LINKS_CACHE_NAME,allEntries=true,beforeInvocation=true)
+	@CacheEvict(value = LINKS_CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void save(Link link) throws Exception {
 		linkMapper.insert(link);
 	}
 
 	@Override
-	@CacheEvict(value=LINKS_CACHE_NAME,allEntries=true,beforeInvocation=true)
+	@CacheEvict(value = LINKS_CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void update(Link link) {
 		linkMapper.updateByPrimaryKeySelective(link);
 	}
 
 	@Override
-	@CacheEvict(value=LINKS_CACHE_NAME,allEntries=true,beforeInvocation=true)
-	public void remove(int linkId){
+	@CacheEvict(value = LINKS_CACHE_NAME, allEntries = true, beforeInvocation = true)
+	public void remove(int linkId) {
 		linkMapper.deleteByPrimaryKey(linkId);
 	}
 
