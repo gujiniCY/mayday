@@ -30,9 +30,10 @@ public interface ArticleService {
 	 * 不分页查询所有文章
 	 * 
 	 * @param status
+	 * @param string 
 	 * @return
 	 */
-	List<ArticleCustom> findAllArticle(int status);
+	List<ArticleCustom> findAllArticle(int status, String post);
 
 	/**
 	 * 分页查询所有文章

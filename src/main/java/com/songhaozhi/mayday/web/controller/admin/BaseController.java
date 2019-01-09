@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.songhaozhi.mayday.model.dto.MaydayConst;
 import com.songhaozhi.mayday.service.LogService;
 
 import cn.hutool.core.text.StrBuilder;
@@ -29,6 +30,10 @@ public class BaseController {
 	 * @return 返回拼接好的模板路径
 	 */
 	public String render(String pageName) {
+		//加载主题
+		if(MaydayConst.themeName!=null) {
+			THEME=MaydayConst.themeName;
+		}
 		StrBuilder themeStr = new StrBuilder("themes/");
 		themeStr.append(THEME);
 		themeStr.append("/");

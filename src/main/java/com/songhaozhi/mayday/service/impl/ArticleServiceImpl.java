@@ -87,9 +87,9 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'findAllArticle'+#status")
-	public List<ArticleCustom> findAllArticle(int status) {
-		return articleMapperCustom.findAllArticle(status);
+	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'findAllArticle'+#status+#post")
+	public List<ArticleCustom> findAllArticle(int status,String post) {
+		return articleMapperCustom.findAllArticle(status,post);
 	}
 
 	@Override

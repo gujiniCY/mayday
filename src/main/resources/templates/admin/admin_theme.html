@@ -37,9 +37,9 @@
 						<td><img style="width: 100px;height: 60px" th:src="${theme.themeImg}"></td>
 						<td th:text="${#dates.format(theme.createTime,'yyyy/MM/dd HH:mm:ss')}"></td>
 						<td>
-						<button class="btn btn-secondary" th:disabled="${theme.themeStatus == 1}">
+						<button class="btn btn-secondary" th:onclick="'javascript:themeEnabled(\''+${theme.id}+'\')'" th:disabled="${theme.themeStatus == 1}">
 						<th:block th:if="${theme.themeStatus == 1}">已启用</th:block>
-						<th:block th:if="${theme.themeStatus == 0}">启用</th:block>
+						<th:block th:if="${theme.themeStatus == 0}" >启用</th:block>
 						</button>
 						<button class="btn btn-primary" th:onclick="'javascript:themeOption(\''+${theme.themeName}+'\')'">设置</button>
 						<button th:onclick="'javascript:showModel('+${theme.id}+')'"
@@ -146,6 +146,37 @@
 			maxmin : true
 		});
 	} 
+	//启用主题
+	function themeEnabled(id){
+		$.ajax({
+			type :"post",
+			url :"/admin/theme/themeEnabled",
+			data :{"id":id},
+			dataType :"json",
+			success :function(data){
+				 if(data.flag==true){
+					 $.toast({
+                         text: data.msg,
+                         heading: '提示',
+                         icon: 'success',
+                         showHideTransition: 'fade',
+                         allowToastClose: true,
+                         hideAfter: 1000,
+                         stack: 1,
+                         position: 'top-center',
+                         textAlign: 'left',
+                         loader: true,
+                         loaderBg: '#ffffff',
+                         afterHidden: function () {
+                        	 location.reload();
+                         }
+                     });
+				}else{
+					showMsg(data.msg,"error",3000);
+				} 
+			}
+		})		 
+	}
 	</script>
 	<div class="col" id="saveTheme" style="display: none;">
 		<div class="row">

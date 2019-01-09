@@ -30,4 +30,9 @@ public class MaydayConst {
 	 * 所有菜单
 	 */
 	public static List<Menu> menus = new ArrayList<Menu>();
+	/**
+	 * 主题
+	 */
+	public static String themeName;
+	
 }

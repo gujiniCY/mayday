@@ -17,6 +17,7 @@ import com.songhaozhi.mayday.model.domain.Log;
 import com.songhaozhi.mayday.model.domain.Theme;
 import com.songhaozhi.mayday.model.dto.JsonResult;
 import com.songhaozhi.mayday.model.dto.LogConstant;
+import com.songhaozhi.mayday.model.dto.MaydayConst;
 import com.songhaozhi.mayday.model.enums.MaydayEnums;
 import com.songhaozhi.mayday.service.ThemeService;
 
@@ -95,10 +96,34 @@ public class ThemeController extends BaseController {
 		return "redirect:/admin/theme";
 	}
 
+	/**
+	 * 跳转主题设置页面
+	 * @param themeName
+	 * @param model
+	 * @return
+	 */
 	@GetMapping(value = "/{themeName}")
 	public String themeOption(@PathVariable String themeName, Model model) {
 		Theme theme = themeService.findByThemeName(themeName);
 		model.addAttribute("theme", theme);
 		return "/themes/" + themeName + "/module/options";
 	}
+	/**
+	 * 启用主题
+	 * @param id
+	 * @return
+	 */
+	@PostMapping(value="themeEnabled")
+	@ResponseBody
+	public JsonResult themeEnabled(@RequestParam(value="id")int id) {
+		try {
+			themeService.themeEnabled(id);
+			MaydayConst.themeName=themeService.getEnabledTheme();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new JsonResult(MaydayEnums.ERROR.isFlag(),MaydayEnums.ERROR.getMessage());
+		}
+		return new JsonResult(MaydayEnums.OPERATION_SUCCESS.isFlag(), MaydayEnums.OPERATION_SUCCESS.getMessage());
+	}
+	
 }

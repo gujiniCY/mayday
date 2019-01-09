@@ -11,6 +11,7 @@ import com.songhaozhi.mayday.model.domain.Options;
 import com.songhaozhi.mayday.model.dto.MaydayConst;
 import com.songhaozhi.mayday.service.MenuService;
 import com.songhaozhi.mayday.service.OptionsService;
+import com.songhaozhi.mayday.service.ThemeService;
 
 /**
  * @author : 宋浩志
@@ -22,11 +23,14 @@ public class StartupConfig implements ApplicationListener<ContextRefreshedEvent>
 	private OptionsService optionsService;
 	@Autowired
 	private MenuService menuService;
+	@Autowired
+	private ThemeService themeService;
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
 		this.loadOptions();
 		this.loadMenus();
+		this.loadThemeName();
 	}
 
 	/**
@@ -46,6 +50,12 @@ public class StartupConfig implements ApplicationListener<ContextRefreshedEvent>
 	 */
 	private void loadMenus() {
 		MaydayConst.menus = menuService.findMenus();
+	}
+	/**
+	 * 加载主题
+	 */
+	private void loadThemeName() {
+		MaydayConst.themeName=themeService.getEnabledTheme();
 	}
 
 }
