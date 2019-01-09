@@ -2,10 +2,13 @@ package com.songhaozhi.mayday.util;
 
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
 import com.github.pagehelper.PageInfo;
+import com.songhaozhi.mayday.model.dto.MaydayConst;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
@@ -91,5 +94,19 @@ public class Commons {
 	public static int getYear() {
 		return DateUtil.year(new Date());
 	}
-
+	/**
+	 * pinghsu主题 获取社交链接
+	 * @return
+	 */
+	public static Map<String,String> social(){
+		final String prefix = "pinghsu_";
+		Map<String,String> map=new HashMap<>();
+		map.put("weibo", MaydayConst.options.get(prefix+"weibo"));
+		map.put("zhihu", MaydayConst.options.get(prefix+"zhihu"));
+		map.put("github", MaydayConst.options.get(prefix+"github"));
+		map.put("twitter", MaydayConst.options.get(prefix+"twitter"));
+		map.put("qq", "http://wpa.qq.com/msgrd?v=3&uin="+MaydayConst.options.get(prefix+"qq")+"&site=qq&menu=yes");
+		map.put("email", "mailto:"+MaydayConst.options.get(prefix+"email"));
+		return map;
+	}
 }

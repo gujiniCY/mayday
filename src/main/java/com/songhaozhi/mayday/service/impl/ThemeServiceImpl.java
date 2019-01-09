@@ -51,7 +51,11 @@ public class ThemeServiceImpl implements ThemeService {
 		ThemeExample themeExample = new ThemeExample();
 		ThemeExample.Criteria criteria = themeExample.createCriteria();
 		criteria.andThemeNameEqualTo(themeName);
-		return themeMapper.selectByExample(themeExample).get(0);
+		List<Theme> list=themeMapper.selectByExample(themeExample);
+		if(list==null) {
+			return null;
+		}
+		return list.get(0);
 	}
 
 }

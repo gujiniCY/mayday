@@ -5,11 +5,30 @@
     <div class="footer-social">
         <div class="footer-container clearfix">
             <div class="social-list">
-             <a class="social weibo" target="blank" th:href="@{${options['pinghsu_weibo']}}">微博</a>
-             <a class="social zhihu" target="blank" th:href="@{${options['pinghsu_zhihu']}}">知乎</a>
-             <a class="social github" target="blank" th:href="@{${options['pinghsu_github']}}">Github</a>
-             <a class="social twitter" target="blank" th:href="@{${options['pinghsu_twitter']}}">Twitter</a>
-             <a class="social qq" target="blank" th:href="@{${options['pinghsu_qq']}}">QQ</a>
+            <th:block th:each="map :${commons.social()}">
+            	<th:block th:if="${map.value} != null and ${map.value} !=''">
+            	 <th:block th:switch="${map.key}">
+            	 	<th:block th:case="'weibo'">
+            	 	 <a class="social weibo" target="blank" th:href="@{${map.value}}">微博</a>
+            	 	</th:block>
+            	 	<th:block th:case="'zhihu'">
+            	 	 <a class="social zhihu" target="blank" th:href="@{${map.value}}">知乎</a>
+            	 	</th:block>
+            	 	<th:block th:case="'github'">
+            	 	 <a class="social github" target="blank" th:href="@{${map.value}}">Github</a>
+            	 	</th:block>
+            	 	<th:block th:case="'twitter'">
+            	 	 <a class="social twitter" target="blank" th:href="@{${map.value}}">Twitter</a>
+            	 	</th:block>
+            	 	<th:block th:case="'qq'">
+            	 	 <a class="social qq" target="blank" th:href="@{${map.value}}">QQ</a>
+            	 	</th:block>
+            	 	<th:block th:case="'email'">
+            	 	 <a class="social email" target="blank" th:href="@{${map.value}}">Email</a>
+            	 	</th:block>
+            	 </th:block>
+            	</th:block>
+            </th:block>
             </div>
         </div>
     </div>
