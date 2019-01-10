@@ -278,15 +278,15 @@
 								<div class="col-md-5">
 									<div class="animated-radio-button mt-2">
 										<label> <input type="radio" value="server"
-										name="attachment_location"><span
-											class="label-text" th:checked="${options['attachment_location'] == 'server'}">本地服务器</span>
+										name="attachment_location" th:checked="${options['attachment_location'] == 'server'}"><span
+											class="label-text">本地服务器</span>
 										</label>
 										<label> <input type="radio" th:value="qiniu"
-										name="attachment_location" disabled=""><span
+										name="attachment_location" th:checked="${options['attachment_location'] == 'qiniu'}" disabled=""><span
 											class="label-text">七牛云</span>
 										</label>
 										<label> <input type="radio" th:value="upyun"
-										name="attachment_location" disabled=""><span
+										name="attachment_location" th:checked="${options['attachment_location'] == 'upyun'}" disabled=""><span
 											class="label-text">又拍云</span>
 										</label>
 									</div>

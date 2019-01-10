@@ -22,7 +22,7 @@
 	</if>
 	</where>
 	</sql>
-	<select id="findPageArticle"
+	<!-- <select id="findPageArticle"
 		resultType="com.songhaozhi.mayday.model.domain.ArticleCustom" parameterType="com.songhaozhi.mayday.model.domain.ArticleCustom">
 		SELECT *,(SELECT GROUP_CONCAT(mayday_category.category_name) from
 		mayday_category where category_id in(SELECT category_id FROM
@@ -39,8 +39,25 @@
 		FROM mayday_article a 
 		<include refid="whereArticleCustom"></include>
 		ORDER BY article_updatetime DESC,article_newstime DESC
+	</select> -->
+	<select id="findPageArticle"
+		resultType="com.songhaozhi.mayday.model.domain.ArticleCustom" parameterType="com.songhaozhi.mayday.model.domain.ArticleCustom">
+			SELECT
+			ma.*,
+			GROUP_CONCAT(distinct mc.category_name ) AS categorysName,
+			GROUP_CONCAT(distinct mc.category_url ) AS categorysUrl,
+			GROUP_CONCAT(distinct mt.tag_name ) AS tagsName,
+			GROUP_CONCAT(distinct mt.tag_url ) AS tagsUrl
+			FROM
+			mayday_article ma
+			LEFT JOIN mayday_article_category mac ON ma.id = mac.article_id
+			LEFT JOIN mayday_category mc ON mc.category_id = mac.category_id
+			LEFT JOIN mayday_article_tag mat ON ma.id = mat.article_id
+			LEFT JOIN mayday_tag mt ON mt.tag_id = mat.tag_id
+			<include refid="whereArticleCustom"></include>
+			GROUP BY
+			ma.id ORDER BY article_updatetime DESC,article_newstime DESC
 	</select>
-	
 	<select id="findAllArticle"
 		resultType="com.songhaozhi.mayday.model.domain.ArticleCustom">
 		SELECT * FROM mayday_article a 
@@ -70,19 +87,20 @@
 	SELECT COUNT(*) FROM mayday_article WHERE article_url = #{articleUrl}
 	</select>
 	<select id="findByArticleUrl" parameterType="String" resultType="com.songhaozhi.mayday.model.domain.ArticleCustom">
-	SELECT *,(SELECT GROUP_CONCAT(mayday_category.category_name) from
-		mayday_category where category_id in(SELECT category_id FROM
-		mayday_article_category WHERE article_id=a.id) ) categorysName
-		,(SELECT GROUP_CONCAT(mayday_tag.tag_name) FROM mayday_tag
-		WHERE tag_id in (SELECT tag_id FROM mayday_article_tag WHERE
-		article_id = a.id)) tagsName,
-		(SELECT GROUP_CONCAT(mayday_tag.tag_url) FROM mayday_tag
-		WHERE tag_id in (SELECT tag_id FROM mayday_article_tag WHERE
-		article_id = a.id)) tagsUrl,
-		(SELECT GROUP_CONCAT(mayday_category.category_url) from
-		mayday_category where category_id in(SELECT category_id FROM
-		mayday_article_category WHERE article_id=a.id) ) categorysUrl
-		FROM mayday_article a WHERE article_url=#{articleUrl}
+		SELECT
+			ma.*,
+			GROUP_CONCAT(distinct mc.category_name ) AS categorysName,
+			GROUP_CONCAT(distinct mc.category_url ) AS categorysUrl,
+			GROUP_CONCAT(distinct mt.tag_name ) AS tagsName,
+			GROUP_CONCAT(distinct mt.tag_url ) AS tagsUrl
+			FROM
+			mayday_article ma
+			LEFT JOIN mayday_article_category mac ON ma.id = mac.article_id
+			LEFT JOIN mayday_category mc ON mc.category_id = mac.category_id
+			LEFT JOIN mayday_article_tag mat ON ma.id = mat.article_id
+			LEFT JOIN mayday_tag mt ON mt.tag_id = mat.tag_id
+			WHERE article_url=#{articleUrl}
+			GROUP BY ma.id 
 	</select>
 	
 	<select id="findArtileByCategory" parameterType="com.songhaozhi.mayday.model.domain.Category" resultType="com.songhaozhi.mayday.model.domain.ArticleCustom">
