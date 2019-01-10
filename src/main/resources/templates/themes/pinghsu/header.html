@@ -31,7 +31,7 @@
 <header id="header" class="header bg-white">
     <div class="navbar-container">
         <a  class="navbar-logo" th:href="${options['blog_url']}">
-           <img th:src="${options['blog_logo'] == '' ? '/static/img/transparent.png' : options['blog_logo'] }" alt="首页"/>
+           <img th:src="${#maps.containsKey(options,'blog_logo') == false ? '/static/img/transparent.png' : options['blog_logo'] }"/>
         </a>
         <div class="navbar-menu" th:each="menu : ${menus}">
             <a th:href="${menu.menuUrl}" th:text="${menu.menuName}" th:target="${menu.menuTarget}"></a>

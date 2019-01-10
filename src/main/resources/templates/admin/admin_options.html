@@ -18,7 +18,7 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 tile">
-		<div class="bs-component">
+			<div class="bs-component">
 				<ul class="nav nav-tabs" role="tablist">
 					<li class="nav-item"><a class="nav-link active"
 						data-toggle="tab" href="#routine">常规设置</a></li>
@@ -33,280 +33,377 @@
 					<!-- <li class="nav-item"><a class="nav-link" data-toggle="tab"
 						href="#admin">后台设置</a></li>-->
 					<li class="nav-item"><a class="nav-link" data-toggle="tab"
-						href="#email">邮箱设置</a></li> 
+						href="#email">邮箱设置</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="tab"
 						href="#other">其他设置</a></li>
 				</ul>
-			<!-- Tab panes -->
-			<div class="tab-content">
-				<div id="routine" class="tab-pane active">
-					<form class="form-horizontal" id="commonOptions">
-						<div class="form-group row mt-3">
-							<label class="col-form-label col-md-2">博客标题：</label>
-							<div class="col-md-5">
-								<input class="form-control" type="text" th:value="${options['blog_name']}" name="blog_name">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-md-2">博客地址：</label>
-							<div class="col-md-5">
-								<input class="form-control" type="text" name="blog_url" th:value="${options['blog_url']}">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-md-2">首页LOGO：</label>
-							<div class="col-md-5">
-							<div class="input-group">
-								<input class="form-control" type="text" readonly="readonly" name="blog_logo" id="blog_logo" th:value="${options['blog_logo']}">
-								<span class="input-group-btn">
-								<button class="btn btn-default " type="button" th:onclick="'javascript:openChoice(\''+blog_logo+'\')'">选择</button>
-								</span>
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div id="routine" class="tab-pane active">
+						<form class="form-horizontal" id="commonOptions">
+							<div class="form-group row mt-3">
+								<label class="col-form-label col-md-2">博客标题：</label>
+								<div class="col-md-5">
+									<input class="form-control" type="text"
+										th:value="${options['blog_name']}" name="blog_name">
 								</div>
 							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-md-2">标签页LOGO：</label>
-							<div class="col-md-5">
-							<div class="input-group">
-								<input class="form-control" type="text" name="ico_logo" readonly="readonly" id="ico_logo" th:value="${options['ico_logo']}">
-								<span class="input-group-btn">
-								<button class="btn btn-default " type="button" th:onclick="'javascript:openChoice(\''+ico_logo+'\')'">选择</button>
-								</span>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">博客地址：</label>
+								<div class="col-md-5">
+									<input class="form-control" type="text" name="blog_url"
+										th:value="${options['blog_url']}">
 								</div>
 							</div>
-						</div>
-						<div class="form-group row">
-							<label class="control-label col-md-2">页脚信息：</label>
-							<div class="col-md-5">
-								<div class="input-group">
-									<textarea class="form-control" title="支持HTML" rows="3" th:text="${options['blog_footer']}" th:value="${options['blog_footer']}" id=""
-										name="blog_footer" style="resize: none"></textarea>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">首页LOGO：</label>
+								<div class="col-md-5">
+									<div class="input-group">
+										<input class="form-control" type="text" readonly="readonly"
+											name="blog_logo" id="blog_logo"
+											th:value="${options['blog_logo']}"> <span
+											class="input-group-btn">
+											<button class="btn btn-default " type="button"
+												th:onclick="'javascript:openChoice(\''+blog_logo+'\')'">选择</button>
+										</span>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="tile-footer">
-							<div class="row">
-								<div class="col-md-8 col-md-offset-3">
-									<button class="btn btn-outline-primary" type="button" onclick="save('commonOptions')">
-										<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
-									</button>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">标签页LOGO：</label>
+								<div class="col-md-5">
+									<div class="input-group">
+										<input class="form-control" type="text" name="ico_logo"
+											readonly="readonly" id="ico_logo"
+											th:value="${options['ico_logo']}"> <span
+											class="input-group-btn">
+											<button class="btn btn-default " type="button"
+												th:onclick="'javascript:openChoice(\''+ico_logo+'\')'">选择</button>
+										</span>
+									</div>
 								</div>
 							</div>
-						</div>
-					</form>
-				</div>
-				<!-- SEO表单 -->
-				<div id="seo" class="tab-pane fade">
-					<form class="form-horizontal" id="seoOptions">
-						<div class="form-group row mt-3">
-							<label class="col-form-label col-md-2">关键词： <span
-								data-toggle="tooltip" data-placement="top" title="多个关键词使用,隔开"
-								style="cursor: pointer"> <i class="fa fa-question-circle"
-									aria-hidden="true"></i>
-							</span></label>
-							<div class="col-md-5">
-								<input class="form-control" type="text" th:value="${options['seo_keyword']}" name="seo_keyword">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-md-2">博客描述：</label>
-							<div class="col-md-5">
-								<input class="form-control" type="text" th:value="${options['seo_describe']}" name="seo_describe">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-md-2">百度推送token： <span
-								data-toggle="tooltip" data-placement="top" title="百度站长平台获取"
-								style="cursor: pointer"> <i class="fa fa-question-circle"
-									aria-hidden="true"></i>
-							</span></label>
-							<div class="col-md-5">
-								<div class="input-group">
-									<input type="text" class="form-control" id="baiduToken" th:value="${options['seo_baidu_token']}" name="seo_baidu_token">
-									<span class="input-group-btn">
-										<button class="btn btn-default" onclick="pushBaidu()" type="button">推送</button>
-									</span>
+							<div class="form-group row">
+								<label class="control-label col-md-2">页脚信息：</label>
+								<div class="col-md-5">
+									<div class="input-group">
+										<textarea class="form-control" title="支持HTML" rows="3"
+											th:text="${options['blog_footer']}"
+											th:value="${options['blog_footer']}" id="" name="blog_footer"
+											style="resize: none"></textarea>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="tile-footer">
-							<div class="row">
-								<div class="col-md-8 col-md-offset-3">
-									<button class="btn btn-outline-primary" type="button" onclick="save('seoOptions')">
-										<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
-									</button>
+							<div class="tile-footer">
+								<div class="row">
+									<div class="col-md-8 col-md-offset-3">
+										<button class="btn btn-outline-primary" type="button"
+											onclick="save('commonOptions')">
+											<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
+										</button>
+									</div>
 								</div>
 							</div>
-						</div>
-					</form>
-				</div>
-				<!-- 文章 -->
-				 <div id="article" class="tab-pane fade">
-					<form class="form-horizontal" id="articleOptions">
-						<div class="form-group row mt-3">
-							<label class="col-form-label col-md-2">首页显示条数： <span
-								data-toggle="tooltip" data-placement="top" title="默认为12条"
-								style="cursor: pointer"> <i class="fa fa-question-circle"
-									aria-hidden="true"></i>
-							</span></label>
-							<div class="col-md-5">
-								<input class="form-control" type="text" th:value="${options['index_article']}" name="index_article">
-							</div>
-						</div>
-						 <div class="form-group row">
-							<label class="col-form-label col-md-2">RSS显示条数：</label>
-							<div class="col-md-5">
-								<input class="form-control" type="text" th:value="${options['rss_number']}" name="rss_number">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-md-2">文章摘要字数：</label>
-							<div class="col-md-5">
-								<div class="input-group">
-									<input type="text" class="form-control" name="post_summary" th:value="${options['post_summary']}">
+						</form>
+					</div>
+					<!-- SEO表单 -->
+					<div id="seo" class="tab-pane fade">
+						<form class="form-horizontal" id="seoOptions">
+							<div class="form-group row mt-3">
+								<label class="col-form-label col-md-2">关键词： <span
+									data-toggle="tooltip" data-placement="top" title="多个关键词使用,隔开"
+									style="cursor: pointer"> <i
+										class="fa fa-question-circle" aria-hidden="true"></i>
+								</span></label>
+								<div class="col-md-5">
+									<input class="form-control" type="text"
+										th:value="${options['seo_keyword']}" name="seo_keyword">
 								</div>
 							</div>
-						</div>
-						<div class="tile-footer">
-							<div class="row">
-								<div class="col-md-8 col-md-offset-3">
-									<button class="btn btn-outline-primary" type="button" onclick="save('articleOptions')">
-										<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
-									</button>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">博客描述：</label>
+								<div class="col-md-5">
+									<input class="form-control" type="text"
+										th:value="${options['seo_describe']}" name="seo_describe">
 								</div>
 							</div>
-						</div>
-					</form>
-				</div> 
-				<!-- 评论 -->
-				<div id="comment" class="tab-pane fade">
-					<form class="form-horizontal" id="commentOptions">
-						<div class="form-group row mt-3">
-							<label class="col-form-label col-md-2">APP ID:<span
-								data-toggle="tooltip" data-placement="top" title="Leancloud申请的appid"
-								style="cursor: pointer"> <i class="fa fa-question-circle"
-									aria-hidden="true"></i>
-							</span></label>
-							<div class="col-md-5">
-								<input class="form-control" type="text" th:value="${options['comment_valine_appid']}" name="comment_valine_appid">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-md-2">APP KEY:<span
-								data-toggle="tooltip" data-placement="top" title="Leancloud申请的appkey"
-								style="cursor: pointer"> <i class="fa fa-question-circle"
-									aria-hidden="true"></i>
-							</span></label>
-							<div class="col-md-5">
-								<input class="form-control" type="text" th:value="${options['comment_valine_appkey']}" name="comment_valine_appkey">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-md-2">头像类型:</label>
-							<div class="col-md-5">
-								<select class="form-control" name="comment_valine_portrait">
-								<option th:selected="${options['comment_valine_portrait']=='identicon'}" value="identicon">抽象几何图形</option>
-								<option th:selected="${options['comment_valine_portrait']=='monsterid'}" value="monsterid">小怪物</option>
-								<option th:selected="${options['comment_valine_portrait']=='wavatar'}" value="wavatar">wavatar</option>
-								<option th:selected="${options['comment_valine_portrait']=='retro'}" value="retro">复古</option>
-								<option th:selected="${options['comment_valine_portrait']=='robohash'}" value="robohash">机器人</option>
-								<option th:selected="${options['comment_valine_portrait']=='hide'}" value="hide">不显示头像</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-md-2">占位提示:</label>
-							<div class="col-md-5">
-								<input class="form-control" type="text" th:value="${options['comment_valine_hint']}" name="comment_valine_hint">
-							</div>
-						</div>
-						<div class="tile-footer">
-							<div class="row">
-								<div class="col-md-8 col-md-offset-3">
-									<button class="btn btn-outline-primary" type="button" onclick="save('commentOptions')">
-										<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
-									</button>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">百度推送token： <span
+									data-toggle="tooltip" data-placement="top" title="百度站长平台获取"
+									style="cursor: pointer"> <i
+										class="fa fa-question-circle" aria-hidden="true"></i>
+								</span></label>
+								<div class="col-md-5">
+									<div class="input-group">
+										<input type="text" class="form-control" id="baiduToken"
+											th:value="${options['seo_baidu_token']}"
+											name="seo_baidu_token"> <span class="input-group-btn">
+											<button class="btn btn-default" onclick="pushBaidu()"
+												type="button">推送</button>
+										</span>
+									</div>
 								</div>
 							</div>
-						</div>
-					</form>
-				</div>
-				<!-- 附件 -->
-				<div id="attachment" class="tab-pane fade">
-					<form class="form-horizontal">
-						
-					</form>
-				</div>
-				<!-- 邮箱 -->
-				<div id="email" class="tab-pane fade">
-					<form class="form-horizontal" id="emailOptions">
-						<div class="form-group row mt-3">
-							<label class="col-form-label col-md-2">邮箱账号:</label>
-							<div class="col-md-5">
-								<input class="form-control" type="text" th:value="${options['email_username']}" name="email_username">
-							</div>
-						</div>
-						<div class="tile-footer">
-							<div class="row">
-								<div class="col-md-8 col-md-offset-3">
-									<button class="btn btn-outline-primary" type="button" onclick="save('emailOptions')">
-										<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
-									</button>
+							<div class="tile-footer">
+								<div class="row">
+									<div class="col-md-8 col-md-offset-3">
+										<button class="btn btn-outline-primary" type="button"
+											onclick="save('seoOptions')">
+											<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
+										</button>
+									</div>
 								</div>
 							</div>
-						</div>
-					</form>
+						</form>
+					</div>
+					<!-- 文章 -->
+					<div id="article" class="tab-pane fade">
+						<form class="form-horizontal" id="articleOptions">
+							<div class="form-group row mt-3">
+								<label class="col-form-label col-md-2">首页显示条数： <span
+									data-toggle="tooltip" data-placement="top" title="默认为12条"
+									style="cursor: pointer"> <i
+										class="fa fa-question-circle" aria-hidden="true"></i>
+								</span></label>
+								<div class="col-md-5">
+									<input class="form-control" type="text"
+										th:value="${options['index_article']}" name="index_article">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">RSS显示条数：</label>
+								<div class="col-md-5">
+									<input class="form-control" type="text"
+										th:value="${options['rss_number']}" name="rss_number">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">文章摘要字数：</label>
+								<div class="col-md-5">
+									<div class="input-group">
+										<input type="text" class="form-control" name="post_summary"
+											th:value="${options['post_summary']}">
+									</div>
+								</div>
+							</div>
+							<div class="tile-footer">
+								<div class="row">
+									<div class="col-md-8 col-md-offset-3">
+										<button class="btn btn-outline-primary" type="button"
+											onclick="save('articleOptions')">
+											<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
+										</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<!-- 评论 -->
+					<div id="comment" class="tab-pane fade">
+						<form class="form-horizontal" id="commentOptions">
+							<div class="form-group row mt-3">
+								<label class="col-form-label col-md-2">APP ID:<span
+									data-toggle="tooltip" data-placement="top"
+									title="Leancloud申请的appid" style="cursor: pointer"> <i
+										class="fa fa-question-circle" aria-hidden="true"></i>
+								</span></label>
+								<div class="col-md-5">
+									<input class="form-control" type="text"
+										th:value="${options['comment_valine_appid']}"
+										name="comment_valine_appid">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">APP KEY:<span
+									data-toggle="tooltip" data-placement="top"
+									title="Leancloud申请的appkey" style="cursor: pointer"> <i
+										class="fa fa-question-circle" aria-hidden="true"></i>
+								</span></label>
+								<div class="col-md-5">
+									<input class="form-control" type="text"
+										th:value="${options['comment_valine_appkey']}"
+										name="comment_valine_appkey">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">头像类型:</label>
+								<div class="col-md-5">
+									<select class="form-control" name="comment_valine_portrait">
+										<option
+											th:selected="${options['comment_valine_portrait']=='identicon'}"
+											value="identicon">抽象几何图形</option>
+										<option
+											th:selected="${options['comment_valine_portrait']=='monsterid'}"
+											value="monsterid">小怪物</option>
+										<option
+											th:selected="${options['comment_valine_portrait']=='wavatar'}"
+											value="wavatar">wavatar</option>
+										<option
+											th:selected="${options['comment_valine_portrait']=='retro'}"
+											value="retro">复古</option>
+										<option
+											th:selected="${options['comment_valine_portrait']=='robohash'}"
+											value="robohash">机器人</option>
+										<option
+											th:selected="${options['comment_valine_portrait']=='hide'}"
+											value="hide">不显示头像</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">占位提示:</label>
+								<div class="col-md-5">
+									<input class="form-control" type="text"
+										th:value="${options['comment_valine_hint']}"
+										name="comment_valine_hint">
+								</div>
+							</div>
+							<div class="tile-footer">
+								<div class="row">
+									<div class="col-md-8 col-md-offset-3">
+										<button class="btn btn-outline-primary" type="button"
+											onclick="save('commentOptions')">
+											<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
+										</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<!-- 附件 -->
+					<div id="attachment" class="tab-pane fade">
+						<form class="form-horizontal" id="attachmentOptions">
+							<div class="form-group row mt-3">
+								<label class="col-form-label col-md-2">储存位置:</label>
+								<div class="col-md-5">
+									<div class="animated-radio-button mt-2">
+										<label> <input type="radio" value="server"
+										name="attachment_location"><span
+											class="label-text" th:checked="${options['attachment_location'] == 'server'}">本地服务器</span>
+										</label>
+										<label> <input type="radio" th:value="qiniu"
+										name="attachment_location" disabled=""><span
+											class="label-text">七牛云</span>
+										</label>
+										<label> <input type="radio" th:value="upyun"
+										name="attachment_location" disabled=""><span
+											class="label-text">又拍云</span>
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="tile-footer">
+								<div class="row">
+									<div class="col-md-8 col-md-offset-3">
+										<button class="btn btn-outline-primary" type="button"
+											onclick="save('attachmentOptions')">
+											<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
+										</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<!-- 邮箱 -->
+					<div id="email" class="tab-pane fade">
+						<form class="form-horizontal" id="emailOptions">
+							<div class="form-group row mt-3">
+								<label class="col-form-label col-md-2">邮箱账号:</label>
+								<div class="col-md-5">
+									<input class="form-control" type="text"
+										th:value="${options['email_username']}" name="email_username">
+								</div>
+							</div>
+							<div class="tile-footer">
+								<div class="row">
+									<div class="col-md-8 col-md-offset-3">
+										<button class="btn btn-outline-primary" type="button"
+											onclick="save('emailOptions')">
+											<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
+										</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<!-- 其他设置 -->
+					<div id="other" class="tab-pane fade">
+						<form class="form-horizontal" id="otherOptions">
+							<div class="form-group row mt-3">
+								<label class="control-label col-md-2">统计代码：</label>
+								<div class="col-md-5">
+									<div class="input-group">
+										<textarea class="form-control" rows="4"
+											th:text="${options['blog_statistics']}"
+											th:value="${options['blog_statistics']}"
+											name="blog_statistics" style="resize: none"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="tile-footer">
+								<div class="row">
+									<div class="col-md-8 col-md-offset-3">
+										<button class="btn btn-outline-primary" type="button"
+											onclick="save('otherOptions')">
+											<i class="fa fa-fw fa-lg fa-check-circle"></i>保存
+										</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-</main>
+	</main>
 	<div th:replace="admin/module/macros :: comm"></div>
 	<script src="/plugins/layer/layer.js"></script>
 	<script type="text/javascript">
-	//保存设置项
-	 function save(id){
-		var from =$("#"+id).serialize();
-		$.ajax({
-			type:"post",
-			url:"/admin/option/save",
-			data:from,
-			dataType:"json",
-			success:function(data){
-				showMsg(data.msg,"success",3000)
-			}
-		});
-	}
-	//选择logo
-	function openChoice(id) {
-		layer.open({
-			type : 2,
-			title : '所有附件',
-			anim : 2,
-			area : [ '90%', '90%' ],
-			shadeClose : true,
-			content : "/admin/profile/openChoice?id=" + id,
-			maxmin : true
-		});
-	} 
-	 //推送百度
-	function pushBaidu(){
-		 var token= $("#baiduToken").val();
-		$.ajax({
-			url:"/admin/article/pushBaidu",
-			type:"post",
-			data:{token:token},
-			dataType:"json",
-			success:function(data){
-				if(data.flag==true){
-					showMsg(data.msg,"success",3000);
-				}else if(data.flag==false){
-					showMsg(data.msg,"error",3000);
+		//保存设置项
+		function save(id) {
+			var from = $("#" + id).serialize();
+			$.ajax({
+				type : "post",
+				url : "/admin/option/save",
+				data : from,
+				dataType : "json",
+				success : function(data) {
+					showMsg(data.msg, "success", 3000)
 				}
-			}
-		});
-	} 
+			});
+		}
+		//选择logo
+		function openChoice(id) {
+			layer.open({
+				type : 2,
+				title : '所有附件',
+				anim : 2,
+				area : [ '90%', '90%' ],
+				shadeClose : true,
+				content : "/admin/profile/openChoice?id=" + id,
+				maxmin : true
+			});
+		}
+		//推送百度
+		function pushBaidu() {
+			var token = $("#baiduToken").val();
+			$.ajax({
+				url : "/admin/article/pushBaidu",
+				type : "post",
+				data : {
+					token : token
+				},
+				dataType : "json",
+				success : function(data) {
+					if (data.flag == true) {
+						showMsg(data.msg, "success", 3000);
+					} else if (data.flag == false) {
+						showMsg(data.msg, "error", 3000);
+					}
+				}
+			});
+		}
 	</script>
 </body>
 </html>
