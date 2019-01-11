@@ -93,6 +93,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
+	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'findPageArticle'+#articleCustom.articleStatus+#articleCustom.articlePost")
 	public PageInfo<ArticleCustom> findPageArticle(int page, int limit, ArticleCustom articleCustom) {
 		PageHelper.startPage(page, limit);
 		List<ArticleCustom> lists = articleMapperCustom.findPageArticle(articleCustom);
