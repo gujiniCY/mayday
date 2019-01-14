@@ -29,12 +29,12 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	@Cacheable(value = CATEGORYS_CACHE_NAME, key = CATEGORYS_CACHE_KEY)
-	public List<Category> findCategory() throws Exception {
+	public List<Category> findCategory() {
 		return categoryMapper.selectByExample(null);
 	}
 
 	@Override
-	public Category findByCategoryId(int categoryId) throws Exception {
+	public Category findByCategoryId(int categoryId) {
 		return categoryMapper.selectByPrimaryKey(categoryId);
 	}
 

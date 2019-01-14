@@ -73,4 +73,9 @@ public interface UserService {
 	 * @param enable
 	 */
 	void updateLoginEnable(String enable) throws Exception;
+	/**
+	 * 保存用户
+	 * @param user
+	 */
+	void save(User user);
 }

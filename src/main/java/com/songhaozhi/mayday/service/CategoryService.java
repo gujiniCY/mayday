@@ -15,7 +15,7 @@ public interface CategoryService {
 	 * 
 	 * @return
 	 */
-	List<Category> findCategory() throws Exception;
+	List<Category> findCategory();
 
 	/**
 	 * 根据id查询
@@ -23,7 +23,7 @@ public interface CategoryService {
 	 * @param categoryId
 	 * @return
 	 */
-	Category findByCategoryId(int categoryId) throws Exception;
+	Category findByCategoryId(int categoryId);
 
 	/**
 	 * 添加

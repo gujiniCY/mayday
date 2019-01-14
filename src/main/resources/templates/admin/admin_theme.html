@@ -62,7 +62,7 @@
 	<script type="text/javascript" src="/static/plugins/layer/layer.js"></script>
 	 <script type="text/javascript">
 	 $(function(){
-		 $("#themeFrom").bootstrapValidator({
+		 $("#themeForm").bootstrapValidator({
 				message: 'This value is not valid',
 	           　		feedbackIcons: {
 	               　　　　　　　　valid: 'glyphicon glyphicon-ok',
@@ -99,10 +99,10 @@
 			 content: $('#saveTheme'),
 			 btn: ['保存', '取消'],
 			 yes: function(index, layero){
-			 var bootstrapValidator = $("#themeFrom").data("bootstrapValidator");
+			 var bootstrapValidator = $("#themeForm").data("bootstrapValidator");
 			 bootstrapValidator.validate();
 			 if(bootstrapValidator.isValid()){
-				 var obj=$("#themeFrom").serialize();
+				 var obj=$("#themeForm").serialize();
 				 $.ajax({
 					type :"post",
 					async :false,
@@ -181,7 +181,7 @@
 	<div class="col" id="saveTheme" style="display: none;">
 		<div class="row">
 			<div class="col-md-12">
-				<form id="themeFrom">
+				<form id="themeForm">
 					<div class="form-group row mt-3">
 						<label class="control-label col-md-4">主题名称：</label>
 						<div class="col-md-8">

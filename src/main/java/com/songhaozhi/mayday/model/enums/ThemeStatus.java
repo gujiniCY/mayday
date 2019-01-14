@@ -6,12 +6,12 @@ package com.songhaozhi.mayday.model.enums;
 */
 public enum ThemeStatus {
 	/**
-	 * 未启用
+	 * 0 未启用
 	 */
 	THEME_NOT_ENABLED(0),
 
 	/**
-	 * 已启用
+	 * 1 已启用
 	 */
 	THEME_ENABLED(1);
 

@@ -31,12 +31,16 @@ public class IndexInterceptor implements HandlerInterceptor {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		// 工具类
-		request.setAttribute("commons", commons);
-		// 设置项
-		request.setAttribute("options", MaydayConst.options);
-		// 菜单
-		request.setAttribute("menus", MaydayConst.menus);
+		String requestType = request.getHeader("X-Requested-With");
+		//非ajax请求
+		if(!"XMLHttpRequest".equals(requestType)){
+			// 工具类
+			request.setAttribute("commons", commons);
+			// 设置项
+			request.setAttribute("options", MaydayConst.options);
+			// 菜单
+			request.setAttribute("menus", MaydayConst.menus);
+		}
 	}
 
 	@Override

@@ -31,12 +31,8 @@ public class CategoryController extends BaseController {
 	 */
 	@GetMapping
 	public String category(Model model) {
-		try {
-			List<Category> categorys = categoryService.findCategory();
-			model.addAttribute("Categorys", categorys);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		List<Category> categorys = categoryService.findCategory();
+		model.addAttribute("Categorys", categorys);
 		return "/admin/admin_category";
 	}
 
@@ -55,7 +51,7 @@ public class CategoryController extends BaseController {
 			model.addAttribute("Categorys", categorys);
 			model.addAttribute("category", category);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return "/admin/admin_category";
 	}
@@ -75,7 +71,7 @@ public class CategoryController extends BaseController {
 				categoryService.update(category);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return "redirect:/admin/category";
 	}
@@ -91,7 +87,7 @@ public class CategoryController extends BaseController {
 		try {
 			categoryService.delete(categoryId);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return "redirect:/admin/category";
 	}
