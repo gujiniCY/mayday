@@ -57,3 +57,8 @@ function showMsg(text, icon, hideAfter) {
 		loaderBg : '#2dadd2',
 	});
 }
+//点击按钮以后设置按钮为不可点击，修改文字
+function loadingText(btnId,text){
+	 $("#"+btnId+"").attr("disabled","");
+	 $("#"+btnId+"").text(text);
+}

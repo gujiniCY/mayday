@@ -178,7 +178,6 @@ public class ArticleController extends BaseController {
 						ServletUtil.getClientIP(request), DateUtil.date()));
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			log.error("添加或更新失败" + e.getMessage());
 			return new JsonResult(MaydayEnums.ERROR.isFlag(), MaydayEnums.ERROR.getMessage());
 		}
@@ -210,7 +209,7 @@ public class ArticleController extends BaseController {
 				return new JsonResult(false, "推送失败");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return new JsonResult(true, "推送成功");
 	}
@@ -228,7 +227,7 @@ public class ArticleController extends BaseController {
 		try {
 			articleService.recycle(id, ArticleStatus.PUBLISH.getStatus());
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return new JsonResult(MaydayEnums.OPERATION_SUCCESS.isFlag(), MaydayEnums.OPERATION_SUCCESS.getMessage());
 	}
@@ -244,7 +243,7 @@ public class ArticleController extends BaseController {
 		try {
 			articleService.recycle(id, ArticleStatus.RECYCLE.getStatus());
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return "redirect:/admin/article?status=0";
 	}
@@ -263,7 +262,6 @@ public class ArticleController extends BaseController {
 			logService.save(new Log(LogConstant.REMOVE_AN_ARTICLE, LogConstant.SUCCESS,
 					ServletUtil.getClientIP(request), DateUtil.date()));
 		} catch (Exception e) {
-			e.printStackTrace();
 			log.error("删除文章失败" + e.getMessage());
 		}
 		return "redirect:/admin/article?status=2";
@@ -283,7 +281,7 @@ public class ArticleController extends BaseController {
 			model.addAttribute("categorys", categorys);
 			model.addAttribute("tags", tags);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return "/admin/admin_new_article";
 	}
@@ -307,7 +305,7 @@ public class ArticleController extends BaseController {
 			model.addAttribute("tags", tags);
 			model.addAttribute("articleCustom", articleCustom);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return "/admin/admin_edit_article";
 	}
@@ -332,7 +330,7 @@ public class ArticleController extends BaseController {
 				map.put("categorysIds", articleCustom.getCategorys().split(","));
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return map;
 	}

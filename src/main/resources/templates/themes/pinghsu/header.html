@@ -10,7 +10,7 @@
     <meta name="author" th:content="${options['blog_name']}">
     <meta name="keywords" th:content="${title}+','+${keywords} + ','+${options['seo_keyword']}"/>
     <meta name="description" th:content="${article !=null ?article.articleSummary: ''}"/>
-    <link rel="shortcut icon" th:href="${options['ico_logo'] == '' ? '/static/img/favicon.ico' : options['ico_logo'] }"/>
+    <link rel="shortcut icon" th:href="${#maps.containsKey(options,'ico_logo') == false ? '/static/img/favicon.ico' : options['ico_logo'] }"/>
    	<title thSys:text="${title}"></title>
     <link th:href="@{//cdn.bootcss.com/highlight.js/9.9.0/styles/xcode.min.css}" rel="stylesheet"/>
     <link th:href="@{/source/pinghsu/source/style.min.css}" rel="stylesheet"/>

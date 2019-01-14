@@ -50,20 +50,16 @@ public class PageController extends BaseController {
 	public String page(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "limit", defaultValue = "10") int limit,
 			@RequestParam(value = "status", defaultValue = "0") int status) {
-		try {
-			ArticleCustom articleCustom = new ArticleCustom();
-			articleCustom.setArticleStatus(status);
-			articleCustom.setArticlePost(PostType.POST_TYPE_PAGE.getValue());
-			PageInfo<ArticleCustom> pageInfo = articleService.findPageArticle(page, limit, articleCustom);
-			model.addAttribute("info", pageInfo);
-			// 已发布条数
-			model.addAttribute("published", articleService.countByStatus(0, PostType.POST_TYPE_PAGE.getValue()));
-			// 草稿条数
-			model.addAttribute("draft", articleService.countByStatus(1, PostType.POST_TYPE_PAGE.getValue()));
-			model.addAttribute("status", status);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		ArticleCustom articleCustom = new ArticleCustom();
+		articleCustom.setArticleStatus(status);
+		articleCustom.setArticlePost(PostType.POST_TYPE_PAGE.getValue());
+		PageInfo<ArticleCustom> pageInfo = articleService.findPageArticle(page, limit, articleCustom);
+		model.addAttribute("info", pageInfo);
+		// 已发布条数
+		model.addAttribute("published", articleService.countByStatus(0, PostType.POST_TYPE_PAGE.getValue()));
+		// 草稿条数
+		model.addAttribute("draft", articleService.countByStatus(1, PostType.POST_TYPE_PAGE.getValue()));
+		model.addAttribute("status", status);
 		return "/admin/admin_page";
 	}
 
@@ -131,7 +127,6 @@ public class PageController extends BaseController {
 						ServletUtil.getClientIP(request), DateUtil.date()));
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			log.error("添加或更新失败" + e.getMessage());
 			return new JsonResult(MaydayEnums.ERROR.isFlag(), MaydayEnums.ERROR.getMessage());
 		}
@@ -152,7 +147,6 @@ public class PageController extends BaseController {
 			logService.save(new Log(LogConstant.REMOVE_AN_PAGE, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
 					DateUtil.date()));
 		} catch (Exception e) {
-			e.printStackTrace();
 			log.error("删除文章失败" + e.getMessage());
 		}
 		return "redirect:/admin/page?status=0";
@@ -171,7 +165,7 @@ public class PageController extends BaseController {
 			ArticleCustom articleCustom = articleService.findByArticleId(article_id);
 			model.addAttribute("articleCustom", articleCustom);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return "/admin/admin_edit_page";
 	}

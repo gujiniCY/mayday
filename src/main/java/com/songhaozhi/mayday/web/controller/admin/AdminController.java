@@ -69,7 +69,8 @@ public class AdminController extends BaseController {
 		int countAttachment = attachmentService.countAttachment().size();
 		model.addAttribute("countAttachment", countAttachment);
 		// 成立天数
-
+		Date blogStart=DateUtil.parse(MaydayConst.options.get("blog_start").toString());
+		model.addAttribute("establishDate", DateUtil.between(blogStart, DateUtil.date(), DateUnit.DAY));
 		// 查询最新的文章
 		ArticleCustom articleCustom = new ArticleCustom();
 		articleCustom.setArticlePost(PostType.POST_TYPE_POST.getValue());

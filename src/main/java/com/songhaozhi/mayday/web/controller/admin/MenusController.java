@@ -67,7 +67,7 @@ public class MenusController extends BaseController {
 			MaydayConst.menus.clear();
 			MaydayConst.menus = menuService.findMenus();
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return "redirect:/admin/menus";
 	}
@@ -79,7 +79,7 @@ public class MenusController extends BaseController {
 			MaydayConst.menus.clear();
 			MaydayConst.menus = menuService.findMenus();
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return "redirect:/admin/menus";
 	}

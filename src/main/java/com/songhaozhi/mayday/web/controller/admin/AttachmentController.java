@@ -98,7 +98,6 @@ public class AttachmentController extends BaseController {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			log.error("删除文件" + attachment.getPictureName() + "失败");
 			return new JsonResult(MaydayEnums.ERROR.isFlag(), MaydayEnums.ERROR.getMessage());
 		}
@@ -174,7 +173,6 @@ public class AttachmentController extends BaseController {
 				logService.save(new Log(LogConstant.UPLOAD_ATTACHMENT, LogConstant.UPLOAD_SUCCESS,
 						ServletUtil.getClientIP(request), DateUtil.date()));
 			} catch (Exception e) {
-				e.printStackTrace();
 				log.error("上传附件错误" + e.getMessage());
 				return new JsonResult(false, "系统未知错误");
 			}

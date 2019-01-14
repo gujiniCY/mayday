@@ -71,7 +71,7 @@ public class TagController extends BaseController {
 				tagService.update(tag);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return "redirect:/admin/tag";
 	}
@@ -87,7 +87,7 @@ public class TagController extends BaseController {
 		try {
 			tagService.remove(tagId);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return "redirect:/admin/tag";
 	}

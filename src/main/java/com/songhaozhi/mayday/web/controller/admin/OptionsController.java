@@ -57,6 +57,7 @@ public class OptionsController extends BaseController {
 				MaydayConst.options.put(options.getOptionName(), options.getOptionValue());
 			}
 		} catch (Exception e) {
+			log.error(e.getMessage());
 			return new JsonResult(MaydayEnums.PRESERVE_ERROR.isFlag(), MaydayEnums.PRESERVE_ERROR.getMessage());
 		}
 		return new JsonResult(MaydayEnums.PRESERVE_SUCCESS.isFlag(), MaydayEnums.PRESERVE_SUCCESS.getMessage());

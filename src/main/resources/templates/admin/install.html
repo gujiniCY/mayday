@@ -73,7 +73,7 @@
 						<div class="tile-footer">
 							<div class="row">
 								<div class="col-md-12">
-									<button class="btn btn-light float-right" type="button"
+									<button class="btn btn-light float-right" id="install_btn" type="button"
 										onclick="install()">
 										<i class="fa fa-fw fa-lg fa-check-circle"></i>确定
 									</button>
@@ -86,15 +86,7 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript"
-	th:src="@{/plugins/vali/js/jquery-3.2.1.min.js}"></script>
-<script type="text/javascript"
-	th:src="@{/plugins/vali/js/popper.min.js}"></script>
-<script type="text/javascript"
-	th:src="@{/plugins/vali/js/bootstrap.min.js}"></script>
-<script type="text/javascript" th:src="@{/plugins/vali/js/main.js}"></script>
-<script type="text/javascript"
-	th:src="@{/plugins/vali/js/plugins/pace.min.js}"></script>
+<div th:replace="admin/module/macros :: comm"></div>
 <div th:replace="admin/module/macros :: bootstrapValidator"></div>
 <script type="text/javascript">
 	$(function(){
@@ -165,10 +157,12 @@
 		 bootstrapValidator.validate();
 		 if(bootstrapValidator.isValid()){
 			 var obj=$("#installForm").serialize();
+			 loadingText("install_btn","注册中...");
 			 $.ajax({
 				type:"POST",
 				url:"/install/execute",
 				data:obj,
+				async: false,
 				dataType:"json",
 				success:function(data){
 					if(data.flag==true){

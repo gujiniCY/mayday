@@ -61,13 +61,9 @@ public class UserController extends BaseController {
 	public String openChoice(Model model, @RequestParam(value = "id", defaultValue = "none") String id,
 			@RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "limit", defaultValue = "18") int limit) {
-		try {
-			PageInfo<Attachment> lists = attachmentService.getAttachment(page, limit);
-			model.addAttribute("info", lists);
-			model.addAttribute("id", id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		PageInfo<Attachment> lists = attachmentService.getAttachment(page, limit);
+		model.addAttribute("info", lists);
+		model.addAttribute("id", id);
 		return "/admin/part/open_choice";
 	}
 
@@ -83,7 +79,7 @@ public class UserController extends BaseController {
 			userService.updateDatum(user);
 			session.invalidate();
 		} catch (Exception e) {
-			log.error("修改资料：未知错误", e);
+			log.error("修改资料", e);
 			return new JsonResult(MaydayEnums.ERROR.isFlag(), MaydayEnums.ERROR.getMessage());
 		}
 		return new JsonResult(MaydayEnums.PRESERVE_SUCCESS.isFlag(), MaydayEnums.PRESERVE_SUCCESS.getMessage());
@@ -122,8 +118,7 @@ public class UserController extends BaseController {
 				return new JsonResult(MaydayEnums.OPERATION_ERROR.isFlag(), "原密码错误");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			log.error("修改密码失败，系统错误");
+			log.error("修改密码",e);
 			return new JsonResult(MaydayEnums.ERROR.isFlag(), "修改密码失败");
 		}
 		return new JsonResult(MaydayEnums.OPERATION_SUCCESS.isFlag(), "修改密码成功");

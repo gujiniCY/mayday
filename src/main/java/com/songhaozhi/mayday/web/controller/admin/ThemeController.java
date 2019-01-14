@@ -70,7 +70,7 @@ public class ThemeController extends BaseController {
 			logService.save(new Log(LogConstant.PUBLISH_AN_THEME, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
 					DateUtil.date()));
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 			return new JsonResult(MaydayEnums.PRESERVE_ERROR.isFlag(), MaydayEnums.PRESERVE_ERROR.getMessage());
 		}
 		return new JsonResult(MaydayEnums.PRESERVE_SUCCESS.isFlag(), MaydayEnums.PRESERVE_SUCCESS.getMessage());
@@ -91,7 +91,7 @@ public class ThemeController extends BaseController {
 			logService.save(new Log(LogConstant.REMOVE_AN_THEME, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
 					DateUtil.date()));
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return "redirect:/admin/theme";
 	}
@@ -120,7 +120,7 @@ public class ThemeController extends BaseController {
 			themeService.themeEnabled(id);
 			MaydayConst.themeName=themeService.getEnabledTheme();
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 			return new JsonResult(MaydayEnums.ERROR.isFlag(),MaydayEnums.ERROR.getMessage());
 		}
 		return new JsonResult(MaydayEnums.OPERATION_SUCCESS.isFlag(), MaydayEnums.OPERATION_SUCCESS.getMessage());

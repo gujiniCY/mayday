@@ -68,7 +68,7 @@ public class LinksController extends BaseController {
 				linksService.update(link);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return "redirect:/admin/links";
 	}

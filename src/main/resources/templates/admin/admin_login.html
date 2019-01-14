@@ -28,7 +28,7 @@
             <input class="form-control" id="userPwd" type="password" name="userPwd" value="123456" placeholder="密码">
           </div>
           <div class="form-group btn-container">
-            <button class="btn btn-outline-primary btn-block" data-loading-text="登录中..."  type="button" style="animation-delay:2s;" onclick="getLogin()">登录</button>
+            <button class="btn btn-outline-primary btn-block" id="btn_login"  type="button" onclick="getLogin()">登录</button>
           </div>
         </form>
       </div>
@@ -38,10 +38,12 @@
     function getLogin() {
         var userName=$("#userName").val();
         var userPwd=$("#userPwd").val();
+        loadingText("btn_login","登录中...");
         $.ajax({
             type: "post",
             url: "/admin/getLogin",
             dataType :"json",
+            async: false,
             data: {userName:userName,userPwd: userPwd},
             success:function (data) {
             	if(data.flag==true){

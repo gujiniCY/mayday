@@ -47,7 +47,7 @@ public class LogsController extends BaseController {
 		try {
 			logService.clear();
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return "redirect:/admin";
 	}

@@ -124,7 +124,7 @@ public class InstallController extends BaseController{
 		articleService.save(article, null, null);
 		
 		// 添加日志
-		logService.save(new Log(LogConstant.PUBLISH_AN_ARTICLE, LogConstant.SUCCESS,
+		logService.save(new Log(LogConstant.INSTALL_SUCCESS, LogConstant.SUCCESS,
 				ServletUtil.getClientIP(request), DateUtil.date()));
 		
 		//添加菜单
@@ -155,6 +155,9 @@ public class InstallController extends BaseController{
 				MaydayConst.options.put(options.getOptionName(), options.getOptionValue());
 			}
 		}
+		//重置菜单
+		MaydayConst.menus.clear();
+		MaydayConst.menus = menuService.findMenus();
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			return new JsonResult(false, "系统错误");

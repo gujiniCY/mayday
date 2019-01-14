@@ -40,4 +40,6 @@ public interface LogConstant {
 
 	String REMOVE_AN_THEME = "删除主题";
 
+	String INSTALL_SUCCESS = "安装MAYDAY";
+
 }
