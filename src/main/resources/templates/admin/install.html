@@ -13,14 +13,17 @@
 <link rel="stylesheet" type="text/css"
 	th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}">
 </head>
-<body style="background-color:#F2F2F2;">
-<div class="col-md-12">
-	<div class="row mt-5">
-		<div class="col-md-8 offset-md-2">
-			<h1 class="font-weight-bold text-center" style="font-family: 'verdana'">mayday&nbsp;
-			<small class="font-weight-bold" style="font-family: 'verdana'">注册</small></h1>
+<body style="background-color: #F2F2F2;">
+	<div class="col-md-12">
+		<div class="row mt-5">
+			<div class="col-md-8 offset-md-2">
+				<h1 class="font-weight-bold text-center"
+					style="font-family: 'verdana'">
+					mayday&nbsp; <small class="font-weight-bold"
+						style="font-family: 'verdana'">注册</small>
+				</h1>
+			</div>
 		</div>
-	</div>
 		<div class="row mt-5">
 			<div class="col-md-8 offset-md-2">
 				<div class="tile">
@@ -71,7 +74,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<button class="btn btn-light float-right" type="button"
-											onclick="install()">
+										onclick="install()">
 										<i class="fa fa-fw fa-lg fa-check-circle"></i>确定
 									</button>
 								</div>
@@ -93,7 +96,7 @@
 <script type="text/javascript"
 	th:src="@{/plugins/vali/js/plugins/pace.min.js}"></script>
 <div th:replace="admin/module/macros :: bootstrapValidator"></div>
-	<script type="text/javascript">
+<script type="text/javascript">
 	$(function(){
 		$("#installForm").bootstrapValidator({
 			message: 'This value is not valid',
@@ -162,22 +165,36 @@
 		 bootstrapValidator.validate();
 		 if(bootstrapValidator.isValid()){
 			 var obj=$("#installForm").serialize();
-			 console.log(obj);
 			 $.ajax({
 				type:"POST",
 				url:"/install/execute",
 				data:obj,
 				dataType:"json",
 				success:function(data){
-					console.log(data);
-					
+					if(data.flag==true){
+						 $.toast({
+	                         text: data.msg,
+	                         heading: '提示',
+	                         icon: 'success',
+	                         showHideTransition: 'fade',
+	                         allowToastClose: true,
+	                         hideAfter: 1000,
+	                         stack: 1,
+	                         position: 'top-center',
+	                         textAlign: 'left',
+	                         loader: true,
+	                         loaderBg: '#ffffff',
+	                         afterHidden: function () {
+	                        	 window.location.href = "/"; 
+	                         }
+	                     });
+					}else{
+						showMsg(data.msg,"error",3000);
+					}
 				}
 			})
 		 }
 	}
-	
-	
-	
 	</script>
-	
+
 </html>

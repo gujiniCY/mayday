@@ -157,8 +157,9 @@ public class InstallController extends BaseController{
 		}
 		} catch (Exception e) {
 			log.error(e.getMessage());
+			return new JsonResult(false, "系统错误");
 		}	
-		return null;
+		return new JsonResult(true, "注册成功");
 	}
 
 }

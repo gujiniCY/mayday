@@ -120,7 +120,7 @@ public class AdminController extends BaseController {
 			// 已注册用户
 			User users = userService.findUser();
 			// 判断账户是否被禁用十分钟
-			Date date = null;
+			Date date = DateUtil.date();
 			if (users.getLoginLastTime() != null) {
 				date = users.getLoginLastTime();
 			}
