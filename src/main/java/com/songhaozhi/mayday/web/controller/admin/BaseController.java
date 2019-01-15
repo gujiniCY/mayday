@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.songhaozhi.mayday.model.dto.MaydayConst;
 import com.songhaozhi.mayday.service.LogService;
+import com.songhaozhi.mayday.util.MapCache;
 
 import cn.hutool.core.text.StrBuilder;
 
@@ -16,9 +17,10 @@ import cn.hutool.core.text.StrBuilder;
 public class BaseController {
 	/** 日志 **/
 	protected final Logger log = LoggerFactory.getLogger(getClass());
-
 	@Autowired
 	protected LogService logService;
+	
+	protected MapCache cache = MapCache.single();
 	// 默认主题
 	public static String THEME = "pinghsu";
 
@@ -31,8 +33,8 @@ public class BaseController {
 	 */
 	public String render(String pageName) {
 		//加载主题
-		if(MaydayConst.themeName!=null) {
-			THEME=MaydayConst.themeName;
+		if(MaydayConst.THEME_NAME!=null) {
+			THEME=MaydayConst.THEME_NAME;
 		}
 		StrBuilder themeStr = new StrBuilder("themes/");
 		themeStr.append(THEME);

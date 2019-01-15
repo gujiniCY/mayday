@@ -37,9 +37,9 @@ public class IndexInterceptor implements HandlerInterceptor {
 			// 工具类
 			request.setAttribute("commons", commons);
 			// 设置项
-			request.setAttribute("options", MaydayConst.options);
+			request.setAttribute("options", MaydayConst.OPTIONS);
 			// 菜单
-			request.setAttribute("menus", MaydayConst.menus);
+			request.setAttribute("menus", MaydayConst.MENUS);
 		}
 	}
 

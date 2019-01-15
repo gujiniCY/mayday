@@ -145,4 +145,9 @@ public interface ArticleService {
 	 * @return
 	 */
 	PageInfo<Article> findArticleByKeywords(String keywords, Integer page, Integer limit);
+	/**
+	 * 修改文章点击数
+	 * @param article
+	 */
+	void updateArticleViews(Article article);
 }

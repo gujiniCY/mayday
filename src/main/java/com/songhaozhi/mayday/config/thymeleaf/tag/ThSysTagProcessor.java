@@ -41,7 +41,7 @@ public class ThSysTagProcessor extends AbstractAttributeTagProcessor {
 		final IStandardExpressionParser parser = StandardExpressions.getExpressionParser(configuration);
 		final IStandardExpression expression = parser.parseExpression(context, attributeValue);
 		final String title = (String) expression.execute(context);
-		structureHandler.setBody(title + " - " + MaydayConst.options.get("blog_name"), false);
+		structureHandler.setBody(title + " - " + MaydayConst.OPTIONS.get("blog_name"), false);
 	}
 
 }

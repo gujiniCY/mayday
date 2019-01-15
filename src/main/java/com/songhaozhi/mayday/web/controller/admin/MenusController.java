@@ -32,7 +32,7 @@ public class MenusController extends BaseController {
 	 */
 	@GetMapping
 	public String menus(Model model) {
-		model.addAttribute("menus", MaydayConst.menus);
+		model.addAttribute("menus", MaydayConst.MENUS);
 		return "/admin/admin_menus";
 	}
 
@@ -64,8 +64,8 @@ public class MenusController extends BaseController {
 			} else {
 				menuService.edit(menu);
 			}
-			MaydayConst.menus.clear();
-			MaydayConst.menus = menuService.findMenus();
+			MaydayConst.MENUS.clear();
+			MaydayConst.MENUS = menuService.findMenus();
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
@@ -76,8 +76,8 @@ public class MenusController extends BaseController {
 	public String remove(@RequestParam(value = "menuId") Integer menuId) {
 		try {
 			menuService.remove(menuId);
-			MaydayConst.menus.clear();
-			MaydayConst.menus = menuService.findMenus();
+			MaydayConst.MENUS.clear();
+			MaydayConst.MENUS = menuService.findMenus();
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}

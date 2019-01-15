@@ -249,4 +249,10 @@ public class ArticleServiceImpl implements ArticleService {
 		List<Article> list = articleMapper.selectByExample(articleExample);
 		return new PageInfo<>(list);
 	}
+
+	@Override
+	@CacheEvict(value = ARTICLES_CACHE_NAME, allEntries = true, beforeInvocation = true)
+	public void updateArticleViews(Article article) {
+		articleMapper.updateByPrimaryKeySelective(article);		
+	}
 }

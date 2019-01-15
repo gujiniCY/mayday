@@ -40,7 +40,7 @@ public class StartupConfig implements ApplicationListener<ContextRefreshedEvent>
 		List<Options> listMap = optionsService.selectMap();
 		if (listMap.size() > 0 && !listMap.isEmpty()) {
 			for (Options options : listMap) {
-				MaydayConst.options.put(options.getOptionName(), options.getOptionValue());
+				MaydayConst.OPTIONS.put(options.getOptionName(), options.getOptionValue());
 			}
 		}
 	}
@@ -49,13 +49,13 @@ public class StartupConfig implements ApplicationListener<ContextRefreshedEvent>
 	 * 加载菜单
 	 */
 	private void loadMenus() {
-		MaydayConst.menus = menuService.findMenus();
+		MaydayConst.MENUS = menuService.findMenus();
 	}
 	/**
 	 * 加载主题
 	 */
 	private void loadThemeName() {
-		MaydayConst.themeName=themeService.getEnabledTheme();
+		MaydayConst.THEME_NAME=themeService.getEnabledTheme();
 	}
 
 }

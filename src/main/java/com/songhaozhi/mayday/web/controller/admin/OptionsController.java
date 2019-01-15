@@ -51,10 +51,10 @@ public class OptionsController extends BaseController {
 	public JsonResult save(@RequestParam Map<String, String> map) {
 		try {
 			optionsService.save(map);
-			MaydayConst.options.clear();
+			MaydayConst.OPTIONS.clear();
 			List<Options> listMap = optionsService.selectMap();
 			for (Options options : listMap) {
-				MaydayConst.options.put(options.getOptionName(), options.getOptionValue());
+				MaydayConst.OPTIONS.put(options.getOptionName(), options.getOptionValue());
 			}
 		} catch (Exception e) {
 			log.error(e.getMessage());

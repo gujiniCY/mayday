@@ -67,7 +67,7 @@
 								<button class="btn btn-outline-danger" type="button"
 									th:onclick="'javascript:deleteAttachment('+${attachment.id}+')'">永久删除</button>
 								<button class="btn btn-outline-info" id="copyVal" type="button"
-									th:attr="data-clipboard-text=${attachment!=null?attachment.picturePath:''}">复制链接</button>
+									th:attr="data-clipboard-text=${attachment!=null?options['blog_url']+attachment.picturePath:''}">复制链接</button>
 							</div>
 						</form>
 					</div>

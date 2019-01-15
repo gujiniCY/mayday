@@ -137,8 +137,8 @@ public class ArticleController extends BaseController {
 				}
 				// 如果摘要为空则取前五十字为摘要
 				int post_summary = 50;
-				if (StrUtil.isNotEmpty(MaydayConst.options.get("post_summary"))) {
-					post_summary = Integer.parseInt(MaydayConst.options.get("post_summary"));
+				if (StrUtil.isNotEmpty(MaydayConst.OPTIONS.get("post_summary"))) {
+					post_summary = Integer.parseInt(MaydayConst.OPTIONS.get("post_summary"));
 				}
 				// 清理html标签和空白字符
 				String summaryText = StrUtil.cleanBlank(HtmlUtil.cleanHtmlTag(article.getArticleContent()));
@@ -159,8 +159,8 @@ public class ArticleController extends BaseController {
 				}
 				// 如果摘要为空则取前五十字为摘要
 				int post_summary = 50;
-				if (StrUtil.isNotEmpty(MaydayConst.options.get("post_summary"))) {
-					post_summary = Integer.parseInt(MaydayConst.options.get("post_summary"));
+				if (StrUtil.isNotEmpty(MaydayConst.OPTIONS.get("post_summary"))) {
+					post_summary = Integer.parseInt(MaydayConst.OPTIONS.get("post_summary"));
 				}
 				// 清理html标签和空白字符
 				String summaryText = StrUtil.cleanBlank(HtmlUtil.cleanHtmlTag(article.getArticleContent()));
@@ -198,7 +198,7 @@ public class ArticleController extends BaseController {
 			if (StrUtil.isEmpty(token)) {
 				return new JsonResult(false, "请先填写token");
 			}
-			String blogUrl = MaydayConst.options.get("blog_url");
+			String blogUrl = MaydayConst.OPTIONS.get("blog_url");
 			List<ArticleCustom> articles = articleService.findAllArticle(ArticleStatus.PUBLISH.getStatus(),PostType.POST_TYPE_POST.getValue());
 			StringBuffer urls = new StringBuffer();
 			for (ArticleCustom article : articles) {

@@ -64,9 +64,11 @@
                          }
                      });
             	}else{
+            		loadingBack("btn_login","登录");
             		showMsg(data.msg,"error",3000);
             	}
             },error:function (data) {
+            	loadingBack("btn_login","登录");
             	showMsg("登录失败","error",3000);
             }
         });

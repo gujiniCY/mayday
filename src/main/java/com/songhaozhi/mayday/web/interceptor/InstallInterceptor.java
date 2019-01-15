@@ -19,7 +19,7 @@ public class InstallInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-		if (StrUtil.equals("true", MaydayConst.options.get("is_install"))) {
+		if (StrUtil.equals("true", MaydayConst.OPTIONS.get("is_install"))) {
 			return true;
 		}
 		response.sendRedirect("/install");

@@ -148,16 +148,16 @@ public class InstallController extends BaseController{
 		menuService.save(menuLinks);
 		
 		//重新加载设置项
-		MaydayConst.options.clear();
+		MaydayConst.OPTIONS.clear();
 		List<Options> listMap = optionsService.selectMap();
 		if (listMap.size() > 0 && !listMap.isEmpty()) {
 			for (Options options : listMap) {
-				MaydayConst.options.put(options.getOptionName(), options.getOptionValue());
+				MaydayConst.OPTIONS.put(options.getOptionName(), options.getOptionValue());
 			}
 		}
 		//重置菜单
-		MaydayConst.menus.clear();
-		MaydayConst.menus = menuService.findMenus();
+		MaydayConst.MENUS.clear();
+		MaydayConst.MENUS = menuService.findMenus();
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			return new JsonResult(false, "系统错误");

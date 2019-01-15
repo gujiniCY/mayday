@@ -2,6 +2,8 @@ package com.songhaozhi.mayday.web.controller.front;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +25,10 @@ import com.songhaozhi.mayday.service.ArticleService;
 import com.songhaozhi.mayday.service.CategoryService;
 import com.songhaozhi.mayday.service.LinksService;
 import com.songhaozhi.mayday.service.TagService;
+import com.songhaozhi.mayday.util.MaydayUtil;
 import com.songhaozhi.mayday.web.controller.admin.BaseController;
+
+import cn.hutool.extra.servlet.ServletUtil;
 
 /**
  * @author : 宋浩志
@@ -63,8 +68,8 @@ public class IndexController extends BaseController {
 	public String index(Model model, @PathVariable(value = "page") Integer page) {
 		page = page < 0 || page > MaydayConst.MAX_PAGE ? 1 : page;
 		// 默认显示条数
-		Integer limit = MaydayConst.options.get("index_article") == null ? PageNumber.POST_INDEX_lIMIT.getLimit()
-				: Integer.parseInt(MaydayConst.options.get("index_article"));
+		Integer limit = MaydayConst.OPTIONS.get("index_article") == null ? PageNumber.POST_INDEX_lIMIT.getLimit()
+				: Integer.parseInt(MaydayConst.OPTIONS.get("index_article"));
 		ArticleCustom articleCustom = new ArticleCustom();
 		articleCustom.setArticleStatus(ArticleStatus.PUBLISH.getStatus());
 		articleCustom.setArticlePost(PostType.POST_TYPE_POST.getValue());
@@ -96,13 +101,56 @@ public class IndexController extends BaseController {
 	 * @return
 	 */
 	@GetMapping(value = { "post/{articleUrl}", "post/{articleUrl}.html" })
-	public String post(Model model, @PathVariable(value = "articleUrl") String articleUrl) {
+	public String post(Model model, @PathVariable(value = "articleUrl") String articleUrl,HttpServletRequest request) {
 		ArticleCustom articleCustom = articleService.findByArticleUrl(articleUrl);
 		if (articleCustom == null) {
 			return this.render_404();
 		}
+		if(!checkRepeatIp(request, articleCustom.getId())) {
+			updateArticleViews(articleCustom.getId(),articleCustom.getArticleViews());
+		}
 		model.addAttribute("article", articleCustom);
 		return this.render("post");
+	}
+	/**
+	 * 检测同一IP十分钟以内重复访问同一篇文章
+	 * @param request
+	 * @param id 文章id
+	 * @return
+	 */
+	public boolean checkRepeatIp(HttpServletRequest request,int id) {
+		
+		String value=ServletUtil.getClientIP(request)+":"+id;
+		Integer count=cache.hget("hits:frequency", value);
+		if(count!=null && count>0) {
+			return true;
+		}
+		cache.hset("hits:frequency", value,1,MaydayConst.IP_REPEAT_TIME);
+		return false;
+	}
+	/**
+	 * 修改文章点击率
+	 * @param id
+	 * @param views
+	 */
+	public void updateArticleViews(Integer id,Long views) {
+		if (views == null) {
+			views = 0L;
+        }
+		//获取缓存数据
+		Long cacheViews=cache.hget("article"+id, "cacheViews");
+		//如果缓存数据为null赋值1，反之加1
+		cacheViews=cacheViews == null ? 1 : cacheViews+1;
+		//如果缓存只大于等于设置的次数则修改到数据库
+		if(cacheViews>=MaydayConst.CLICK_EXCEED) {
+			Article article=new Article();
+			article.setId(id);
+			article.setArticleViews(views+cacheViews);
+			articleService.updateArticleViews(article);
+			cache.hset("article"+id, "cacheViews", null);
+		}else {
+			cache.hset("article"+id, "cacheViews", cacheViews);
+		}
 	}
 
 	/**

@@ -118,7 +118,7 @@ public class ThemeController extends BaseController {
 	public JsonResult themeEnabled(@RequestParam(value="id")int id) {
 		try {
 			themeService.themeEnabled(id);
-			MaydayConst.themeName=themeService.getEnabledTheme();
+			MaydayConst.THEME_NAME=themeService.getEnabledTheme();
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			return new JsonResult(MaydayEnums.ERROR.isFlag(),MaydayEnums.ERROR.getMessage());

@@ -62,3 +62,8 @@ function loadingText(btnId,text){
 	 $("#"+btnId+"").attr("disabled","");
 	 $("#"+btnId+"").text(text);
 }
+//回滚原本状态
+function loadingBack(btnId,text){
+	$("#"+btnId+"").removeAttr("disabled");
+	$("#"+btnId+"").text(text);
+}

@@ -101,15 +101,15 @@ public class Commons {
 	public static Map<String,String> social(){
 		final String prefix = "pinghsu_";
 		Map<String,String> map=new HashMap<>();
-		map.put("weibo", MaydayConst.options.get(prefix+"weibo"));
-		map.put("zhihu", MaydayConst.options.get(prefix+"zhihu"));
-		map.put("github", MaydayConst.options.get(prefix+"github"));
-		map.put("twitter", MaydayConst.options.get(prefix+"twitter"));
-		if(MaydayConst.options.get(prefix+"qq") != null) {
-			map.put("qq", "http://wpa.qq.com/msgrd?v=3&uin="+MaydayConst.options.get(prefix+"qq")+"&site=qq&menu=yes");
+		map.put("weibo", MaydayConst.OPTIONS.get(prefix+"weibo"));
+		map.put("zhihu", MaydayConst.OPTIONS.get(prefix+"zhihu"));
+		map.put("github", MaydayConst.OPTIONS.get(prefix+"github"));
+		map.put("twitter", MaydayConst.OPTIONS.get(prefix+"twitter"));
+		if(MaydayConst.OPTIONS.get(prefix+"qq") != null) {
+			map.put("qq", "http://wpa.qq.com/msgrd?v=3&uin="+MaydayConst.OPTIONS.get(prefix+"qq")+"&site=qq&menu=yes");
 		}
-		if(MaydayConst.options.get(prefix+"email") != null) {
-			map.put("email", "mailto:"+MaydayConst.options.get(prefix+"email"));
+		if(MaydayConst.OPTIONS.get(prefix+"email") != null) {
+			map.put("email", "mailto:"+MaydayConst.OPTIONS.get(prefix+"email"));
 		}
 		return map;
 	}

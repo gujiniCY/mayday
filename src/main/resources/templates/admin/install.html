@@ -183,9 +183,13 @@
 	                         }
 	                     });
 					}else{
+						loadingBack("btn_login","登录");
 						showMsg(data.msg,"error",3000);
 					}
-				}
+				},error:function (data) {
+	            	loadingBack("install_btn","注册");
+	            	showMsg("注册失败","error",3000);
+	            }
 			})
 		 }
 	}
