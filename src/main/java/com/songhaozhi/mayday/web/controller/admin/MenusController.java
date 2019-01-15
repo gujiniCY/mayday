@@ -14,6 +14,8 @@ import com.songhaozhi.mayday.model.domain.Menu;
 import com.songhaozhi.mayday.model.dto.MaydayConst;
 import com.songhaozhi.mayday.service.MenuService;
 
+import cn.hutool.core.util.URLUtil;
+
 /**
  * 菜单
  * 
@@ -60,8 +62,10 @@ public class MenusController extends BaseController {
 	public String save(Menu menu) {
 		try {
 			if (menu.getMenuId() == null) {
+				menu.setMenuUrl(URLUtil.encode(menu.getMenuUrl()));
 				menuService.save(menu);
 			} else {
+				menu.setMenuUrl(URLUtil.encode(menu.getMenuUrl()));
 				menuService.edit(menu);
 			}
 			MaydayConst.MENUS.clear();

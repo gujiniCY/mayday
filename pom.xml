@@ -153,14 +153,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<fork>true</fork>
-					<addResources>true</addResources>
-				</configuration>
-			</plugin>
 			<!-- 跳过单元测试，不然打包的时候会因为加载不了application.yaml报错 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

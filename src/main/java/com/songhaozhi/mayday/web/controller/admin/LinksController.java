@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.songhaozhi.mayday.model.domain.Link;
 import com.songhaozhi.mayday.service.LinksService;
 
+import cn.hutool.core.util.URLUtil;
+
 /**
  * @author : 宋浩志
  * @createDate : 2018年9月25日 友情链接
@@ -63,8 +65,10 @@ public class LinksController extends BaseController {
 	public String save(Link link, Model model) {
 		try {
 			if (link.getLinkId() == null) {
+				link.setLinkUrl(URLUtil.encode(link.getLinkUrl()));
 				linksService.save(link);
 			} else {
+				link.setLinkUrl(URLUtil.encode(link.getLinkUrl()));
 				linksService.update(link);
 			}
 		} catch (Exception e) {

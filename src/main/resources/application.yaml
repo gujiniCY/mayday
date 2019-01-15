@@ -1,13 +1,10 @@
 server: 
-  connection-timeout: 60000
-  servlet: 
-    session:
-      timeout: 86400
-  port: 8888 
+  port: 8091 
 logging: 
-  config: classpath:logback-spring.xml
-  file: server.log
-  path: /log/
+  level: 
+    root: debug
+  path: /mayday/
+  file: mayday.log
 spring: 
   mvc:
     static-path-pattern: /**

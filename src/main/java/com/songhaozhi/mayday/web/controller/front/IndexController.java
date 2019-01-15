@@ -25,7 +25,6 @@ import com.songhaozhi.mayday.service.ArticleService;
 import com.songhaozhi.mayday.service.CategoryService;
 import com.songhaozhi.mayday.service.LinksService;
 import com.songhaozhi.mayday.service.TagService;
-import com.songhaozhi.mayday.util.MaydayUtil;
 import com.songhaozhi.mayday.web.controller.admin.BaseController;
 
 import cn.hutool.extra.servlet.ServletUtil;
@@ -174,10 +173,13 @@ public class IndexController extends BaseController {
 	 * @return
 	 */
 	@GetMapping(value = "/{articleUrl}")
-	public String page(@PathVariable String articleUrl, Model model) {
+	public String page(@PathVariable String articleUrl, Model model,HttpServletRequest request) {
 		ArticleCustom articleCustom = articleService.findByArticleUrl(articleUrl);
 		if (articleCustom == null) {
 			return this.render_404();
+		}
+		if(!checkRepeatIp(request, articleCustom.getId())) {
+			updateArticleViews(articleCustom.getId(),articleCustom.getArticleViews());
 		}
 		model.addAttribute("article", articleCustom);
 		return this.render("page");
