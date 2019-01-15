@@ -60,7 +60,7 @@ public class PageController extends BaseController {
 		// 草稿条数
 		model.addAttribute("draft", articleService.countByStatus(1, PostType.POST_TYPE_PAGE.getValue()));
 		model.addAttribute("status", status);
-		return "/admin/admin_page";
+		return "admin/admin_page";
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class PageController extends BaseController {
 	 */
 	@GetMapping(value = "/new")
 	public String newPage() {
-		return "/admin/admin_new_page";
+		return "admin/admin_new_page";
 	}
 
 	/**
@@ -167,6 +167,6 @@ public class PageController extends BaseController {
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
-		return "/admin/admin_edit_page";
+		return "admin/admin_edit_page";
 	}
 }

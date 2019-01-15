@@ -80,7 +80,7 @@ public class ArticleController extends BaseController {
 		model.addAttribute("recycle",
 				articleService.countByStatus(ArticleStatus.RECYCLE.getStatus(), PostType.POST_TYPE_POST.getValue()));
 		model.addAttribute("status", status);
-		return "/admin/admin_article";
+		return "admin/admin_article";
 	}
 
 	/**
@@ -283,7 +283,7 @@ public class ArticleController extends BaseController {
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
-		return "/admin/admin_new_article";
+		return "admin/admin_new_article";
 	}
 
 	/**
@@ -307,7 +307,7 @@ public class ArticleController extends BaseController {
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
-		return "/admin/admin_edit_article";
+		return "admin/admin_edit_article";
 	}
 
 	/**

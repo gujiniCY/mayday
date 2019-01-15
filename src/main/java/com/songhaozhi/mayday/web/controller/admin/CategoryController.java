@@ -35,7 +35,7 @@ public class CategoryController extends BaseController {
 	public String category(Model model) {
 		List<Category> categorys = categoryService.findCategory();
 		model.addAttribute("Categorys", categorys);
-		return "/admin/admin_category";
+		return "admin/admin_category";
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class CategoryController extends BaseController {
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
-		return "/admin/admin_category";
+		return "admin/admin_category";
 	}
 
 	/**

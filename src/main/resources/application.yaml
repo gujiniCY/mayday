@@ -2,7 +2,7 @@ server:
   port: 8091 
 logging: 
   level: 
-    root: debug
+    root: info
   path: /mayday/
   file: mayday.log
 spring: 

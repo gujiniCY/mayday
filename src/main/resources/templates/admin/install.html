@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -85,9 +85,8 @@
 			</div>
 		</div>
 	</div>
-</body>
-<div th:replace="admin/module/macros :: comm"></div>
-<div th:replace="admin/module/macros :: bootstrapValidator"></div>
+	<div th:replace="admin/module/macros :: comm"></div>
+	<div th:replace="admin/module/macros :: bootstrapValidator"></div>
 <script type="text/javascript">
 	$(function(){
 		$("#installForm").bootstrapValidator({
@@ -194,5 +193,5 @@
 		 }
 	}
 	</script>
-
+</body>
 </html>

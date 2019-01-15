@@ -35,7 +35,7 @@ public class MenusController extends BaseController {
 	@GetMapping
 	public String menus(Model model) {
 		model.addAttribute("menus", MaydayConst.MENUS);
-		return "/admin/admin_menus";
+		return "admin/admin_menus";
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class MenusController extends BaseController {
 		List<Menu> menus = menuService.findMenus();
 		model.addAttribute("menus", menus);
 		model.addAttribute("menu", menu);
-		return "/admin/admin_menus";
+		return "admin/admin_menus";
 	}
 
 	/**

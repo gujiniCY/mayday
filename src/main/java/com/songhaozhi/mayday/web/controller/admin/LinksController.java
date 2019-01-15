@@ -35,7 +35,7 @@ public class LinksController extends BaseController {
 	public String links(Model model) {
 		List<Link> lists = linksService.findLinks();
 		model.addAttribute("links", lists);
-		return "/admin/admin_links";
+		return "admin/admin_links";
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class LinksController extends BaseController {
 		List<Link> lists = linksService.findLinks();
 		model.addAttribute("links", lists);
 		model.addAttribute("link", link);
-		return "/admin/admin_links";
+		return "admin/admin_links";
 	}
 
 	/**

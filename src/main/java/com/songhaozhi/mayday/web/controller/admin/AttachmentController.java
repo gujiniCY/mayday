@@ -50,7 +50,7 @@ public class AttachmentController extends BaseController {
 			@RequestParam(value = "limit", defaultValue = "18") int limit) {
 		PageInfo<Attachment> info = attachmentService.getAttachment(page, limit);
 		model.addAttribute("info", info);
-		return "/admin/admin_attachment";
+		return "admin/admin_attachment";
 	}
 
 	/**
@@ -193,7 +193,7 @@ public class AttachmentController extends BaseController {
 	public String viewDetails(Model model, @RequestParam(value = "id") int id) {
 		Attachment attachment = attachmentService.findById(id);
 		model.addAttribute("attachment", attachment);
-		return "/admin/part/view_details";
+		return "admin/part/view_details";
 	}
 
 }

@@ -34,7 +34,7 @@ public class LogsController extends BaseController {
 			@RequestParam(value = "limit", defaultValue = "10") int limit) {
 		PageInfo<Log> info = logService.findLogs(page, limit);
 		model.addAttribute("logs", info);
-		return "/admin/part/view_logs";
+		return "admin/part/view_logs";
 	}
 
 	/**

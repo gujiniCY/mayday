@@ -47,7 +47,7 @@ public class ThemeController extends BaseController {
 			@RequestParam(value = "limit", defaultValue = "10") int limit) {
 		PageInfo<Theme> info = themeService.findPageTheme(page, limit);
 		model.addAttribute("info", info);
-		return "/admin/admin_theme";
+		return "admin/admin_theme";
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class ThemeController extends BaseController {
 	public String themeOption(@PathVariable String themeName, Model model) {
 		Theme theme = themeService.findByThemeName(themeName);
 		model.addAttribute("theme", theme);
-		return "/themes/" + themeName + "/module/options";
+		return "themes/" + themeName + "/module/options";
 	}
 	/**
 	 * 启用主题

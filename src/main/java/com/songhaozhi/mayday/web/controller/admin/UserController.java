@@ -46,7 +46,7 @@ public class UserController extends BaseController {
 		// 单用户
 		User users = userService.findUser();
 		model.addAttribute("user", users);
-		return "/admin/admin_user";
+		return "admin/admin_user";
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class UserController extends BaseController {
 		PageInfo<Attachment> lists = attachmentService.getAttachment(page, limit);
 		model.addAttribute("info", lists);
 		model.addAttribute("id", id);
-		return "/admin/part/open_choice";
+		return "admin/part/open_choice";
 	}
 
 	/**

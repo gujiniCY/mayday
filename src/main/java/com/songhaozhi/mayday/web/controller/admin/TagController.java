@@ -34,7 +34,7 @@ public class TagController extends BaseController {
 	public String tag(Model model) {
 		List<Tag> lists = tagService.findTags();
 		model.addAttribute("tags", lists);
-		return "/admin/admin_tag";
+		return "admin/admin_tag";
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class TagController extends BaseController {
 		List<Tag> lists = tagService.findTags();
 		model.addAttribute("tags", lists);
 		model.addAttribute("tag", tag);
-		return "/admin/admin_tag";
+		return "admin/admin_tag";
 	}
 
 	/**

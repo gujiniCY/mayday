@@ -37,7 +37,7 @@ public class OptionsController extends BaseController {
 	 */
 	@GetMapping
 	public String option(Model model) {
-		return "/admin/admin_options";
+		return "admin/admin_options";
 	}
 
 	/**

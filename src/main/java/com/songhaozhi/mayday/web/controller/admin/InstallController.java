@@ -54,7 +54,7 @@ public class InstallController extends BaseController{
 	private OptionsService optionsService; 
 	@GetMapping
 	public String install() {
-		return "/admin/install";
+		return "admin/install";
 	}
 
 	/**
