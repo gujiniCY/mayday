@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,7 +54,14 @@ public class InstallController extends BaseController{
 	@Autowired
 	private OptionsService optionsService; 
 	@GetMapping
-	public String install() {
+	public String install(Model model) {
+		if(StrUtil.equals("true", MaydayConst.OPTIONS.get("is_install"))) {
+			//已注册过
+			model.addAttribute("isInstall", true);
+		}else {
+			//未注册
+			model.addAttribute("isInstall", false);
+		}
 		return "admin/install";
 	}
 

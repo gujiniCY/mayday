@@ -17,9 +17,9 @@ spring:
     cache: false
   datasource: 
         type: com.alibaba.druid.pool.DruidDataSource
-        url: jdbc:mysql://47.106.22.160:3306/mayday
-        username: mayday
-        password: mayday123456
+        url: jdbc:mysql://localhost:3306/mayday
+        username: root
+        password: 123456
         driver-class-name: com.mysql.jdbc.Driver
 mybatis: 
   typeAliasesPackage: com.songhaozhi.mayday.model.domain

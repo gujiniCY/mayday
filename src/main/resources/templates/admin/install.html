@@ -14,7 +14,7 @@
 	th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}">
 </head>
 <body style="background-color: #F2F2F2;">
-	<div class="col-md-12">
+	<div class="col-md-12" th:if="${isInstall == 'false'}">
 		<div class="row mt-5">
 			<div class="col-md-8 offset-md-2">
 				<h1 class="font-weight-bold text-center"
@@ -84,6 +84,9 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div th:unless="${isInstall == 'true'}">
+				<h3>你已经注册过了，请直接登录</h3>
 	</div>
 	<div th:replace="admin/module/macros :: comm"></div>
 	<div th:replace="admin/module/macros :: bootstrapValidator"></div>
