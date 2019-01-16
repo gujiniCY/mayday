@@ -75,6 +75,7 @@
 					uploadUrl : "/admin/attachment/upload",
 					language : 'zh',
 					uploadAsync : true,
+					maxFileCount : 10,
 					allowedFileExtensions : [ 'jpg', 'gif', 'png', 'jpeg',
 							'svg', 'psd' ],
 					enctype : 'multipart/form-data',
@@ -94,9 +95,9 @@
 					textAlign : 'left',
 					loader : true,
 					loaderBg : '#ffffff',
-					afterHidden : function() {
-						window.location.reload();
-					}
+					afterHidden: function () {
+				            window.location.reload();
+				    }
 				});
 			} else {
 				$.toast({

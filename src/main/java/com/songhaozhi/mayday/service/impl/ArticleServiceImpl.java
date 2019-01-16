@@ -93,7 +93,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'findPageArticle'+#articleCustom.articleStatus+#articleCustom.articlePost")
+	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'findPageArticle'+#page+#limit+#articleCustom.articleStatus+#articleCustom.articlePost")
 	public PageInfo<ArticleCustom> findPageArticle(int page, int limit, ArticleCustom articleCustom) {
 		PageHelper.startPage(page, limit);
 		List<ArticleCustom> lists = articleMapperCustom.findPageArticle(articleCustom);
@@ -221,7 +221,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'findArtileByCategory'+#page+#limit")
+	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'findArtileByCategory'+#page+#limit+#category.categoryUrl")
 	public PageInfo<ArticleCustom> findArtileByCategory(int page, int limit, Category category) {
 		PageHelper.startPage(page, limit);
 		List<ArticleCustom> list = articleMapperCustom.findArtileByCategory(category);
