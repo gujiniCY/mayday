@@ -1,5 +1,6 @@
 package com.songhaozhi.mayday.web.controller.admin;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
@@ -14,13 +15,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 import com.songhaozhi.mayday.model.domain.Attachment;
+import com.songhaozhi.mayday.model.domain.Log;
 import com.songhaozhi.mayday.model.domain.User;
 import com.songhaozhi.mayday.model.dto.JsonResult;
+import com.songhaozhi.mayday.model.dto.LogConstant;
 import com.songhaozhi.mayday.model.enums.MaydayEnums;
 import com.songhaozhi.mayday.service.AttachmentService;
 import com.songhaozhi.mayday.service.UserService;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.crypto.SecureUtil;
+import cn.hutool.extra.servlet.ServletUtil;
 
 /**
  * @author : 宋浩志
@@ -102,7 +107,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public JsonResult updatePwd(@RequestParam(value = "formerlyPwd") String formerlyPwd,
 			@RequestParam(value = "nowPwd") String nowPwd, @RequestParam(value = "confirmPwd") String confirmPwd,
-			@RequestParam(value = "userId") Integer userId) {
+			@RequestParam(value = "userId") Integer userId,HttpServletRequest request) {
 		if (StringUtils.isBlank(formerlyPwd) || StringUtils.isBlank(formerlyPwd) || StringUtils.isBlank(confirmPwd)) {
 			return new JsonResult(MaydayEnums.OPERATION_ERROR.isFlag(), "请填写完整信息");
 		}
@@ -114,6 +119,8 @@ public class UserController extends BaseController {
 			if (user != null) {
 				user.setUserPwd(SecureUtil.md5(confirmPwd));
 				userService.updateDatum(user);
+				logService.save(new Log(LogConstant.UPDATE_PWD, LogConstant.LOGIN_SUCCES, ServletUtil.getClientIP(request),
+						DateUtil.date()));
 			} else {
 				return new JsonResult(MaydayEnums.OPERATION_ERROR.isFlag(), "原密码错误");
 			}

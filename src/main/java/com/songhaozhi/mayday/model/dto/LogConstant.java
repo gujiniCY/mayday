@@ -7,7 +7,7 @@ package com.songhaozhi.mayday.model.dto;
 public interface LogConstant {
 
 	String LOGIN = "登录后台";
-
+	
 	String SUCCESS = "操作成功";
 
 	String ERROR = "操作失败";
@@ -15,6 +15,8 @@ public interface LogConstant {
 	String UPLOAD_ATTACHMENT = "上传附件";
 
 	String UPLOAD_SUCCESS = "上传成功";
+	
+	String UPDATE_PWD="修改密码";
 
 	String DELETE_ATTACHMENT = "删除附件";
 
