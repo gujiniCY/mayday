@@ -1,10 +1,11 @@
 server: 
   port: 8091 
-logging: 
-  level: 
-    root: info
-  path: /mayday/
-  file: mayday.log
+logging:
+    level: 
+        org.springframework: info
+        data: DEBUG
+        security: DEBUG
+    config: classpath:logback-spring.xml
 spring: 
   mvc:
     static-path-pattern: /**

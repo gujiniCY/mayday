@@ -1,28 +1,36 @@
+
 <h1><a href="#">mayday</a></h1>
 
->mayday博客系统是我想边学习springboot和thymeleaf编写的一个java博客系统，目前正在开发中
+>mayday博客系统是我想边学习springboot和thymeleaf编写的一个java博客系统
 
-[![JDK](https://img.shields.io/badge/jdk-1.8-green.svg)](#)
+![JDK](https://img.shields.io/badge/jdk-1.8-green.svg?style=flat-square) [![LICENSE](https://img.shields.io/github/license/gujiniCY/mayday.svg?style=flat-square)](https://github.com/gujiniCY/mayday/blob/master/LICENSE)   [![star](https://img.shields.io/github/stars/gujiniCY/mayday.svg?label=Stars&style=social)](https://github.com/gujiniCY/mayday)[![star](https://gitee.com/song_haozhi/mayday/badge/star.svg?theme=white)](https://gitee.com/song_haozhi/mayday) 
+
 
 >个人博客[https://www.songhaozhi.com](https://www.songhaozhi.com)
 
 
-## 已完成部分
 ## 图片演示
-### 登录
-![](https://img.songhaozhi.com/doc/login.png)
-### 个人资料
-![](https://img.songhaozhi.com/doc/%E4%B8%AA%E4%BA%BA%E8%B5%84%E6%96%99.png)
-### 分类
-![](https://img.songhaozhi.com/doc/%E5%88%86%E7%B1%BB.png)
-### 友情链接
-![](https://img.songhaozhi.com/doc/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5.png)
-### 标签
-![](https://img.songhaozhi.com/doc/%E6%A0%87%E7%AD%BE.png)
-### 附件
-![](https://img.songhaozhi.com/doc/%E9%99%84%E4%BB%B6.png)
-![](https://img.songhaozhi.com/doc/%E9%99%84%E4%BB%B62.png)
-![](https://img.songhaozhi.com/doc/%E9%99%84%E4%BB%B6%E8%AF%A6%E6%83%85.png)
+![install.png](https://i.loli.net/2019/01/16/5c3e9cbd2cce1.png)
+![login.png](https://i.loli.net/2019/01/16/5c3e9cbe5d863.png)
+![admin.png](https://i.loli.net/2019/01/16/5c3e9cc39f985.png)
+![post.png](https://i.loli.net/2019/01/16/5c3e99ca6e1d7.png)
+![profile.png](https://i.loli.net/2019/01/16/5c3e99cd0eb3a.png)
+![theme.png](https://i.loli.net/2019/01/16/5c3e99cfd9664.png)
+![tag.png](https://i.loli.net/2019/01/16/5c3e99d5cf331.png)
+![upload_attach.png](https://i.loli.net/2019/01/16/5c3e99d967102.png)
+![attach.png](https://i.loli.net/2019/01/16/5c3e9cb4f2416.png)
+![write_post.png](https://i.loli.net/2019/01/16/5c3e99e86d25a.png)
+![menu.png](https://i.loli.net/2019/01/16/5c3e99eabbebb.png)
+![link.png](https://i.loli.net/2019/01/16/5c3e9cc21d326.png)
+![new_page.png](https://i.loli.net/2019/01/16/5c3e9c4b6285c.png)
+![option.png](https://i.loli.net/2019/01/16/5c3e9c4b7f568.png)
+![page.png](https://i.loli.net/2019/01/16/5c3e9c4b91e5f.png)
+![category.png](https://i.loli.net/2019/01/16/5c3e9cba85ecf.png)
+![index.png](https://i.loli.net/2019/01/16/5c3e9cc2c23f6.png)
+![index_archives.png](https://i.loli.net/2019/01/16/5c3e9cb6e83c3.png)
+
+![index_links.png](https://i.loli.net/2019/01/16/5c3e9cbc2a408.png)
+![index_post.png](https://i.loli.net/2019/01/16/5c3e9cbd096b9.png)
 ## 开源协议
 [MIT](https://gitee.com/song_haozhi/mayday/blob/master/LICENSE)
 ## 致谢：
@@ -40,3 +48,6 @@
  12. [pagehelper](https://pagehelper.github.io/) mybatis分页插件
  13. [bootstrap-fileinput](https://github.com/kartik-v/bootstrap-fileinput) bootstrap上传控件
  14. [halo](https://github.com/ruibaby/halo)  halo博客系统
+ 15. [ehcache](http://www.ehcache.org/) Java的进程内缓存框架
+ 16. [MDTool](https://github.com/cevin15/MDTool) 将markdown转换为html的工具
+
