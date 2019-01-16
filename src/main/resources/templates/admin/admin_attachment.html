@@ -51,7 +51,7 @@
 				anim : 2,
 				area : [ '90%', '90%' ],
 				maxmin : true,
-				content : "/admin/attachment/viewDetails?id=" + id
+				content : "attachment/viewDetails?id=" + id
 			});
 		}
 
@@ -65,11 +65,9 @@
 							'svg', 'psd' ],
 					enctype : 'multipart/form-data',
 					showClose : false
-				}).on("fileuploaded", function(event, data, previewId, index) {
-			var response = data.response;
-			if (response.flag == true) {
-				$.toast({
-					text : response.msg,
+				}).on("filebatchuploadcomplete", function(event, files, extra) {
+				 $.toast({
+					text : "上传成功！",
 					heading : '提示',
 					icon : 'success',
 					showHideTransition : 'fade',
@@ -83,22 +81,7 @@
 					afterHidden : function() {
 						window.location.reload();
 					}
-				});
-			} else {
-				$.toast({
-					text : response.msg,
-					heading : '提示',
-					icon : 'error',
-					showHideTransition : 'fade',
-					allowToastClose : true,
-					hideAfter : 1000,
-					stack : 1,
-					position : 'top-center',
-					textAlign : 'left',
-					loader : true,
-					loaderBg : '#ffffff',
-				});
-			}
+				}); 
 		});
 		$("#upload").click(function() {
 			$("#uploadInput").slideToggle(400);
