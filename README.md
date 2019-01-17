@@ -9,32 +9,35 @@
 >个人博客[https://www.songhaozhi.com](https://www.songhaozhi.com)
 
 ## 快速开始
-> git clone https://github.com/gujiniCY/mayday.git
+`git clone https://github.com/gujiniCY/mayday.git`
 
 下载代码以后，运行sql文件夹下的sql文件，并且到src/main/resources下的application.yaml下修改你的数据库链接
 保存好以后 mvn package打包运行 进入target文件夹运行java -jar mayday.jar
-## 图片演示
-![install.png](https://i.loli.net/2019/01/16/5c3e9cbd2cce1.png)
-![login.png](https://i.loli.net/2019/01/16/5c3e9cbe5d863.png)
-![admin.png](https://i.loli.net/2019/01/16/5c3e9cc39f985.png)
-![post.png](https://i.loli.net/2019/01/16/5c3e99ca6e1d7.png)
-![profile.png](https://i.loli.net/2019/01/16/5c3e99cd0eb3a.png)
-![theme.png](https://i.loli.net/2019/01/16/5c3e99cfd9664.png)
-![tag.png](https://i.loli.net/2019/01/16/5c3e99d5cf331.png)
-![upload_attach.png](https://i.loli.net/2019/01/16/5c3e99d967102.png)
-![attach.png](https://i.loli.net/2019/01/16/5c3e9cb4f2416.png)
-![write_post.png](https://i.loli.net/2019/01/16/5c3e99e86d25a.png)
-![menu.png](https://i.loli.net/2019/01/16/5c3e99eabbebb.png)
-![link.png](https://i.loli.net/2019/01/16/5c3e9cc21d326.png)
-![new_page.png](https://i.loli.net/2019/01/16/5c3e9c4b6285c.png)
-![option.png](https://i.loli.net/2019/01/16/5c3e9c4b7f568.png)
-![page.png](https://i.loli.net/2019/01/16/5c3e9c4b91e5f.png)
-![category.png](https://i.loli.net/2019/01/16/5c3e9cba85ecf.png)
-![index.png](https://i.loli.net/2019/01/16/5c3e9cc2c23f6.png)
-![index_archives.png](https://i.loli.net/2019/01/16/5c3e9cb6e83c3.png)
 
-![index_links.png](https://i.loli.net/2019/01/16/5c3e9cbc2a408.png)
-![index_post.png](https://i.loli.net/2019/01/16/5c3e9cbd096b9.png)
+如果使用又拍云cdn的话请到参数跟随里面设置全程跟随以及开启重定向跟随
+
+## 图片演示
+![install.png](https://images.gitee.com/uploads/images/2019/0117/112452_b81fbb50_1574192.png)
+![login.png](https://images.gitee.com/uploads/images/2019/0117/112450_7ae99bba_1574192.png)
+![admin.png](https://images.gitee.com/uploads/images/2019/0117/112450_3a600852_1574192.png)
+![post.png](https://images.gitee.com/uploads/images/2019/0117/112451_d6754471_1574192.png)
+![profile.png](https://images.gitee.com/uploads/images/2019/0117/112451_499f580f_1574192.png)
+![theme.png](https://images.gitee.com/uploads/images/2019/0117/112451_a4e0016a_1574192.png)
+![tag.png](https://images.gitee.com/uploads/images/2019/0117/112451_05569d9b_1574192.png)
+![upload_attach.png](https://images.gitee.com/uploads/images/2019/0117/112451_50127984_1574192.png)
+![attach.png](https://images.gitee.com/uploads/images/2019/0117/112451_66bac3bf_1574192.png)
+![write_post.png](https://images.gitee.com/uploads/images/2019/0117/112454_1b3d8fa9_1574192.png)
+![menu.png](https://images.gitee.com/uploads/images/2019/0117/112452_58ac3c2d_1574192.png)
+![link.png](https://images.gitee.com/uploads/images/2019/0117/112452_ecf27d79_1574192.png)
+![new_page.png](https://images.gitee.com/uploads/images/2019/0117/112455_e9bdbee6_1574192.png)
+![option.png](https://images.gitee.com/uploads/images/2019/0117/112452_c40d529a_1574192.png)
+![page.png](https://images.gitee.com/uploads/images/2019/0117/112452_6c1d4dd7_1574192.png)
+![category.png](https://images.gitee.com/uploads/images/2019/0117/112452_0e35930e_1574192.png)
+![index.png](https://images.gitee.com/uploads/images/2019/0117/112455_a6973f29_1574192.png)
+![index_archives.png](https://images.gitee.com/uploads/images/2019/0117/112453_cc8c9773_1574192.png)
+
+![index_links.png](https://images.gitee.com/uploads/images/2019/0117/112453_1208a83f_1574192.png)
+![index_post.png](https://images.gitee.com/uploads/images/2019/0117/112454_327abed1_1574192.png)
 ## 开源协议
 [MIT](https://gitee.com/song_haozhi/mayday/blob/master/LICENSE)
 ## 致谢：
@@ -54,5 +57,6 @@
  14. [halo](https://github.com/ruibaby/halo)  halo博客系统
  15. [ehcache](http://www.ehcache.org/) Java的进程内缓存框架
  16. [MDTool](https://github.com/cevin15/MDTool) 将markdown转换为html的工具
+
 
 
