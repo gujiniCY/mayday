@@ -87,6 +87,7 @@ public class ThemeController extends BaseController {
 	public String remove(int id, HttpServletRequest request) {
 		try {
 			themeService.remove(id);
+			MaydayConst.THEME_NAME=null;
 			// 添加日志
 			logService.save(new Log(LogConstant.REMOVE_AN_THEME, LogConstant.SUCCESS, ServletUtil.getClientIP(request),
 					DateUtil.date()));
