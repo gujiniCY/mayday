@@ -41,7 +41,7 @@
 ## 开源协议
 [MIT](https://gitee.com/song_haozhi/mayday/blob/master/LICENSE)
 ## 致谢：
- 1. [springboot](http://spring.io/projects/spring-boot) 版本2.2.4
+ 1. [springboot](http://spring.io/projects/spring-boot) 版本2.0.4
  2. [mybatis](http://www.mybatis.org/mybatis-3/) ORM框架
  3. [mysql](https://www.mysql.com/) 数据库，版本5.6
  4. [maven](http://maven.apache.org/)  依赖管理
