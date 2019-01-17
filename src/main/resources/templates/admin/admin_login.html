@@ -35,6 +35,12 @@
     </section>
   <div th:replace="admin/module/macros :: comm" ></div>
   <script type="text/javascript">
+  //回车登录事件
+  $("#userPwd").keyup(function(event){
+	  if(event.keyCode ==13){
+		  getLogin();
+	  }
+	});
     function getLogin() {
         var userName=$("#userName").val();
         var userPwd=$("#userPwd").val();
@@ -60,7 +66,7 @@
                          loader: true,
                          loaderBg: '#ffffff',
                          afterHidden: function () {
-                        	 window.location.href = "/admin"; 
+                        	 window.location.href = "/admin/login"; 
                          }
                      });
             	}else{

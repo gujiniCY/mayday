@@ -75,44 +75,28 @@
 					uploadUrl : "/admin/attachment/upload",
 					language : 'zh',
 					uploadAsync : true,
+					maxFileCount : 10,
 					allowedFileExtensions : [ 'jpg', 'gif', 'png', 'jpeg',
 							'svg', 'psd' ],
 					enctype : 'multipart/form-data',
 					showClose : false
-				}).on("fileuploaded", function(event, data, previewId, index) {
-			var response = data.response;
-			if (response.flag == true) {
-				$.toast({
-					text : response.msg,
-					heading : '提示',
-					icon : 'success',
-					showHideTransition : 'fade',
-					allowToastClose : true,
-					hideAfter : 1000,
-					stack : 1,
-					position : 'top-center',
-					textAlign : 'left',
-					loader : true,
-					loaderBg : '#ffffff',
-					afterHidden : function() {
-						window.location.reload();
-					}
-				});
-			} else {
-				$.toast({
-					text : response.msg,
-					heading : '提示',
-					icon : 'error',
-					showHideTransition : 'fade',
-					allowToastClose : true,
-					hideAfter : 1000,
-					stack : 1,
-					position : 'top-center',
-					textAlign : 'left',
-					loader : true,
-					loaderBg : '#ffffff',
-				});
-			}
+				}).on("filebatchuploadcomplete", function(event, files, extra) {
+					 $.toast({
+						text : "上传成功！",
+						heading : '提示',
+						icon : 'success',
+						showHideTransition : 'fade',
+						allowToastClose : true,
+						hideAfter : 1000,
+						stack : 1,
+						position : 'top-center',
+						textAlign : 'left',
+						loader : true,
+						loaderBg : '#ffffff',
+						afterHidden : function() {
+							window.location.reload();
+						}
+					}); 
 		});
 
 		function choice(path) {

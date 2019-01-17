@@ -1,5 +1,5 @@
 
-<h1><a href="#">mayday</a></h1>
+<h1><a href="https://mayday.songhaozhi.com">mayday</a></h1>
 
 >mayday博客系统是我想边学习springboot和thymeleaf编写的一个java博客系统
 
@@ -8,7 +8,11 @@
 
 >个人博客[https://www.songhaozhi.com](https://www.songhaozhi.com)
 
+## 快速开始
+> git clone https://github.com/gujiniCY/mayday.git
 
+下载代码以后，运行sql文件夹下的sql文件，并且到src/main/resources下的application.yaml下修改你的数据库链接
+保存好以后 mvn package打包运行 进入target文件夹运行java -jar mayday.jar
 ## 图片演示
 ![install.png](https://i.loli.net/2019/01/16/5c3e9cbd2cce1.png)
 ![login.png](https://i.loli.net/2019/01/16/5c3e9cbe5d863.png)
@@ -50,4 +54,5 @@
  14. [halo](https://github.com/ruibaby/halo)  halo博客系统
  15. [ehcache](http://www.ehcache.org/) Java的进程内缓存框架
  16. [MDTool](https://github.com/cevin15/MDTool) 将markdown转换为html的工具
+
 
