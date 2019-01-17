@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -189,8 +190,8 @@ public class AttachmentController extends BaseController {
 	 * @param id
 	 * @return
 	 */
-	@GetMapping(value = "viewDetails")
-	public String viewDetails(Model model, @RequestParam(value = "id") int id) {
+	@GetMapping(value = "viewDetails/{id}")
+	public String viewDetails(Model model, @PathVariable int id) {
 		Attachment attachment = attachmentService.findById(id);
 		model.addAttribute("attachment", attachment);
 		return "admin/part/view_details";
