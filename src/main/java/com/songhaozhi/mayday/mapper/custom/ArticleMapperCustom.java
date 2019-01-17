@@ -33,7 +33,7 @@ public interface ArticleMapperCustom {
 
 	ArticleCustom findByArticleUrl(@Param(value = "articleUrl") String articleUrl);
 
-	List<ArticleCustom> findArtileByCategory(Category category);
+	List<ArticleCustom> findArtileByCategory(@Param("category") Category category,@Param(value="status") int status);
 
-	List<ArticleCustom> findArtileByTag(Tag tag);
+	List<ArticleCustom> findArtileByTag(@Param("tag") Tag tag, @Param(value="status") int status);
 }

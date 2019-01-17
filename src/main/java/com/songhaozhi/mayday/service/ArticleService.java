@@ -122,9 +122,10 @@ public interface ArticleService {
 	 * @param page
 	 * @param limit
 	 * @param category
+	 * @param status 文章状态
 	 * @return
 	 */
-	PageInfo<ArticleCustom> findArtileByCategory(int page, int limit, Category category);
+	PageInfo<ArticleCustom> findArtileByCategory(int page, int limit, Category category, int status);
 
 	/**
 	 * 分页查询标签下的所有文章
@@ -132,9 +133,10 @@ public interface ArticleService {
 	 * @param page
 	 * @param size
 	 * @param tag
+	 * @param status 文章状态
 	 * @return
 	 */
-	PageInfo<ArticleCustom> findArtileByTag(Integer page, Integer limit, Tag tag);
+	PageInfo<ArticleCustom> findArtileByTag(Integer page, Integer limit, Tag tag, int status);
 
 	/**
 	 * 标题分页搜索文章

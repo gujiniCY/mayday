@@ -204,7 +204,7 @@ public class IndexController extends BaseController {
 		}
 		Integer limit = PageNumber.POST_INDEX_lIMIT.getLimit();
 		page = page < 0 || page > MaydayConst.MAX_PAGE ? 1 : page;
-		PageInfo<ArticleCustom> info = articleService.findArtileByCategory(page, limit, category);
+		PageInfo<ArticleCustom> info = articleService.findArtileByCategory(page, limit, category,ArticleStatus.PUBLISH.getStatus());
 		model.addAttribute("articles", info);
 		model.addAttribute("type", "分类");
 		model.addAttribute("url", "category/" + category.getCategoryUrl());
@@ -231,7 +231,7 @@ public class IndexController extends BaseController {
 		}
 		Integer limit = PageNumber.POST_INDEX_lIMIT.getLimit();
 		page = page < 0 || page > MaydayConst.MAX_PAGE ? 1 : page;
-		PageInfo<ArticleCustom> info = articleService.findArtileByTag(page, limit, tag);
+		PageInfo<ArticleCustom> info = articleService.findArtileByTag(page, limit, tag,ArticleStatus.PUBLISH.getStatus());
 		model.addAttribute("articles", info);
 		model.addAttribute("type", "标签");
 		model.addAttribute("url", "tags/" + tag.getTagUrl());

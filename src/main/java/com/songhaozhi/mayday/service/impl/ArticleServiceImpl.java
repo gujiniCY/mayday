@@ -222,17 +222,17 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'findArtileByCategory'+#page+#limit+#category.categoryUrl")
-	public PageInfo<ArticleCustom> findArtileByCategory(int page, int limit, Category category) {
+	public PageInfo<ArticleCustom> findArtileByCategory(int page, int limit, Category category,int status) {
 		PageHelper.startPage(page, limit);
-		List<ArticleCustom> list = articleMapperCustom.findArtileByCategory(category);
+		List<ArticleCustom> list = articleMapperCustom.findArtileByCategory(category,status);
 		return new PageInfo<>(list);
 	}
 
 	@Override
-	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'findArtileByTag'+#page+#limit")
-	public PageInfo<ArticleCustom> findArtileByTag(Integer page, Integer limit, Tag tag) {
+	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'findArtileByTag'+#page+#limit+#status")
+	public PageInfo<ArticleCustom> findArtileByTag(Integer page, Integer limit, Tag tag,int status) {
 		PageHelper.startPage(page, limit);
-		List<ArticleCustom> list = articleMapperCustom.findArtileByTag(tag);
+		List<ArticleCustom> list = articleMapperCustom.findArtileByTag(tag,status);
 		return new PageInfo<>(list);
 	}
 

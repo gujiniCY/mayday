@@ -103,15 +103,15 @@
 			GROUP BY ma.id 
 	</select>
 	
-	<select id="findArtileByCategory" parameterType="com.songhaozhi.mayday.model.domain.Category" resultType="com.songhaozhi.mayday.model.domain.ArticleCustom">
+	<select id="findArtileByCategory" resultType="com.songhaozhi.mayday.model.domain.ArticleCustom">
 	SELECT * FROM mayday_article WHERE id in 
 	(SELECT article_id FROM mayday_article_category WHERE 
-	category_id=(SELECT category_id FROM mayday_category WHERE category_url=#{categoryUrl}))
+	category_id=(SELECT category_id FROM mayday_category WHERE category_url=#{category.categoryUrl})) and article_status =#{status}
 	</select>
 	
-	<select id="findArtileByTag" parameterType="com.songhaozhi.mayday.model.domain.Tag" resultType="com.songhaozhi.mayday.model.domain.ArticleCustom">
+	<select id="findArtileByTag" resultType="com.songhaozhi.mayday.model.domain.ArticleCustom">
 	SELECT * FROM mayday_article WHERE id in 
 	(SELECT article_id FROM mayday_article_tag WHERE 
-	tag_id=(SELECT tag_id FROM mayday_tag WHERE tag_url=#{tagUrl}))
+	tag_id=(SELECT tag_id FROM mayday_tag WHERE tag_url=#{tag.tagUrl})) and article_status =#{status}
 	</select>
 </mapper>
