@@ -5,8 +5,9 @@
 
 > 取名mayday可能是因为我是五月天的假粉丝吧！
 
-![JDK](https://img.shields.io/badge/jdk-1.8-green.svg?style=flat-square) [![LICENSE](https://img.shields.io/github/license/gujiniCY/mayday.svg?style=flat-square)](https://github.com/gujiniCY/mayday/blob/master/LICENSE)   [![star](https://img.shields.io/github/stars/gujiniCY/mayday.svg?label=Stars&style=social)](https://github.com/gujiniCY/mayday)[![star](https://gitee.com/song_haozhi/mayday/badge/star.svg?theme=white)](https://gitee.com/song_haozhi/mayday) 
+> 博客基本功能都已实现，后续还会一直更新下去！
 
+![JDK](https://img.shields.io/badge/jdk-1.8-green.svg?style=flat-square) [![LICENSE](https://img.shields.io/github/license/gujiniCY/mayday.svg?style=flat-square)](https://github.com/gujiniCY/mayday/blob/master/LICENSE)   [![star](https://img.shields.io/github/stars/gujiniCY/mayday.svg?label=Stars&style=social)](https://github.com/gujiniCY/mayday)[![star](https://gitee.com/song_haozhi/mayday/badge/star.svg?theme=white)](https://gitee.com/song_haozhi/mayday) 
 
 ## 快速开始
 `git clone https://github.com/gujiniCY/mayday.git`
@@ -15,6 +16,10 @@
 保存好以后 mvn package打包运行 进入target文件夹运行java -jar mayday.jar
 
 如果使用又拍云cdn的话请到参数跟随里面设置全程跟随以及开启重定向跟随
+
+### 关于评论功能
+目前没有打算自己写评论功能，于是用的[valine](https://ioliu.cn/2017/add-valine-comments-to-your-blog/)评论系统
+valine基本功能都已实现，查看[教程](https://valine.js.org/)部署好以后到博客后台设置APP ID和APP KEY保存以后就可以了
 
 ## 图片演示
 ![install.png](https://images.gitee.com/uploads/images/2019/0117/112452_b81fbb50_1574192.png)
