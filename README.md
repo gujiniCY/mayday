@@ -3,6 +3,8 @@
 
 >mayday博客系统是我想边学习springboot和thymeleaf编写的一个java博客系统
 
+> 取名mayday可能是因为我是五月天的假粉丝吧！
+
 ![JDK](https://img.shields.io/badge/jdk-1.8-green.svg?style=flat-square) [![LICENSE](https://img.shields.io/github/license/gujiniCY/mayday.svg?style=flat-square)](https://github.com/gujiniCY/mayday/blob/master/LICENSE)   [![star](https://img.shields.io/github/stars/gujiniCY/mayday.svg?label=Stars&style=social)](https://github.com/gujiniCY/mayday)[![star](https://gitee.com/song_haozhi/mayday/badge/star.svg?theme=white)](https://gitee.com/song_haozhi/mayday) 
 
 
