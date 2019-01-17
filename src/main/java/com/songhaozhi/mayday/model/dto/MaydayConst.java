@@ -40,13 +40,8 @@ public class MaydayConst {
 	 */
 	public static final Integer IP_REPEAT_TIME=600;
 	
-	  /**
+	/**
      * 点击次数超过多少更新到数据库
      */
     public static final int CLICK_EXCEED = 10; 
-	
-	/**
-	 * 缓存文章ID与访问IP的Map
-	 */
-	public static Map<String,String> VIEW_MAP=new HashMap<>();
 }

@@ -19,6 +19,7 @@ import com.songhaozhi.mayday.model.domain.Article;
 import com.songhaozhi.mayday.model.domain.Log;
 import com.songhaozhi.mayday.model.domain.Menu;
 import com.songhaozhi.mayday.model.domain.Options;
+import com.songhaozhi.mayday.model.domain.Theme;
 import com.songhaozhi.mayday.model.domain.User;
 import com.songhaozhi.mayday.model.dto.JsonResult;
 import com.songhaozhi.mayday.model.dto.LogConstant;
@@ -29,6 +30,7 @@ import com.songhaozhi.mayday.model.enums.ThemeStatus;
 import com.songhaozhi.mayday.service.ArticleService;
 import com.songhaozhi.mayday.service.MenuService;
 import com.songhaozhi.mayday.service.OptionsService;
+import com.songhaozhi.mayday.service.ThemeService;
 import com.songhaozhi.mayday.service.UserService;
 import com.youbenzi.mdtool.tool.MDTool;
 
@@ -53,6 +55,8 @@ public class InstallController extends BaseController{
 	private MenuService menuService;
 	@Autowired
 	private OptionsService optionsService; 
+	@Autowired
+	private ThemeService themeService;
 	@GetMapping
 	public String install(Model model) {
 		if(StrUtil.equals("true", MaydayConst.OPTIONS.get("is_install"))) {
@@ -166,6 +170,15 @@ public class InstallController extends BaseController{
 		//重置菜单
 		MaydayConst.MENUS.clear();
 		MaydayConst.MENUS = menuService.findMenus();
+		//添加默认主题
+		Theme theme=new Theme();
+		theme.setThemeName("pinghsu");
+		theme.setThemeDescribe("pinghsu");
+		theme.setThemeImg("/static/img/pinghsu.jpg");
+		theme.setCreateTime(DateUtil.date());
+		theme.setThemeStatus(1);
+		themeService.saveTheme(theme);
+		MaydayConst.THEME_NAME="pinghsu";
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			return new JsonResult(false, "系统错误");

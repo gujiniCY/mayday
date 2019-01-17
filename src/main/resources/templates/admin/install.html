@@ -10,6 +10,7 @@
 	th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
 <link rel="stylesheet" type="text/css"
 	th:href="@{/plugins/vali/css/main.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/plugins/toast/jquery.toast.css}">
 <link rel="stylesheet" type="text/css"
 	th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}">
 </head>
@@ -185,7 +186,7 @@
 	                         }
 	                     });
 					}else{
-						loadingBack("btn_login","登录");
+						loadingBack("install_btn","注册");
 						showMsg(data.msg,"error",3000);
 					}
 				},error:function (data) {
