@@ -65,10 +65,8 @@ public class LinksController extends BaseController {
 	public String save(Link link, Model model) {
 		try {
 			if (link.getLinkId() == null) {
-				link.setLinkUrl(URLUtil.encode(link.getLinkUrl()));
 				linksService.save(link);
 			} else {
-				link.setLinkUrl(URLUtil.encode(link.getLinkUrl()));
 				linksService.update(link);
 			}
 		} catch (Exception e) {

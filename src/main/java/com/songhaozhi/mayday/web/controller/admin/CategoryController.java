@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.songhaozhi.mayday.model.domain.Category;
 import com.songhaozhi.mayday.service.CategoryService;
 
-import cn.hutool.core.util.URLUtil;
-
 /**
  * @author : 宋浩志
  * @createDate : 2018年9月26日 分类
@@ -68,10 +66,8 @@ public class CategoryController extends BaseController {
 	public String save(Category category) {
 		try {
 			if (category.getCategoryId() == null) {
-				category.setCategoryUrl(URLUtil.encode(category.getCategoryUrl()));
 				categoryService.save(category);
 			} else {
-				category.setCategoryUrl(URLUtil.encode(category.getCategoryUrl()));
 				categoryService.update(category);
 			}
 		} catch (Exception e) {
