@@ -1,6 +1,8 @@
 
 <h1><a href="https://mayday.songhaozhi.com">mayday</a></h1>
 
+# 本项目完全是出于学习与交流的目的，如果你看不上本项目请直接右上角，不要在评论区留下装逼的话，当然，我非常欢迎友善的评论与建议
+
 >mayday博客系统是我想边学习springboot和thymeleaf编写的一个java博客系统
 
 > 取名mayday可能是因为我是五月天的假粉丝吧！
