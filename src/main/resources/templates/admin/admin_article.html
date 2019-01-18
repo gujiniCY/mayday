@@ -58,10 +58,10 @@
 				<input type="hidden" id="articleId"> <a
 					href="/admin/article" th:style="${status==0} ? 'color: #000' : ''"><span>已发布(<th:block
 							th:text="${published}"></th:block>)
-				</span></a> | <a href="/admin/article?status=1"
+				</span></a>&nbsp;|&nbsp;&nbsp;<a href="/admin/article?status=1"
 					th:style="${status==1} ? 'color: #000': ''"><span>草稿(<th:block
 							th:text="${draft}"></th:block>)
-				</span></a> | <a href="/admin/article?status=2"
+				</span></a>&nbsp;|&nbsp;&nbsp;<a href="/admin/article?status=2"
 					th:style="${status==2} ? 'color: #000': ''"><span>回收站(<th:block
 							th:text="${recycle}"></th:block>)
 				</span></a>
@@ -76,7 +76,7 @@
 							<td>操作</td>
 						</tr>
 						<tr th:each="article,iterStat : ${info.list}">
-							<td th:text="${#strings.abbreviate(article.articleTitle,20)}"></td>
+							<td th:text="${#strings.abbreviate(article.articleTitle,20)}" class="mt-auto"></td>
 							<td th:text="${#strings.abbreviate(article.categorysName,20)}"></td>
 							<td th:text="${#strings.abbreviate(article.tagsName,20)}"></td>
 							<td
@@ -84,25 +84,25 @@
 							<td th:switch="${article.articleStatus}"><th:block
 									th:case="0">
 									<a th:href="@{'/post/'+${article.articleUrl}}"
-										th:target="_blank" class="btn btn-outline-primary">查看</a>
+										th:target="_blank" class="btn btn-outline-primary btn-sm">查看</a>
 									<a th:href="@{/admin/article/edit(article_id=${article.id})}"
-										class="btn btn-outline-info">编辑</a>
+										class="btn btn-outline-info btn-sm">编辑</a>
 									<button
 										th:onclick="'javascript:recycleModel('+${article.id}+')'"
-										class="btn btn-outline-danger">丢弃</button>
+										class="btn btn-outline-danger btn-sm">丢弃</button>
 								</th:block> <th:block th:case="1">
 									<a th:href="@{/admin/article/edit(article_id=${article.id})}"
-										class="btn btn-outline-primary">编辑</a>
+										class="btn btn-outline-primary btn-sm">编辑</a>
 									<button th:onclick="'javascript:restore('+${article.id}+')'"
-										class="btn btn-outline-info">发布</button>
+										class="btn btn-outline-info btn-sm">发布</button>
 									<button
 										th:onclick="'javascript:recycleModel('+${article.id}+')'"
-										class="btn btn-outline-danger">丢弃</button>
+										class="btn btn-outline-danger btn-sm">丢弃</button>
 								</th:block> <th:block th:case="2">
 									<button th:onclick="'javascript:restore('+${article.id}+')'"
-										class="btn btn-outline-primary">还原</button>
+										class="btn btn-outline-primary btn-sm">还原</button>
 									<button th:onclick="'javascript:showModel('+${article.id}+')'"
-										class="btn btn-outline-danger">彻底删除(不可逆)</button>
+										class="btn btn-outline-danger btn-sm">彻底删除(不可逆)</button>
 								</th:block></td>
 						</tr>
 						<tr th:unless="${info.list.total} != 0">

@@ -52,9 +52,9 @@
 								</select>
 							</div>
 							<div class="tile-footer">
-								<button class="btn btn-outline-primary" type="submit">保存菜单</button>
+								<button class="btn btn-sm btn-outline-primary" type="submit">保存菜单</button>
 							<th:block th:if="${menu} != null">
-									<a class="btn btn-outline-info" href="/admin/menus">返回添加</a>
+									<a class="btn btn-sm btn-outline-info" href="/admin/menus">返回添加</a>
 								</th:block>
 							</div>
 						</form>
@@ -78,9 +78,9 @@
 										<td th:text="${menu.menuUrl}"></td>
 										<td th:text="${menu.menuSort}"></td>
 										<td th:text="${menu.menuIcon}"></td>
-										<td><a class="btn btn-outline-primary"
+										<td><a class="btn btn-sm btn-outline-primary"
 											th:href="@{/admin/menus/edit(menuId=${menu.menuId})}">修改</a>
-											<button class="btn btn-outline-danger"
+											<button class="btn btn-sm btn-outline-danger"
 												th:onclick="'javascript:showModel('+${menu.menuId}+')'">删除</button>
 										</td>
 									</tr>

@@ -21,7 +21,7 @@
 		<div class="col-md-12">
 			<div class="tile">
 			<input type="hidden" id="themeId">
-			<button class="btn btn-outline-primary mb-3" onclick="saveTheme()">添加主题</button>
+			<button class="btn btn-sm btn-outline-primary mb-3" onclick="saveTheme()">添加主题</button>
 				<div class="table-responsive">
 					<table class="table m-auto table-striped table-bordered table-hover text-center" id="">
 						<tr>
@@ -37,13 +37,13 @@
 						<td><img style="width: 100px;height: 60px" th:src="${theme.themeImg}"></td>
 						<td th:text="${#dates.format(theme.createTime,'yyyy/MM/dd HH:mm:ss')}"></td>
 						<td>
-						<button class="btn btn-secondary" th:onclick="'javascript:themeEnabled(\''+${theme.id}+'\')'" th:disabled="${theme.themeStatus == 1}">
+						<button class="btn btn-sm btn-secondary" th:onclick="'javascript:themeEnabled(\''+${theme.id}+'\')'" th:disabled="${theme.themeStatus == 1}">
 						<th:block th:if="${theme.themeStatus == 1}">已启用</th:block>
 						<th:block th:if="${theme.themeStatus == 0}" >启用</th:block>
 						</button>
-						<button class="btn btn-primary" th:onclick="'javascript:themeOption(\''+${theme.themeName}+'\')'">设置</button>
+						<button class="btn btn-sm btn-primary" th:onclick="'javascript:themeOption(\''+${theme.themeName}+'\')'">设置</button>
 						<button th:onclick="'javascript:showModel('+${theme.id}+')'"
-										class="btn btn-outline-danger">删除</button>
+										class="btn btn-sm btn-outline-danger">删除</button>
 						</td>
 						</tr>
 						 <tr th:unless="${info.list.total} != 0">

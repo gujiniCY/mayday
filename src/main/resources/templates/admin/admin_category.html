@@ -53,9 +53,9 @@
 									name="categoryDescribe" style="resize: none"></textarea>
 							</div>
 							<div class="tile-footer">
-								<button class="btn btn-outline-primary" type="submit">保存分类</button>
+								<button class="btn btn-sm btn-outline-primary" type="submit">保存分类</button>
 								<th:block th:if="${category} != null">
-									<a class="btn btn-outline-info" href="/admin/category">返回添加</a>
+									<a class="btn btn-sm btn-outline-info" href="/admin/category">返回添加</a>
 								</th:block>
 							</div>
 						</form>
@@ -77,9 +77,9 @@
 										<td th:text="${category.categoryName}"></td>
 										<td th:text="${category.categoryUrl}"></td>
 										<td th:text="${category.categoryDescribe}"></td>
-										<td><a class="btn btn-outline-primary"
+										<td><a class="btn btn-sm btn-outline-primary"
 											th:href="@{/admin/category/edit(categoryId=${category.categoryId})}">修改</a>
-											<button class="btn btn-outline-danger"
+											<button class="btn btn-sm btn-outline-danger"
 												th:onclick="'javascript:showModel('+${category.categoryId}+')'">删除</button>
 										</td>
 									</tr>

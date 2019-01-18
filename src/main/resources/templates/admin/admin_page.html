@@ -21,7 +21,7 @@
 		<div class="col-md-12">
 			<div class="tile">
 			<input type="hidden" id="articleId">
-			<a href="/admin/page?status=0" th:style="${status==0} ? 'color: #000' : ''"><span>已发布(<th:block th:text="${published}"></th:block>)</span></a> | <a href="/admin/page?status=1" th:style="${status==1} ? 'color: #000' : ''"><span>草稿(<th:block th:text="${draft}"></th:block>)</span></a>
+			<a href="/admin/page?status=0" th:style="${status==0} ? 'color: #000' : ''"><span>已发布(<th:block th:text="${published}"></th:block>)</span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/admin/page?status=1" th:style="${status==1} ? 'color: #000' : ''"><span>草稿(<th:block th:text="${draft}"></th:block>)</span></a>
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-hover"
 						id="article_table">
@@ -37,18 +37,18 @@
 							<td th:text="${#dates.format(article.articleNewstime,'yyyy/MM/dd HH:mm:ss')}"></td>
 							<td th:switch="${article.articleStatus}">
 								<th:block th:case="0">
-									<a th:href="@{'/'+${article.articleUrl}}" th:target="_blank" class="btn btn-outline-primary">查看</a>
+									<a th:href="@{'/'+${article.articleUrl}}" th:target="_blank" class="btn btn-sm btn-outline-primary">查看</a>
 									<a th:href="@{/admin/page/edit(article_id=${article.id})}"
-										class="btn btn-outline-info">编辑</a>
+										class="btn btn-sm btn-outline-info">编辑</a>
 										<button th:onclick="'javascript:showModel('+${article.id}+')'"
-										class="btn btn-outline-danger">彻底删除(不可逆)</button>
+										class="btn btn-sm btn-outline-danger">彻底删除(不可逆)</button>
 								</th:block>
 								 <th:block th:case="1">
 									<a th:href="@{/admin/page/edit(article_id=${article.id})}"
-										class="btn btn-outline-primary">编辑</a>
-									<button th:onclick="'javascript:restore('+${article.id}+')'" class="btn btn-outline-info">发布</button>
+										class="btn btn-sm btn-outline-primary">编辑</a>
+									<button th:onclick="'javascript:restore('+${article.id}+')'" class="btn btn-sm btn-outline-info">发布</button>
 									<button th:onclick="'javascript:showModel('+${article.id}+')'"
-										class="btn btn-outline-danger">彻底删除(不可逆)</button>
+										class="btn btn-sm btn-outline-danger">彻底删除(不可逆)</button>
 								</th:block>
 								</td>
 						</tr>
