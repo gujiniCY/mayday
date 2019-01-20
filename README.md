@@ -22,7 +22,8 @@
 ### 关于评论功能
 目前没有打算自己写评论功能，于是用的[valine](https://ioliu.cn/2017/add-valine-comments-to-your-blog/)评论系统
 valine基本功能都已实现，查看[教程](https://valine.js.org/)部署好以后到博客后台设置APP ID和APP KEY保存以后就可以了
-
+### 关于主题
+这两天有人在后台新增主题并设置启用，然后就首页就500了，我现在只做了一个主题，所以在后台新增主题启用是没有任何用的，主题模块我以后应该会改掉，目前就先这样吧 :relieved: 
 ## 图片演示
 ![install.png](https://images.gitee.com/uploads/images/2019/0117/112452_b81fbb50_1574192.png)
 ![login.png](https://images.gitee.com/uploads/images/2019/0117/112450_7ae99bba_1574192.png)
