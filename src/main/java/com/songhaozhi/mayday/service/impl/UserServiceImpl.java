@@ -77,9 +77,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateLoginEnable(String enable) throws Exception {
+	public void updateLoginEnable(String enable, Integer error) throws Exception {
 		User user = this.findUser();
 		user.setLoginEnable(enable);
+		user.setLoginError(error);
 		userMapper.updateByPrimaryKeySelective(user);
 	}
 

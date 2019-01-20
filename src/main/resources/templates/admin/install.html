@@ -152,7 +152,10 @@
                    }
                },
            }
-		}); 
+		}).on('success.form.bv', function(e) {
+            // 阻止默认事件提交
+            e.preventDefault();
+        });
 		
 	})
 	function install(){

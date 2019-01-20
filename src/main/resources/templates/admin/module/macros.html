@@ -182,7 +182,7 @@
  <!-- 侧边栏-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
-      <div class="app-sidebar__user"><img width="60px" class="app-sidebar__user-avatar" th:src="${session.user_session.userPortrait}" alt="User Image">
+      <div class="app-sidebar__user"><img width="60px" class="app-sidebar__user-avatar" th:src="${session.user_session.userPortrait == null ? '/static/img/portrait.jpg' : session.user_session.userPortrait}" alt="User Image">
         <div>
           <p class="app-sidebar__user-name" th:text="${session.user_session.userDisplayName}" ></p>
         </div>

@@ -70,9 +70,10 @@ public interface UserService {
 	/**
 	 * 禁止登录
 	 * 
-	 * @param enable
+	 * @param enable 状态
+	 * @param error 错误次数
 	 */
-	void updateLoginEnable(String enable) throws Exception;
+	void updateLoginEnable(String enable, Integer error) throws Exception;
 	/**
 	 * 保存用户
 	 * @param user

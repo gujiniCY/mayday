@@ -126,7 +126,7 @@ public class AdminController extends BaseController {
 				date = users.getLoginLastTime();
 			}
 			// 计算两个日期之间的时间差
-			long between = DateUtil.between(date, DateUtil.date(), DateUnit.MINUTE);
+			long between = DateUtil.between(date, DateUtil.date(), DateUnit.SECOND);
 			if (StrUtil.equals(users.getLoginEnable(), flag) && (between < inhibitTime)) {
 				return new JsonResult(false, "账户被禁止登录10分钟，请稍后重试");
 			}
@@ -145,8 +145,10 @@ public class AdminController extends BaseController {
 				return new JsonResult(true, "登录成功");
 			} else {
 				Integer error = userService.updateError();
-				if (error >= errorCount) {
-					userService.updateLoginEnable("true");
+				if (error == errorCount) {
+					userService.updateLoginEnable("true",0);
+				}else if(error==1) {
+					userService.updateLoginEnable("false",1);
 				}
 				// 添加失败日志
 				logService.save(new Log(LogConstant.LOGIN, LogConstant.LOGIN_ERROR, ServletUtil.getClientIP(request),
@@ -154,8 +156,7 @@ public class AdminController extends BaseController {
 				return new JsonResult(false, "用户名或密码错误！你还有" + (5 - error) + "次机会");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			log.error("登录失败，系统错误！");
+			log.error("登录失败，系统错误！",e);
 			return new JsonResult(false, "未知错误！");
 		}
 	}
