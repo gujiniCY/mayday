@@ -126,7 +126,7 @@ public class AdminController extends BaseController {
 				date = users.getLoginLastTime();
 			}
 			// 计算两个日期之间的时间差
-			long between = DateUtil.between(date, DateUtil.date(), DateUnit.SECOND);
+			long between = DateUtil.between(date, DateUtil.date(), DateUnit.MINUTE);
 			if (StrUtil.equals(users.getLoginEnable(), flag) && (between < inhibitTime)) {
 				return new JsonResult(false, "账户被禁止登录10分钟，请稍后重试");
 			}
