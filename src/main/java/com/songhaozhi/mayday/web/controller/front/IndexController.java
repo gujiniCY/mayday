@@ -70,7 +70,7 @@ public class IndexController extends BaseController {
 	public String index(Model model, @PathVariable(value = "page") Integer page) {
 		page = page < 0 || page > MaydayConst.MAX_PAGE ? 1 : page;
 		// 默认显示条数
-		Integer limit = MaydayConst.OPTIONS.get("index_article") == null ? PageNumber.POST_INDEX_lIMIT.getLimit()
+		Integer limit = StrUtil.isEmpty(MaydayConst.OPTIONS.get("index_article")) ? PageNumber.POST_INDEX_lIMIT.getLimit()
 				: Integer.parseInt(MaydayConst.OPTIONS.get("index_article"));
 		ArticleCustom articleCustom = new ArticleCustom();
 		articleCustom.setArticleStatus(ArticleStatus.PUBLISH.getStatus());
@@ -277,7 +277,7 @@ public class IndexController extends BaseController {
 	 * @return
 	 * @throws FeedException 
 	 */
-	@GetMapping(value = { "feed", "feed.xml", "index.xml", "atom", "atom.xml" })
+	@GetMapping(value = { "feed", "feed.xml", "index.xml", "atom", "atom.xml" }, produces = "application/xml;charset=UTF-8")
 	@ResponseBody
 	public String rss() throws FeedException {
 		String rssNumber = MaydayConst.OPTIONS.get("rss_number");

@@ -105,11 +105,14 @@ public class Commons {
 		map.put("zhihu", MaydayConst.OPTIONS.get(prefix+"zhihu"));
 		map.put("github", MaydayConst.OPTIONS.get(prefix+"github"));
 		map.put("twitter", MaydayConst.OPTIONS.get(prefix+"twitter"));
-		if(MaydayConst.OPTIONS.get(prefix+"qq") != null) {
+		if(StrUtil.isNotEmpty(MaydayConst.OPTIONS.get(prefix+"qq"))) {
 			map.put("qq", "http://wpa.qq.com/msgrd?v=3&uin="+MaydayConst.OPTIONS.get(prefix+"qq")+"&site=qq&menu=yes");
 		}
-		if(MaydayConst.OPTIONS.get(prefix+"email") != null) {
+		if(StrUtil.isNotEmpty(MaydayConst.OPTIONS.get(prefix+"email"))) {
 			map.put("email", "mailto:"+MaydayConst.OPTIONS.get(prefix+"email"));
+		}
+		if(MaydayConst.OPTIONS.get(prefix+"rss").equals("rss_open")) {
+			map.put("rss", MaydayConst.OPTIONS.get("blog_url")+"/index.xml");
 		}
 		return map;
 	}

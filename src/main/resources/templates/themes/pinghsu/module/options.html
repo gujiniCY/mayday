@@ -29,6 +29,20 @@
 						<div id="sns" class="container tab-pane active">
 							<form class="form-horizontal" id="snsOptions">
 						<div class="form-group row mt-3">
+							<label class="col-form-label col-md-4 font-weight-bold">RSS：</label>
+							<div class="col-md-8 mt-2">
+										<label> <input type="radio" th:value="rss_open"
+											name="pinghsu_rss"
+											th:checked="${options['pinghsu_rss'] == 'rss_open'}" checked="checked"/><span
+											class="label-text font-weight-bold">显示</span>
+										</label> <label><input type="radio" th:value="rss_close"
+											name="pinghsu_rss"
+											th:checked="${options['pinghsu_rss'] == 'rss_close'}"
+											/><span class="label-text font-weight-bold">隐藏</span>
+										</label>
+									</div>
+						</div>
+						<div class="form-group row mt-3">
 							<label class="col-form-label col-md-4 font-weight-bold">Weibo：</label>
 							<div class="col-md-8">
 								<input class="form-control" type="text" th:value="${options['pinghsu_weibo']}" name="pinghsu_weibo">

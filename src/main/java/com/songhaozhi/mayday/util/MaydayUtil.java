@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -19,7 +20,10 @@ import org.springframework.util.Assert;
 import com.songhaozhi.mayday.model.domain.ArticleCustom;
 import com.songhaozhi.mayday.model.dto.MaydayConst;
 import com.sun.syndication.feed.rss.Channel;
+import com.sun.syndication.feed.rss.Description;
+import com.sun.syndication.feed.rss.Item;
 import com.sun.syndication.io.FeedException;
+import com.sun.syndication.io.WireFeedOutput;
 
 /**
  * @author : 宋浩志
@@ -140,7 +144,8 @@ public class MaydayUtil {
 	 */
 	public static String buildRss(List<ArticleCustom> articles)throws FeedException{
 		 Assert.notEmpty(articles, "posts must not be empty");
-		 Channel channel=new Channel("rss_2.0");
+		 Channel channel=new Channel();
+		 channel.setFeedType("rss_2.0");
 		 if(MaydayConst.OPTIONS.get("blog_name")==null) {
 			 channel.setTitle("");
 		 }else {
@@ -151,16 +156,31 @@ public class MaydayUtil {
 		 }else {
 			 channel.setLink(MaydayConst.OPTIONS.get("blog_url"));
 		 }
-		if(MaydayConst.OPTIONS.get("seo_describe")==null) {
+		 if(MaydayConst.OPTIONS.get("blog_url")==null) {
+			 channel.setUri("");
+		 }else {
+			 channel.setUri(MaydayConst.OPTIONS.get("blog_url"));
+		 }
+		 if(MaydayConst.OPTIONS.get("seo_describe")==null) {
 			 channel.setDescription("");
 		 }else {
 			 channel.setDescription(MaydayConst.OPTIONS.get("seo_describe"));
 		 }
 		channel.setLanguage("zh-CN");
+		List<Item> items=new ArrayList<>();
 		for (int i = 0; i < articles.size(); i++) {
-			
+			Item item=new Item();
+			Description descr = new Description();
+			item.setTitle(articles.get(i).getArticleTitle());
+			item.setLink(MaydayConst.OPTIONS.get("blog_url")+"/post/"+articles.get(i).getArticleUrl());
+			item.setPubDate(articles.get(i).getArticleNewstime());
+			descr.setValue(articles.get(i).getArticleContent());
+			item.setDescription(descr);
+			items.add(item);
 		}
-		return null;
+		channel.setItems(items);
+        WireFeedOutput out = new WireFeedOutput();
+        return out.outputString(channel);
 	}
 	
 }

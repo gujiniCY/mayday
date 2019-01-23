@@ -8,6 +8,9 @@
             <th:block th:each="map :${commons.social()}">
             	<th:block th:if="${map.value} != null and ${map.value} !=''">
             	 <th:block th:switch="${map.key}">
+            	    <th:block th:case="'rss'">
+            	 	 <a class="social rss" target="blank" th:href="@{${map.value}}">RSS</a>
+            	 	</th:block>
             	 	<th:block th:case="'weibo'">
             	 	 <a class="social weibo" target="blank" th:href="@{${map.value}}">微博</a>
             	 	</th:block>
