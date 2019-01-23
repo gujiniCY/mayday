@@ -32,6 +32,7 @@
 		<thumbnailator.version>0.4.8</thumbnailator.version>
 		<ehcache.version>3.6.3</ehcache.version>
 		<MDTool.version>1.2.1</MDTool.version>
+		<rome.version>1.0</rome.version>
 	</properties>
 
 	<dependencies>
@@ -143,6 +144,12 @@
 			<groupId>com.youbenzi</groupId>
 			<artifactId>MDTool</artifactId>
 			<version>${MDTool.version}</version>
+		</dependency>
+		<!-- rss -->
+		<dependency>
+			<groupId>rome</groupId>
+			<artifactId>rome</artifactId>
+			<version>${rome.version}</version>
 		</dependency>
 	</dependencies>
 

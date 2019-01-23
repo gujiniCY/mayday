@@ -10,8 +10,16 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import javax.imageio.ImageIO;
+
+import org.springframework.util.Assert;
+
+import com.songhaozhi.mayday.model.domain.ArticleCustom;
+import com.songhaozhi.mayday.model.dto.MaydayConst;
+import com.sun.syndication.feed.rss.Channel;
+import com.sun.syndication.io.FeedException;
 
 /**
  * @author : 宋浩志
@@ -124,6 +132,35 @@ public class MaydayUtil {
 			e.printStackTrace();
 			return "";
 		}
+	}
+	/**
+	 * 生成rss
+	 * @param articles
+	 * @return
+	 */
+	public static String buildRss(List<ArticleCustom> articles)throws FeedException{
+		 Assert.notEmpty(articles, "posts must not be empty");
+		 Channel channel=new Channel("rss_2.0");
+		 if(MaydayConst.OPTIONS.get("blog_name")==null) {
+			 channel.setTitle("");
+		 }else {
+			 channel.setTitle(MaydayConst.OPTIONS.get("blog_name"));
+		 }
+		 if(MaydayConst.OPTIONS.get("blog_url")==null) {
+			 channel.setLink("");
+		 }else {
+			 channel.setLink(MaydayConst.OPTIONS.get("blog_url"));
+		 }
+		if(MaydayConst.OPTIONS.get("seo_describe")==null) {
+			 channel.setDescription("");
+		 }else {
+			 channel.setDescription(MaydayConst.OPTIONS.get("seo_describe"));
+		 }
+		channel.setLanguage("zh-CN");
+		for (int i = 0; i < articles.size(); i++) {
+			
+		}
+		return null;
 	}
 	
 }

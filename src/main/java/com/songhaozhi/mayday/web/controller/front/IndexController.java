@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 import com.songhaozhi.mayday.model.domain.Article;
@@ -25,8 +26,11 @@ import com.songhaozhi.mayday.service.ArticleService;
 import com.songhaozhi.mayday.service.CategoryService;
 import com.songhaozhi.mayday.service.LinksService;
 import com.songhaozhi.mayday.service.TagService;
+import com.songhaozhi.mayday.util.MaydayUtil;
 import com.songhaozhi.mayday.web.controller.admin.BaseController;
+import com.sun.syndication.io.FeedException;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.ServletUtil;
 
 /**
@@ -53,7 +57,6 @@ public class IndexController extends BaseController {
 	 */
 	@GetMapping(value = { "/", "index" })
 	public String index(Model model) {
-
 		// 调用方法渲染首页
 		return this.index(model, 1);
 	}
@@ -100,55 +103,60 @@ public class IndexController extends BaseController {
 	 * @return
 	 */
 	@GetMapping(value = { "post/{articleUrl}", "post/{articleUrl}.html" })
-	public String post(Model model, @PathVariable(value = "articleUrl") String articleUrl,HttpServletRequest request) {
+	public String post(Model model, @PathVariable(value = "articleUrl") String articleUrl, HttpServletRequest request) {
 		ArticleCustom articleCustom = articleService.findByArticleUrl(articleUrl);
 		if (articleCustom == null) {
 			return this.render_404();
 		}
-		if(!checkRepeatIp(request, articleCustom.getId())) {
-			updateArticleViews(articleCustom.getId(),articleCustom.getArticleViews());
+		if (!checkRepeatIp(request, articleCustom.getId())) {
+			updateArticleViews(articleCustom.getId(), articleCustom.getArticleViews());
 		}
 		model.addAttribute("article", articleCustom);
 		return this.render("post");
 	}
+
 	/**
 	 * 检测同一IP十分钟以内重复访问同一篇文章
+	 * 
 	 * @param request
-	 * @param id 文章id
+	 * @param id
+	 *            文章id
 	 * @return
 	 */
-	public boolean checkRepeatIp(HttpServletRequest request,int id) {
-		
-		String value=ServletUtil.getClientIP(request)+":"+id;
-		Integer count=cache.hget("hits:frequency", value);
-		if(count!=null && count>0) {
+	public boolean checkRepeatIp(HttpServletRequest request, int id) {
+
+		String value = ServletUtil.getClientIP(request) + ":" + id;
+		Integer count = cache.hget("hits:frequency", value);
+		if (count != null && count > 0) {
 			return true;
 		}
-		cache.hset("hits:frequency", value,1,MaydayConst.IP_REPEAT_TIME);
+		cache.hset("hits:frequency", value, 1, MaydayConst.IP_REPEAT_TIME);
 		return false;
 	}
+
 	/**
 	 * 修改文章点击率
+	 * 
 	 * @param id
 	 * @param views
 	 */
-	public void updateArticleViews(Integer id,Long views) {
+	public void updateArticleViews(Integer id, Long views) {
 		if (views == null) {
 			views = 0L;
-        }
-		//获取缓存数据
-		Long cacheViews=cache.hget("article"+id, "cacheViews");
-		//如果缓存数据为null赋值1，反之加1
-		cacheViews=cacheViews == null ? 1 : cacheViews+1;
-		//如果缓存只大于等于设置的次数则修改到数据库
-		if(cacheViews>=MaydayConst.CLICK_EXCEED) {
-			Article article=new Article();
+		}
+		// 获取缓存数据
+		Long cacheViews = cache.hget("article" + id, "cacheViews");
+		// 如果缓存数据为null赋值1，反之加1
+		cacheViews = cacheViews == null ? 1 : cacheViews + 1;
+		// 如果缓存只大于等于设置的次数则修改到数据库
+		if (cacheViews >= MaydayConst.CLICK_EXCEED) {
+			Article article = new Article();
 			article.setId(id);
-			article.setArticleViews(views+cacheViews);
+			article.setArticleViews(views + cacheViews);
 			articleService.updateArticleViews(article);
-			cache.hset("article"+id, "cacheViews", null);
-		}else {
-			cache.hset("article"+id, "cacheViews", cacheViews);
+			cache.hset("article" + id, "cacheViews", null);
+		} else {
+			cache.hset("article" + id, "cacheViews", cacheViews);
 		}
 	}
 
@@ -173,13 +181,13 @@ public class IndexController extends BaseController {
 	 * @return
 	 */
 	@GetMapping(value = "/{articleUrl}")
-	public String page(@PathVariable String articleUrl, Model model,HttpServletRequest request) {
+	public String page(@PathVariable String articleUrl, Model model, HttpServletRequest request) {
 		ArticleCustom articleCustom = articleService.findByArticleUrl(articleUrl);
 		if (articleCustom == null) {
 			return this.render_404();
 		}
-		if(!checkRepeatIp(request, articleCustom.getId())) {
-			updateArticleViews(articleCustom.getId(),articleCustom.getArticleViews());
+		if (!checkRepeatIp(request, articleCustom.getId())) {
+			updateArticleViews(articleCustom.getId(), articleCustom.getArticleViews());
 		}
 		model.addAttribute("article", articleCustom);
 		return this.render("page");
@@ -204,7 +212,8 @@ public class IndexController extends BaseController {
 		}
 		Integer limit = PageNumber.POST_INDEX_lIMIT.getLimit();
 		page = page < 0 || page > MaydayConst.MAX_PAGE ? 1 : page;
-		PageInfo<ArticleCustom> info = articleService.findArtileByCategory(page, limit, category,ArticleStatus.PUBLISH.getStatus());
+		PageInfo<ArticleCustom> info = articleService.findArtileByCategory(page, limit, category,
+				ArticleStatus.PUBLISH.getStatus());
 		model.addAttribute("articles", info);
 		model.addAttribute("type", "分类");
 		model.addAttribute("url", "category/" + category.getCategoryUrl());
@@ -231,7 +240,8 @@ public class IndexController extends BaseController {
 		}
 		Integer limit = PageNumber.POST_INDEX_lIMIT.getLimit();
 		page = page < 0 || page > MaydayConst.MAX_PAGE ? 1 : page;
-		PageInfo<ArticleCustom> info = articleService.findArtileByTag(page, limit, tag,ArticleStatus.PUBLISH.getStatus());
+		PageInfo<ArticleCustom> info = articleService.findArtileByTag(page, limit, tag,
+				ArticleStatus.PUBLISH.getStatus());
 		model.addAttribute("articles", info);
 		model.addAttribute("type", "标签");
 		model.addAttribute("url", "tags/" + tag.getTagUrl());
@@ -259,6 +269,27 @@ public class IndexController extends BaseController {
 		model.addAttribute("keywords", keywords);
 		model.addAttribute("url", "search/" + keywords);
 		return this.render("page-category");
+	}
+
+	/**
+	 * 文章rss
+	 * 
+	 * @return
+	 * @throws FeedException 
+	 */
+	@GetMapping(value = { "feed", "feed.xml", "index.xml", "atom", "atom.xml" })
+	@ResponseBody
+	public String rss() throws FeedException {
+		String rssNumber = MaydayConst.OPTIONS.get("rss_number");
+		if (StrUtil.isBlank(rssNumber)) {
+			rssNumber = "20";
+		}
+		ArticleCustom articleCustom = new ArticleCustom();
+		articleCustom.setArticleStatus(ArticleStatus.PUBLISH.getStatus());
+		articleCustom.setArticlePost(PostType.POST_TYPE_POST.getValue());
+		PageInfo<ArticleCustom> pageInfo = articleService.findPageArticle(0, Integer.parseInt(rssNumber), articleCustom);
+		List<ArticleCustom> articles=pageInfo.getList();
+		return MaydayUtil.buildRss(articles);
 	}
 
 }
