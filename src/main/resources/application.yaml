@@ -16,7 +16,7 @@ spring:
     cache: false
   datasource: 
          type: com.alibaba.druid.pool.DruidDataSource
-         url: jdbc:mysql://47.106.22.160:3306/maydaytest?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+         url: jdbc:mysql://localhost:3306/maydaytest?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
          username: maydaytest
          password: C36J4EajMepPEdTC
          driver-class-name: com.mysql.jdbc.Driver
