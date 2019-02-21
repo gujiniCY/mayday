@@ -111,8 +111,8 @@ public class Commons {
 		if(StrUtil.isNotEmpty(MaydayConst.OPTIONS.get(prefix+"email"))) {
 			map.put("email", "mailto:"+MaydayConst.OPTIONS.get(prefix+"email"));
 		}
-		if(MaydayConst.OPTIONS.get(prefix+"rss").equals("rss_open")) {
-			map.put("rss", MaydayConst.OPTIONS.get("blog_url")+"/index.xml");
+		if("rss_open".equals(MaydayConst.OPTIONS.get(prefix+"rss"))) {
+				map.put("rss", MaydayConst.OPTIONS.get("blog_url")+"/index.xml");
 		}
 		return map;
 	}
