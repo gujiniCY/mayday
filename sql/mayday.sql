@@ -1,17 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : 47.106.22.160_mayday
-Source Server Version : 50640
-Source Host           : 47.106.22.160:3306
-Source Database       : mayday
-
-Target Server Type    : MYSQL
-Target Server Version : 50640
-File Encoding         : 65001
-
-Date: 2019-01-16 11:26:40
-*/
 
 SET FOREIGN_KEY_CHECKS=0;
 
