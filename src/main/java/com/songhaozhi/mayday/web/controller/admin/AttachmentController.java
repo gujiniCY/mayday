@@ -116,7 +116,7 @@ public class AttachmentController extends BaseController {
 		if (!file.isEmpty()) {
 			try {
 				// 获取用户目录
-				String userPath = System.getProperties().getProperty("user.home") + "/mayday";
+				String userPath = System.getProperties().getProperty("user.home") + "/mayday/";
 				// 保存目录
 				StringBuffer hold = new StringBuffer("upload/");
 				// 获取时间，以年月创建目录
@@ -166,8 +166,7 @@ public class AttachmentController extends BaseController {
 				attachment.setPictureSuffix(new StringBuffer().append(".").append(fileSuffix).toString());
 				attachment.setPictureSmallPath(compressDataPath.toString());
 				attachment.setPictureWh(MaydayUtil.getImageWh(new File(mediaPath.toString() + "/" + fileName)));
-				attachment
-						.setPictureSize(MaydayUtil.parseSize(new File(mediaPath.toString() + "/" + fileName).length()));
+				attachment.setPictureSize(MaydayUtil.parseSize(new File(mediaPath.toString() + "/" + fileName).length()));
 				attachmentService.save(attachment);
 				// 添加日志
 				logService.save(new Log(LogConstant.UPLOAD_ATTACHMENT, LogConstant.UPLOAD_SUCCESS,
