@@ -72,7 +72,8 @@ public class ArticleController extends BaseController {
 		PageInfo<ArticleCustom> pageInfo = articleService.findPageArticle(page, limit, articleCustom);
 		model.addAttribute("info", pageInfo);
 		// 已发布条数
-		model.addAttribute("published", articleService.countByStatus(ArticleStatus.PUBLISH.getStatus(), PostType.POST_TYPE_POST.getValue()));
+		model.addAttribute("published",
+				articleService.countByStatus(ArticleStatus.PUBLISH.getStatus(), PostType.POST_TYPE_POST.getValue()));
 		// 草稿条数
 		model.addAttribute("draft",
 				articleService.countByStatus(ArticleStatus.DRAFT.getStatus(), PostType.POST_TYPE_POST.getValue()));
@@ -135,8 +136,8 @@ public class ArticleController extends BaseController {
 				if (StrUtil.isEmpty(article.getArticleThumbnail())) {
 					article.setArticleThumbnail("/static/img/rand/" + RandomUtil.randomInt(1, 19) + ".jpg");
 				}
-				//判断摘要是否为空
-				if(StrUtil.isEmpty(article.getArticleSummary())) {
+				// 判断摘要是否为空
+				if (StrUtil.isEmpty(article.getArticleSummary())) {
 					// 如果摘要为空则取前五十字为摘要
 					int post_summary = 50;
 					if (StrUtil.isNotEmpty(MaydayConst.OPTIONS.get("post_summary"))) {
@@ -160,18 +161,21 @@ public class ArticleController extends BaseController {
 				if (StrUtil.isEmpty(article.getArticleThumbnail())) {
 					article.setArticleThumbnail("/static/img/rand/" + RandomUtil.randomInt(1, 19) + ".jpg");
 				}
-				// 如果摘要为空则取前五十字为摘要
-				int post_summary = 50;
-				if (StrUtil.isNotEmpty(MaydayConst.OPTIONS.get("post_summary"))) {
-					post_summary = Integer.parseInt(MaydayConst.OPTIONS.get("post_summary"));
-				}
-				// 清理html标签和空白字符
-				String summaryText = StrUtil.cleanBlank(HtmlUtil.cleanHtmlTag(article.getArticleContent()));
-				// 设置文章摘要
-				if (summaryText.length() > post_summary) {
-					article.setArticleSummary(summaryText.substring(0, post_summary));
-				} else {
-					article.setArticleSummary(summaryText);
+				// 判断摘要是否为空
+				if (StrUtil.isEmpty(article.getArticleSummary())) {
+					// 如果摘要为空则取前五十字为摘要
+					int post_summary = 50;
+					if (StrUtil.isNotEmpty(MaydayConst.OPTIONS.get("post_summary"))) {
+						post_summary = Integer.parseInt(MaydayConst.OPTIONS.get("post_summary"));
+					}
+					// 清理html标签和空白字符
+					String summaryText = StrUtil.cleanBlank(HtmlUtil.cleanHtmlTag(article.getArticleContent()));
+					// 设置文章摘要
+					if (summaryText.length() > post_summary) {
+						article.setArticleSummary(summaryText.substring(0, post_summary));
+					} else {
+						article.setArticleSummary(summaryText);
+					}
 				}
 				// 文章最后修改时间
 				article.setArticleUpdatetime(DateUtil.date());
@@ -202,7 +206,8 @@ public class ArticleController extends BaseController {
 				return new JsonResult(false, "请先填写token");
 			}
 			String blogUrl = MaydayConst.OPTIONS.get("blog_url");
-			List<ArticleCustom> articles = articleService.findAllArticle(ArticleStatus.PUBLISH.getStatus(),PostType.POST_TYPE_POST.getValue());
+			List<ArticleCustom> articles = articleService.findAllArticle(ArticleStatus.PUBLISH.getStatus(),
+					PostType.POST_TYPE_POST.getValue());
 			StringBuffer urls = new StringBuffer();
 			for (ArticleCustom article : articles) {
 				urls.append(blogUrl).append("/archives/").append(article.getArticleUrl()).append("\n");
