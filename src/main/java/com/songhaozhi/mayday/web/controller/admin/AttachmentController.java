@@ -116,12 +116,12 @@ public class AttachmentController extends BaseController {
 		if (!file.isEmpty()) {
 			try {
 				// 获取用户目录
-				String userPath = System.getProperties().getProperty("user.home") + "\\mayday";
+				String userPath = System.getProperties().getProperty("user.home") + "/mayday";
 				// 保存目录
-				StringBuffer hold = new StringBuffer("upload\\");
+				StringBuffer hold = new StringBuffer("upload/");
 				// 获取时间，以年月创建目录
 				Date date = DateUtil.date();
-				hold.append(DateUtil.thisYear()).append("\\").append(DateUtil.thisMonth() + 1).append("\\");
+				hold.append(DateUtil.thisYear()).append("/").append(DateUtil.thisMonth() + 1).append("/");
 				File mediaPath = new File(userPath, hold.toString());
 				// 如果没有该目录则创建
 				if (!mediaPath.exists()) {
@@ -144,19 +144,19 @@ public class AttachmentController extends BaseController {
 
 				// 原图片路径
 				StringBuffer originalPath = new StringBuffer();
-				originalPath.append(mediaPath.getAbsolutePath()).append("\\").append(fileName);
+				originalPath.append(mediaPath.getAbsolutePath()).append("/").append(fileName);
 				// 压缩图片路径
 				StringBuffer compressPath = new StringBuffer();
-				compressPath.append(mediaPath.getAbsolutePath()).append("\\").append(nameSuffix).append("_small.")
+				compressPath.append(mediaPath.getAbsolutePath()).append("/").append(nameSuffix).append("_small.")
 						.append(fileSuffix);
 				// 压缩图片
 				Thumbnails.of(originalPath.toString()).size(256, 256).keepAspectRatio(false).toFile(compressPath.toString());
 				// 原图数据库路径
 				StringBuffer originalDataPath = new StringBuffer();
-				originalDataPath.append("\\").append(hold).append(fileName);
+				originalDataPath.append("/").append(hold).append(fileName);
 				// 压缩图数据库路径
 				StringBuffer compressDataPath = new StringBuffer();
-				compressDataPath.append("\\").append(hold).append(nameSuffix).append("_small.").append(fileSuffix);
+				compressDataPath.append("/").append(hold).append(nameSuffix).append("_small.").append(fileSuffix);
 				// 添加数据库
 				Attachment attachment = new Attachment();
 				attachment.setPictureName(fileName);
@@ -165,9 +165,9 @@ public class AttachmentController extends BaseController {
 				attachment.setPictureCreateDate(date);
 				attachment.setPictureSuffix(new StringBuffer().append(".").append(fileSuffix).toString());
 				attachment.setPictureSmallPath(compressDataPath.toString());
-				attachment.setPictureWh(MaydayUtil.getImageWh(new File(mediaPath.toString() + "\\" + fileName)));
+				attachment.setPictureWh(MaydayUtil.getImageWh(new File(mediaPath.toString() + "/" + fileName)));
 				attachment
-						.setPictureSize(MaydayUtil.parseSize(new File(mediaPath.toString() + "\\" + fileName).length()));
+						.setPictureSize(MaydayUtil.parseSize(new File(mediaPath.toString() + "/" + fileName).length()));
 				attachmentService.save(attachment);
 				// 添加日志
 				logService.save(new Log(LogConstant.UPLOAD_ATTACHMENT, LogConstant.UPLOAD_SUCCESS,
