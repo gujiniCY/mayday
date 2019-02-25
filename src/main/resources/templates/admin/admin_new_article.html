@@ -32,7 +32,7 @@
 						</div>
 						<div class="form-group">
 							<input class="form-control" name="articleUrl" id="articleUrl" type="text"
-								placeholder="默认生成拼音链接，如果为空则后台生成时间戳链接">
+								placeholder="为空则后台生成时间戳链接">
 						</div> 
 						<div class="form-group">
 							<textarea class="form-control" id="articleMd"></textarea>
@@ -182,7 +182,7 @@
 		   inlineAttachment.editors.codemirror4.attach(simplemde.codemirror, {
 	           uploadUrl: "/admin/attachment/upload"
 	       });
-	    //生成url链接
+	    /* //生成url链接
 	   $("#articleTitle").blur(function(){
 		   $.ajax({
 			  url:"/admin/article/filter",
@@ -193,7 +193,7 @@
 				  $("#articleUrl").val(data.msg);
 			  }
 		   });
-	   });  
+	   });   */
    });
  	//选择略缩图
 	function openChoice(id){

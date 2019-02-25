@@ -118,6 +118,9 @@ public class ArticleController extends BaseController {
 			if (article.getId() == null) {
 				// 判断文章链接是否重复
 				if (!StrUtil.isEmpty(article.getArticleUrl())) {
+					if(article.getArticleUrl().length()>50) {
+						return new JsonResult(false, "路径不能大于50");
+					}
 					// 查询url是否重复
 					int repeat = articleService.findRepeatByUrl(article.getArticleUrl());
 					if (repeat != 0) {
