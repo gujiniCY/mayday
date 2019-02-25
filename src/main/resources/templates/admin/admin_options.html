@@ -202,6 +202,84 @@
 					<div id="comment" class="tab-pane fade">
 						<form class="form-horizontal" id="commentOptions">
 							<div class="form-group row mt-3">
+								<label class="col-form-label col-md-2">platform:</label>
+								<div class="col-md-5">
+									<div class="animated-radio-button mt-2">
+										<label><input class="form-control" value="gitalk"
+											type="radio"
+											th:checked="${options['platform_comment'] == 'gitalk'}"
+											name="platform_comment"><span class="label-text">Gitalk</span></label>
+										<label><input class="form-control" value="valine"
+											type="radio"
+											th:checked="${options['platform_comment'] == 'valine'}"
+											name="platform_comment"><span class="label-text">Valine</span></label>
+									</div>
+								</div>
+							</div>
+							<div class="gitalk-options" style="display: none">
+						<div class="form-group row mt-3">
+								<label class="col-form-label col-md-2">clientID:<span
+									data-toggle="tooltip" data-placement="top"
+									title="GitHub Application Client ID." style="cursor: pointer"> <i
+										class="fa fa-question-circle" aria-hidden="true"></i>
+								</span></label>
+								<div class="col-md-5">
+									<input class="form-control" type="text"
+										th:value="${options['comment_gitalk_clientid']}"
+										name="comment_gitalk_clientid">
+								</div>
+						</div>
+						<div class="form-group row mt-3">
+								<label class="col-form-label col-md-2">clientSecret:<span
+									data-toggle="tooltip" data-placement="top"
+									title="GitHub Application Client Secret." style="cursor: pointer"> <i
+										class="fa fa-question-circle" aria-hidden="true"></i>
+								</span></label>
+								<div class="col-md-5">
+									<input class="form-control" type="text"
+										th:value="${options['comment_gitalk_clientSecret']}"
+										name="comment_gitalk_clientSecret">
+								</div>
+						</div>
+						<div class="form-group row mt-3">
+								<label class="col-form-label col-md-2">repo:<span
+									data-toggle="tooltip" data-placement="top"
+									title="GitHub仓库名称" style="cursor: pointer"> <i
+										class="fa fa-question-circle" aria-hidden="true"></i>
+								</span></label>
+								<div class="col-md-5">
+									<input class="form-control" type="text"
+										th:value="${options['comment_gitalk_repo']}"
+										name="comment_gitalk_repo">
+								</div>
+						</div>
+						<div class="form-group row mt-3">
+								<label class="col-form-label col-md-2">owner:<span
+									data-toggle="tooltip" data-placement="top"
+									title="GitHub仓库所有者，可以是个人或者组织。" style="cursor: pointer"> <i
+										class="fa fa-question-circle" aria-hidden="true"></i>
+								</span></label>
+								<div class="col-md-5">
+									<input class="form-control" type="text"
+										th:value="${options['comment_gitalk_owner']}"
+										name="comment_gitalk_owner">
+								</div>
+						</div>
+						<div class="form-group row mt-3">
+								<label class="col-form-label col-md-2">admin:<span
+									data-toggle="tooltip" data-placement="top"
+									title="GitHub仓库的所有者和合作者" style="cursor: pointer"> <i
+										class="fa fa-question-circle" aria-hidden="true"></i>
+								</span></label>
+								<div class="col-md-5">
+									<input class="form-control" type="text"
+										th:value="${options['comment_gitalk_admin']}"
+										name="comment_gitalk_admin">
+								</div>
+						</div>
+						</div>
+							<div class="valine-options" style="display: none">
+							<div class="form-group row mt-3">
 								<label class="col-form-label col-md-2">APP ID:<span
 									data-toggle="tooltip" data-placement="top"
 									title="Leancloud申请的appid" style="cursor: pointer"> <i
@@ -257,6 +335,7 @@
 										th:value="${options['comment_valine_hint']}"
 										name="comment_valine_hint">
 								</div>
+							</div>
 							</div>
 							<div class="tile-footer">
 								<div class="row">
@@ -360,6 +439,31 @@
 	<div th:replace="admin/module/macros :: comm"></div>
 	<script src="/plugins/layer/layer.js"></script>
 	<script type="text/javascript">
+	
+		$(function(){
+			selectCommentPlatform();
+			
+			$('input[name=platform_comment]').click(function(){
+				selectCommentPlatform();
+			});
+		})
+		//评论设置平台选择
+		function selectCommentPlatform(){
+			var gitalk=$("input[value='gitalk']:checked").val();
+			var valine=$("input[value='valine']:checked").val();
+			console.log(gitalk+valine);
+			if(gitalk!=null){
+				$(".gitalk-options").show();
+			}else{
+				$(".gitalk-options").hide();
+			}
+			if(valine!=null){
+				$(".valine-options").show();
+			}else{
+				$(".valine-options").hide();
+			}
+		}
+		
 		//保存设置项
 		function save(id) {
 			var from = $("#" + id).serialize();

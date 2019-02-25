@@ -225,7 +225,6 @@
       </ul>
     </aside>
 </div>
-
 <th:block th:if="${article.articleComment} ==0 " th:fragment="comment">
     <script th:inline="javascript" type="text/javascript">
     $(function(){
@@ -233,16 +232,31 @@
         /*<![CDATA[*/
     	var options=/*[[${options}]]*/;
         /*]]>*/
-     	 new Valine({
-            el: '#vcomments',
-            appId: options.comment_valine_appid,
-            appKey: options.comment_valine_appkey,
-            notify:false, 
-            verify:false, 
-            placeholder: options.comment_valine_hint,
-            avatar: options.comment_valine_portrait,
-            //visitor: true
-        })
+        if(options.platform_comment=="gitalk"){
+        	$(".post-content").append("<div id='gitalk-container'></div>");
+        	var gitalk = new Gitalk({
+        		  clientID: options.comment_gitalk_clientid,
+        		  clientSecret: options.comment_gitalk_clientSecret,
+        		  repo: options.comment_gitalk_repo,
+        		  owner: options.comment_gitalk_owner,
+        		  admin: [options.comment_gitalk_admin],
+        		  id: location.pathname,      // Ensure uniqueness and length less than 50
+        		  distractionFreeMode: false  // Facebook-like distraction free mode
+        		})
+        	gitalk.render('gitalk-container')
+        }else if(options.platform_comment=="valine"){
+        	$(".post-content").append("<div id='vcomments'></div>");
+        	new Valine({
+                el: '#vcomments',
+                appId: options.comment_valine_appid,
+                appKey: options.comment_valine_appkey,
+                notify:false, 
+                verify:false, 
+                placeholder: options.comment_valine_hint,
+                avatar: options.comment_valine_portrait,
+                //visitor: true
+            })
+        }
     });
     </script>
 </th:block>

@@ -25,9 +25,8 @@
             <th:block th:text="${#dates.format(article.articleUpdatetime,'yyyy/MM/dd HH:mm:ss')}"/>
         </p>
     </div>
-    <div id="vcomments"></div>
 </article>
- <div th:replace="admin/module/macros :: comment"></div>  
+ <div th:replace="admin/module/macros :: comment"></div> 
  <div th:replace="themes/pinghsu/footer :: footer"></div> 
 </body>
 </html>
