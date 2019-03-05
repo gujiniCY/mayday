@@ -86,6 +86,7 @@ public class AttachmentController extends BaseController {
 			File picturePathFile = new File(new StringBuffer(userPath).append(picturePath).toString());
 			File pictureSmallPathFile = new File(new StringBuffer(userPath).append(pictureSmallPath).toString());
 			if (picturePathFile.isFile() && picturePathFile.exists()) {
+				System.gc();
 				if (pictureSmallPathFile.delete() && picturePathFile.delete()) {
 					attachmentService.deleteAttachment(id);
 					log.info("删除文件" + attachment.getPictureName() + "成功");
