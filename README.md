@@ -3,11 +3,13 @@
 
 # 本项目完全是出于学习与交流的目的，如果你看不上本项目请直接右上角，不要在评论区留下装逼的话，当然，我非常欢迎友善的评论与建议
 
->mayday博客系统是我想边学习springboot和thymeleaf编写的一个java博客系统
+>  **mayday博客系统是我想边学习springboot和thymeleaf编写的一个java博客系统** 
 
-> 取名mayday可能是因为我是五月天的假粉丝吧！
+>  **取名mayday可能是因为我是五月天的假粉丝吧！** 
 
-> 博客基本功能都已实现，后续还会一直更新下去！
+>  **博客基本功能都已实现，后续还会一直更新下去！** 
+
+>  **如果对你有帮助的话请右上角点个star，非常感谢！** 
 
 ![JDK](https://img.shields.io/badge/jdk-1.8-green.svg?style=flat-square) [![LICENSE](https://img.shields.io/github/license/gujiniCY/mayday.svg?style=flat-square)](https://github.com/gujiniCY/mayday/blob/master/LICENSE)   [![star](https://img.shields.io/github/stars/gujiniCY/mayday.svg?label=Stars&style=social)](https://github.com/gujiniCY/mayday)[![star](https://gitee.com/song_haozhi/mayday/badge/star.svg?theme=white)](https://gitee.com/song_haozhi/mayday) 
 
@@ -18,6 +20,7 @@
 3. 到src/main/resources下的application.yaml下修改你的数据库链接
 4. 保存好以后 mvn package打包
 5. 进入target文件夹运行nohup java -jar mayday.jar &
+6. 访问http://localhost:8091
 
 ### 如果使用又拍云cdn的话请到参数跟随里面设置全程跟随以及开启重定向跟随
 
