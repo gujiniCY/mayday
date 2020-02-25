@@ -1,6 +1,14 @@
 
 <h1><a href="https://mayday.songhaozhi.com">mayday</a></h1>
 
+# 实在是想不通，免费分享的东西为什么要拿去卖钱
+
+### 该项目被有些人拿去闲鱼卖钱了，还骂我是抄袭者，反馈给闲鱼客服连我的项目名称都问就说登记了让我等待处理结果。无奈，我只能把该人贴出来
+[闲鱼商品地址](https://market.m.taobao.com/app/idleFish-F2e/widle-taobao-rax/page-detail?wh_weex=true&wx_navbar_transparent=true&id=607143224372&ut_sk=1.WUOSSRv3%252FQADAJZkAvsosaO5_21407387_1582606469302.Copy.detail.607143224372.3157869223&forceFlush=1&qq-pf-to=pcqq.group)
+![3YFnbj.jpg](https://images.gitee.com/uploads/images/2020/0225/131214_89eddba9_1574192.jpeg)
+
+
+
 >  **mayday博客系统是我想边学习springboot和thymeleaf编写的一个java博客系统** 
 
 >  **取名mayday可能是因为我是五月天的假粉丝吧！** 
