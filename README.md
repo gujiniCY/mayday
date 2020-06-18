@@ -17,6 +17,7 @@
 4. 保存好以后 mvn package打包
 5. 进入target文件夹运行nohup java -jar mayday.jar &
 6. 访问http://localhost:8091
+7. 后台管理系统地址http://localhost:8091/admin
 
 ### 如果使用又拍云cdn的话请到参数跟随里面设置全程跟随以及开启重定向跟随
 
