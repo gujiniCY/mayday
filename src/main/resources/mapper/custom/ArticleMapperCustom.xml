@@ -74,7 +74,14 @@
 	</update>
 	
 	<select id="findByArticleId" resultType="com.songhaozhi.mayday.model.domain.ArticleCustom" parameterType="Integer">
-	SELECT a.id,a.user_id,a.article_content,a.article_content_md,a.article_newstime,a.article_summary,a.article_thumbnail,a.article_title,article_type,a.article_comment,a.article_url,GROUP_CONCAT(distinct  b.category_id) categorys ,GROUP_CONCAT(distinct  c.tag_id) tags FROM mayday_article a INNER JOIN mayday_article_category b INNER JOIN mayday_article_tag c on a.id=b.article_id AND b.article_id=c.article_id WHERE a.id=#{id}
+	SELECT a.id,a.user_id,a.article_content,a.article_content_md,a.article_newstime,a.article_summary,a.article_thumbnail,a.article_title,article_type,a.article_comment,a.article_url,GROUP_CONCAT(distinct  b.category_id) categorys ,GROUP_CONCAT(distinct  c.tag_id) tags
+	FROM mayday_article a
+	INNER JOIN mayday_article_category b
+	on b.article_id=a.id
+	LEFT JOIN mayday_article_tag c
+	on a.id=b.article_id
+	AND b.article_id=c.article_id
+	WHERE a.id=#{id}
 	</select>
 	
 	<select id="findDateAndCount" resultType="com.songhaozhi.mayday.model.dto.ArchiveBo">
