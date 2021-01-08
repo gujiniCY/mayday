@@ -229,7 +229,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'findArtileByTag'+#page+#limit+#status")
+	@Cacheable(value = ARTICLES_CACHE_NAME, key = "'findArtileByTag'+#page+#limit+#status+#tag.tagUrl")
 	public PageInfo<ArticleCustom> findArtileByTag(Integer page, Integer limit, Tag tag,int status) {
 		PageHelper.startPage(page, limit);
 		List<ArticleCustom> list = articleMapperCustom.findArtileByTag(tag,status);
