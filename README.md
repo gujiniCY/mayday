@@ -46,7 +46,7 @@
 ![index_links.png](https://images.gitee.com/uploads/images/2019/0117/112453_1208a83f_1574192.png)
 ![index_post.png](https://images.gitee.com/uploads/images/2019/0117/112454_327abed1_1574192.png)
 ## 开源协议
-[GPL-3.0](/master/LICENSE)
+[GPL-3.0](/LICENSE)
 ## 致谢：
  1. [SpringBoot](http://spring.io/projects/spring-boot) 版本2.0.4
  2. [MyBatis](http://www.mybatis.org/mybatis-3/) ORM框架
