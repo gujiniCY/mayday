@@ -263,6 +263,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(value = ARTICLES_CACHE_NAME, allEntries = true, beforeInvocation = true)
     public JsonResult save(Article article, Long[] tags, Long[] categorys) {
         if (StrUtil.isEmpty(article.getArticleTitle())) {
             return JsonResult.fail("标题不能为空");
