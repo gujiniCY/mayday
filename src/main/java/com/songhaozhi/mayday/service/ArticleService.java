@@ -90,7 +90,7 @@ public interface ArticleService {
 	 *            分类id
 	 * @throws Exception
 	 */
-	void update(Article article, Long[] tags, Long[] categorys) throws Exception;
+	void update(Article article, Long[] tags, Long[] categorys);
 
 	/**
 	 * 归档

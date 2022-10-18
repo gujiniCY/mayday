@@ -12,14 +12,14 @@ import com.songhaozhi.mayday.model.domain.Attachment;
 public interface AttachmentService {
 	/**
 	 * 保存
-	 * 
+	 *
 	 * @param attachment
 	 */
-	void save(Attachment attachment) throws Exception;
+	void save(Attachment attachment);
 
 	/**
 	 * 分页查询附件
-	 * 
+	 *
 	 * @param page
 	 * @param limit
 	 * @return
@@ -28,7 +28,7 @@ public interface AttachmentService {
 
 	/**
 	 * 根据id查询
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 */
@@ -36,14 +36,14 @@ public interface AttachmentService {
 
 	/**
 	 * 删除
-	 * 
+	 *
 	 * @param id
 	 */
 	void deleteAttachment(int id) throws Exception;
 
 	/**
 	 * 所有附件
-	 * 
+	 *
 	 * @return
 	 */
 	List<Attachment> countAttachment();

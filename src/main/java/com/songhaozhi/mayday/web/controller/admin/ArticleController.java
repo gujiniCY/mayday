@@ -106,7 +106,7 @@ public class ArticleController extends BaseController {
     @ResponseBody
     public JsonResult pushBaidu(@RequestParam(value = "token") String token) {
         if (StrUtil.isEmpty(token)) {
-            return new JsonResult(false, "请先填写token");
+            return JsonResult.fail("请先填写token");
         }
         String blogUrl = MaydayConst.OPTIONS.get("blog_url");
         List<ArticleCustom> articles = articleService.findAllArticle(ArticleStatus.PUBLISH.getStatus(),
@@ -117,9 +117,9 @@ public class ArticleController extends BaseController {
         }
         String result = MaydayUtil.baiduPost(blogUrl, token, urls.toString());
         if (StrUtil.isEmpty(result)) {
-            return new JsonResult(false, "推送失败");
+            return JsonResult.fail("推送失败");
         }
-        return new JsonResult(true, "推送成功");
+        return JsonResult.ok("推送成功");
     }
 
     /**

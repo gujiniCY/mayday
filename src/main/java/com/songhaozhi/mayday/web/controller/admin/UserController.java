@@ -42,7 +42,7 @@ public class UserController extends BaseController {
 	private AttachmentService attachmentService;
 
 	/**
-	 * 
+	 *
 	 * @param model
 	 * @param session
 	 * @return 返回个人资料页面
@@ -57,7 +57,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 所有附件
-	 * 
+	 *
 	 * @param model
 	 * @param page
 	 * @param limit
@@ -74,7 +74,7 @@ public class UserController extends BaseController {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param user
 	 * @return 修改个人资料结果
 	 */
@@ -93,7 +93,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 修改密码
-	 * 
+	 *
 	 * @param formerlyPwd
 	 *            原密码
 	 * @param nowPwd
@@ -110,10 +110,10 @@ public class UserController extends BaseController {
 			@RequestParam(value = "nowPwd") String nowPwd, @RequestParam(value = "confirmPwd") String confirmPwd,
 			@RequestParam(value = "userId") Integer userId,HttpServletRequest request) {
 		if (StringUtils.isBlank(formerlyPwd) || StringUtils.isBlank(formerlyPwd) || StringUtils.isBlank(confirmPwd)) {
-			return new JsonResult(MaydayEnums.OPERATION_ERROR.isFlag(), "请填写完整信息");
+			return JsonResult.result(MaydayEnums.OPERATION_ERROR.isFlag(), "请填写完整信息");
 		}
 		if (!nowPwd.equals(confirmPwd)) {
-			return new JsonResult(MaydayEnums.OPERATION_ERROR.isFlag(), "两次密码不一样");
+			return JsonResult.result(MaydayEnums.OPERATION_ERROR.isFlag(), "两次密码不一样");
 		}
 		try {
 			User user = userService.findByUserIdAndUserPwd(userId, SecureUtil.md5(formerlyPwd));
@@ -123,12 +123,12 @@ public class UserController extends BaseController {
 				logService.save(new Log(LogConstant.UPDATE_PWD, LogConstant.LOGIN_SUCCES, ServletUtil.getClientIP(request),
 						DateUtil.date()));
 			} else {
-				return new JsonResult(MaydayEnums.OPERATION_ERROR.isFlag(), "原密码错误");
+				return JsonResult.result(MaydayEnums.OPERATION_ERROR.isFlag(), "原密码错误");
 			}
 		} catch (Exception e) {
 			log.error("修改密码",e);
-			return new JsonResult(MaydayEnums.ERROR.isFlag(), "修改密码失败");
+			return JsonResult.result(MaydayEnums.ERROR.isFlag(), "修改密码失败");
 		}
-		return new JsonResult(MaydayEnums.OPERATION_SUCCESS.isFlag(), "修改密码成功");
+		return JsonResult.result(MaydayEnums.OPERATION_SUCCESS.isFlag(), "修改密码成功");
 	}
 }
