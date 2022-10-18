@@ -35,8 +35,7 @@ public class GlobalExceptionHandler {
      * Spirng 非法参数验证异常
      *
      * @param ex
-     * @return com.xuyangkj.gaogaodian.common.ApiResult
-     * @date 2019/10/14 16:35
+     * @return
      */
     @ExceptionHandler(BindException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
@@ -51,8 +50,7 @@ public class GlobalExceptionHandler {
      * javax.validation 非法参数验证异常
      *
      * @param ex
-     * @return com.xuyangkj.gaogaodian.common.ApiResult
-     * @date 2019/10/14 16:35
+     * @return
      */
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
@@ -83,8 +81,7 @@ public class GlobalExceptionHandler {
      * 数据库执行异常
      *
      * @param e
-     * @return com.xuyangkj.gaogaodian.common.ApiResult
-     * @date 2019/10/15 9:27
+     * @return
      */
     @ExceptionHandler(DataAccessException.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
@@ -97,8 +94,7 @@ public class GlobalExceptionHandler {
      * HTTP解析请求参数异常
      *
      * @param exception
-     * @return com.xuyangkj.gaogaodian.common.ApiResult
-     * @date 2019/10/15 9:27
+     * @return
      */
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -111,8 +107,7 @@ public class GlobalExceptionHandler {
      * HTTP
      *
      * @param exception
-     * @return com.xuyangkj.gaogaodian.common.ApiResult
-     * @date 2019/10/15 9:27
+     * @return
      */
     @ExceptionHandler(value = HttpMediaTypeException.class)
     @ResponseStatus(HttpStatus.OK)
@@ -126,8 +121,7 @@ public class GlobalExceptionHandler {
      * HTTP请求方式错误
      *
      * @param exception
-     * @return com.xuyangkj.gaogaodian.common.ApiResult
-     * @date 2019/10/15 9:27
+     * @return
      */
     @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -153,8 +147,7 @@ public class GlobalExceptionHandler {
      * 默认的异常处理
      *
      * @param exception
-     * @return com.xuyangkj.gaogaodian.common.ApiResult
-     * @date 2019/10/15 9:27
+     * @return
      */
     @ExceptionHandler(value = Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
