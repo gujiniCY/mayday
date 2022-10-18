@@ -1,0 +1,4 @@
+/.idea/
+/target/
+/appservice_log/
+*.iml
