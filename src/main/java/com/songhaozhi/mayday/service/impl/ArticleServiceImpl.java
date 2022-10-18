@@ -66,7 +66,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     @CacheEvict(value = ARTICLES_CACHE_NAME, allEntries = true, beforeInvocation = true)
     @Transactional(rollbackFor = Exception.class)
-    public int insert(Article article, Long[] tags, Long[] categorys) {
+    public void insert(Article article, Long[] tags, Long[] categorys) {
+        articleMapper.insert(article);
         if (categorys != null) {
             Arrays.asList(categorys).stream().forEach(cate -> {
                 ArticleCategory articleCategory = new ArticleCategory();
@@ -83,7 +84,6 @@ public class ArticleServiceImpl implements ArticleService {
                 articleTagMapper.insert(articleTag);
             });
         }
-        return articleMapper.insert(article);
     }
 
     @Override

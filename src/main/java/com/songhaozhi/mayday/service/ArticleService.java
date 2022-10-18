@@ -24,7 +24,7 @@ public interface ArticleService {
 	 * @param categorys
 	 *            分类id
 	 */
-	int insert(Article article, Long[] tagsName, Long[] categorys);
+	void insert(Article article, Long[] tagsName, Long[] categorys);
 
 	/**
 	 * 不分页查询所有文章
