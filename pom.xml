@@ -11,7 +11,7 @@
 
 	<name>mayday</name>
 	<description>
-	mayday,一个为了学习springboot而诞生的博客项目
+	mayday,一个为了学习SpringBoot而诞生的博客项目
 	</description>
 
 	<parent>
