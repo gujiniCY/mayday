@@ -30,7 +30,7 @@ public class AttachmentServiceImpl implements AttachmentService {
 
 	@Override
 	@CacheEvict(value = ATTACHMENTS_CACHE_NAME, allEntries = true, beforeInvocation = true)
-	public void save(Attachment attachment) throws Exception {
+	public void save(Attachment attachment){
 		attachmentMapper.insert(attachment);
 	}
 
