@@ -40,7 +40,7 @@ public class PageController extends BaseController {
 
 	/**
 	 * 显示所有页面
-	 * 
+	 *
 	 * @param model
 	 * @param page
 	 * @param limit
@@ -65,7 +65,7 @@ public class PageController extends BaseController {
 
 	/**
 	 * 新建页面
-	 * 
+	 *
 	 * @return
 	 */
 	@GetMapping(value = "/new")
@@ -75,7 +75,7 @@ public class PageController extends BaseController {
 
 	/**
 	 * 保存页面
-	 * 
+	 *
 	 * @param article
 	 * @param tags
 	 * @param categorys
@@ -110,7 +110,7 @@ public class PageController extends BaseController {
 				if (StrUtil.isEmpty(article.getArticleThumbnail())) {
 					article.setArticleThumbnail("/static/img/rand/" + RandomUtil.randomInt(1, 19) + ".jpg");
 				}
-				articleService.save(article, null, null);
+				articleService.insert(article, null, null);
 				// 添加日志
 				logService.save(new Log(LogConstant.PUBLISH_AN_PAGE, LogConstant.SUCCESS,
 						ServletUtil.getClientIP(request), DateUtil.date()));
@@ -135,7 +135,7 @@ public class PageController extends BaseController {
 
 	/**
 	 * 彻底删除页面
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 */
@@ -154,7 +154,7 @@ public class PageController extends BaseController {
 
 	/**
 	 * 修改页面
-	 * 
+	 *
 	 * @param model
 	 * @return
 	 */

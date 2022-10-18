@@ -3,11 +3,11 @@ package com.songhaozhi.mayday.service;
 import java.util.List;
 
 import com.github.pagehelper.PageInfo;
-import com.songhaozhi.mayday.model.domain.Article;
-import com.songhaozhi.mayday.model.domain.ArticleCustom;
-import com.songhaozhi.mayday.model.domain.Category;
-import com.songhaozhi.mayday.model.domain.Tag;
+import com.songhaozhi.mayday.model.domain.*;
 import com.songhaozhi.mayday.model.dto.ArchiveBo;
+import com.songhaozhi.mayday.model.dto.JsonResult;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author : 宋浩志
@@ -16,7 +16,7 @@ import com.songhaozhi.mayday.model.dto.ArchiveBo;
 public interface ArticleService {
 	/**
 	 * 保存文章
-	 * 
+	 *
 	 * @param article
 	 *            文章
 	 * @param tagsName
@@ -24,20 +24,20 @@ public interface ArticleService {
 	 * @param categorys
 	 *            分类id
 	 */
-	void save(Article article, Long[] tagsName, Long[] categorys) throws Exception;
+	int insert(Article article, Long[] tagsName, Long[] categorys);
 
 	/**
 	 * 不分页查询所有文章
-	 * 
+	 *
 	 * @param status
-	 * @param string 
+	 * @param post
 	 * @return
 	 */
 	List<ArticleCustom> findAllArticle(int status, String post);
 
 	/**
 	 * 分页查询所有文章
-	 * 
+	 *
 	 * @param limit
 	 * @param page
 	 * @param articleCustom
@@ -48,7 +48,7 @@ public interface ArticleService {
 
 	/**
 	 * 状态统计条数
-	 * 
+	 *
 	 * @param status
 	 *            状态
 	 * @param post
@@ -59,22 +59,22 @@ public interface ArticleService {
 
 	/**
 	 * 修改文章状态为回收站
-	 * 
+	 *
 	 * @param id
 	 */
-	void remove(int id) throws Exception;
+	void remove(int id);
 
 	/**
 	 * 修改文章状态为回收站
-	 * 
+	 *
 	 * @param id
 	 * @param integer
 	 */
-	void recycle(int id, Integer integer) throws Exception;
+	void recycle(int id, Integer integer);
 
 	/**
 	 * id查询文章
-	 * 
+	 *
 	 * @param article_id
 	 * @return
 	 */
@@ -82,7 +82,7 @@ public interface ArticleService {
 
 	/**
 	 * 修改文章
-	 * 
+	 *
 	 * @param article
 	 * @param tags
 	 *            标签id
@@ -94,14 +94,14 @@ public interface ArticleService {
 
 	/**
 	 * 归档
-	 * 
+	 *
 	 * @return
 	 */
 	List<ArchiveBo> archives();
 
 	/**
 	 * 统计重复链接
-	 * 
+	 *
 	 * @param articleUrl
 	 *            文章链接
 	 * @return
@@ -110,7 +110,7 @@ public interface ArticleService {
 
 	/**
 	 * 文章链接查询
-	 * 
+	 *
 	 * @param articleUrl
 	 * @return 文章
 	 */
@@ -118,7 +118,7 @@ public interface ArticleService {
 
 	/**
 	 * 分页查询分类下的所有文章
-	 * 
+	 *
 	 * @param page
 	 * @param limit
 	 * @param category
@@ -129,9 +129,9 @@ public interface ArticleService {
 
 	/**
 	 * 分页查询标签下的所有文章
-	 * 
+	 *
 	 * @param page
-	 * @param size
+	 * @param limit
 	 * @param tag
 	 * @param status 文章状态
 	 * @return
@@ -140,10 +140,10 @@ public interface ArticleService {
 
 	/**
 	 * 标题分页搜索文章
-	 * 
+	 *
 	 * @param keywords
 	 * @param page
-	 * @param size
+	 * @param limit
 	 * @return
 	 */
 	PageInfo<Article> findArticleByKeywords(String keywords, Integer page, Integer limit);
@@ -152,4 +152,6 @@ public interface ArticleService {
 	 * @param article
 	 */
 	void updateArticleViews(Article article);
+
+    JsonResult save(Article article, Long[] tags, Long[] categorys);
 }

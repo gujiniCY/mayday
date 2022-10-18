@@ -54,7 +54,7 @@ public class InstallController extends BaseController{
 	@Autowired
 	private MenuService menuService;
 	@Autowired
-	private OptionsService optionsService; 
+	private OptionsService optionsService;
 	@Autowired
 	private ThemeService themeService;
 	@GetMapping
@@ -71,7 +71,7 @@ public class InstallController extends BaseController{
 
 	/**
 	 * 执行安装
-	 * 
+	 *
 	 * @param blogName
 	 *            博客标题
 	 * @param blogUrl
@@ -107,7 +107,7 @@ public class InstallController extends BaseController{
 		user.setUserEmail(emailUsername);
 		user.setUserName(userName);
 		userService.save(user);
-		
+
 		//保存设置项
 		Map<String, String> optionsMap=new HashMap<>();
 		optionsMap.put("blog_name", blogName);
@@ -117,7 +117,7 @@ public class InstallController extends BaseController{
 		optionsMap.put("attachment_location", "server");
 		optionsMap.put("is_install", "true");
 		optionsService.save(optionsMap);
-		
+
 		//第一篇文章
 		Article article=new Article();
 		article.setArticleTitle("Hello Mayday!");
@@ -133,12 +133,12 @@ public class InstallController extends BaseController{
 		article.setArticleComment(ThemeStatus.THEME_NOT_ENABLED.getValue());
 		article.setArticleUpdatetime(DateUtil.date());
 		article.setArticleUrl("hello-mayday");
-		articleService.save(article, null, null);
-		
+		articleService.insert(article, null, null);
+
 		// 添加日志
 		logService.save(new Log(LogConstant.INSTALL_SUCCESS, LogConstant.SUCCESS,
 				ServletUtil.getClientIP(request), DateUtil.date()));
-		
+
 		//添加菜单
 		Menu menuIndex=new Menu();
 		menuIndex.setMenuName("首页");
@@ -158,7 +158,7 @@ public class InstallController extends BaseController{
 		menuLinks.setMenuTarget("_self");
 		menuLinks.setMenuSort(3);
 		menuService.save(menuLinks);
-		
+
 		//重新加载设置项
 		MaydayConst.OPTIONS.clear();
 		List<Options> listMap = optionsService.selectMap();
@@ -182,7 +182,7 @@ public class InstallController extends BaseController{
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			return new JsonResult(false, "系统错误");
-		}	
+		}
 		return new JsonResult(true, "注册成功");
 	}
 
