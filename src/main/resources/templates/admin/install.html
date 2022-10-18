@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mayday - 注册</title>
+<title>Mayday - 安装配置</title>
 <link rel="shortcut icon" th:href="@{/static/img/favicon.ico}" />
 <link rel="stylesheet" type="text/css"
 	th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
@@ -156,7 +156,7 @@
             // 阻止默认事件提交
             e.preventDefault();
         });
-		
+
 	})
 	function install(){
 		 var bootstrapValidator = $("#installForm").data("bootstrapValidator");
@@ -185,7 +185,7 @@
 	                         loader: true,
 	                         loaderBg: '#ffffff',
 	                         afterHidden: function () {
-	                        	 window.location.href = "/"; 
+	                        	 window.location.href = "/";
 	                         }
 	                     });
 					}else{
