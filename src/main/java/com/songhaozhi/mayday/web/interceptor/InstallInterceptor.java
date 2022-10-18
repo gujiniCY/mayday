@@ -12,7 +12,7 @@ import com.songhaozhi.mayday.model.dto.MaydayConst;
 import cn.hutool.core.util.StrUtil;
 
 /**
- * 博客注册拦截器
+ * 博客安装拦截器
  */
 @Component
 public class InstallInterceptor implements HandlerInterceptor {
