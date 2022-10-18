@@ -21,6 +21,12 @@ public enum MaydayEnums {
 	 * 保存成功
 	 */
 	PRESERVE_SUCCESS(true, "保存成功"),
+
+	DATEBASE_EXECUTION_EXCEPTION(false,"数据库执行语句出现异常"),
+
+	PARAMETER_EXCEPTION(false,"请求参数解析异常"),
+
+	HTTP_REQUEST_METHOD_NOT_SUPPORTED(false,"请求方式错误"),
 	/**
 	 * 保存失败
 	 */
