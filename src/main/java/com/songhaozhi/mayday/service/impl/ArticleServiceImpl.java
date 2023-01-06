@@ -313,6 +313,7 @@ public class ArticleServiceImpl implements ArticleService {
                     article.setArticleSummary(summaryText);
                 }
             }
+            article.setArticleContent(HtmlUtil.filter(article.getArticleContent()));
             this.insert(article, tags, categorys);
             // 添加日志
             log.setLogTitle(LogConstant.PUBLISH_AN_ARTICLE);
@@ -339,6 +340,7 @@ public class ArticleServiceImpl implements ArticleService {
             }
             // 文章最后修改时间
             article.setArticleUpdatetime(DateUtil.date());
+            article.setArticleContent(HtmlUtil.filter(article.getArticleContent()));
             this.update(article, tags, categorys);
             //添加日志
             log.setLogTitle(LogConstant.UPDATE_AN_ARTICLE);
