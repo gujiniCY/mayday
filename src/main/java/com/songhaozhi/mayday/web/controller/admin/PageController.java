@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.ServletUtil;
+import cn.hutool.http.HtmlUtil;
 import com.github.pagehelper.PageInfo;
 import com.songhaozhi.mayday.model.domain.Article;
 import com.songhaozhi.mayday.model.domain.ArticleCustom;
@@ -101,6 +102,7 @@ public class PageController extends BaseController {
             if (StrUtil.isEmpty(article.getArticleThumbnail())) {
                 article.setArticleThumbnail("/static/img/rand/" + RandomUtil.randomInt(1, 19) + ".jpg");
             }
+            article.setArticleContent(HtmlUtil.filter(article.getArticleContent()));
             articleService.insert(article, null, null);
             // 添加日志
             logService.save(new Log(LogConstant.PUBLISH_AN_PAGE, LogConstant.SUCCESS,
@@ -112,6 +114,7 @@ public class PageController extends BaseController {
             }
             // 页面最后修改时间
             article.setArticleUpdatetime(DateUtil.date());
+            article.setArticleContent(HtmlUtil.filter(article.getArticleContent()));
             articleService.update(article, null, null);
             // 添加日志
             logService.save(new Log(LogConstant.UPDATE_AN_PAGE, LogConstant.SUCCESS,
