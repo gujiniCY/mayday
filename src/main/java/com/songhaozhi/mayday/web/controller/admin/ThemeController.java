@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,7 +35,7 @@ public class ThemeController extends BaseController {
 
 	/**
 	 * 查看所有主题
-	 * 
+	 *
 	 * @param model
 	 * @param page
 	 * @param limit
@@ -52,7 +51,7 @@ public class ThemeController extends BaseController {
 
 	/**
 	 * 保存主题
-	 * 
+	 *
 	 * @param theme
 	 * @param request
 	 * @return
@@ -78,7 +77,7 @@ public class ThemeController extends BaseController {
 
 	/**
 	 * 删除主题
-	 * 
+	 *
 	 * @param id
 	 * @param request
 	 * @return
@@ -103,8 +102,8 @@ public class ThemeController extends BaseController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping(value = "/{themeName}")
-	public String themeOption(@PathVariable String themeName, Model model) {
+	@GetMapping(value = "/themeOption")
+	public String themeOption(@RequestParam(value = "themeName") String themeName, Model model) {
 		Theme theme = themeService.findByThemeName(themeName);
 		model.addAttribute("theme", theme);
 		return "themes/" + themeName + "/module/options";
@@ -126,5 +125,5 @@ public class ThemeController extends BaseController {
 		}
 		return new JsonResult(MaydayEnums.OPERATION_SUCCESS.isFlag(), MaydayEnums.OPERATION_SUCCESS.getMessage());
 	}
-	
+
 }
