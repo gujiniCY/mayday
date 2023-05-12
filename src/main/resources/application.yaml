@@ -1,31 +1,35 @@
-server: 
-  port: 8091 
+server:
+  port: 8091
 logging:
-    level: 
+    level:
         org.springframework: info
         data: DEBUG
         security: DEBUG
     config: classpath:logback-spring.xml
-spring: 
+spring:
   mvc:
     static-path-pattern: /**
-  thymeleaf: 
+  thymeleaf:
     servlet:
       content-type: text/html
     encoding: UTF-8
     cache: false
-  datasource: 
+  datasource:
          type: com.alibaba.druid.pool.DruidDataSource
-         url: jdbc:mysql://localhost:3306/maydaytest?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
-         username: maydaytest
-         password: C36J4EajMepPEdTC
+         url: jdbc:mysql://localhost:3306/mayday?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+         username: root
+         password: 123456
          driver-class-name: com.mysql.jdbc.Driver
-mybatis: 
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+mybatis:
   typeAliasesPackage: com.songhaozhi.mayday.model.domain
   mapperLocations: classpath:mapper/*/*.xml
   configuration:
     map-underscore-to-camel-case: true
-pagehelper: 
+pagehelper:
   helper-dialect: mysql
   reasonable: true
   support-methods-arguments: true

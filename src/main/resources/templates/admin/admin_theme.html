@@ -37,11 +37,11 @@
 						<td><img style="width: 100px;height: 60px" th:src="${theme.themeImg}"></td>
 						<td th:text="${#dates.format(theme.createTime,'yyyy/MM/dd HH:mm:ss')}"></td>
 						<td>
-						<button class="btn btn-sm btn-secondary" th:onclick="'javascript:themeEnabled(\''+${theme.id}+'\')'" th:disabled="${theme.themeStatus == 1}">
+						<button class="btn btn-sm btn-secondary" th:onclick="themeEnabled([[${theme.id}]])" th:disabled="${theme.themeStatus == 1}">
 						<th:block th:if="${theme.themeStatus == 1}">已启用</th:block>
 						<th:block th:if="${theme.themeStatus == 0}" >启用</th:block>
 						</button>
-						<button class="btn btn-sm btn-primary" th:onclick="'javascript:themeOption(\''+${theme.themeName}+'\')'">设置</button>
+						<button class="btn btn-sm btn-primary" th:onclick="themeOption([[${theme.themeName}]])">设置</button>
 						<button th:onclick="'javascript:showModel('+${theme.id}+')'"
 										class="btn btn-sm btn-outline-danger">删除</button>
 						</td>
@@ -142,7 +142,7 @@
 			anim : 2,
 			area : [ '90%', '90%' ],
 			shadeClose : true,
-			content : "/admin/theme/themeOption?themeName=" + themeName,
+			content : "/admin/theme/"+themeName+"?themeName=" + themeName,
 			maxmin : true
 		});
 	}

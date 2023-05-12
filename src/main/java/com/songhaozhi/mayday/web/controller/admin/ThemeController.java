@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -102,8 +103,8 @@ public class ThemeController extends BaseController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping(value = "/themeOption")
-	public String themeOption(@RequestParam(value = "themeName") String themeName, Model model) {
+	@GetMapping(value = "/{themeName}")
+	public String themeOption(@PathVariable(value = "themeName") String themeName, Model model) {
 		Theme theme = themeService.findByThemeName(themeName);
 		model.addAttribute("theme", theme);
 		return "themes/" + themeName + "/module/options";

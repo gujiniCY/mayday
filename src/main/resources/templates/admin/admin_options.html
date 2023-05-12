@@ -64,7 +64,7 @@
 											th:value="${options['blog_logo']}"> <span
 											class="input-group-btn">
 											<button class="btn btn-default " type="button"
-												th:onclick="'javascript:openChoice(\''+blog_logo+'\')'">选择</button>
+												th:onclick="openChoice('blog_logo')">选择</button>
 										</span>
 									</div>
 								</div>
@@ -78,7 +78,7 @@
 											th:value="${options['ico_logo']}"> <span
 											class="input-group-btn">
 											<button class="btn btn-default " type="button"
-												th:onclick="'javascript:openChoice(\''+ico_logo+'\')'">选择</button>
+												th:onclick="openChoice('ico_logo')">选择</button>
 										</span>
 									</div>
 								</div>
@@ -439,10 +439,10 @@
 	<div th:replace="admin/module/macros :: comm"></div>
 	<script src="/plugins/layer/layer.js"></script>
 	<script type="text/javascript">
-	
+
 		$(function(){
 			selectCommentPlatform();
-			
+
 			$('input[name=platform_comment]').click(function(){
 				selectCommentPlatform();
 			});
@@ -463,7 +463,7 @@
 				$(".valine-options").hide();
 			}
 		}
-		
+
 		//保存设置项
 		function save(id) {
 			var from = $("#" + id).serialize();

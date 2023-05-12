@@ -47,7 +47,7 @@
 					<input type="hidden" id="showId" th:value="${id}">
 					<th:block th:each="attachment : ${info.list}">
 						<div class="col-lg-2 col-md-3 col-sm-6 col-6 div-thumbnail"
-							th:onclick="'javascript:choice(\''+${attachment.picturePath}+'\')'">
+							th:onclick="choice([[${attachment.picturePath}]])">
 							<a href="#"><img
 								class="img-thumbnail img-fluid img-responsive"
 								th:src="${attachment.pictureSmallPath}"></a>
@@ -96,7 +96,7 @@
 						afterHidden : function() {
 							window.location.reload();
 						}
-					}); 
+					});
 		});
 
 		function choice(path) {
