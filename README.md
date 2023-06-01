@@ -19,9 +19,6 @@
 6. 访问http://localhost:8091
 7. 后台管理系统地址http://localhost:8091/admin
 
-### 如果使用又拍云cdn的话请到参数跟随里面设置全程跟随以及开启重定向跟随
-
-
 ### 关于评论功能
 目前没有打算自己写评论功能。用的两个评论插件[gitalk](https://github.com/gitalk/gitalk)和[valine](https://ioliu.cn/2017/add-valine-comments-to-your-blog/)
 ## 图片演示
